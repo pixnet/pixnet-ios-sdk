@@ -18,6 +18,8 @@
     });
     return sharedInstance;
 }
+
+
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
     //檢查進來的參數
     if (userID == nil) {
