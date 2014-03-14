@@ -19,6 +19,9 @@
 		CEDB7C9518D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
 		CEDB7C9D18D2ECF700D14D0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */; };
 		CEDB7C9F18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C9E18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m */; };
+		CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */; };
+		CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */; };
+		CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		CEDB7C9A18D2ECF700D14D0C /* PIXNET-iOS-SDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PIXNET-iOS-SDKTests-Info.plist"; sourceTree = "<group>"; };
 		CEDB7C9C18D2ECF700D14D0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEDB7C9E18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIXNET_iOS_SDKTests.m; sourceTree = "<group>"; };
+		CEDB7CA918D2F7D000D14D0C /* PIXNETSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXNETSDK.h; sourceTree = "<group>"; };
+		CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXNETSDK.m; sourceTree = "<group>"; };
+		CEDB7CAC18D2F7EF00D14D0C /* PIXBlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXBlog.h; sourceTree = "<group>"; };
+		CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlog.m; sourceTree = "<group>"; };
+		CEDB7CAF18D2F7FA00D14D0C /* PIXAPIHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXAPIHandler.h; sourceTree = "<group>"; };
+		CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAPIHandler.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +86,7 @@
 		CEDB7C6D18D2ECF700D14D0C = {
 			isa = PBXGroup;
 			children = (
+				CEDB7CA818D2F7A600D14D0C /* Classes */,
 				CEDB7C7F18D2ECF700D14D0C /* PIXNET-iOS-SDK */,
 				CEDB7C9818D2ECF700D14D0C /* PIXNET-iOS-SDKTests */,
 				CEDB7C7818D2ECF700D14D0C /* Frameworks */,
@@ -142,6 +152,35 @@
 				CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEDB7CA818D2F7A600D14D0C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CA918D2F7D000D14D0C /* PIXNETSDK.h */,
+				CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */,
+				CEDB7CB318D2F83B00D14D0C /* APIHandle */,
+				CEDB7CB218D2F82300D14D0C /* NetworkHandle */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		CEDB7CB218D2F82300D14D0C /* NetworkHandle */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CAF18D2F7FA00D14D0C /* PIXAPIHandler.h */,
+				CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */,
+			);
+			name = NetworkHandle;
+			sourceTree = "<group>";
+		};
+		CEDB7CB318D2F83B00D14D0C /* APIHandle */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CAC18D2F7EF00D14D0C /* PIXBlog.h */,
+				CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */,
+			);
+			name = APIHandle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
+				CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */,
+				CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */,
+				CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */,
 				CEDB7C8618D2ECF700D14D0C /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
