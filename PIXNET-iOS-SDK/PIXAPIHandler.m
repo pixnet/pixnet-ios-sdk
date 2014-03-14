@@ -21,20 +21,20 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
     return sharedInstance;
 }
 
--(void)callAPI:(NSString *)apiName parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
-    [self callAPI:apiName httpMethod:@"GET" parameters:parameters requestCompletion:completion];
+-(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+    [self callAPI:apiPath httpMethod:@"GET" parameters:parameters requestCompletion:completion];
 }
 
--(void)callAPI:(NSString *)apiName httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
-    [self callAPI:apiName httpMethod:httpMethod shouldAuth:NO parameters:parameters requestCompletion:completion];
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:NO parameters:parameters requestCompletion:completion];
 }
 
--(void)callAPI:(NSString *)apiName httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
     NSString *parameterString = nil;
     if (parameters != nil) {
         parameterString = [self parametersStringFromDictionary:parameters];
     }
-    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@", kApiURLPrefix, apiName];
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@", kApiURLPrefix, apiPath];
     if (httpMethod == nil || [httpMethod isEqualToString:@"GET"]) {
         [urlString appendString:[NSString stringWithFormat:@"?%@", parameterString]];
     }
