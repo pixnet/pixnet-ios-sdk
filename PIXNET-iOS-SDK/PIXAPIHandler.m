@@ -66,20 +66,25 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
         //這裡要用 NSURLSession
     } else {
         //這裡可以用 NSURLConnection
-        [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (connectionError == nil) {
-                    NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
-                    if (hr.statusCode == 200) {
-                        completion(YES, data, nil);
+        if (uploadData == nil) {
+            //NSURLConnection 下載
+            [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (connectionError == nil) {
+                        NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
+                        if (hr.statusCode == 200) {
+                            completion(YES, data, nil);
+                        } else {
+                            completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
+                        }
                     } else {
-                        completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
+                        completion(NO, data, connectionError.localizedDescription);
                     }
-                } else {
-                    completion(NO, data, connectionError.localizedDescription);
-                }
-            });
-        }];
+                });
+            }];
+        } else {
+           //NSURLConnection 上傳
+        }
     }
 }
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSString *)parameterString{
