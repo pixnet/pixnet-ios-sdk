@@ -42,6 +42,12 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 }
 
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:NO parameters:parameters requestCompletion:completion];
+}
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:nil parameters:parameters requestCompletion:completion];
+}
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
     NSString *parameterString = nil;
     if (parameters != nil) {
         parameterString = [self parametersStringFromDictionary:parameters];
@@ -52,28 +58,39 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
     }
     
     NSURL *requestUrl = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:requestUrl];
-    if (![httpMethod isEqualToString:@"GET"]) {
-        [urlRequest setHTTPMethod:httpMethod];
-        [urlRequest setHTTPBody:[parameterString dataUsingEncoding:NSUTF8StringEncoding]];
-    }
     
-    [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (connectionError == nil) {
-                NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
-                if (hr.statusCode == 200) {
-                    completion(YES, data, nil);
+    NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameterString];
+    
+    
+    if (backgroundExec) {
+        //這裡要用 NSURLSession
+    } else {
+        //這裡可以用 NSURLConnection
+        [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (connectionError == nil) {
+                    NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
+                    if (hr.statusCode == 200) {
+                        completion(YES, data, nil);
+                    } else {
+                        completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
+                    }
                 } else {
-                    completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
+                    completion(NO, data, connectionError.localizedDescription);
                 }
-            } else {
-                completion(NO, data, connectionError.localizedDescription);
-            }
-        });
-    }];
+            });
+        }];
+    }
 }
-
+-(NSMutableURLRequest *)requestWithURL:(NSURL *)url shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSString *)parameterString{
+#warning 這裡還沒有產生 auth 用的 request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    if (![httpMethod isEqualToString:@"GET"]) {
+        [request setHTTPMethod:httpMethod];
+        [request setHTTPBody:[parameterString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    return request;
+}
 -(NSString *)parametersStringFromDictionary:(NSDictionary *)dictionary{
     NSMutableString *parameterString = [NSMutableString new];
     
