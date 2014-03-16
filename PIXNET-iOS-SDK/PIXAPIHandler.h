@@ -11,6 +11,19 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
 #import <Foundation/Foundation.h>
 
 @interface PIXAPIHandler : NSObject
+/**
+ *  設定 consumer key 及 consumer secrect
+ *
+ *  @param aKey     consumer key
+ *  @param aSecrect consumer secrect
+ */
++(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect;
+/**
+ *  用來判斷 consumer key 及 secrect 是否已被設定
+ *
+ *  @return consumer key 及 secrect 都已被設定即回傳 YES
+ */
++(BOOL)isConsumerKeyAndSecrectAssigned;
 +(instancetype)sharedInstance;
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證

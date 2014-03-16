@@ -5,13 +5,25 @@
 //  Created by Dolphin Su on 3/14/14.
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
+static const NSString *kConsumerKey;
+static const NSString *kConsumerSecrect;
 
 #import "PIXAPIHandler.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 
 @implementation PIXAPIHandler
-
++(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect{
+    kConsumerKey = [aKey copy];
+    kConsumerSecrect = [aSecrect copy];
+}
++(BOOL)isConsumerKeyAndSecrectAssigned{
+    BOOL assigned = YES;
+    if (kConsumerKey == nil || kConsumerSecrect == nil) {
+        assigned = NO;
+    }
+    return assigned;
+}
 +(instancetype)sharedInstance{
     static PIXAPIHandler *sharedInstance = nil;
     static dispatch_once_t onceToken;
