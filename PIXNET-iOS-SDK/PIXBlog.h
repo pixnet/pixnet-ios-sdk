@@ -11,6 +11,6 @@
 #import "PIXAPIHandler.h"
 
 @interface PIXBlog : NSObject
-+(instancetype)sharedInstance;
+//+(instancetype)sharedInstance;
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion;
 @end

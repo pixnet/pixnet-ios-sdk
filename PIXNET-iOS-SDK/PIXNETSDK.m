@@ -27,6 +27,6 @@
     return sharedInstance;
 }
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
-    [[PIXBlog sharedInstance] getBlogInformationWithUserID:userID completion:completion];
+    [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
 }
 @end
