@@ -26,7 +26,9 @@
         completion(NO, nil, @"userID 不可為 nil");
         return;
     }
-    [[PIXAPIHandler sharedInstance] callAPI:@"blog" parameters:@{@"user": userID} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    PIXAPIHandler *pixAPIHandler = [PIXAPIHandler new];
+    
+    [pixAPIHandler callAPI:@"blog" parameters:@{@"user": userID} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
         if (succeed) {
             NSError *jsonError = nil;

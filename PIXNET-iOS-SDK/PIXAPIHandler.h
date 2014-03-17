@@ -11,6 +11,8 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
 #import <Foundation/Foundation.h>
 
 @interface PIXAPIHandler : NSObject
+//+(instancetype)sharedInstance;
+
 /**
  *  設定 consumer key 及 consumer secrect
  *
