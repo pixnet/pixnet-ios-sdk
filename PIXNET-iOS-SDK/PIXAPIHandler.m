@@ -9,6 +9,7 @@ static const NSString *kConsumerKey;
 static const NSString *kConsumerSecrect;
 
 #import "PIXAPIHandler.h"
+#import <AFNetworking.h>
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 
