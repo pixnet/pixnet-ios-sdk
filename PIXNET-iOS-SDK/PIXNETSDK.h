@@ -9,11 +9,8 @@
 
 #import <Foundation/Foundation.h>
 @class PIXBlog;
-//#import "PIXBlogCategories.h"
-//#import "PIXBlogComments.h"
-//#import "PIXBlogMainpage.h"
 #import "PIXAPIHandler.h"
-
+#import "PIXAlbum.h"
 
 @interface PIXNETSDK : NSObject
 
