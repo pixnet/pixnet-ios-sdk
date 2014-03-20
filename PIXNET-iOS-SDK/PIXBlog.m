@@ -19,7 +19,7 @@
     return sharedInstance;
 }
 
-
+#pragma mark - Blog information
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
     //檢查進來的參數
     if (userID == nil) {
@@ -45,4 +45,58 @@
         }
     }];
 }
+
+#pragma mark - Blog Categories
+- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(RequestCompletion)completion{
+    //檢查進來的參數
+    if (userID == nil) {
+        completion(NO, nil, @"userID 不可為 nil");
+        return;
+    }
+    if (passwd == nil) {
+        [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userID} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            //檢查出去的參數
+            if (succeed) {
+                NSError *jsonError = nil;
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+                if (jsonError) {
+                    completion(NO, nil, jsonError.localizedDescription);
+                } else {
+                    if ([dict[@"error"] intValue] == 0) {
+                        completion(YES, dict[@"blog"], nil);
+                    } else {
+                        completion(NO, nil, dict[@"message"]);
+                    }
+                }
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }else {
+        [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userID, @"passwd": passwd} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            //檢查出去的參數
+            if (succeed) {
+                NSError *jsonError = nil;
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+                if (jsonError) {
+                    completion(NO, nil, jsonError.localizedDescription);
+                } else {
+                    if ([dict[@"error"] intValue] == 0) {
+                        completion(YES, dict[@"blog"], nil);
+                    } else {
+                        completion(NO, nil, dict[@"message"]);
+                    }
+                }
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
+
+}
+
+#pragma mark - Blog Articles
+
+
+
 @end

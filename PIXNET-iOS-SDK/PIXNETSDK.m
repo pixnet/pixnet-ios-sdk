@@ -29,4 +29,8 @@
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
     [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
 }
+
+- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(RequestCompletion)completion{
+
+}
 @end
