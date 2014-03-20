@@ -45,4 +45,19 @@
         }
     }];
 }
+- (void)getBlogArticlesCompletion:(RequestCompletion)completion{
+    [[PIXAPIHandler new] callAPI:@"blog/articles" httpMethod:@"GET" parameters:@{@"user":@"emmademo"} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (errorMessage != nil) {
+            completion(NO, nil, errorMessage);
+        } else {
+            NSError *jsonError;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+            if (jsonError != nil) {
+                completion(NO, nil, jsonError.localizedDescription);
+            } else {
+                completion(YES, dict[@"articles"], nil);
+            }
+        }
+    }];
+}
 @end

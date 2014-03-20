@@ -13,7 +13,9 @@
 +(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect{
     [PIXAPIHandler setConsumerKey:aKey consumerSecrect:aSecrect];
 }
-
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password completion:(RequestCompletion)completion{
+    [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
+}
 +(instancetype)sharedInstance{
     if (![PIXAPIHandler isConsumerKeyAndSecrectAssigned]) {
         NSLog(@"您尚未設定 consumer key 或 consumer secrect");
@@ -28,5 +30,10 @@
 }
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
     [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
+}
+- (void)getBlogArticlesCompletion:(RequestCompletion)completion{
+    [[PIXBlog new] getBlogArticlesCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        NSLog(@"result: %@", result);
+    }];
 }
 @end

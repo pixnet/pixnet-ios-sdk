@@ -8,10 +8,18 @@
 static const NSString *kConsumerKey;
 static const NSString *kConsumerSecrect;
 
+
 #import "PIXAPIHandler.h"
+#import <AFXAuthClient.h>
 #import <AFNetworking.h>
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
+static NSMutableDictionary *_authClientDictionary;
+static AFXAuthClient *_authClient;
+
+@interface PIXAPIHandler ()
+
+@end
 
 @implementation PIXAPIHandler
 +(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect{
@@ -24,6 +32,20 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
         assigned = NO;
     }
     return assigned;
+}
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion{
+    if (![self isConsumerKeyAndSecrectAssigned]) {
+        completion(NO, nil, @"consumer key 或 consumer secrect 尚未設定");
+        return;
+    }
+    _authClient = [[AFXAuthClient alloc] initWithBaseURL:[NSURL URLWithString:[kApiURLPrefix copy]] key:[kConsumerKey copy] secret:[kConsumerSecrect copy]];
+    [_authClient authorizeUsingXAuthWithAccessTokenPath:@"oauth/access_token" accessMethod:@"POST" username:userName password:password success:^(AFXAuthToken *accessToken) {
+//        NSLog(@"authed token key: %@", accessToken.key);
+        completion(YES, accessToken, nil);
+    } failure:^(NSError *error) {
+//        NSLog(@"auth failed: %@", error);
+        completion(NO, nil, error.localizedDescription);
+    }];
 }
 +(instancetype)sharedInstance{
     static PIXAPIHandler *sharedInstance = nil;
@@ -60,8 +82,7 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
     
     NSURL *requestUrl = [NSURL URLWithString:urlString];
     
-    NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameterString];
-    
+    NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
     
     if (backgroundExec) {
         //這裡要用 NSURLSession
@@ -88,12 +109,16 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
         }
     }
 }
--(NSMutableURLRequest *)requestWithURL:(NSURL *)url shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSString *)parameterString{
-#warning 這裡還沒有產生 auth 用的 request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    if (![httpMethod isEqualToString:@"GET"]) {
-        [request setHTTPMethod:httpMethod];
-        [request setHTTPBody:[parameterString dataUsingEncoding:NSUTF8StringEncoding]];
+-(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
+    NSMutableURLRequest *request = nil;
+    if (auth) {
+        request = [_authClient requestWithMethod:httpMethod path:path parameters:parameters];
+    } else {
+        request = [NSMutableURLRequest requestWithURL:url];
+        if (![httpMethod isEqualToString:@"GET"]) {
+            [request setHTTPMethod:httpMethod];
+            [request setHTTPBody:[[self parametersStringFromDictionary:parameters] dataUsingEncoding:NSUTF8StringEncoding]];
+        }
     }
     return request;
 }
@@ -109,9 +134,23 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
     }
     return parameterString;
 }
--(NSError *)errorWithHTTPStautsCode:(NSInteger)errorCode{
-    NSError *error = nil;
-    
-    return error;
+/**
+ *  為每一個 user 設立一個自己的 AFXAuthClient instance
+ *
+ *  @param userName
+ *
+ *  @return AFXAuthClient client
+ */
++(AFXAuthClient *)authClientWithUserName:(NSString *)userName{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _authClientDictionary = [NSMutableDictionary new];
+    });
+    AFXAuthClient *client = _authClientDictionary[userName];
+    if (client == nil) {
+        client = [[AFXAuthClient alloc] initWithBaseURL:[NSURL URLWithString:[kApiURLPrefix copy]] key:[kConsumerKey copy] secret:[kConsumerSecrect copy]];
+        [_authClientDictionary setObject:client forKey:userName];
+    }
+    return client;
 }
 @end

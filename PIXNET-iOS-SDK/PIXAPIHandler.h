@@ -24,6 +24,8 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  *  @return consumer key 及 secrect 都已被設定即回傳 YES
  */
 +(BOOL)isConsumerKeyAndSecrectAssigned;
+
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion;
 //+(instancetype)sharedInstance;
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
