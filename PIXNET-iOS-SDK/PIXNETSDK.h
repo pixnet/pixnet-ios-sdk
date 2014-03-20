@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 @class PIXBlog;
 #import "PIXAPIHandler.h"
-
+#import "PIXAlbum.h"
 
 @interface PIXNETSDK : NSObject
 

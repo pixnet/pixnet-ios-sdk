@@ -1,1157 +1,545 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>archiveVersion</key>
-	<string>1</string>
-	<key>classes</key>
-	<dict/>
-	<key>objectVersion</key>
-	<string>46</string>
-	<key>objects</key>
-	<dict>
-		<key>49B1C38622254F81AD98762E</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Copy Pods Resources</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>"${SRCROOT}/Pods/Pods-resources.sh"
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>4B01D00FE656426F9CE16160</key>
-		<dict>
-			<key>includeInIndex</key>
-			<string>1</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.xcconfig</string>
-			<key>name</key>
-			<string>Pods.xcconfig</string>
-			<key>path</key>
-			<string>Pods/Pods.xcconfig</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>6B1788342F364ABEA90596A8</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array/>
-			<key>inputPaths</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXShellScriptBuildPhase</string>
-			<key>name</key>
-			<string>Check Pods Manifest.lock</string>
-			<key>outputPaths</key>
-			<array/>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-			<key>shellPath</key>
-			<string>/bin/sh</string>
-			<key>shellScript</key>
-			<string>diff "${PODS_ROOT}/../Podfile.lock" "${PODS_ROOT}/Manifest.lock" &gt; /dev/null
-if [[ $? != 0 ]] ; then
-    cat &lt;&lt; EOM
-error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.
-EOM
-    exit 1
-fi
-</string>
-			<key>showEnvVarsInLog</key>
-			<string>0</string>
-		</dict>
-		<key>9CDB24BB1BB342F89ED09330</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>archive.ar</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>libPods.a</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>CEDB7C6D18D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7CA818D2F7A600D14D0C</string>
-				<string>CEDB7C7F18D2ECF700D14D0C</string>
-				<string>CEDB7C9818D2ECF700D14D0C</string>
-				<string>CEDB7C7818D2ECF700D14D0C</string>
-				<string>CEDB7C7718D2ECF700D14D0C</string>
-				<string>4B01D00FE656426F9CE16160</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C6E18D2ECF700D14D0C</key>
-		<dict>
-			<key>attributes</key>
-			<dict>
-				<key>LastUpgradeCheck</key>
-				<string>0510</string>
-				<key>ORGANIZATIONNAME</key>
-				<string>Dolphin Su</string>
-				<key>TargetAttributes</key>
-				<dict>
-					<key>CEDB7C9018D2ECF700D14D0C</key>
-					<dict>
-						<key>TestTargetID</key>
-						<string>CEDB7C7518D2ECF700D14D0C</string>
-					</dict>
-				</dict>
-			</dict>
-			<key>buildConfigurationList</key>
-			<string>CEDB7C7118D2ECF700D14D0C</string>
-			<key>compatibilityVersion</key>
-			<string>Xcode 3.2</string>
-			<key>developmentRegion</key>
-			<string>English</string>
-			<key>hasScannedForEncodings</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXProject</string>
-			<key>knownRegions</key>
-			<array>
-				<string>en</string>
-			</array>
-			<key>mainGroup</key>
-			<string>CEDB7C6D18D2ECF700D14D0C</string>
-			<key>productRefGroup</key>
-			<string>CEDB7C7718D2ECF700D14D0C</string>
-			<key>projectDirPath</key>
-			<string></string>
-			<key>projectReferences</key>
-			<array/>
-			<key>projectRoot</key>
-			<string></string>
-			<key>targets</key>
-			<array>
-				<string>CEDB7C7518D2ECF700D14D0C</string>
-				<string>CEDB7C9018D2ECF700D14D0C</string>
-			</array>
-		</dict>
-		<key>CEDB7C7118D2ECF700D14D0C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>CEDB7CA018D2ECF700D14D0C</string>
-				<string>CEDB7CA118D2ECF700D14D0C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>defaultConfigurationName</key>
-			<string>Release</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>CEDB7C7218D2ECF700D14D0C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CEDB7C8A18D2ECF700D14D0C</string>
-				<string>CEDB7CAE18D2F7EF00D14D0C</string>
-				<string>CEDB7CAB18D2F7D000D14D0C</string>
-				<string>CEDB7CB118D2F7FA00D14D0C</string>
-				<string>CEDB7C8618D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CEDB7C7318D2ECF700D14D0C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CEDB7C7C18D2ECF700D14D0C</string>
-				<string>CEDB7C7E18D2ECF700D14D0C</string>
-				<string>CEDB7C7A18D2ECF700D14D0C</string>
-				<string>D2C300279399403B84D4742C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CEDB7C7418D2ECF700D14D0C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CEDB7C8418D2ECF700D14D0C</string>
-				<string>CEDB7C8C18D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CEDB7C7518D2ECF700D14D0C</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>CEDB7CA218D2ECF700D14D0C</string>
-			<key>buildPhases</key>
-			<array>
-				<string>6B1788342F364ABEA90596A8</string>
-				<string>CEDB7C7218D2ECF700D14D0C</string>
-				<string>CEDB7C7318D2ECF700D14D0C</string>
-				<string>CEDB7C7418D2ECF700D14D0C</string>
-				<string>49B1C38622254F81AD98762E</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array/>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>PIXNET-iOS-SDK</string>
-			<key>productName</key>
-			<string>PIXNET-iOS-SDK</string>
-			<key>productReference</key>
-			<string>CEDB7C7618D2ECF700D14D0C</string>
-			<key>productType</key>
-			<string>com.apple.product-type.application</string>
-		</dict>
-		<key>CEDB7C7618D2ECF700D14D0C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.application</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDK.app</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>CEDB7C7718D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C7618D2ECF700D14D0C</string>
-				<string>CEDB7C9118D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Products</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C7818D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C7918D2ECF700D14D0C</string>
-				<string>CEDB7C7B18D2ECF700D14D0C</string>
-				<string>CEDB7C7D18D2ECF700D14D0C</string>
-				<string>CEDB7C9218D2ECF700D14D0C</string>
-				<string>9CDB24BB1BB342F89ED09330</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Frameworks</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C7918D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>Foundation.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/Foundation.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>CEDB7C7A18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C7918D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C7B18D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>CoreGraphics.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/CoreGraphics.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>CEDB7C7C18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C7B18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C7D18D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>UIKit.framework</string>
-			<key>path</key>
-			<string>System/Library/Frameworks/UIKit.framework</string>
-			<key>sourceTree</key>
-			<string>SDKROOT</string>
-		</dict>
-		<key>CEDB7C7E18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C7D18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C7F18D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C8818D2ECF700D14D0C</string>
-				<string>CEDB7C8918D2ECF700D14D0C</string>
-				<string>CEDB7C8B18D2ECF700D14D0C</string>
-				<string>CEDB7C8018D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDK</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8018D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C8118D2ECF700D14D0C</string>
-				<string>CEDB7C8218D2ECF700D14D0C</string>
-				<string>CEDB7C8518D2ECF700D14D0C</string>
-				<string>CEDB7C8718D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8118D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDK-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8218D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C8318D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8318D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8418D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C8218D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C8518D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>main.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8618D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C8518D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C8718D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDK-Prefix.pch</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8818D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>AppDelegate.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8918D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>AppDelegate.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8A18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C8918D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C8B18D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>folder.assetcatalog</string>
-			<key>path</key>
-			<string>Images.xcassets</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C8C18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C8B18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C8D18D2ECF700D14D0C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CEDB7C9F18D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXSourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CEDB7C8E18D2ECF700D14D0C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CEDB7C9318D2ECF700D14D0C</string>
-				<string>CEDB7C9518D2ECF700D14D0C</string>
-				<string>CEDB7C9418D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXFrameworksBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CEDB7C8F18D2ECF700D14D0C</key>
-		<dict>
-			<key>buildActionMask</key>
-			<string>2147483647</string>
-			<key>files</key>
-			<array>
-				<string>CEDB7C9D18D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXResourcesBuildPhase</string>
-			<key>runOnlyForDeploymentPostprocessing</key>
-			<string>0</string>
-		</dict>
-		<key>CEDB7C9018D2ECF700D14D0C</key>
-		<dict>
-			<key>buildConfigurationList</key>
-			<string>CEDB7CA518D2ECF700D14D0C</string>
-			<key>buildPhases</key>
-			<array>
-				<string>CEDB7C8D18D2ECF700D14D0C</string>
-				<string>CEDB7C8E18D2ECF700D14D0C</string>
-				<string>CEDB7C8F18D2ECF700D14D0C</string>
-			</array>
-			<key>buildRules</key>
-			<array/>
-			<key>dependencies</key>
-			<array>
-				<string>CEDB7C9718D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXNativeTarget</string>
-			<key>name</key>
-			<string>PIXNET-iOS-SDKTests</string>
-			<key>productName</key>
-			<string>PIXNET-iOS-SDKTests</string>
-			<key>productReference</key>
-			<string>CEDB7C9118D2ECF700D14D0C</string>
-			<key>productType</key>
-			<string>com.apple.product-type.bundle.unit-test</string>
-		</dict>
-		<key>CEDB7C9118D2ECF700D14D0C</key>
-		<dict>
-			<key>explicitFileType</key>
-			<string>wrapper.cfbundle</string>
-			<key>includeInIndex</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDKTests.xctest</string>
-			<key>sourceTree</key>
-			<string>BUILT_PRODUCTS_DIR</string>
-		</dict>
-		<key>CEDB7C9218D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>wrapper.framework</string>
-			<key>name</key>
-			<string>XCTest.framework</string>
-			<key>path</key>
-			<string>Library/Frameworks/XCTest.framework</string>
-			<key>sourceTree</key>
-			<string>DEVELOPER_DIR</string>
-		</dict>
-		<key>CEDB7C9318D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C9218D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C9418D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C7918D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C9518D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C7D18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C9618D2ECF700D14D0C</key>
-		<dict>
-			<key>containerPortal</key>
-			<string>CEDB7C6E18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXContainerItemProxy</string>
-			<key>proxyType</key>
-			<string>1</string>
-			<key>remoteGlobalIDString</key>
-			<string>CEDB7C7518D2ECF700D14D0C</string>
-			<key>remoteInfo</key>
-			<string>PIXNET-iOS-SDK</string>
-		</dict>
-		<key>CEDB7C9718D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXTargetDependency</string>
-			<key>target</key>
-			<string>CEDB7C7518D2ECF700D14D0C</string>
-			<key>targetProxy</key>
-			<string>CEDB7C9618D2ECF700D14D0C</string>
-		</dict>
-		<key>CEDB7C9818D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C9E18D2ECF700D14D0C</string>
-				<string>CEDB7C9918D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDKTests</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C9918D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C9A18D2ECF700D14D0C</string>
-				<string>CEDB7C9B18D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Supporting Files</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C9A18D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.xml</string>
-			<key>path</key>
-			<string>PIXNET-iOS-SDKTests-Info.plist</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C9B18D2ECF700D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7C9C18D2ECF700D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXVariantGroup</string>
-			<key>name</key>
-			<string>InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C9C18D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>text.plist.strings</string>
-			<key>name</key>
-			<string>en</string>
-			<key>path</key>
-			<string>en.lproj/InfoPlist.strings</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C9D18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C9B18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7C9E18D2ECF700D14D0C</key>
-		<dict>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>PIXNET_iOS_SDKTests.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7C9F18D2ECF700D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7C9E18D2ECF700D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7CA018D2ECF700D14D0C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_DYNAMIC_NO_PIC</key>
-				<string>NO</string>
-				<key>GCC_OPTIMIZATION_LEVEL</key>
-				<string>0</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
-				<string>NO</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.1</string>
-				<key>ONLY_ACTIVE_ARCH</key>
-				<string>YES</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>CEDB7CA118D2ECF700D14D0C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>ALWAYS_SEARCH_USER_PATHS</key>
-				<string>NO</string>
-				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
-				<string>gnu++0x</string>
-				<key>CLANG_CXX_LIBRARY</key>
-				<string>libc++</string>
-				<key>CLANG_ENABLE_MODULES</key>
-				<string>YES</string>
-				<key>CLANG_ENABLE_OBJC_ARC</key>
-				<string>YES</string>
-				<key>CLANG_WARN_BOOL_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN_EMPTY_BODY</key>
-				<string>YES</string>
-				<key>CLANG_WARN_ENUM_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_INT_CONVERSION</key>
-				<string>YES</string>
-				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
-				<string>YES_ERROR</string>
-				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
-				<string>YES</string>
-				<key>CODE_SIGN_IDENTITY[sdk=iphoneos*]</key>
-				<string>iPhone Developer</string>
-				<key>COPY_PHASE_STRIP</key>
-				<string>YES</string>
-				<key>ENABLE_NS_ASSERTIONS</key>
-				<string>NO</string>
-				<key>GCC_C_LANGUAGE_STANDARD</key>
-				<string>gnu99</string>
-				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
-				<string>YES</string>
-				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
-				<string>YES_ERROR</string>
-				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
-				<string>YES_AGGRESSIVE</string>
-				<key>GCC_WARN_UNUSED_FUNCTION</key>
-				<string>YES</string>
-				<key>GCC_WARN_UNUSED_VARIABLE</key>
-				<string>YES</string>
-				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
-				<string>7.1</string>
-				<key>SDKROOT</key>
-				<string>iphoneos</string>
-				<key>VALIDATE_PRODUCT</key>
-				<string>YES</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>CEDB7CA218D2ECF700D14D0C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>CEDB7CA318D2ECF700D14D0C</string>
-				<string>CEDB7CA418D2ECF700D14D0C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>CEDB7CA318D2ECF700D14D0C</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4B01D00FE656426F9CE16160</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>PIXNET-iOS-SDK/PIXNET-iOS-SDK-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>CEDB7CA418D2ECF700D14D0C</key>
-		<dict>
-			<key>baseConfigurationReference</key>
-			<string>4B01D00FE656426F9CE16160</string>
-			<key>buildSettings</key>
-			<dict>
-				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
-				<string>AppIcon</string>
-				<key>ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME</key>
-				<string>LaunchImage</string>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>PIXNET-iOS-SDK/PIXNET-iOS-SDK-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>app</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>CEDB7CA518D2ECF700D14D0C</key>
-		<dict>
-			<key>buildConfigurations</key>
-			<array>
-				<string>CEDB7CA618D2ECF700D14D0C</string>
-				<string>CEDB7CA718D2ECF700D14D0C</string>
-			</array>
-			<key>defaultConfigurationIsVisible</key>
-			<string>0</string>
-			<key>isa</key>
-			<string>XCConfigurationList</string>
-		</dict>
-		<key>CEDB7CA618D2ECF700D14D0C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch</string>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<array>
-					<string>DEBUG=1</string>
-					<string>$(inherited)</string>
-				</array>
-				<key>INFOPLIST_FILE</key>
-				<string>PIXNET-iOS-SDKTests/PIXNET-iOS-SDKTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Debug</string>
-		</dict>
-		<key>CEDB7CA718D2ECF700D14D0C</key>
-		<dict>
-			<key>buildSettings</key>
-			<dict>
-				<key>BUNDLE_LOADER</key>
-				<string>$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK</string>
-				<key>FRAMEWORK_SEARCH_PATHS</key>
-				<array>
-					<string>$(SDKROOT)/Developer/Library/Frameworks</string>
-					<string>$(inherited)</string>
-					<string>$(DEVELOPER_FRAMEWORKS_DIR)</string>
-				</array>
-				<key>GCC_PRECOMPILE_PREFIX_HEADER</key>
-				<string>YES</string>
-				<key>GCC_PREFIX_HEADER</key>
-				<string>PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch</string>
-				<key>INFOPLIST_FILE</key>
-				<string>PIXNET-iOS-SDKTests/PIXNET-iOS-SDKTests-Info.plist</string>
-				<key>PRODUCT_NAME</key>
-				<string>$(TARGET_NAME)</string>
-				<key>TEST_HOST</key>
-				<string>$(BUNDLE_LOADER)</string>
-				<key>WRAPPER_EXTENSION</key>
-				<string>xctest</string>
-			</dict>
-			<key>isa</key>
-			<string>XCBuildConfiguration</string>
-			<key>name</key>
-			<string>Release</string>
-		</dict>
-		<key>CEDB7CA818D2F7A600D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7CA918D2F7D000D14D0C</string>
-				<string>CEDB7CAA18D2F7D000D14D0C</string>
-				<string>CEDB7CB318D2F83B00D14D0C</string>
-				<string>CEDB7CB218D2F82300D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>Classes</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CA918D2F7D000D14D0C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>PIXNETSDK.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CAA18D2F7D000D14D0C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>PIXNETSDK.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CAB18D2F7D000D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7CAA18D2F7D000D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7CAC18D2F7EF00D14D0C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>PIXBlog.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CAD18D2F7EF00D14D0C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>PIXBlog.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CAE18D2F7EF00D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7CAD18D2F7EF00D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7CAF18D2F7FA00D14D0C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.h</string>
-			<key>path</key>
-			<string>PIXAPIHandler.h</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CB018D2F7FA00D14D0C</key>
-		<dict>
-			<key>fileEncoding</key>
-			<string>4</string>
-			<key>isa</key>
-			<string>PBXFileReference</string>
-			<key>lastKnownFileType</key>
-			<string>sourcecode.c.objc</string>
-			<key>path</key>
-			<string>PIXAPIHandler.m</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CB118D2F7FA00D14D0C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>CEDB7CB018D2F7FA00D14D0C</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-		<key>CEDB7CB218D2F82300D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7CAF18D2F7FA00D14D0C</string>
-				<string>CEDB7CB018D2F7FA00D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>NetworkHandle</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>CEDB7CB318D2F83B00D14D0C</key>
-		<dict>
-			<key>children</key>
-			<array>
-				<string>CEDB7CAC18D2F7EF00D14D0C</string>
-				<string>CEDB7CAD18D2F7EF00D14D0C</string>
-			</array>
-			<key>isa</key>
-			<string>PBXGroup</string>
-			<key>name</key>
-			<string>APIHandle</string>
-			<key>sourceTree</key>
-			<string>&lt;group&gt;</string>
-		</dict>
-		<key>D2C300279399403B84D4742C</key>
-		<dict>
-			<key>fileRef</key>
-			<string>9CDB24BB1BB342F89ED09330</string>
-			<key>isa</key>
-			<string>PBXBuildFile</string>
-		</dict>
-	</dict>
-	<key>rootObject</key>
-	<string>CEDB7C6E18D2ECF700D14D0C</string>
-</dict>
-</plist>
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
+		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
+		CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
+		CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */; };
+		CEDB7C8618D2ECF700D14D0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C8518D2ECF700D14D0C /* main.m */; };
+		CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */; };
+		CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */; };
+		CEDB7C9318D2ECF700D14D0C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C9218D2ECF700D14D0C /* XCTest.framework */; };
+		CEDB7C9418D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
+		CEDB7C9518D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
+		CEDB7C9D18D2ECF700D14D0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */; };
+		CEDB7C9F18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C9E18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m */; };
+		CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */; };
+		CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */; };
+		CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */; };
+		CEDFA6B018DA793200BB70B3 /* PIXAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA6AF18DA793200BB70B3 /* PIXAlbum.m */; };
+		D2C300279399403B84D4742C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDB24BB1BB342F89ED09330 /* libPods.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CEDB7C9618D2ECF700D14D0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEDB7C7518D2ECF700D14D0C;
+			remoteInfo = "PIXNET-iOS-SDK";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDB7C7918D2ECF700D14D0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PIXNET-iOS-SDK-Info.plist"; sourceTree = "<group>"; };
+		CEDB7C8318D2ECF700D14D0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEDB7C8518D2ECF700D14D0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PIXNET-iOS-SDK-Prefix.pch"; sourceTree = "<group>"; };
+		CEDB7C8818D2ECF700D14D0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CEDB7C9118D2ECF700D14D0C /* PIXNET-iOS-SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIXNET-iOS-SDKTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEDB7C9218D2ECF700D14D0C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CEDB7C9A18D2ECF700D14D0C /* PIXNET-iOS-SDKTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PIXNET-iOS-SDKTests-Info.plist"; sourceTree = "<group>"; };
+		CEDB7C9C18D2ECF700D14D0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CEDB7C9E18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIXNET_iOS_SDKTests.m; sourceTree = "<group>"; };
+		CEDB7CA918D2F7D000D14D0C /* PIXNETSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXNETSDK.h; sourceTree = "<group>"; };
+		CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXNETSDK.m; sourceTree = "<group>"; };
+		CEDB7CAC18D2F7EF00D14D0C /* PIXBlog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXBlog.h; sourceTree = "<group>"; };
+		CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlog.m; sourceTree = "<group>"; };
+		CEDB7CAF18D2F7FA00D14D0C /* PIXAPIHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXAPIHandler.h; sourceTree = "<group>"; };
+		CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAPIHandler.m; sourceTree = "<group>"; };
+		CEDFA6AE18DA793200BB70B3 /* PIXAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXAlbum.h; sourceTree = "<group>"; };
+		CEDFA6AF18DA793200BB70B3 /* PIXAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAlbum.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CEDB7C7318D2ECF700D14D0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */,
+				CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */,
+				CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */,
+				D2C300279399403B84D4742C /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDB7C8E18D2ECF700D14D0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDB7C9318D2ECF700D14D0C /* XCTest.framework in Frameworks */,
+				CEDB7C9518D2ECF700D14D0C /* UIKit.framework in Frameworks */,
+				CEDB7C9418D2ECF700D14D0C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CEDB7C6D18D2ECF700D14D0C = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CA818D2F7A600D14D0C /* Classes */,
+				CEDB7C7F18D2ECF700D14D0C /* PIXNET-iOS-SDK */,
+				CEDB7C9818D2ECF700D14D0C /* PIXNET-iOS-SDKTests */,
+				CEDB7C7818D2ECF700D14D0C /* Frameworks */,
+				CEDB7C7718D2ECF700D14D0C /* Products */,
+				4B01D00FE656426F9CE16160 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		CEDB7C7718D2ECF700D14D0C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */,
+				CEDB7C9118D2ECF700D14D0C /* PIXNET-iOS-SDKTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CEDB7C7818D2ECF700D14D0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7C7918D2ECF700D14D0C /* Foundation.framework */,
+				CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */,
+				CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */,
+				CEDB7C9218D2ECF700D14D0C /* XCTest.framework */,
+				9CDB24BB1BB342F89ED09330 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CEDB7C7F18D2ECF700D14D0C /* PIXNET-iOS-SDK */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7C8818D2ECF700D14D0C /* AppDelegate.h */,
+				CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */,
+				CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */,
+				CEDB7C8018D2ECF700D14D0C /* Supporting Files */,
+			);
+			path = "PIXNET-iOS-SDK";
+			sourceTree = "<group>";
+		};
+		CEDB7C8018D2ECF700D14D0C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */,
+				CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */,
+				CEDB7C8518D2ECF700D14D0C /* main.m */,
+				CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEDB7C9818D2ECF700D14D0C /* PIXNET-iOS-SDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7C9E18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m */,
+				CEDB7C9918D2ECF700D14D0C /* Supporting Files */,
+			);
+			path = "PIXNET-iOS-SDKTests";
+			sourceTree = "<group>";
+		};
+		CEDB7C9918D2ECF700D14D0C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7C9A18D2ECF700D14D0C /* PIXNET-iOS-SDKTests-Info.plist */,
+				CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEDB7CA818D2F7A600D14D0C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CA918D2F7D000D14D0C /* PIXNETSDK.h */,
+				CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */,
+				CEDB7CB318D2F83B00D14D0C /* APIHandle */,
+				CEDB7CB218D2F82300D14D0C /* NetworkHandle */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		CEDB7CB218D2F82300D14D0C /* NetworkHandle */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CAF18D2F7FA00D14D0C /* PIXAPIHandler.h */,
+				CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */,
+			);
+			name = NetworkHandle;
+			sourceTree = "<group>";
+		};
+		CEDB7CB318D2F83B00D14D0C /* APIHandle */ = {
+			isa = PBXGroup;
+			children = (
+				CEDB7CAC18D2F7EF00D14D0C /* PIXBlog.h */,
+				CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */,
+				CEDFA6AE18DA793200BB70B3 /* PIXAlbum.h */,
+				CEDFA6AF18DA793200BB70B3 /* PIXAlbum.m */,
+			);
+			name = APIHandle;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEDB7CA218D2ECF700D14D0C /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDK" */;
+			buildPhases = (
+				6B1788342F364ABEA90596A8 /* Check Pods Manifest.lock */,
+				CEDB7C7218D2ECF700D14D0C /* Sources */,
+				CEDB7C7318D2ECF700D14D0C /* Frameworks */,
+				CEDB7C7418D2ECF700D14D0C /* Resources */,
+				49B1C38622254F81AD98762E /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PIXNET-iOS-SDK";
+			productName = "PIXNET-iOS-SDK";
+			productReference = CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CEDB7C9018D2ECF700D14D0C /* PIXNET-iOS-SDKTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CEDB7CA518D2ECF700D14D0C /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDKTests" */;
+			buildPhases = (
+				CEDB7C8D18D2ECF700D14D0C /* Sources */,
+				CEDB7C8E18D2ECF700D14D0C /* Frameworks */,
+				CEDB7C8F18D2ECF700D14D0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CEDB7C9718D2ECF700D14D0C /* PBXTargetDependency */,
+			);
+			name = "PIXNET-iOS-SDKTests";
+			productName = "PIXNET-iOS-SDKTests";
+			productReference = CEDB7C9118D2ECF700D14D0C /* PIXNET-iOS-SDKTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CEDB7C6E18D2ECF700D14D0C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Dolphin Su";
+				TargetAttributes = {
+					CEDB7C9018D2ECF700D14D0C = {
+						TestTargetID = CEDB7C7518D2ECF700D14D0C;
+					};
+				};
+			};
+			buildConfigurationList = CEDB7C7118D2ECF700D14D0C /* Build configuration list for PBXProject "PIXNET-iOS-SDK" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CEDB7C6D18D2ECF700D14D0C;
+			productRefGroup = CEDB7C7718D2ECF700D14D0C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */,
+				CEDB7C9018D2ECF700D14D0C /* PIXNET-iOS-SDKTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CEDB7C7418D2ECF700D14D0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */,
+				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDB7C8F18D2ECF700D14D0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDB7C9D18D2ECF700D14D0C /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49B1C38622254F81AD98762E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6B1788342F364ABEA90596A8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CEDB7C7218D2ECF700D14D0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
+				CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */,
+				CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */,
+				CEDFA6B018DA793200BB70B3 /* PIXAlbum.m in Sources */,
+				CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */,
+				CEDB7C8618D2ECF700D14D0C /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CEDB7C8D18D2ECF700D14D0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CEDB7C9F18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CEDB7C9718D2ECF700D14D0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
+			targetProxy = CEDB7C9618D2ECF700D14D0C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEDB7C8318D2ECF700D14D0C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEDB7C9C18D2ECF700D14D0C /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CEDB7CA018D2ECF700D14D0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CEDB7CA118D2ECF700D14D0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CEDB7CA318D2ECF700D14D0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B01D00FE656426F9CE16160 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch";
+				INFOPLIST_FILE = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CEDB7CA418D2ECF700D14D0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B01D00FE656426F9CE16160 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch";
+				INFOPLIST_FILE = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CEDB7CA618D2ECF700D14D0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "PIXNET-iOS-SDKTests/PIXNET-iOS-SDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CEDB7CA718D2ECF700D14D0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch";
+				INFOPLIST_FILE = "PIXNET-iOS-SDKTests/PIXNET-iOS-SDKTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CEDB7C7118D2ECF700D14D0C /* Build configuration list for PBXProject "PIXNET-iOS-SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDB7CA018D2ECF700D14D0C /* Debug */,
+				CEDB7CA118D2ECF700D14D0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEDB7CA218D2ECF700D14D0C /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDB7CA318D2ECF700D14D0C /* Debug */,
+				CEDB7CA418D2ECF700D14D0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEDB7CA518D2ECF700D14D0C /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDKTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDB7CA618D2ECF700D14D0C /* Debug */,
+				CEDB7CA718D2ECF700D14D0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CEDB7C6E18D2ECF700D14D0C /* Project object */;
+}

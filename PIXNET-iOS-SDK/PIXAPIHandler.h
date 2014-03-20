@@ -5,12 +5,14 @@
 //  Created by Dolphin Su on 3/14/14.
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
-//  這個 class 主要用來與後台 API 溝通
+//  這個 class 主要用來與後台 API 溝通, 跟後台要資料時一概都使用 json 格式
 typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessage);
 
 #import <Foundation/Foundation.h>
 
 @interface PIXAPIHandler : NSObject
+//+(instancetype)sharedInstance;
+
 /**
  *  設定 consumer key 及 consumer secrect
  *

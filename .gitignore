@@ -21,3 +21,4 @@ PIXNET-iOS-SDK/PIXNET-iOS-SDKTests
 #CocoaPods
 PIXNET-iOS-SDK/Pods
 PIXNET-iOS-SDK/Podfile.lock
+PIXNET-iOS-SDK/PIXNET-iOS-SDK/AppDelegate.m
