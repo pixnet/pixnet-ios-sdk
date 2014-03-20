@@ -5,7 +5,7 @@
 //  Created by Dolphin Su on 3/14/14.
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
-//  這個 class 主要用來與後台 API 溝通
+//  這個 class 主要用來與後台 API 溝通, 跟後台要資料時一概都使用 json 格式
 typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessage);
 
 #import <Foundation/Foundation.h>
@@ -26,6 +26,8 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  *  @return consumer key 及 secrect 都已被設定即回傳 YES
  */
 +(BOOL)isConsumerKeyAndSecrectAssigned;
+
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion;
 //+(instancetype)sharedInstance;
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
