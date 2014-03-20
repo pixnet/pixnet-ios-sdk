@@ -99,14 +99,14 @@ static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 }
 -(NSString *)parametersStringFromDictionary:(NSDictionary *)dictionary{
     NSMutableString *parameterString = [NSMutableString new];
-    
+
     NSArray *keys = [dictionary allKeys];
     for (NSString *key in keys) {
-        [parameterString appendString:[NSString stringWithFormat:@"%@=%@", key, dictionary[key]]];
-        if (![[keys lastObject] isEqualToString:key]) {
-            [parameterString appendString:@"&"];
-        }
+        [parameterString appendString:[NSString stringWithFormat:@"%@=%@&", key, dictionary[key]]];
     }
+    //一律使用 json 格式處理回傳的資料
+    [parameterString appendString:@"format=json"];
+
     return parameterString;
 }
 -(NSError *)errorWithHTTPStautsCode:(NSInteger)errorCode{
