@@ -5,6 +5,23 @@
 //  Created by Dolphin Su on 3/20/14.
 //  Copyright (c) 2014 Dolphin Su. All rights reserved.
 //
+/**
+ *  Album 裡的影音資料格式
+ */
+typedef NS_ENUM(NSInteger, PIXAlbumElementType){
+    /**
+     *  圖片
+     */
+    PIXAlbumElementTypePic,
+    /**
+     *  影片
+     */
+    PIXAlbumElementTypeVideo,
+    /**
+     *  音樂
+     */
+    PIXAlbumElementTypeAudio
+};
 
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
@@ -21,7 +38,7 @@
  *  @param trimUser   是否每篇文章都要回傳作者資訊, 如果設定為 YES, 則就不回傳. 預設是 NO
  *  @param page       頁數, 預設為1
  *  @param perPage    每頁幾筆, 預設為100
- *  @param completion RequestCompletion
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumListWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(RequestCompletion)completion;
 
@@ -34,8 +51,8 @@
  *  @param trimUser   是否每篇文章都要回傳作者資訊, 如果設定為 1, 則就不回傳. 預設是 NO
  *  @param page       頁數, 預設為1
  *  @param perPage    每頁幾筆, 預設為100
- *  @param shouldAuth 否, 除非請求對象是被保護的
- *  @param completion RequestCompletion
+ *  @param shouldAuth 是否需要認證
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
@@ -45,10 +62,26 @@
  *  @param setId      指定要回傳的 set 的 ID, 必要參數
  *  @param page       頁數
  *  @param perPage    每頁幾筆
- *  @param shouldAuth 否, 除非請求對象是被保護的
- *  @param completion RequestCompletion
+ *  @param shouldAuth 是否需要認證
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSInteger)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+/**
+ *  列出相簿裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElements
+ *
+ *  @param userName    指定要回傳的使用者資訊, 必要參數
+ *  @param setId       指定要回傳的 set 的資訊, 必要參數
+ *  @param elementType 指定要回傳的類別
+ *  @param page        頁數
+ *  @param perPage     每頁幾筆
+ *  @param password    相簿密碼，當使用者相簿設定為密碼相簿時使用
+ *  @param withDetail  傳回詳細資訊，指定為 YES 時將會回傳完整圖片資訊
+ *  @param trimUser    不傳回相片擁有者資訊，指定為 YES 時將不會回傳相片擁有者資訊
+ *  @param shouldAuth  是否需要認證
+ *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSInteger)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+
 #pragma Folders
 
 #pragma Element
