@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
 		CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
@@ -39,6 +40,7 @@
 /* Begin PBXFileReference section */
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDB7C7918D2ECF700D14D0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */,
 				CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */,
 				CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */,
 				CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */,
@@ -114,6 +117,7 @@
 		CEDB7C7818D2ECF700D14D0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */,
 				CEDB7C7918D2ECF700D14D0C /* Foundation.framework */,
 				CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */,
 				CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */,
