@@ -54,9 +54,11 @@
 -(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSInteger)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"userName 是必要參數");
+        return;
     }
     if (setId == 0 || setId > NSIntegerMax || setId < NSIntegerMin) {
         completion(NO, nil, @"setID 參數有誤");
+        return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
@@ -66,6 +68,97 @@
         
     } else {
         [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"album/sets/%li", (long)setId] parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            if (succeed) {
+                [self succeedHandleWithData:result completion:completion];
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
+}
+
+-(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSInteger)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    if (setId == 0 || setId > NSIntegerMax || setId < NSIntegerMin) {
+        completion(NO, nil, @"setID 參數有誤");
+        return;
+    }
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"userName 是必要參數");
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    switch (elementType) {
+        case PIXAlbumElementTypePic:
+            params[@"type"] = @"pic";
+            break;
+        case PIXAlbumElementTypeAudio:
+            params[@"type"] = @"audio";
+            break;
+        case PIXAlbumElementTypeVideo:
+            params[@"type"] = @"video";
+            break;
+        default:
+            completion(NO, nil, @"elementType 參數有誤");
+            return;
+            break;
+    }
+    if (password != nil) {
+        params[@"password"] = password;
+    }
+    params[@"set_id"] = @(setId);
+    params[@"page"] = @(page);
+    params[@"per_page"] = @(perPage);
+    params[@"with_detail"] = @(withDetail);
+    params[@"trim_user"] = @(trimUser);
+    
+    if (shouldAuth) {
+        
+    } else {
+        [[PIXAPIHandler new] callAPI:@"album/elements" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            if (succeed) {
+                [self succeedHandleWithData:result completion:completion];
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
+}
+-(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSUInteger)elementId setID:(NSUInteger)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    BOOL isElement = YES;
+    if (elementId <= 0 || elementId > NSUIntegerMax) {
+        isElement = NO;
+    }
+    BOOL isSetId = YES;
+    if (setId <= 0 || setId > NSUIntegerMax) {
+        isSetId = NO;
+    }
+    if (isSetId == NO && isElement == NO) {
+        completion(NO, nil, @"elementID 或 setID 有誤");
+        return;
+    }
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"UserName 參數有誤");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    params[@"page"] = @(page);
+    params[@"per_page"] = @(perPage);
+    if (isElement) {
+        params[@"element_id"] = @(elementId);
+    }
+    if (isSetId) {
+        params[@"set_id"] = @(setId);
+    }
+    if (password != nil) {
+        params[@"password"] = password;
+    }
+    if (shouldAuth) {
+        
+    } else {
+        [[PIXAPIHandler new] callAPI:@"album/set_comments" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
             if (succeed) {
                 [self succeedHandleWithData:result completion:completion];
             } else {
