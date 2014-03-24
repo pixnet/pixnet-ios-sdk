@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
 
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface PIXAlbum : NSObject
 #pragma Main
@@ -94,7 +95,21 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSUInteger)elementId setID:(NSUInteger)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+/**
+ *  附近的相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
+ *
+ *  @param userName    指定要回傳的使用者資訊, 必要參數
+ *  @param location    經緯度坐標, 必要資訊
+ *  @param distanceMin 回傳相簿所在地和指定的經緯度距離之最小值，單位為公尺。預設為 0 公尺，上限為 50000 公尺
+ *  @param distanceMax 回傳相簿所在地和指定的經緯度距離之最大值，單位為公尺。預設為 0 公尺，上限為 50000 公尺
+ *  @param page        頁數
+ *  @param perPage     每頁幾筆
+ *  @param trimUser    是否每本相簿都要回傳使用者資訊，若設定為 YES 則不回傳
+ *  @param shouldAuth  是否需要認證
+ *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 #pragma Folders
-
+-(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(RequestCompletion)completion;
 #pragma Element
 @end

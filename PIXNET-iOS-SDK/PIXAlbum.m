@@ -167,6 +167,57 @@
         }];
     }
 }
+
+-(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"UserName 參數有誤");
+        return;
+    }
+    if (!CLLocationCoordinate2DIsValid(location)) {
+        completion(NO, nil, @"location 參數是空值");
+        return;
+    }
+    if (distanceMin > 50000) {
+        completion(NO, nil, @"distanceMin 必須介於 0-50000之間");
+        return;
+    }
+    if (distanceMax <= 0 || distanceMax > 50000) {
+        completion(NO, nil, @"distanceMax 必須介於 0-50000之間");
+        return;
+    }
+    if (distanceMax <= 0 || distanceMax > 50000) {
+        completion(NO, nil, @"distanceMax 必須介於 0-50000之間");
+        return;
+    }
+    if (distanceMin > distanceMax) {
+        completion(NO, nil, @"distanceMin 必需小於 distanceMax");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    params[@"lat"] = [NSString stringWithFormat:@"%f", location.latitude];
+    params[@"lon"] = [NSString stringWithFormat:@"%f", location.longitude];
+    params[@"distance_min"] = [NSString stringWithFormat:@"%lu", (unsigned long)distanceMin];
+    params[@"distance_max"] = [NSString stringWithFormat:@"%lu", (unsigned long)distanceMax];
+    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
+    
+    if (shouldAuth) {
+        
+    } else {
+        [[PIXAPIHandler new] callAPI:@"album/sets/nearby" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            if (succeed) {
+                [self succeedHandleWithData:result completion:completion];
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
+}
+-(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(RequestCompletion)completion{
+    
+}
 -(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
