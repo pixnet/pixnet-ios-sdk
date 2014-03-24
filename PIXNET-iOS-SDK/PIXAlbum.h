@@ -122,14 +122,14 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  */
 -(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
- *  <#Description#>
+ *  列出相簿個人單一Folder http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersShow
  *
- *  @param userName   <#userName description#>
- *  @param folderId   <#folderId description#>
- *  @param page       <#page description#>
- *  @param perPage    <#perPage description#>
- *  @param shouldAuth <#shouldAuth description#>
- *  @param completion <#completion description#>
+ *  @param userName   指定要回傳的使用者資訊, 必要參數
+ *  @param folderId   指定要回傳的 folder 資訊, 必要參數
+ *  @param page       頁數
+ *  @param perPage    每頁幾筆
+ *  @param shouldAuth 是否需要認證
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 #pragma Element
