@@ -12,11 +12,11 @@
 
 @interface PIXBlog : NSObject
 //+(instancetype)sharedInstance;
-#pragma Blog imformation
+#pragma mark - Blog imformation
 - (void)getBlogInformationWithUserID:(NSString *)userID
                           completion:(RequestCompletion)completion;
 
-#pragma Blog Categories
+#pragma mark - Blog Categories
 //dosen't need Access token
 - (void)getBlogCategoriesWithUserID:(NSString *)userID
                         andPassword:(NSString *)passwd
@@ -36,7 +36,7 @@
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
                   completion:(RequestCompletion)completion;
 
-#pragma Blog Articles
+#pragma mark - Blog Articles
 //dosen't need Access token
 - (void)getBlogAllArticlesWithUserID:(NSString *)userID
                          andPassword:(NSString *)passwd
@@ -72,9 +72,9 @@
                                  inUser:(NSString *)userID
                              completion:(RequestCompletion)completion;
 //need access token
+//還沒寫
 
-
-#pragma Blog Comments
+#pragma mark - Blog Comments
 //dosen't need Access token
 - (void)getBlogCommentsWithUserID:(NSString *)userID
                      andArticleID:(NSString *)articleID
@@ -88,10 +88,15 @@
 
 - (void)getBlogLatestCommentWithUserID:(NSString *)userID
                             completion:(RequestCompletion)completion;
+//need access token
+//還沒寫
 
 
-#pragma Blog Categories list
+#pragma mark - Blog Categories list
 //dosen't need Access token
 - (void)getBlogCategoriesListCompletion:(RequestCompletion)completion;
+
+//need access token
+//還沒寫
 
 @end
