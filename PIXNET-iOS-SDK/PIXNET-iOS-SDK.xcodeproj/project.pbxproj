@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5078D12018DD868100479317 /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5078D11F18DD868100479317 /* PIXUser.m */; };
+		5078D12118DD868100479317 /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5078D11F18DD868100479317 /* PIXUser.m */; };
+		5078D12418DD894800479317 /* PIXConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 5078D12318DD894800479317 /* PIXConstant.m */; };
+		5078D12518DD894800479317 /* PIXConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 5078D12318DD894800479317 /* PIXConstant.m */; };
+		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
 		CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
@@ -38,7 +43,12 @@
 
 /* Begin PBXFileReference section */
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		5078D11E18DD868100479317 /* PIXUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXUser.h; sourceTree = "<group>"; };
+		5078D11F18DD868100479317 /* PIXUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXUser.m; sourceTree = "<group>"; };
+		5078D12218DD894800479317 /* PIXConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXConstant.h; sourceTree = "<group>"; };
+		5078D12318DD894800479317 /* PIXConstant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXConstant.m; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDB7C7918D2ECF700D14D0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -70,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */,
 				CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */,
 				CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */,
 				CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */,
@@ -114,6 +125,7 @@
 		CEDB7C7818D2ECF700D14D0C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */,
 				CEDB7C7918D2ECF700D14D0C /* Foundation.framework */,
 				CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */,
 				CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */,
@@ -186,10 +198,14 @@
 		CEDB7CB318D2F83B00D14D0C /* APIHandle */ = {
 			isa = PBXGroup;
 			children = (
+				5078D11E18DD868100479317 /* PIXUser.h */,
+				5078D11F18DD868100479317 /* PIXUser.m */,
 				CEDB7CAC18D2F7EF00D14D0C /* PIXBlog.h */,
 				CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */,
 				CEDFA6AE18DA793200BB70B3 /* PIXAlbum.h */,
 				CEDFA6AF18DA793200BB70B3 /* PIXAlbum.m */,
+				5078D12218DD894800479317 /* PIXConstant.h */,
+				5078D12318DD894800479317 /* PIXConstant.m */,
 			);
 			name = APIHandle;
 			sourceTree = "<group>";
@@ -326,6 +342,8 @@
 			files = (
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
 				CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */,
+				5078D12018DD868100479317 /* PIXUser.m in Sources */,
+				5078D12418DD894800479317 /* PIXConstant.m in Sources */,
 				CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */,
 				CEDFA6B018DA793200BB70B3 /* PIXAlbum.m in Sources */,
 				CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */,
@@ -337,6 +355,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5078D12118DD868100479317 /* PIXUser.m in Sources */,
+				5078D12518DD894800479317 /* PIXConstant.m in Sources */,
 				CEDB7C9F18D2ECF700D14D0C /* PIXNET_iOS_SDKTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
