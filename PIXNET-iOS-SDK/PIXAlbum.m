@@ -238,6 +238,33 @@
         }];
     }
 }
+-(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"UserName 參數有誤");
+        return;
+    }
+    if (folderId == nil || folderId.length == 0) {
+        completion(NO, nil, @"folderID 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
+    
+    NSString *pathString = [NSString stringWithFormat:@"album/folders/%@", folderId];
+    if (shouldAuth) {
+        
+    } else {
+        [[PIXAPIHandler new] callAPI:pathString parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            if (succeed) {
+                [self succeedHandleWithData:result completion:completion];
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
+}
 -(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
