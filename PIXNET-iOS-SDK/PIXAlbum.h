@@ -66,7 +66,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSInteger)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+-(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
  *  列出相簿裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElements
  *
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param shouldAuth  是否需要認證
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSInteger)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+-(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
  *  列出相簿(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetComments
  *
@@ -94,7 +94,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSUInteger)elementId setID:(NSUInteger)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+-(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
  *  附近的相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
  *
@@ -121,6 +121,16 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+/**
+ *  <#Description#>
+ *
+ *  @param userName   <#userName description#>
+ *  @param folderId   <#folderId description#>
+ *  @param page       <#page description#>
+ *  @param perPage    <#perPage description#>
+ *  @param shouldAuth <#shouldAuth description#>
+ *  @param completion <#completion description#>
+ */
 -(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 #pragma Element
 @end

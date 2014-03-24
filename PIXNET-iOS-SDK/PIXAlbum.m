@@ -51,12 +51,12 @@
         }];
     }
 }
--(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSInteger)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+-(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"userName 是必要參數");
         return;
     }
-    if (setId == 0 || setId > NSIntegerMax || setId < NSIntegerMin) {
+    if (setId==nil || setId.length==0) {
         completion(NO, nil, @"setID 參數有誤");
         return;
     }
@@ -77,8 +77,8 @@
     }
 }
 
--(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSInteger)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
-    if (setId == 0 || setId > NSIntegerMax || setId < NSIntegerMin) {
+-(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    if (setId==nil || setId.length==0) {
         completion(NO, nil, @"setID 參數有誤");
         return;
     }
@@ -106,11 +106,11 @@
     if (password != nil) {
         params[@"password"] = password;
     }
-    params[@"set_id"] = @(setId);
-    params[@"page"] = @(page);
-    params[@"per_page"] = @(perPage);
-    params[@"with_detail"] = @(withDetail);
-    params[@"trim_user"] = @(trimUser);
+    params[@"set_id"] = setId;
+    params[@"page"] = [NSString stringWithFormat:@"%lu", page];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", perPage];
+    params[@"with_detail"] = [NSString stringWithFormat:@"%i", withDetail];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
     if (shouldAuth) {
         
@@ -124,13 +124,13 @@
         }];
     }
 }
--(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSUInteger)elementId setID:(NSUInteger)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+-(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     BOOL isElement = YES;
-    if (elementId <= 0 || elementId > NSUIntegerMax) {
+    if (elementId==nil || elementId.length == 0) {
         isElement = NO;
     }
     BOOL isSetId = YES;
-    if (setId <= 0 || setId > NSUIntegerMax) {
+    if (setId==nil || setId.length == 0) {
         isSetId = NO;
     }
     if (isSetId == NO && isElement == NO) {
@@ -147,10 +147,10 @@
     params[@"page"] = @(page);
     params[@"per_page"] = @(perPage);
     if (isElement) {
-        params[@"element_id"] = @(elementId);
+        params[@"element_id"] = elementId;
     }
     if (isSetId) {
-        params[@"set_id"] = @(setId);
+        params[@"set_id"] = setId;
     }
     if (password != nil) {
         params[@"password"] = password;
