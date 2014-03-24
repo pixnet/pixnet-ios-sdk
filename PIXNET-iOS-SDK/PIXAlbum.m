@@ -5,6 +5,7 @@
 //  Created by Dolphin Su on 3/20/14.
 //  Copyright (c) 2014 Dolphin Su. All rights reserved.
 //
+static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 
 #import "PIXAlbum.h"
 
@@ -177,6 +178,12 @@
     }
 }
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    [self fetchAlbumElementsOrSetsNearbyWithPath:[kSetsNearbyPath copy] userName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:perPage withDetail:NO type:999 trimUser:trimUser shouldAuth:shouldAuth completion:completion];
+}
+-(void)fetchAlbumElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    [self fetchAlbumElementsOrSetsNearbyWithPath:@"album/elements/nearby" userName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:perPage withDetail:withDetail type:type trimUser:trimUser shouldAuth:shouldAuth completion:completion];
+}
+-(void)fetchAlbumElementsOrSetsNearbyWithPath:(NSString *)path userName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
         return;
@@ -210,11 +217,27 @@
     params[@"page"] = [NSString stringWithFormat:@"%li", page];
     params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
-    
+    switch (type) {
+        case PIXAlbumElementTypePic:
+            params[@"type"] = @"pic";
+            break;
+        case PIXAlbumElementTypeVideo:
+            params[@"type"] = @"video";
+            break;
+        case PIXAlbumElementTypeAudio:
+            params[@"type"] = @"audio";
+            break;
+        default:
+            break;
+    }
+    //相簿留言沒有 with_detail 這個參數, 相片留言才有
+    if (![path isEqualToString:[kSetsNearbyPath copy]]) {
+        params[@"with_detail"] = [NSString stringWithFormat:@"%i", withDetail];
+    }
     if (shouldAuth) {
         
     } else {
-        [[PIXAPIHandler new] callAPI:@"album/sets/nearby" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
             if (succeed) {
                 [self succeedHandleWithData:result completion:completion];
             } else {

@@ -141,10 +141,26 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param password   如果指定使用者的相簿被密碼保護，則需要指定這個參數以通過授權
  *  @param page       頁數
  *  @param perPage    每頁幾筆
- *  @param shouldAuth 是否需要認pyrnot
+ *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+/**
+ *  附近的相片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsNearby
+ *
+ *  @param userName    指定要回傳的使用者資訊, 必要參數
+ *  @param location    經緯度坐標, 必要參數
+ *  @param distanceMin 回傳相簿所在地和指定的經緯度距離之最小值，單位為公尺。預設為 0 公尺，上限為 50000 公尺
+ *  @param distanceMax 回傳相簿所在地和指定的經緯度距離之最大值，單位為公尺。預設為 0 公尺，上限為 50000 公尺
+ *  @param page        頁數
+ *  @param perPage     每頁幾筆
+ *  @param withDetail  是否傳回詳細資訊，指定為 YES 時將傳回相片／影音完整資訊及所屬相簿資訊。
+ *  @param type        指定要回傳的類別。
+ *  @param trimUser    是否每個相片／影音都要回傳使用者資訊，若設定為 YES 則不回傳。
+ *  @param shouldAuth  是否需要認證
+ *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 //todo: 更...這個 API 一定要 auth
 //-(void)fetchAlbumElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(RequestCompletion)completion;
 #pragma Element
