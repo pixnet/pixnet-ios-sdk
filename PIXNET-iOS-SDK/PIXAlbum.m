@@ -215,8 +215,28 @@
         }];
     }
 }
--(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(RequestCompletion)completion{
+-(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"UserName 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
+    if (shouldAuth) {
+        
+    } else {
+        [[PIXAPIHandler new] callAPI:@"album/folders" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            if (succeed) {
+                [self succeedHandleWithData:result completion:completion];
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
 }
 -(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
     NSError *jsonError;
