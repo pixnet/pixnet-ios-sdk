@@ -132,5 +132,20 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+/**
+ *  列出相簿(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumComments
+ *
+ *  @param userName   指定要回傳的使用者資訊, 必要參數
+ *  @param elementId  指定要回傳的留言所在的相簿 setID 與 elementID 只要指定其中一個即可, 未用到的參數請給0
+ *  @param setId      指定要回傳的留言所在的相簿 setID 與 elementID 只要指定其中一個即可, 未用到的參數請給0
+ *  @param password   如果指定使用者的相簿被密碼保護，則需要指定這個參數以通過授權
+ *  @param page       頁數
+ *  @param perPage    每頁幾筆
+ *  @param shouldAuth 是否需要認pyrnot
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+//todo: 更...這個 API 一定要 auth
+//-(void)fetchAlbumElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(RequestCompletion)completion;
 #pragma Element
 @end

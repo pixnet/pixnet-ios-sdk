@@ -125,6 +125,12 @@
     }
 }
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    [self fetchAlbumCommentsWithUserName:userName elementID:elementId setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth apiPath:@"album/set_comments" completion:completion];
+}
+-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    [self fetchAlbumCommentsWithUserName:userName elementID:elementId setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth apiPath:@"album/comments" completion:completion];
+}
+-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth apiPath:(NSString *)apiPath completion:(RequestCompletion)completion{
     BOOL isElement = YES;
     if (elementId==nil || elementId.length == 0) {
         isElement = NO;
@@ -158,7 +164,7 @@
     if (shouldAuth) {
         
     } else {
-        [[PIXAPIHandler new] callAPI:@"album/set_comments" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        [[PIXAPIHandler new] callAPI:apiPath parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
             if (succeed) {
                 [self succeedHandleWithData:result completion:completion];
             } else {
@@ -167,7 +173,6 @@
         }];
     }
 }
-
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
@@ -265,6 +270,8 @@
         }];
     }
 }
+
+
 -(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
