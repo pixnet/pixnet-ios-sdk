@@ -2,6 +2,7 @@ platform :ios, "6.0"
 
 pod 'AFNetworking', '~> 1.3.3'
 pod 'AFXAuthClient', '~> 1.1'
+pod 'RPJSONValidator', '~> 0.1.2'
 
 #target :PIXNET-iOS-SDKTests, :exclusive => true do
 #  pod 'Kiwi', '~> 2.2.3'
