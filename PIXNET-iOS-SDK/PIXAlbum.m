@@ -297,6 +297,15 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 }
 
 -(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    [self fetchAlbumOrSetCommentWithPath:@"album/set_comments/" userName:userName commentId:commentId shouldAuth:shouldAuth completion:completion];
+}
+-(void)fetchAlbumCommentWithUserName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    [self fetchAlbumOrSetCommentWithPath:@"album/comments/" userName:userName commentId:commentId shouldAuth:shouldAuth completion:completion];
+}
+/**
+ *  將 Album comment 及 Album set comment 兩支 api 利用 path 這參數，在這裡結合起來
+ */
+-(void)fetchAlbumOrSetCommentWithPath:(NSString *)path userName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
         return;
@@ -308,7 +317,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     
-    NSString *pathString = [NSString stringWithFormat:@"album/set_comments/%@", commentId];
+    NSString *pathString = [NSString stringWithFormat:@"%@%@", path, commentId];
     if (shouldAuth) {
         
     } else {

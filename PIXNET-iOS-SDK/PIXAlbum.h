@@ -96,6 +96,16 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  */
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
+ *  取得相本單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsId
+ *
+ *  @param userName   相本擁有者, 必要參數
+ *  @param commentId  該則留言的 id, 必要參數
+ *  @param shouldAuth 是否需要認證
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+
+/**
  *  附近的相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
  *
  *  @param userName    相本擁有者, 必要參數
@@ -109,6 +119,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+
 #pragma Folders
 /**
  *  列出某個使用者所有的資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFolders
@@ -146,6 +157,16 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  */
 -(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 /**
+ *  取得相簿單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsId
+ *
+ *  @param userName   相本擁有者, 必要參數
+ *  @param commentId  該則留言的 id, 必要參數
+ *  @param shouldAuth 是否需要認證
+ *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumCommentWithUserName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
+
+/**
  *  附近的相片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsNearby
  *
  *  @param userName    相本擁有者, 必要參數
@@ -161,15 +182,6 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
-/**
- *  讀取相本單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsId
- *
- *  @param userName   相本擁有者, 必要參數
- *  @param commentId  該則留言的 id, 必要參數
- *  @param shouldAuth 是否需要認證
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
- */
--(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion;
 //todo: 更...這個 API 一定要 auth
 //-(void)fetchAlbumElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(RequestCompletion)completion;
 #pragma Element
