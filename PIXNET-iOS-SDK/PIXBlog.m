@@ -20,14 +20,14 @@
 }
 
 #pragma mark - Blog information
-- (void)getBlogInformationWithUserID:(NSString *)userID
+- (void)getBlogInformationWithUserName:(NSString *)userName
                           completion:(RequestCompletion)completion{
     //檢查進來的參數
-    if (userID == nil) {
-        completion(NO, nil, @"userID 不可為 nil");
+    if (userName == nil) {
+        completion(NO, nil, @"userName 不可為 nil");
         return;
     }
-    [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userID} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userName} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
         if (succeed) {
             NSError *jsonError = nil;
@@ -48,138 +48,182 @@
 }
 
 #pragma mark - Blog Categories
-- (void)getBlogCategoriesWithUserID:(NSString *)userID
-                        andPassword:(NSString *)passwd completion:(RequestCompletion)completion{
+- (void)getBlogCategoriesWithUserName:(NSString *)userName
+                             Password:(NSString *)passwd
+                           completion:(RequestCompletion)completion{
     //檢查進來的參數
-    if (userID == nil) {
-        completion(NO, nil, @"userID 不可為 nil");
+    if (userName == nil) {
+        completion(NO, nil, @"userName 不可為 nil");
         return;
     }
-    if (passwd == nil) {
-        [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userID} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-                completion(NO, nil, errorMessage);
-            if (succeed) {
-                NSError *jsonError = nil;
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                if (jsonError) {
-                    completion(NO, nil, jsonError.localizedDescription);
-                } else {
-                    if ([dict[@"error"] intValue] == 0) {
-                        completion(YES, dict[@"blog"], nil);
-                    } else {
-                        completion(NO, nil, dict[@"message"]);
-                    }
-                }
-            } else {
-                completion(NO, nil, errorMessage);
-            }
-        }];
-    }else {
-        [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userID, @"passwd": passwd} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-            //檢查出去的參數
-            if (succeed) {
-                NSError *jsonError = nil;
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                if (jsonError) {
-                    completion(NO, nil, jsonError.localizedDescription);
-                } else {
-                    if ([dict[@"error"] intValue] == 0) {
-                        completion(YES, dict[@"blog"], nil);
-                    } else {
-                        completion(NO, nil, dict[@"message"]);
-                    }
-                }
-            } else {
-                completion(NO, nil, errorMessage);
-            }
-        }];
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    
+    if (passwd != nil) {
+        params[@"password"] = passwd;
     }
-
+    [[PIXAPIHandler new] callAPI:@"blog" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        completion(NO, nil, errorMessage);
+        if (succeed) {
+            NSError *jsonError = nil;
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+            if (jsonError) {
+                completion(NO, nil, jsonError.localizedDescription);
+            } else {
+                if ([dict[@"error"] intValue] == 0) {
+                    completion(YES, dict[@"blog"], nil);
+                } else {
+                    completion(NO, nil, dict[@"message"]);
+                }
+            }
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
 }
 
 #pragma mark - Blog Articles
-- (void)getBlogAllArticlesWithUserID:(NSString *)userID
-                         andPassword:(NSString *)passwd
-                            withpage:(NSInteger)page
-                      articlePerPage:(NSInteger)articlePerPage
-                          completion:(RequestCompletion)completion{
+- (void)getBlogAllArticlesWithuserName:(NSString *)userName
+                              Password:(NSString *)passwd
+                                  Page:(NSInteger)page
+                               Perpage:(NSInteger)articlePerPage
+                            completion:(RequestCompletion)completion{
     //檢查進來的參數
-    if (userID == nil) {
-        completion(NO, nil, @"userID 不可為 nil");
+    if (userName == nil) {
+        completion(NO, nil, @"userName 不可為 nil");
         return;
     }
-    if (passwd == nil) {
-        
-        NSMutableDictionary *params = [NSMutableDictionary new];
-        params[@"user"] = userID;
-        params[@"page"] = @(page);
-        params[@"per_page"] = @(articlePerPage);
-        
-        [[PIXAPIHandler new] callAPI:@"blog"
-                          parameters:params
-                   requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-                       completion(NO, nil, errorMessage);
-                        if (succeed) {
-                           
-                            NSError *jsonError = nil;
-                            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                            
-                            if (jsonError) {
-                                
-                                completion(NO, nil, jsonError.localizedDescription);
-                            
-                            } else {
-                                if ([dict[@"error"] intValue] == 0) {
-                                   
-                                    completion(YES, dict[@"blog"], nil);
-                                
-                                } else {
-                                    
-                                    completion(NO, nil, dict[@"message"]);
-                                }
-                            }
-                        } else {
-                            completion(NO, nil, errorMessage);
-                        }
-                   }];
-    }else {
-        NSMutableDictionary *params = [NSMutableDictionary new];
-        params[@"user"] = userID;
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    
+    if (passwd != nil) {
         params[@"password"] = passwd;
-        params[@"page"] = @(page);
-        params[@"per_page"] = @(articlePerPage);
-        
-        [[PIXAPIHandler new] callAPI:@"blog" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-            //檢查出去的參數
-            if (succeed) {
-                NSError *jsonError = nil;
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                if (jsonError) {
-                    completion(NO, nil, jsonError.localizedDescription);
-                } else {
-                    if ([dict[@"error"] intValue] == 0) {
-                        completion(YES, dict[@"blog"], nil);
-                    } else {
-                        completion(NO, nil, dict[@"message"]);
-                    }
-                }
-            } else {
-                completion(NO, nil, errorMessage);
-            }
-        }];
     }
+    if (page != 0 || page) {
+        params[@"page"] = @(page);
+    }
+    if (articlePerPage !=0 || articlePerPage) {
+        params[@"per_page"] = @(articlePerPage);
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       
+                       NSError *jsonError = nil;
+                       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+                       
+                       if (jsonError) {
+                           
+                           completion(NO, nil, jsonError.localizedDescription);
+                           
+                       } else {
+                           if ([dict[@"error"] intValue] == 0) {
+                               
+                               completion(YES, dict[@"blog"], nil);
+                               
+                           } else {
+                               
+                               completion(NO, nil, dict[@"message"]);
+                           }
+                       }
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
 }
 
-- (void)getBlogSingleArticleWithUserID:(NSString *)userID
-                      withBlogPassword:(NSString *)blogPasswd
-                    andArticlePassword:(NSString *)articlePasswd
-                            completion:(RequestCompletion)completion{
-    if (userID == nil) {
-        completion(NO, nil, @"userID 不可為 nil");
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName
+                            BlogPassword:(NSString *)blogPasswd
+                         ArticlePassword:(NSString *)articlePasswd
+                              completion:(RequestCompletion)completion{
+    if (userName == nil) {
+        completion(NO, nil, @"userName 不可為 nil");
         return;
     }
     
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    if (blogPasswd != nil) {
+        params[@"blog_password"] = blogPasswd;
+    }
+    if (articlePasswd != nil) {
+        params[@"article_password"] = articlePasswd;
+    }
     
+    [[PIXAPIHandler new] callAPI:@"blog"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       
+                       NSError *jsonError = nil;
+                       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+                       
+                       if (jsonError) {
+                           
+                           completion(NO, nil, jsonError.localizedDescription);
+                           
+                       } else {
+                           if ([dict[@"error"] intValue] == 0) {
+                               
+                               completion(YES, dict[@"blog"], nil);
+                               
+                           } else {
+                               
+                               completion(NO, nil, dict[@"message"]);
+                           }
+                       }
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+- (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
+                                UserName:(NSString *)userName
+                            RelatedLimit:(NSInteger)limit
+                              completion:(RequestCompletion)completion{
+    if (userName == nil) {
+        completion(NO, nil, @"userName 不可為 nil");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    if (limit != 0 || limit) {
+        params[@"limit"] = @(limit);
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       
+                       NSError *jsonError = nil;
+                       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+                       
+                       if (jsonError) {
+                           
+                           completion(NO, nil, jsonError.localizedDescription);
+                           
+                       } else {
+                           if ([dict[@"error"] intValue] == 0) {
+                               
+                               completion(YES, dict[@"blog"], nil);
+                               
+                           } else {
+                               
+                               completion(NO, nil, dict[@"message"]);
+                           }
+                       }
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
 
 }
 

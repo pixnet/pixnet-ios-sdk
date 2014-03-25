@@ -13,14 +13,14 @@
 @interface PIXBlog : NSObject
 //+(instancetype)sharedInstance;
 #pragma mark - Blog imformation
-- (void)getBlogInformationWithUserID:(NSString *)userID
+- (void)getBlogInformationWithUserName:(NSString *)userName
                           completion:(RequestCompletion)completion;
 
 #pragma mark - Blog Categories
 //dosen't need Access token
-- (void)getBlogCategoriesWithUserID:(NSString *)userID
-                        andPassword:(NSString *)passwd
-                         completion:(RequestCompletion)completion;
+- (void)getBlogCategoriesWithUserName:(NSString *)userName
+                             Password:(NSString *)passwd
+                           completion:(RequestCompletion)completion;
 
 //need access token
 - (void)postBlogCategoriesWithName:(NSString *)name
@@ -38,23 +38,23 @@
 
 #pragma mark - Blog Articles
 //dosen't need Access token
-- (void)getBlogAllArticlesWithUserID:(NSString *)userID
-                         andPassword:(NSString *)passwd
-                            withpage:(NSInteger)page
-                      articlePerPage:(NSInteger)articlePerPage
-                          completion:(RequestCompletion)completion;
-
-- (void)getBlogSingleArticleWithUserID:(NSString *)userID
-                      withBlogPassword:(NSString *)blogPasswd
-                    andArticlePassword:(NSString *)articlePasswd
+- (void)getBlogAllArticlesWithuserName:(NSString *)userName
+                              Password:(NSString *)passwd
+                                  Page:(NSInteger)page
+                               Perpage:(NSInteger)articlePerPage
                             completion:(RequestCompletion)completion;
 
-- (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
-                                  userID:(NSString *)userID
-                         andRelatedLimit:(NSInteger)limit
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName
+                            BlogPassword:(NSString *)blogPasswd
+                         ArticlePassword:(NSString *)articlePasswd
                               completion:(RequestCompletion)completion;
 
-- (void)getBlogArticleCommentsWithUserID:(NSString *)userID
+- (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
+                                UserName:(NSString *)userName
+                            RelatedLimit:(NSInteger)limit
+                              completion:(RequestCompletion)completion;
+
+- (void)getBlogArticleCommentsWithUserName:(NSString *)userName
                                articleID:(NSString *)articleID
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePassword
@@ -62,37 +62,37 @@
                          commentsPerPage:(NSInteger)commentPerPage
                               completion:(RequestCompletion)completion;
 
-- (void)getBlogLatestArticleWithUserID:(NSString *)userID
+- (void)getBlogLatestArticleWithUserName:(NSString *)userName
                             completion:(RequestCompletion)completion;
 
-- (void)getBlogHotArticleWithUserID:(NSString *)userID
+- (void)getBlogHotArticleWithUserName:(NSString *)userName
                          completion:(RequestCompletion)completion;
 
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
-                                 inUser:(NSString *)userID
+                                 inUser:(NSString *)userName
                              completion:(RequestCompletion)completion;
 //need access token
 //還沒寫
 
 #pragma mark - Blog Comments
 //dosen't need Access token
-- (void)getBlogCommentsWithUserID:(NSString *)userID
+- (void)getBlogCommentsWithUserName:(NSString *)userName
                      andArticleID:(NSString *)articleID
                              page:(NSInteger)page
                           perPage:(NSInteger)perPage
                        completion:(RequestCompletion)completion;
 
-- (void)getBlogSingleCommentWithUserID:(NSString *)userID
+- (void)getBlogSingleCommentWithUserName:(NSString *)userName
                          andCommmentID:(NSString *)commentID
                             completion:(RequestCompletion)completiom;
 
-- (void)getBlogLatestCommentWithUserID:(NSString *)userID
+- (void)getBlogLatestCommentWithUserName:(NSString *)userName
                             completion:(RequestCompletion)completion;
 //need access token
 //還沒寫
 
 
-#pragma mark - Blog Categories list
+#pragma mark - 0 Blog Categories list
 //dosen't need Access token
 - (void)getBlogCategoriesListCompletion:(RequestCompletion)completion;
 
