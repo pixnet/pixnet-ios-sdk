@@ -183,6 +183,9 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 -(void)fetchAlbumElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     [self fetchAlbumElementsOrSetsNearbyWithPath:@"album/elements/nearby" userName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:perPage withDetail:withDetail type:type trimUser:trimUser shouldAuth:shouldAuth completion:completion];
 }
+/**
+ *  取得附近的相簿及照片的 API 參數幾乎都一樣，所以利用這個 method 來簡化 code
+ */
 -(void)fetchAlbumElementsOrSetsNearbyWithPath:(NSString *)path userName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
@@ -194,10 +197,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     if (distanceMin > 50000) {
         completion(NO, nil, @"distanceMin 必須介於 0-50000之間");
-        return;
-    }
-    if (distanceMax <= 0 || distanceMax > 50000) {
-        completion(NO, nil, @"distanceMax 必須介於 0-50000之間");
         return;
     }
     if (distanceMax <= 0 || distanceMax > 50000) {
@@ -297,7 +296,31 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
 }
 
-
+-(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"UserName 參數有誤");
+        return;
+    }
+    if (commentId == nil || commentId.length == 0) {
+        completion(NO, nil, @"commentID 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    
+    NSString *pathString = [NSString stringWithFormat:@"album/set_comments/%@", commentId];
+    if (shouldAuth) {
+        
+    } else {
+        [[PIXAPIHandler new] callAPI:pathString parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+            if (succeed) {
+                [self succeedHandleWithData:result completion:completion];
+            } else {
+                completion(NO, nil, errorMessage);
+            }
+        }];
+    }
+}
 -(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
