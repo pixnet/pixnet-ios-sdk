@@ -31,9 +31,8 @@
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
     [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
 }
-- (void)getBlogArticlesCompletion:(RequestCompletion)completion{
-    [[PIXBlog new] getBlogArticlesCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-        NSLog(@"result: %@", result);
-    }];
+
+- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(RequestCompletion)completion{
+
 }
 @end
