@@ -10,6 +10,7 @@
 #import "PIXAPIHandler.h"
 
 @implementation PIXBlog
+
 +(instancetype)sharedInstance{
     static PIXBlog *sharedInstance = nil;
     static dispatch_once_t onceToken;
@@ -18,6 +19,21 @@
     });
     return sharedInstance;
 }
+
+-(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
+    NSError *jsonError;
+    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+    if (jsonError == nil) {
+        if ([dict[@"error"] intValue] == 0) {
+            completion(YES, dict, nil);
+        } else {
+            completion(NO, nil, dict[@"message"]);
+        }
+    } else {
+        completion(NO, nil, jsonError.localizedDescription);
+    }
+}
+
 
 #pragma mark - Blog information
 - (void)getBlogInformationWithUserName:(NSString *)userName
@@ -30,17 +46,7 @@
     [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userName} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
         if (succeed) {
-            NSError *jsonError = nil;
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-            if (jsonError) {
-                completion(NO, nil, jsonError.localizedDescription);
-            } else {
-                if ([dict[@"error"] intValue] == 0) {
-                    completion(YES, dict[@"blog"], nil);
-                } else {
-                    completion(NO, nil, dict[@"message"]);
-                }
-            }
+            [self succeedHandleWithData:result completion:completion];
         } else {
             completion(NO, nil, errorMessage);
         }
@@ -49,7 +55,7 @@
 
 #pragma mark - Blog Categories
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
-                             Password:(NSString *)passwd
+                             password:(NSString *)passwd
                            completion:(RequestCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
@@ -62,20 +68,10 @@
     if (passwd != nil) {
         params[@"password"] = passwd;
     }
-    [[PIXAPIHandler new] callAPI:@"blog" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [[PIXAPIHandler new] callAPI:@"blog/categories" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         completion(NO, nil, errorMessage);
         if (succeed) {
-            NSError *jsonError = nil;
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-            if (jsonError) {
-                completion(NO, nil, jsonError.localizedDescription);
-            } else {
-                if ([dict[@"error"] intValue] == 0) {
-                    completion(YES, dict[@"blog"], nil);
-                } else {
-                    completion(NO, nil, dict[@"message"]);
-                }
-            }
+            [self succeedHandleWithData:result completion:completion];
         } else {
             completion(NO, nil, errorMessage);
         }
@@ -84,9 +80,9 @@
 
 #pragma mark - Blog Articles
 - (void)getBlogAllArticlesWithuserName:(NSString *)userName
-                              Password:(NSString *)passwd
-                                  Page:(NSInteger)page
-                               Perpage:(NSInteger)articlePerPage
+                              password:(NSString *)passwd
+                                  page:(NSUInteger)page
+                               perpage:(NSUInteger)articlePerPage
                             completion:(RequestCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
@@ -106,29 +102,12 @@
         params[@"per_page"] = @(articlePerPage);
     }
     
-    [[PIXAPIHandler new] callAPI:@"blog"
+    [[PIXAPIHandler new] callAPI:@"blog/articles"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
-                       
-                       NSError *jsonError = nil;
-                       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                       
-                       if (jsonError) {
-                           
-                           completion(NO, nil, jsonError.localizedDescription);
-                           
-                       } else {
-                           if ([dict[@"error"] intValue] == 0) {
-                               
-                               completion(YES, dict[@"blog"], nil);
-                               
-                           } else {
-                               
-                               completion(NO, nil, dict[@"message"]);
-                           }
-                       }
+                       [self succeedHandleWithData:result completion:completion];
                    } else {
                        completion(NO, nil, errorMessage);
                    }
@@ -136,13 +115,20 @@
 }
 
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName
-                            BlogPassword:(NSString *)blogPasswd
-                         ArticlePassword:(NSString *)articlePasswd
+                               articleID:(NSString *)articleID
+                            blogPassword:(NSString *)blogPasswd
+                         articlePassword:(NSString *)articlePasswd
                               completion:(RequestCompletion)completion{
-    if (userName == nil) {
-        completion(NO, nil, @"userName 不可為 nil");
+    
+    if (userName == nil || userName.length == 0 || !userName) {
+        completion(NO, nil, @"Missing User Name");
         return;
     }
+    if (articleID == nil || articleID.length == 0) {
+        completion(NO, nil, @"Missing Article ID");
+        return;
+    }
+    
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
@@ -153,29 +139,12 @@
         params[@"article_password"] = articlePasswd;
     }
     
-    [[PIXAPIHandler new] callAPI:@"blog"
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@", articleID]
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
-                       
-                       NSError *jsonError = nil;
-                       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                       
-                       if (jsonError) {
-                           
-                           completion(NO, nil, jsonError.localizedDescription);
-                           
-                       } else {
-                           if ([dict[@"error"] intValue] == 0) {
-                               
-                               completion(YES, dict[@"blog"], nil);
-                               
-                           } else {
-                               
-                               completion(NO, nil, dict[@"message"]);
-                           }
-                       }
+                       [self succeedHandleWithData:result completion:completion];
                    } else {
                        completion(NO, nil, errorMessage);
                    }
@@ -183,11 +152,15 @@
 }
 
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
-                                UserName:(NSString *)userName
-                            RelatedLimit:(NSInteger)limit
+                                userName:(NSString *)userName
+                            relatedLimit:(NSUInteger)limit
                               completion:(RequestCompletion)completion{
-    if (userName == nil) {
-        completion(NO, nil, @"userName 不可為 nil");
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"Missing User Name");
+        return;
+    }
+    if (articleID == nil || articleID.length == 0) {
+        completion(NO, nil, @"Missing Article ID");
         return;
     }
     
@@ -197,34 +170,282 @@
         params[@"limit"] = @(limit);
     }
     
-    [[PIXAPIHandler new] callAPI:@"blog"
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@/related", articleID]
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
-                       
-                       NSError *jsonError = nil;
-                       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
-                       
-                       if (jsonError) {
-                           
-                           completion(NO, nil, jsonError.localizedDescription);
-                           
-                       } else {
-                           if ([dict[@"error"] intValue] == 0) {
-                               
-                               completion(YES, dict[@"blog"], nil);
-                               
-                           } else {
-                               
-                               completion(NO, nil, dict[@"message"]);
-                           }
-                       }
+                       [self succeedHandleWithData:result completion:completion];
                    } else {
                        completion(NO, nil, errorMessage);
                    }
                }];
 
+}
+
+- (void)getBlogArticleCommentsWithUserName:(NSString *)userName
+                                 articleID:(NSString *)articleID
+                              blogPassword:(NSString *)blogPasswd
+                           articlePassword:(NSString *)articlePassword
+                                      page:(NSUInteger)page
+                           commentsPerPage:(NSUInteger)commentPerPage
+                                completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"Missing User Name");
+        return;
+    }
+    if (articleID == nil || articleID.length == 0) {
+        completion(NO, nil, @"Missing Article ID");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+
+    params[@"user"] = userName;
+    params[@"article_id"] = articleID;
+    
+    if (blogPasswd || blogPasswd.length != 0) {
+        params[@"blog_password"] = blogPasswd;
+    }
+    if (articlePassword || articlePassword.length != 0) {
+        params[@"article_password"] = articlePassword;
+    }
+    if (page) {
+        params[@"page"] = @(page);
+    }
+    if (commentPerPage) {
+        params[@"per_page"] = @(commentPerPage);
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/comments"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+- (void)getBlogLatestArticleWithUserName:(NSString *)userName
+                              completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"Missing User Name");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"user"] = userName;
+    
+    [[PIXAPIHandler new] callAPI:@"blog/articles/latest"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+    
+}
+
+- (void)getBlogHotArticleWithUserName:(NSString *)userName
+                               passwd:(NSString *)passwd
+                           completion:(RequestCompletion)completion{
+    
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"Missing User Name");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"user"] = userName;
+    
+    if (passwd || passwd.length >>0 || passwd !=nil) {
+        params[@"blog_password"] = passwd;
+    }
+    
+    
+    [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+- (void)getblogSearchArticleWithKeyword:(NSString *)keyword
+                               userName:(NSString *)userName
+                                   page:(NSUInteger)page
+                                perPage:(NSUInteger)perPage
+                             completion:(RequestCompletion)completion{
+    
+    if (keyword == nil || keyword.length == 0 || !keyword) {
+        completion(NO, nil, @"Missing Search String");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+
+    params[@"key"] = keyword;
+ 
+    if (userName || userName.length >> 0 || userName != nil) {
+        params[@"user"] = userName;
+    } else {
+        params[@"site"] = @"true";
+    }
+    
+    if (page) {
+        params[@"page"] = @(page);
+    }
+    
+    if (perPage) {
+        params[@"per_page"] = @(perPage);
+    }
+    
+    
+    [[PIXAPIHandler new] callAPI:@"blog/articles/search"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+    
+}
+
+#pragma mark - Blog Comments
+
+- (void)getBlogCommentsWithUserName:(NSString *)userName
+                          articleID:(NSString *)articleID
+                               page:(NSUInteger)page
+                            perPage:(NSUInteger)perPage
+                         completion:(RequestCompletion)completion{
+    
+    if (userName == nil || userName.length == 0 || !userName) {
+        completion(NO, nil, @"Missing User Name");
+        return;
+    }
+    
+    if (articleID == nil || articleID.length == 0 || !articleID) {
+        completion(NO, nil, @"Missing Article ID");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"user"] = userName;
+    params[@"article_id"] = articleID;
+    
+    if (page) {
+        params[@"page"] = @(page);
+    }
+    if (perPage) {
+        params[@"per_page"] = @(perPage);
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/comments"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+
+}
+
+- (void)getBlogSingleCommentWithUserName:(NSString *)userName
+                              commmentID:(NSString *)commentID
+                              completion:(RequestCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"Missing User Name");
+        return;
+    }
+    
+    if (commentID == nil || commentID.length == 0) {
+        completion(NO, nil, @"Missing Comment ID");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    params[@"user"] = userName;
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+- (void)getBlogLatestCommentWithUserName:(NSString *)userName
+                              completion:(RequestCompletion)completion{
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+
+    if (userName || userName != nil || userName.length >> 0) {
+        params[@"user"] = userName;
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/comments/latest"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+    
+}
+#pragma mark - Site Blog Categories list
+
+- (void)getBlogCategoriesListIncludeGroups:(BOOL)group
+                                    thumbs:(BOOL)thumb
+                                completion:(RequestCompletion)completion{
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if (group) {
+        params[@"include_groups"] = @"1";
+    }else{
+        params[@"include_groups"] = @"0";
+    }
+    
+    if (thumb) {
+        params[@"include_thumbs"] = @"1";
+    }else{
+        params[@"include_thumbs"] = @"0";
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/site_categories"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   completion(NO, nil, errorMessage);
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+    
 }
 
 @end
