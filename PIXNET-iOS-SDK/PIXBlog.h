@@ -21,7 +21,7 @@
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogInformationWithUserName:(NSString *)userName
-                          completion:(RequestCompletion)completion;
+                          completion:(PIXHandlerCompletion)completion;
 
 #pragma mark - Blog Categories
 //dosen't need Access token
@@ -34,21 +34,21 @@
  */
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
                              password:(NSString *)passwd
-                           completion:(RequestCompletion)completion;
+                           completion:(PIXHandlerCompletion)completion;
 
 //need access token
 - (void)postBlogCategoriesWithName:(NSString *)name
-                        completion:(RequestCompletion)completion;
+                        completion:(PIXHandlerCompletion)completion;
 
 - (void)changeBlogCategoriesFromID:(NSString *)categoriesID
                                 to:(NSString *)newName
-                        completion:(RequestCompletion)completion;
+                        completion:(PIXHandlerCompletion)completion;
 
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID
-                      completion:(RequestCompletion)completion;
+                      completion:(PIXHandlerCompletion)completion;
 
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
-                  completion:(RequestCompletion)completion;
+                  completion:(PIXHandlerCompletion)completion;
 
 #pragma mark - Blog Articles
 //dosen't need Access token
@@ -65,7 +65,7 @@
                               password:(NSString *)passwd
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage
-                            completion:(RequestCompletion)completion;
+                            completion:(PIXHandlerCompletion)completion;
 
 /**
  *  讀取部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
@@ -80,7 +80,7 @@
                                articleID:(NSString *)articleID
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePasswd
-                              completion:(RequestCompletion)completion;
+                              completion:(PIXHandlerCompletion)completion;
 
 /**
  *  讀取指定 ID 文章的相關文章 http://emma.pixnet.cc/blog/articles/:id/related
@@ -93,7 +93,7 @@
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
                                 userName:(NSString *)userName
                             relatedLimit:(NSUInteger)limit
-                              completion:(RequestCompletion)completion;
+                              completion:(PIXHandlerCompletion)completion;
 
 /**
  *  列出部落格留言 http://emma.pixnet.cc/blog/comments
@@ -112,7 +112,7 @@
                          articlePassword:(NSString *)articlePassword
                                     page:(NSUInteger)page
                          commentsPerPage:(NSUInteger)commentPerPage
-                              completion:(RequestCompletion)completion;
+                              completion:(PIXHandlerCompletion)completion;
 /**
  *  列出部落格最新文章 http://emma.pixnet.cc/blog/articles/latest
  *
@@ -120,7 +120,7 @@
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
-                            completion:(RequestCompletion)completion;
+                            completion:(PIXHandlerCompletion)completion;
 
 /**
  *  列出部落格熱門文章 http://emma.pixnet.cc/blog/articles/hot
@@ -131,7 +131,7 @@
  */
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                              password:(NSString *)passwd
-                         completion:(RequestCompletion)completion;
+                         completion:(PIXHandlerCompletion)completion;
 
 /**
  *  搜尋部落格個人文章 http://emma.pixnet.cc/blog/articles/search
@@ -146,7 +146,7 @@
                                userName:(NSString *)userName
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
-                             completion:(RequestCompletion)completion;
+                             completion:(PIXHandlerCompletion)completion;
 //need access token
 //還沒寫
 
@@ -166,7 +166,7 @@
                           articleID:(NSString *)articleID
                                page:(NSUInteger)page
                             perPage:(NSUInteger)perPage
-                         completion:(RequestCompletion)completion;
+                         completion:(PIXHandlerCompletion)completion;
 
 /**
  *  讀取單一留言 http://emma.pixnet.cc/blog/comments/:id
@@ -177,7 +177,7 @@
  */
 - (void)getBlogSingleCommentWithUserName:(NSString *)userName
                               commmentID:(NSString *)commentID
-                              completion:(RequestCompletion)completion;
+                              completion:(PIXHandlerCompletion)completion;
 
 
 /**
@@ -187,7 +187,7 @@
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogLatestCommentWithUserName:(NSString *)userName
-                              completion:(RequestCompletion)completion;
+                              completion:(PIXHandlerCompletion)completion;
 
 
 //need access token
@@ -206,7 +206,7 @@
  */
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group
                                     thumbs:(BOOL)thumb
-                                completion:(RequestCompletion)completion;
+                                completion:(PIXHandlerCompletion)completion;
 
 //need access token
 //還沒寫

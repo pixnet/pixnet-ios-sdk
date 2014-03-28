@@ -20,7 +20,7 @@
     return sharedInstance;
 }
 
--(void)succeedHandleWithData:(id)data completion:(RequestCompletion)completion{
+-(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
     if (jsonError == nil) {
@@ -37,7 +37,7 @@
 
 #pragma mark - Blog information
 - (void)getBlogInformationWithUserName:(NSString *)userName
-                          completion:(RequestCompletion)completion{
+                          completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
         completion(NO, nil, @"userName 不可為 nil");
@@ -56,7 +56,7 @@
 #pragma mark - Blog Categories
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
                              password:(NSString *)passwd
-                           completion:(RequestCompletion)completion{
+                           completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
         completion(NO, nil, @"userName 不可為 nil");
@@ -83,7 +83,7 @@
                               password:(NSString *)passwd
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage
-                            completion:(RequestCompletion)completion{
+                            completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
         completion(NO, nil, @"userName 不可為 nil");
@@ -118,7 +118,7 @@
                                articleID:(NSString *)articleID
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePasswd
-                              completion:(RequestCompletion)completion{
+                              completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0 || !userName) {
         completion(NO, nil, @"Missing User Name");
@@ -154,7 +154,7 @@
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
                                 userName:(NSString *)userName
                             relatedLimit:(NSUInteger)limit
-                              completion:(RequestCompletion)completion{
+                              completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing User Name");
         return;
@@ -189,7 +189,7 @@
                            articlePassword:(NSString *)articlePassword
                                       page:(NSUInteger)page
                            commentsPerPage:(NSUInteger)commentPerPage
-                                completion:(RequestCompletion)completion{
+                                completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing User Name");
         return;
@@ -230,7 +230,7 @@
 }
 
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
-                              completion:(RequestCompletion)completion{
+                              completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing User Name");
         return;
@@ -254,7 +254,7 @@
 
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                                passwd:(NSString *)passwd
-                           completion:(RequestCompletion)completion{
+                           completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing User Name");
@@ -271,7 +271,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+              requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -285,7 +285,7 @@
                                userName:(NSString *)userName
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
-                             completion:(RequestCompletion)completion{
+                             completion:(PIXHandlerCompletion)completion{
     
     if (keyword == nil || keyword.length == 0 || !keyword) {
         completion(NO, nil, @"Missing Search String");
@@ -330,7 +330,7 @@
                           articleID:(NSString *)articleID
                                page:(NSUInteger)page
                             perPage:(NSUInteger)perPage
-                         completion:(RequestCompletion)completion{
+                         completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0 || !userName) {
         completion(NO, nil, @"Missing User Name");
@@ -368,7 +368,7 @@
 
 - (void)getBlogSingleCommentWithUserName:(NSString *)userName
                               commmentID:(NSString *)commentID
-                              completion:(RequestCompletion)completion{
+                              completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing User Name");
         return;
@@ -395,7 +395,7 @@
 }
 
 - (void)getBlogLatestCommentWithUserName:(NSString *)userName
-                              completion:(RequestCompletion)completion{
+                              completion:(PIXHandlerCompletion)completion{
     
     NSMutableDictionary *params = [NSMutableDictionary new];
 
@@ -419,7 +419,7 @@
 
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group
                                     thumbs:(BOOL)thumb
-                                completion:(RequestCompletion)completion{
+                                completion:(PIXHandlerCompletion)completion{
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     
