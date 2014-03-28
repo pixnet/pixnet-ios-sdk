@@ -13,8 +13,8 @@
 +(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect{
     [PIXAPIHandler setConsumerKey:aKey consumerSecrect:aSecrect];
 }
-+(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password completion:(RequestCompletion)completion{
-    [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
+-(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password completion:(RequestCompletion)completion{
+    [[PIXAPIHandler new] authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
 +(instancetype)sharedInstance{
     if (![PIXAPIHandler isConsumerKeyAndSecrectAssigned]) {
@@ -29,7 +29,7 @@
     return sharedInstance;
 }
 - (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion{
-    [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
+//    [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
 }
 
 - (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(RequestCompletion)completion{

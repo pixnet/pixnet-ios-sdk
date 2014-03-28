@@ -33,13 +33,14 @@ static NSMutableDictionary *_authClientDictionary;
     }
     return assigned;
 }
--(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion{
+-(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     if (kConsumerSecrect==nil || kConsumerKey==nil) {
         completion(NO, nil, @"consumer key 或 consumer secrect 尚未設定");
         return;
     }
     _paramForXAuthRequest = @{@"x_auth_username":userName, @"x_auth_password":password, @"x_auth_mode":@"client_auth"};
-    NSURLRequest *request = [GCOAuth URLRequestForPath:@"/oauth/access_token" POSTParameters:_paramForXAuthRequest host:@"emma.pixnet.cc" consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:nil tokenSecret:nil];
+    NSURLRequest *request = [self requestForXAuthWithPath:@"oauth/access_token" parameters:nil httpMethod:@"POST"];
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (connectionError) {
@@ -65,41 +66,23 @@ static NSMutableDictionary *_authClientDictionary;
             }
         });
     }];
-    /*
-    _authClient = [[AFXAuthClient alloc] initWithBaseURL:[NSURL URLWithString:[kApiURLPrefix copy]] key:[kConsumerKey copy] secret:[kConsumerSecrect copy]];
-    [_authClient authorizeUsingXAuthWithAccessTokenPath:@"oauth/access_token" accessMethod:@"POST" username:userName password:password success:^(AFXAuthToken *accessToken) {
-//        NSLog(@"authed token key: %@", accessToken.key);
-        completion(YES, accessToken, nil);
-    } failure:^(NSError *error) {
-//        NSLog(@"auth failed: %@", error);
-        completion(NO, nil, error.localizedDescription);
-    }];
-     */
-}
-+(instancetype)sharedInstance{
-    static PIXAPIHandler *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[PIXAPIHandler alloc] init];
-    });
-    return sharedInstance;
 }
 
--(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+-(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:@"GET" parameters:parameters requestCompletion:completion];
 }
 
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:NO parameters:parameters requestCompletion:completion];
 }
 
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:NO parameters:parameters requestCompletion:completion];
 }
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:nil parameters:parameters requestCompletion:completion];
 }
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     NSString *parameterString = nil;
     if (parameters != nil) {
         parameterString = [self parametersStringFromDictionary:parameters];
@@ -141,8 +124,7 @@ static NSMutableDictionary *_authClientDictionary;
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
     NSMutableURLRequest *request = nil;
     if (auth) {
-//        request = [_authClient requestWithMethod:httpMethod path:path parameters:parameters];
-//        request = [GCOAuth URLRequestForPath:[NSString stringWithFormat:@"/", path] POSTParameters:_paramForXAuthRequest host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecrect accessToken:<#(NSString *)#> tokenSecret:<#(NSString *)#>];
+        [self requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
     } else {
         request = [NSMutableURLRequest requestWithURL:url];
         if (![httpMethod isEqualToString:@"GET"]) {
@@ -164,23 +146,22 @@ static NSMutableDictionary *_authClientDictionary;
 
     return parameterString;
 }
-/**
- *  為每一個 user 設立一個自己的 AFXAuthClient instance
- *
- *  @param userName
- *
- *  @return AFXAuthClient client
- */
-//+(AFXAuthClient *)authClientWithUserName:(NSString *)userName{
-//    static dispatch_once_t onceToken;
-//    dispatch_once(&onceToken, ^{
-//        _authClientDictionary = [NSMutableDictionary new];
-//    });
-//    AFXAuthClient *client = _authClientDictionary[userName];
-//    if (client == nil) {
-//        client = [[AFXAuthClient alloc] initWithBaseURL:[NSURL URLWithString:[kApiURLPrefix copy]] key:[kConsumerKey copy] secret:[kConsumerSecrect copy]];
-//        [_authClientDictionary setObject:client forKey:userName];
-//    }
-//    return client;
-//}
+-(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_paramForXAuthRequest];
+    if (params) {
+        [dict addEntriesFromDictionary:params];
+    }
+    NSMutableURLRequest *request = nil;
+    NSString *oPath = [NSString stringWithFormat:@"/%@", path];
+    if ([httpMethod isEqualToString:@"GET"]) {
+        request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:_oauthToken tokenSecret:_oauthTokenSecret];
+    } else {
+        if ([httpMethod isEqualToString:@"POST"]) {
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:_oauthToken tokenSecret:_oauthTokenSecret];
+        } else {
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:nil host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:_oauthToken tokenSecret:_oauthTokenSecret];
+        }
+    }
+    return request;
+}
 @end

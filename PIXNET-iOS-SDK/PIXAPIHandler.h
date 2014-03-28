@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
 //  這個 class 主要用來與後台 API 溝通, 跟後台要資料時一概都使用 json 格式
-typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessage);
+//typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessage);
+typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMessage);
 
 #import <Foundation/Foundation.h>
 
@@ -28,7 +29,7 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  */
 +(BOOL)isConsumerKeyAndSecrectAssigned;
 
--(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion;
+-(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
 //+(instancetype)sharedInstance;
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
@@ -37,7 +38,7 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  *  @param parameters value 的部份請給 NSString instance
  *  @param requestCompletion succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
--(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion;
+-(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 /**
  *  用來呼叫 PIXNET 後台的 method, 不需 oAuth 認證
  *
@@ -46,7 +47,7 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  *  @param parameters value 的部份請給 NSString instance
  *  @param requestCompletion succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion;
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 /**
  *  用來呼叫 PIXNET 後台的 method
  *
@@ -56,7 +57,7 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  *  @param parameters value 的部份請給 NSString instance
  *  @param requestCompletion succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion;
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec parameters:(NSDictionary *)parameters requestCompletion:(RequestCompletion)completion;
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 @end
