@@ -11,6 +11,7 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
 #import <Foundation/Foundation.h>
 
 @interface PIXAPIHandler : NSObject
+@property (nonatomic, copy) NSString *oauthToken;
 //+(instancetype)sharedInstance;
 
 /**
@@ -27,7 +28,7 @@ typedef void (^RequestCompletion)(BOOL succeed, id result,  NSString *errorMessa
  */
 +(BOOL)isConsumerKeyAndSecrectAssigned;
 
-+(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion;
+-(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(RequestCompletion)completion;
 //+(instancetype)sharedInstance;
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
