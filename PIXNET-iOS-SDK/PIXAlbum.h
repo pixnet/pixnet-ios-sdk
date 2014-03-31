@@ -73,10 +73,10 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
 #import <CoreLocation/CoreLocation.h>
 
 @interface PIXAlbum : NSObject
-#pragma Main
+#pragma mark Main
 // coming soon
 
-#pragma SetFolders
+#pragma mark SetFolders
 /**
  *  列出相本列表 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfolders
  *
@@ -88,7 +88,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumListWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
 
-#pragma Sets
+#pragma mark Sets
 /**
  *  列出個人所有相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
  *
@@ -184,7 +184,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
-#pragma Folders
+#pragma mark Folders
 /**
  *  列出某個使用者所有的資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFolders
  *
@@ -248,5 +248,5 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
 -(void)fetchAlbumElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 //todo: 更...這個 API 一定要 auth
 //-(void)fetchAlbumElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(RequestCompletion)completion;
-#pragma Element
+#pragma mark Element
 @end

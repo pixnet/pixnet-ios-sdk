@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
 static const NSString *kConsumerKey;
-static const NSString *kConsumerSecrect;
+static const NSString *kConsumerSecret;
 
 
 #import "PIXAPIHandler.h"
@@ -14,31 +14,36 @@ static const NSString *kConsumerSecrect;
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
-static NSMutableDictionary *_authClientDictionary;
+static const NSString *kUserName;
+static const NSString *kUserPassword;
+static const NSString *kOauthToken;
+static const NSString *kOauthTokenSecret;
+//static NSDictionary *kAuthClientDictionary = @{@"x_auth_username":userName, @"x_auth_password":password, @"x_auth_mode":@"client_auth"};
 
 @interface PIXAPIHandler ()
 @property (nonatomic, strong) NSDictionary *paramForXAuthRequest;
-@property (nonatomic, copy) NSString *oauthTokenSecret;
+//@property (nonatomic, copy) NSString *oauthTokenSecret;
 @end
 
 @implementation PIXAPIHandler
-+(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect{
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
     kConsumerKey = [aKey copy];
-    kConsumerSecrect = [aSecrect copy];
+    kConsumerSecret = [aSecret copy];
 }
 +(BOOL)isConsumerKeyAndSecrectAssigned{
     BOOL assigned = YES;
-    if (kConsumerKey == nil || kConsumerSecrect == nil) {
+    if (kConsumerKey == nil || kConsumerSecret == nil) {
         assigned = NO;
     }
     return assigned;
 }
--(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
-    if (kConsumerSecrect==nil || kConsumerKey==nil) {
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
+    if (kConsumerSecret==nil || kConsumerKey==nil) {
         completion(NO, nil, @"consumer key 或 consumer secrect 尚未設定");
         return;
     }
-    _paramForXAuthRequest = @{@"x_auth_username":userName, @"x_auth_password":password, @"x_auth_mode":@"client_auth"};
+    kUserName = [userName copy];
+    kUserPassword = [password copy];
     NSURLRequest *request = [self requestForXAuthWithPath:@"oauth/access_token" parameters:nil httpMethod:@"POST"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -55,13 +60,13 @@ static NSMutableDictionary *_authClientDictionary;
                     for (NSString *string in array) {
                         NSArray *array0 = [string componentsSeparatedByString:@"="];
                         if ([array0[0] isEqualToString:@"oauth_token"]) {
-                            _oauthToken = array0[1];
+                            kOauthToken = [array0[1] copy];
                         }
                         if ([array0[0] isEqualToString:@"oauth_token_secret"]) {
-                            _oauthTokenSecret = array0[1];
+                            kOauthTokenSecret = [array0[1] copy];
                         }
                     }
-                    completion(YES, _oauthToken, nil);
+                    completion(YES, kOauthToken, nil);
                 }
             }
         });
@@ -83,13 +88,16 @@ static NSMutableDictionary *_authClientDictionary;
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:nil parameters:parameters requestCompletion:completion];
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
+    if (shouldAuth && kConsumerKey == nil) {
+        completion(NO, nil, @"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:");
+    }
     NSString *parameterString = nil;
     if (parameters != nil) {
         parameterString = [self parametersStringFromDictionary:parameters];
     }
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@", kApiURLPrefix, apiPath];
     if (httpMethod == nil || [httpMethod isEqualToString:@"GET"]) {
-        [urlString appendString:[NSString stringWithFormat:@"?%@", parameterString]];
+        [urlString appendString:[NSString stringWithFormat:@"?%@", [parameterString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     }
     
     NSURL *requestUrl = [NSURL URLWithString:urlString];
@@ -124,7 +132,7 @@ static NSMutableDictionary *_authClientDictionary;
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
     NSMutableURLRequest *request = nil;
     if (auth) {
-        [self requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
+        request = [PIXAPIHandler requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
     } else {
         request = [NSMutableURLRequest requestWithURL:url];
         if (![httpMethod isEqualToString:@"GET"]) {
@@ -146,20 +154,21 @@ static NSMutableDictionary *_authClientDictionary;
 
     return parameterString;
 }
--(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:_paramForXAuthRequest];
++(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
+    NSDictionary *userDict = @{@"x_auth_username":kUserName, @"x_auth_password":kUserPassword, @"x_auth_mode":@"client_auth"};
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
     if (params) {
         [dict addEntriesFromDictionary:params];
     }
     NSMutableURLRequest *request = nil;
     NSString *oPath = [NSString stringWithFormat:@"/%@", path];
     if ([httpMethod isEqualToString:@"GET"]) {
-        request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:_oauthToken tokenSecret:_oauthTokenSecret];
+        request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:[kOauthToken copy] tokenSecret:[kOauthTokenSecret copy]];
     } else {
         if ([httpMethod isEqualToString:@"POST"]) {
-            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:_oauthToken tokenSecret:_oauthTokenSecret];
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:[kOauthToken copy] tokenSecret:[kOauthTokenSecret copy]];
         } else {
-            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:nil host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecrect copy] accessToken:_oauthToken tokenSecret:_oauthTokenSecret];
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:nil host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:[kOauthToken copy] tokenSecret:[kOauthTokenSecret copy]];
         }
     }
     return request;
