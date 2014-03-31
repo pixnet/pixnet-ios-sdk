@@ -183,6 +183,20 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
+-(void)deleteAlbumSetWithSetID:(NSString *)setId completion:(PIXHandlerCompletion)completion{
+    if (setId==nil || setId.length==0) {
+        completion(NO, nil, @"setId 參數有誤");
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"album/sets/%@", setId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:@{@"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     if (setId==nil || setId.length==0) {
         completion(NO, nil, @"setID 參數有誤");
