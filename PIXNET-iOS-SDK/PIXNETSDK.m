@@ -10,11 +10,11 @@
 #import "PIXBlog.h"
 
 @implementation PIXNETSDK
-+(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect{
-    [PIXAPIHandler setConsumerKey:aKey consumerSecrect:aSecrect];
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
+    [PIXAPIHandler setConsumerKey:aKey consumerSecret:aSecret];
 }
--(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password completion:(PIXHandlerCompletion)completion{
-    [[PIXAPIHandler new] authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
+    [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
 +(instancetype)sharedInstance{
     if (![PIXAPIHandler isConsumerKeyAndSecrectAssigned]) {

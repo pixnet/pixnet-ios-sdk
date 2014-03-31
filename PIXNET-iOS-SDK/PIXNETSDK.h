@@ -14,7 +14,21 @@
 
 @interface PIXNETSDK : NSObject
 
-+(void)setConsumerKey:(NSString *)aKey consumerSecrect:(NSString *)aSecrect;
+/**
+ *  呼叫任何 API 前，務必設定 consumer key 及 consumer secret
+ *
+ *  @param aKey     consum key
+ *  @param aSecret consumer secret
+ */
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret;
+/**
+ *  利用 XAuth 向 PIXNET 後台取得授權
+ *
+ *  @param userName   使用者名稱(帳號)
+ *  @param password   使用者密碼
+ *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
+ */
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
 +(instancetype)sharedInstance;
 
 #pragma mark - Blog Method
