@@ -61,7 +61,7 @@
  *  @param articlePerPage 每頁幾筆, 預設為 100, 不需要則輸入 nil
  *  @param completion     succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)getBlogAllArticlesWithuserName:(NSString *)userName
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName
                               password:(NSString *)passwd
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage

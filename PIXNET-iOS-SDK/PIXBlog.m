@@ -79,7 +79,7 @@
 }
 
 #pragma mark - Blog Articles
-- (void)getBlogAllArticlesWithuserName:(NSString *)userName
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName
                               password:(NSString *)passwd
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage
