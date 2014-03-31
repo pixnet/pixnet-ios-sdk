@@ -28,11 +28,11 @@
     });
     return sharedInstance;
 }
-//- (void)getBlogInformationWithUserID:(NSString *)userID completion:(PIXHandlerCompletion)completion{
-////    [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
-//}
-//
-//- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(PIXHandlerCompletion)completion{
-//
-//}
+- (void)getBlogInformationWithUserID:(NSString *)userID completion:(PIXHandlerCompletion)completion{
+//    [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
+}
+
+- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(PIXHandlerCompletion)completion{
+
+}
 @end

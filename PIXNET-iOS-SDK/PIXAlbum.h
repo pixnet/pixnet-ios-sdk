@@ -22,7 +22,52 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
      */
     PIXAlbumElementTypeAudio
 };
-
+/**
+ *  相簿閱讀權限
+ */
+typedef NS_ENUM(NSInteger, PIXAlbumSetPermissionType) {
+    /**
+     *  完全公開
+     */
+    PIXAlbumSetPermissionTypeOpen = 0,
+    /**
+     *  好友相簿
+     */
+    PIXAlbumSetPermissionTypeFriend = 1,
+    /**
+     *  密碼相簿
+     */
+    PIXAlbumSetPermissionTypePassword = 3,
+    /**
+     *  隱藏相簿
+     */
+    PIXAlbumSetPermissionTypeHidden = 4,
+    /**
+     *  好友群組相簿
+     */
+    PIXAlbumSetPermissionTypeGroup = 5
+};
+/**
+ *  相簿留言權限
+ */
+typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
+    /**
+     *  禁止留言
+     */
+    PIXAlbumSetCommentRightTypeNO,
+    /**
+     *  開放留言
+     */
+    PIXAlbumSetCommentRightTypeAll,
+    /**
+     *  限好友留言
+     */
+    PIXAlbumSetCommentRightTypeFriend,
+    /**
+     *  限會員留言
+     */
+    PIXAlbumSetCommentRightTypeMember
+};
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
 #import <CoreLocation/CoreLocation.h>
@@ -67,6 +112,25 @@ typedef NS_ENUM(NSInteger, PIXAlbumElementType){
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+/**
+ *  新增相簿
+ *
+ *  @param setTitle           相簿標題
+ *  @param setDescription     相簿描述
+ *  @param permission         相簿閱讀權限
+ *  @param categoryId         相簿分類
+ *  @param isLockRight        是否鎖右鍵
+ *  @param isAllowCc          是否採用 CC 授權
+ *  @param commentrightType   留言權限
+ *  @param password           相簿密碼(當 permission==PIXAlbumSetPermissionTypePassword 時為必要參數)
+ *  @param passwordHint       相簿密碼提示(當 permission==PIXAlbumSetPermissionTypePassword 時為必要參數)
+ *  @param friendGroupIds     好友群組ID，array 裡的值為 NSString instance
+ *  @param allowCommercialUse 是否允許商業使用
+ *  @param allowDerivation    是否允許創作衍生著作
+ *  @param parentId           如果這個 parent_id 被指定, 則此相簿會放置在這個相簿資料夾底下(只能放在資料夾底下)
+ *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)createAlbumSetWithTitle:(NSString *)setTitle description:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
 /**
  *  列出相本裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElements
  *

@@ -77,7 +77,66 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
-
+-(void)createAlbumSetWithTitle:(NSString *)setTitle description:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion{
+    if (setTitle == nil) {
+        completion(NO, nil, @"相簿標題是必要參數");
+        return;
+    }
+    if (setDescription == nil) {
+        completion(NO, nil, @"相簿描述是必要參數");
+        return;
+    }
+    if (permission == PIXAlbumSetPermissionTypePassword && password == nil) {
+        completion(NO, nil, @"相簿閱讀權限為密碼，但您尚未設定密碼");
+        return;
+    }
+    if (permission == PIXAlbumSetPermissionTypePassword && passwordHint == nil) {
+        completion(NO, nil, @"相簿閱讀權限為密碼，但您尚未設定密碼提示");
+        return;
+    }
+    if (permission == PIXAlbumSetPermissionTypeGroup && (friendGroupIds == nil || [friendGroupIds count] == 0)) {
+        completion(NO, nil, @"相簿閱讀權限為好友群組，但您尚未設定好友群組");
+        return;
+    }
+    for (id friendGroup in friendGroupIds) {
+        if (![friendGroup isKindOfClass:[NSString class]]) {
+            completion(NO, nil, @"%@ 不是 NSString instance 哦");
+            return;
+        }
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"title"] = setTitle;
+    params[@"description"] = setDescription;
+    params[@"permission"] = [NSString stringWithFormat:@"%li", permission];
+    if (categoryId) {
+        params[@"category_id"] = [NSString stringWithFormat:@"%@", categoryId];
+    }
+    params[@"is_lockright"] = [NSString stringWithFormat:@"%i", isLockRight];
+    params[@"allow_cc"] = [NSString stringWithFormat:@"%i", isAllowCc];
+    params[@"cancomment"] = [NSString stringWithFormat:@"%li", commentRightType];
+    if (password) {
+        params[@"password"] = password;
+    }
+    if (passwordHint) {
+        params[@"password_hint"] = passwordHint;
+    }
+    if (friendGroupIds) {
+        params[@"friend_group_ids"] = [friendGroupIds componentsJoinedByString:@"-"];
+    }
+    params[@"allow_commercial_usr"] = [NSString stringWithFormat:@"%i", allowCommercialUse];
+    params[@"allow_derivation"] = [NSString stringWithFormat:@"%i", allowDerivation];
+    if (parentId) {
+        params[@"parent_id"] = parentId;
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"album/sets" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     if (setId==nil || setId.length==0) {
         completion(NO, nil, @"setID 參數有誤");
