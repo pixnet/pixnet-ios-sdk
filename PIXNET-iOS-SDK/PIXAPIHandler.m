@@ -168,7 +168,7 @@ static const NSString *kOauthTokenSecret;
         if ([httpMethod isEqualToString:@"POST"]) {
             request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:[kOauthToken copy] tokenSecret:[kOauthTokenSecret copy]];
         } else {
-            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:nil host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:[kOauthToken copy] tokenSecret:[kOauthTokenSecret copy]];
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:@"https" host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:[kOauthToken copy] tokenSecret:[kOauthTokenSecret copy]];
         }
     }
     return request;
