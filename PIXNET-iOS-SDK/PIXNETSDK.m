@@ -28,11 +28,76 @@
     });
     return sharedInstance;
 }
-//- (void)getBlogInformationWithUserID:(NSString *)userID completion:(PIXHandlerCompletion)completion{
-////    [[PIXBlog new] getBlogInformationWithUserID:userID completion:completion];
-//}
-//
-//- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(PIXHandlerCompletion)completion{
-//
-//}
+
+
+#pragma mark - Blog Method
+#pragma mark - Blog Imformation
+
+- (void)getBlogInformationWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogInformationWithUserName:userName completion:completion];
+}
+
+#pragma mark - Blog Categories
+
+- (void)getblogCategoriesWithUserName:(NSString *)userName password:(NSString *)passwd completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogCategoriesWithUserName:userName password:passwd completion:completion];
+    
+}
+
+#pragma mark - Blog Articles
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName
+                              password:(NSString *)passwd
+                                  page:(NSUInteger)page
+                               perpage:(NSUInteger)articlePerPage
+                            completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:articlePerPage completion:completion];
+}
+
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName
+                               articleID:(NSString *)articleID
+                            blogPassword:(NSString *)blogPasswd
+                         articlePassword:(NSString *)articlePasswd
+                              completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogSingleArticleWithUserName:userName articleID:articleID blogPassword:blogPasswd articlePassword:articlePasswd completion:completion];
+}
+
+- (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
+                                userName:(NSString *)userName
+                            relatedLimit:(NSUInteger)limit
+                              completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogRelatedArticleByArticleID:articleID userName:userName relatedLimit:limit completion:completion];
+}
+
+- (void)getBlogArticleCommentsWithUserName:(NSString *)userName
+                                 articleID:(NSString *)articleID
+                              blogPassword:(NSString *)blogPasswd
+                           articlePassword:(NSString *)articlePassword
+                                      page:(NSUInteger)page
+                           commentsPerPage:(NSUInteger)commentPerPage
+                                completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogArticleCommentsWithUserName:userName articleID:articleID blogPassword:blogPasswd articlePassword:articlePassword page:page commentsPerPage:commentPerPage completion:completion];
+}
+
+- (void)getBlogLatestArticleWithUserName:(NSString *)userName
+                              completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogLatestCommentWithUserName:userName completion:completion];
+}
+
+- (void)getBlogHotArticleWithUserName:(NSString *)userName
+                             password:(NSString *)passwd
+                           completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd completion:completion];
+}
+
+- (void)getblogSearchArticleWithKeyword:(NSString *)keyword
+                               userName:(NSString *)userName
+                                   page:(NSUInteger)page
+                                perPage:(NSUInteger)perPage
+                             completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getblogSearchArticleWithKeyword:keyword userName:userName page:page perPage:perPage completion:completion];
+}
+
+
+#pragma mark - Blog Comments
+
 @end
