@@ -121,8 +121,8 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
 /**
  *  新增相簿
  *
- *  @param setTitle           相簿標題
- *  @param setDescription     相簿描述
+ *  @param setTitle           相簿標題，必要參數
+ *  @param setDescription     相簿描述，必要參數
  *  @param permission         相簿閱讀權限
  *  @param categoryId         相簿分類
  *  @param isLockRight        是否鎖右鍵
@@ -130,13 +130,33 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  *  @param commentrightType   留言權限
  *  @param password           相簿密碼(當 permission==PIXAlbumSetPermissionTypePassword 時為必要參數)
  *  @param passwordHint       相簿密碼提示(當 permission==PIXAlbumSetPermissionTypePassword 時為必要參數)
- *  @param friendGroupIds     好友群組ID，array 裡的值為 NSString instance
+ *  @param friendGroupIds     好友群組ID，array 裡的值為 NSString instance(當 permission==PIXAlbumSetPermissionTypeGroup 時為必要參數)
  *  @param allowCommercialUse 是否允許商業使用
  *  @param allowDerivation    是否允許創作衍生著作
  *  @param parentId           如果這個 parent_id 被指定, 則此相簿會放置在這個相簿資料夾底下(只能放在資料夾底下)
  *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)createAlbumSetWithTitle:(NSString *)setTitle description:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改相簿
+ *
+ *  @param setId              欲修改的該相簿 ID
+ *  @param setTitle           相簿標題，必要參數
+ *  @param setDescription     相簿描述，必要參數
+ *  @param permission         相簿閱讀權限
+ *  @param categoryId         相簿分類
+ *  @param isLockRight        是否鎖右鍵
+ *  @param isAllowCc          是否採用 CC 授權
+ *  @param commentRightType   留言權限
+ *  @param password           相簿密碼(當 permission==PIXAlbumSetPermissionTypePassword 時為必要參數)
+ *  @param passwordHint       相簿密碼提示(當 permission==PIXAlbumSetPermissionTypePassword 時為必要參數)
+ *  @param friendGroupIds     好友群組ID，array 裡的值為 NSString instance(當 permission==PIXAlbumSetPermissionTypeGroup 時為必要參數)
+ *  @param allowCommercialUse 是否允許商業使用
+ *  @param allowDerivation    是否允許創作衍生著作
+ *  @param parentId           如果這個 parent_id 被指定, 則此相簿會放置在這個相簿資料夾底下(只能放在資料夾底下)
+ *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)updateAlbumSetWithSetID:(NSString *)setId setTitle:(NSString *)setTitle setDescription:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
 /**
  *  列出相本裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElements
  *
