@@ -27,7 +27,21 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
-
+-(void)sortSetFoldersWithFolderIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    if (ids == nil || [ids count] == 0) {
+        completion(NO, nil, @"ids 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"ids"] = [ids componentsJoinedByString:@"-"];
+    [[PIXAPIHandler new] callAPI:@"album/setfolders/position" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)fetchAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"userName 是必要參數");

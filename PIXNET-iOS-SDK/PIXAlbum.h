@@ -87,7 +87,13 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumListWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
-
+/**
+ *  修改相簿首頁排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfoldersPosition
+ *
+ *  @param ids        相簿id, array 裡的值為 NSString, id 的順序即為相簿的新順序
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)sortSetFoldersWithFolderIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
 #pragma mark Sets
 /**
  *  列出個人所有相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
