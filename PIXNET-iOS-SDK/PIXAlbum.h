@@ -74,7 +74,12 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
 
 @interface PIXAlbum : NSObject
 #pragma mark Main
-// coming soon
+/**
+ *  列出相簿主圖及相片牆資訊
+ *
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumMainWithCompletion:(PIXHandlerCompletion)completion;
 
 #pragma mark SetFolders
 /**
