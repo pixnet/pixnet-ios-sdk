@@ -26,7 +26,7 @@
  *
  *  @return 該部落格的基本資訊
  */
-- (void)getBlogInformationWithUserID:(NSString *)userID completion:(RequestCompletion)completion;
+- (void)getBlogInformationWithUserID:(NSString *)userID completion:(PIXHandlerCompletion)completion;
 
 //blog categories
 /**
@@ -36,6 +36,6 @@
  *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有密碼就輸入 nil 
  *  @param completion
  */
-- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(RequestCompletion)completion;
+- (void)getBlogCategoriesWithUserID:(NSString *)userID andPassword:(NSString *)passwd completion:(PIXHandlerCompletion)completion;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation PIXUser
 
--(void)getUserWithUserName:(NSString *)userName completion:(RequestCompletion)completion{
+-(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSString stringWithFormat:MsgFmtRequiredParameter, "User"]);
     }
