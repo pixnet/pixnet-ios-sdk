@@ -461,6 +461,9 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     [self createOrUpdateAlbumFolderWithFolderID:folderId title:folderTitle description:folderDescription completion:completion];
 }
+/**
+ *  新增/修改資料夾的參數幾乎一樣，所以用這個 method 合併起來
+ */
 -(void)createOrUpdateAlbumFolderWithFolderID:(NSString *)folderId title:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
     if (folderTitle==nil || folderTitle.length==0) {
         completion(NO, nil, @"一定要有資料夾標題");
@@ -478,6 +481,20 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         path = [NSString stringWithFormat:@"album/folders/%@", folderId];
     }
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
+-(void)deleteAlbumFolderWithFolderID:(NSString *)folderId completion:(PIXHandlerCompletion)completion{
+    if (folderId==nil || folderId.length==0) {
+        completion(NO, nil, @"folderId 參數有誤");
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"album/folders/%@", folderId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:@{@"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
