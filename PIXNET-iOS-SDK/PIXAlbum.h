@@ -223,7 +223,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
-#pragma mark Folders(vip 才會有資料夾)
+#pragma mark Folders(VIP 才會有資料夾)
 /**
  *  列出某個使用者所有的資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFolders
  *
@@ -247,14 +247,21 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
- *  修改相簿排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsPosition
+ *  修改資料夾裡的相簿排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsPosition
  *
  *  @param parentId   屬於哪一個相簿資料夾
  *  @param ids        相簿id, array 裡的值為 NSString, id 的順序即為相簿的新順序
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)sortAlbumSetsWithParentID:(NSString *)parentId IDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
-
+/**
+ *  新增資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersCreate
+ *
+ *  @param folderTitle       資料夾標題
+ *  @param folderDescription 資料夾描述
+ *  @param completion        succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)createAlbumFolderWithTitle:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion;
 /**
  *  列出相本(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumComments
  *

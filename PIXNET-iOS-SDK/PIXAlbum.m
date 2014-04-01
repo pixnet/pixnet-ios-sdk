@@ -447,7 +447,24 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
-
+-(void)createAlbumFolderWithTitle:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
+    if (folderTitle==nil || folderTitle.length==0) {
+        completion(NO, nil, @"一定要有資料夾標題");
+        return;
+    }
+    if (folderDescription==nil || folderDescription.length==0) {
+        completion(NO, nil, @"一定要有資料夾描述");
+        return;
+    }
+    NSDictionary *params = @{@"title":folderTitle, @"description":folderDescription};
+    [[PIXAPIHandler new] callAPI:@"album/folders" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     [self fetchAlbumOrSetCommentWithPath:@"album/set_comments/" userName:userName commentId:commentId shouldAuth:shouldAuth completion:completion];
 }
