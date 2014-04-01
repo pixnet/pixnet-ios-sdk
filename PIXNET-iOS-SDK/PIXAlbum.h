@@ -99,6 +99,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)sortSetFoldersWithFolderIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
+
 #pragma mark Sets
 /**
  *  列出個人所有相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
@@ -124,7 +125,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
- *  新增相簿
+ *  新增相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsCreate
  *
  *  @param setTitle           相簿標題，必要參數
  *  @param setDescription     相簿描述，必要參數
@@ -143,7 +144,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)createAlbumSetWithTitle:(NSString *)setTitle description:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
 /**
- *  修改相簿
+ *  修改相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsUpdate
  *
  *  @param setId              欲修改的該相簿 ID
  *  @param setTitle           相簿標題，必要參數
@@ -163,7 +164,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)updateAlbumSetWithSetID:(NSString *)setId setTitle:(NSString *)setTitle setDescription:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
 /**
- *  刪除單一相簿
+ *  刪除單一相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsDelete
  *
  *  @param setId      欲刪除的相簿的 ID
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
@@ -222,7 +223,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
-#pragma mark Folders
+#pragma mark Folders(vip 才會有資料夾)
 /**
  *  列出某個使用者所有的資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFolders
  *
@@ -235,7 +236,7 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
- *  列出某個使用者單一資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersShow
+ *  列出某個使用者單一資料夾裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersShow
  *
  *  @param userName   相本擁有者, 必要參數
  *  @param folderId   指定要回傳的 folder 資訊, 必要參數
@@ -245,6 +246,15 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改相簿排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsPosition
+ *
+ *  @param parentId   屬於哪一個相簿資料夾
+ *  @param ids        相簿id, array 裡的值為 NSString, id 的順序即為相簿的新順序
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)sortAlbumSetsWithParentID:(NSString *)parentId IDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
+
 /**
  *  列出相本(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumComments
  *

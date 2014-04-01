@@ -37,13 +37,30 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }];
 }
 -(void)sortSetFoldersWithFolderIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    [self sortAlbumSetsOrFoldersWithParentID:nil IDs:ids completion:completion];
+}
+-(void)sortAlbumSetsWithParentID:(NSString *)parentId IDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    [self sortAlbumSetsOrFoldersWithParentID:parentId IDs:ids completion:completion];
+}
+/**
+ *  對相簿排序的 API 的參數幾乎相同，所以用這個 method 整合
+ */
+-(void)sortAlbumSetsOrFoldersWithParentID:(NSString *)parentId IDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
     if (ids == nil || [ids count] == 0) {
         completion(NO, nil, @"ids 參數有誤");
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"ids"] = [ids componentsJoinedByString:@"-"];
-    [[PIXAPIHandler new] callAPI:@"album/setfolders/position" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    
+    NSString *path = nil;
+    if (parentId == nil) {
+        path = @"album/setfolders/position";
+    } else {
+        path = @"album/sets/position";
+        params[@"parent_id"] = parentId;
+    }
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
