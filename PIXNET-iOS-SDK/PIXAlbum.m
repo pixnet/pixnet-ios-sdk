@@ -448,6 +448,16 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
 }
 -(void)createAlbumFolderWithTitle:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
+    [self createOrUpdateAlbumFolderWithFolderID:nil title:folderTitle description:folderDescription isCreate:YES completion:completion];
+}
+-(void)updateAlbumFolderWithFolderID:(NSString *)folderId title:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
+    [self createOrUpdateAlbumFolderWithFolderID:folderId title:folderTitle description:folderDescription isCreate:NO completion:completion];
+}
+-(void)createOrUpdateAlbumFolderWithFolderID:(NSString *)folderId title:(NSString *)folderTitle description:(NSString *)folderDescription isCreate:(BOOL)isCreate completion:(PIXHandlerCompletion)completion{
+    if (!isCreate && (folderId==nil || folderId.length==0)) {
+        completion(NO, nil, @"folderId 參數有誤");
+        return;
+    }
     if (folderTitle==nil || folderTitle.length==0) {
         completion(NO, nil, @"一定要有資料夾標題");
         return;
@@ -457,7 +467,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         return;
     }
     NSDictionary *params = @{@"title":folderTitle, @"description":folderDescription};
-    [[PIXAPIHandler new] callAPI:@"album/folders" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    NSString *path = nil;
+    if (isCreate) {
+        path = @"album/folders";
+    } else {
+        path = [NSString stringWithFormat:@"album/folders/%@", folderId];
+    }
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {

@@ -263,6 +263,15 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)createAlbumFolderWithTitle:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion;
 /**
+ *  修改資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersUpdate
+ *
+ *  @param folderId          資料夾 ID
+ *  @param folderTitle       資料夾標題
+ *  @param folderDescription 資料夾描述
+ *  @param completion        succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)updateAlbumFolderWithFolderID:(NSString *)folderId title:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion;
+/**
  *  列出相本(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumComments
  *
  *  @param userName   相本擁有者, 必要參數
