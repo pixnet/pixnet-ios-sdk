@@ -594,6 +594,31 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
+-(void)sortElementsWithSetID:(NSString *)setId elementIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    if (setId==nil || setId.length==0) {
+        completion(NO, nil, @"setId 參數有誤");
+        return;
+    }
+    if (ids==nil || ids.count==0) {
+        completion(NO, nil, @"ids 參數有誤");
+        return;
+    } else {
+        for (id elementId in ids) {
+            if (![elementId isKindOfClass:[NSString class]]) {
+                completion(NO, nil, @"ids 裡每一個 value 都要是 NSString 才行");
+                return;
+            }
+        }
+    }
+    NSDictionary *params = @{@"set_id": setId, @"ids":[ids componentsJoinedByString:@"-"]};
+    [[PIXAPIHandler new] callAPI:@"album/elements/position" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 //TODO: 還沒做上傳檔案的 query!
 -(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId dataIsBase64Encoded:(BOOL)dataIsBase64Encoded elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion{
     if (elementData==nil || elementData.length==0) {

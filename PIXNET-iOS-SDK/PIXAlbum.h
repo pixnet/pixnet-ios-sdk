@@ -350,7 +350,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 /**
  *  修改圖片(或影片)裡的參數 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsUpdate
  *
- *  @param elementId          圖片(或影片)的 ID
+ *  @param elementId          圖片(或影片)的 ID，必要參數
  *  @param elementTitle       圖片(或影片)標題
  *  @param elementDescription 圖片(或影片)描述
  *  @param setId              圖片(或影片)所屬的相簿 ID
@@ -363,10 +363,18 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 /**
  *  刪除單張圖片(或影片) http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsDelete
  *
- *  @param elementId  圖片(或影片)的 ID
+ *  @param elementId  圖片(或影片)的 ID, 必要參數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)deleteElementWithElementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改相簿裡圖片影片排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsPosition
+ *
+ *  @param setId      相簿 ID，必要參數
+ *  @param ids        圖片 ID, array 裡的值為 NSString, id 的順序即為圖片的新順序，必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)sortElementsWithSetID:(NSString *)setId elementIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
 //TODO: 這個比較麻煩，晚點再來做
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
