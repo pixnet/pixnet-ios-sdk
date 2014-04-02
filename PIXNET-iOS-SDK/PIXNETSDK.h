@@ -31,6 +31,8 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
 +(instancetype)sharedInstance;
 
+//Blog Method
+
 #pragma mark - Blog Method
 #pragma mark - Blog imformation
 /**
