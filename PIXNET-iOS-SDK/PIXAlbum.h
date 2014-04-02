@@ -68,6 +68,27 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
      */
     PIXAlbumSetCommentRightTypeMember
 };
+/**
+ *  影片檔縮圖類型
+ */
+typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
+    /**
+     *  影片開頭
+     */
+    PIXVideoThumbTypeBeginning,
+    /**
+     *  影片中段
+     */
+    PIXVideoThumbTypeMiddle,
+    /**
+     *  影片結尾
+     */
+    PIXVideoThumbTypeEnd,
+    /**
+     *  不做任何設定
+     */
+    PIXVideoThumbTypeNone
+};
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
 #import <CoreLocation/CoreLocation.h>
@@ -326,4 +347,36 @@ typedef NS_ENUM(NSInteger, PIXAlbumSetCommentRightType) {
  */
 -(void)fetchAlbumElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
 #pragma mark Element
+/**
+ *  修改圖片(或影片)裡的參數 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsUpdate
+ *
+ *  @param elementId          圖片(或影片)的 ID
+ *  @param elementTitle       圖片(或影片)標題
+ *  @param elementDescription 圖片(或影片)描述
+ *  @param setId              圖片(或影片)所屬的相簿 ID
+ *  @param videoThumbType     影片截圖類型，如不設定請給 PIXVideoThumbTypeNone
+ *  @param tags               由 NSString instance 組成的 array
+ *  @param location           照片(或影片)的經緯度，如不需要此參數，可使用 kCLLocationCoordinate2DInvalid
+ *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)updateElementWithElementID:(NSString *)elementId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription setID:(NSString *)setId videoThumbType:(PIXVideoThumbType)videoThumbType tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion;
+//TODO: 這個比較麻煩，晚點再來做
+/**
+ *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
+ *
+ *  @param elementData             必要參數，圖片的 NSData instance，如果有使用 base64 加密，在 dataIsBase64Encoded 需為 YES
+ *  @param setId                   必要參數，上傳進哪本相簿的相簿 ID
+ *  @param dataIsBase64Encoded     如果 elementData 有做過 base64 加密，這裡請給 YES
+ *  @param elementTitle            照片(或影片)標題
+ *  @param elementDescription      照片(或影片)描述
+ *  @param tags                    由 NSString instance 組成的 array
+ *  @param location                照片(或影片)的經緯度，如不需要此參數，可使用 kCLLocationCoordinate2DInvalid
+ *  @param videoThumbType          如果上傳的檔案是影音檔, 可以選擇影片縮圖方式
+ *  @param picShouldRotateByExif   照片是否按照 exif 旋轉
+ *  @param videoShouldRotateByMeta 影片是否按照 header 旋轉
+ *  @param shouldUseQuadrate       是否使用方形縮圖
+ *  @param shouldAddWatermark      是否加浮水印
+ *  @param isElementFirst          新上傳照片(或影片)的放相簿前面
+ */
+//-(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId dataIsBase64Encoded:(BOOL)dataIsBase64Encoded elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
 @end

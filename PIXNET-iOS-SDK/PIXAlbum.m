@@ -536,6 +536,105 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
+-(void)updateElementWithElementID:(NSString *)elementId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription setID:(NSString *)setId videoThumbType:(PIXVideoThumbType)videoThumbType tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
+    if (elementId==nil || elementId.length==0) {
+        completion(NO, nil, @"elementId 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    if (elementTitle && elementTitle.length > 0) {
+        params[@"title"] = elementTitle;
+    }
+    if (elementDescription && elementDescription.length > 0) {
+        params[@"description"] = elementDescription;
+    }
+    if (setId && setId.length>0) {
+        params[@"set_id"] = setId;
+    }
+    switch (videoThumbType) {
+        case PIXVideoThumbTypeBeginning:
+            params[@"video_thumb_type"] = @"beginning";
+            break;
+        case PIXVideoThumbTypeMiddle:
+            params[@"video_thumb_type"] = @"middle";
+            break;
+        case PIXVideoThumbTypeEnd:
+            params[@"video_thumb_type"] = @"end";
+            break;
+        default:
+            break;
+    }
+    if (tags && tags.count>0) {
+        params[@"tags"] = [tags componentsJoinedByString:@"-"];
+    }
+    if (CLLocationCoordinate2DIsValid(location)) {
+        params[@"latitude"] = [NSString stringWithFormat:@"%g", location.latitude];
+        params[@"longitude"] = [NSString stringWithFormat:@"%g", location.longitude];
+    }
+    NSString *path = [NSString stringWithFormat:@"album/elements/%@", elementId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
+//TODO: 還沒做上傳檔案的 query!
+-(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId dataIsBase64Encoded:(BOOL)dataIsBase64Encoded elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion{
+    if (elementData==nil || elementData.length==0) {
+        completion(NO, nil, @"elementData 參數有誤");
+        return;
+    }
+    if (setId==nil || setId.length==0) {
+        completion(NO, nil, @"setId 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"upload_file"] = elementData;
+    params[@"set_id"] = setId;
+    params[@"upload_method"] = [NSString stringWithFormat:@"%i", dataIsBase64Encoded];
+    if (elementTitle) {
+        params[@"title"] = elementTitle;
+    }
+    if (elementDescription) {
+        params[@"description"] = elementDescription;
+    }
+    if (tags && [tags count]>0) {
+        params[@"tags"] = [tags componentsJoinedByString:@"-"];
+    }
+    if (CLLocationCoordinate2DIsValid(location)) {
+        params[@"latitude"] = [NSString stringWithFormat:@"%g", location.latitude];
+        params[@"longitude"] = [NSString stringWithFormat:@"%g", location.longitude];
+    }
+
+    switch (videoThumbType) {
+        case PIXVideoThumbTypeBeginning:
+            params[@"video_thumb_type"] = @"beginning";
+            break;
+        case PIXVideoThumbTypeMiddle:
+            params[@"video_thumb_type"] = @"middle";
+            break;
+        case PIXVideoThumbTypeEnd:
+            params[@"video_thumb_type"] = @"end";
+            break;
+        default:
+            break;
+    }
+    params[@"rotate_by_exif"] = [NSString stringWithFormat:@"%i", picShouldRotateByExif];
+    params[@"rotate_by_meta"] = [NSString stringWithFormat:@"%i", videoShouldRotateByMeta];
+    params[@"quadrate"] = [NSString stringWithFormat:@"%i", shouldUseQuadrate];
+    params[@"add_watermark"] = [NSString stringWithFormat:@"%i", shouldAddWatermark];
+    params[@"element_first"] = [NSString stringWithFormat:@"%i", isElementFirst];
+    
+    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
