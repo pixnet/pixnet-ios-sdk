@@ -19,9 +19,10 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
--(void)fetchAlbumListWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
+-(void)fetchAlbumSetsWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"userName 是必要參數");
+        return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
@@ -203,6 +204,31 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
             }
         }];
     }
+}
+-(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:YES completion:completion];
+}
+-(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO completion:completion];
+}
+-(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion{
+    if (commentId==nil || commentId.length==0) {
+        completion(NO, nil, @"commentId 參數有誤");
+        return;
+    }
+    NSString *path = nil;
+    if (isSpam) {
+        path = [NSString stringWithFormat:@"album/set_comments/%@/mark_spam", commentId];
+    } else {
+        path = [NSString stringWithFormat:@"album/set_comments/%@/mark_ham", commentId];
+    }
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
 }
 -(void)deleteAlbumSetWithSetID:(NSString *)setId completion:(PIXHandlerCompletion)completion{
     if (setId==nil || setId.length==0) {

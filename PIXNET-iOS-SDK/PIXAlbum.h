@@ -112,7 +112,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param perPage    每頁幾筆, 預設為100
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumListWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+-(void)fetchAlbumSetsWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
 /**
  *  修改相簿首頁排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfoldersPosition
  *
@@ -219,6 +219,22 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+/**
+ *  將某則留言標記為廣告留言
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將某則留言標記為非廣告留言
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+//TODO: 等票的答案(32020)
+//-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body userName:(NSString *)userName password:(NSString *)password completion:(PIXHandlerCompletion)completion;
 /**
  *  取得相本單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsId
  *
