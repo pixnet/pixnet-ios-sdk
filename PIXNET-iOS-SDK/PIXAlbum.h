@@ -360,6 +360,13 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)updateElementWithElementID:(NSString *)elementId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription setID:(NSString *)setId videoThumbType:(PIXVideoThumbType)videoThumbType tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除單張圖片(或影片) http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsDelete
+ *
+ *  @param elementId  圖片(或影片)的 ID
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)deleteElementWithElementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
 //TODO: 這個比較麻煩，晚點再來做
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
