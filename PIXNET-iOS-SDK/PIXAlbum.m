@@ -704,6 +704,44 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
+-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion{
+    [self createCommentWithBody:body isForAlbumSet:YES parentID:setId password:password completion:completion];
+}
+-(void)createElementCommentWithElementID:(NSString *)elementID body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion{
+    [self createCommentWithBody:body isForAlbumSet:NO parentID:elementID password:password completion:completion];
+}
+-(void)createCommentWithBody:(NSString *)body isForAlbumSet:(BOOL)isForAlbumSet parentID:(NSString *)parentId password:(NSString *)password completion:(PIXHandlerCompletion)completion{
+    if (body==nil || body.length==0) {
+        completion(NO, nil, @"一定要有留言內容");
+        return;
+    }
+    if (parentId==nil || parentId.length==0) {
+        completion(NO, nil, @"一定要有elementId 或是 setId");
+        return;
+    }
+
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"body"] = body;
+    if (password!=nil && password.length>0) {
+        params[@"password"] = password;
+    }
+    NSString *path = nil;
+    if (isForAlbumSet) {
+        params[@"set_id"] = parentId;
+        path = [NSString stringWithFormat:@"album/set_comments"];
+    } else {
+        params[@"element_id"] = parentId;
+        path = [NSString stringWithFormat:@"album/comments"];
+    }
+
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];

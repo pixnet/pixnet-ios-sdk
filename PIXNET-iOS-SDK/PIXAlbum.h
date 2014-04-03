@@ -240,8 +240,24 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)deleteAlbumSetCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-//TODO: 等票的答案(32020)
-//-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body userName:(NSString *)userName password:(NSString *)password completion:(PIXHandlerCompletion)completion;
+/**
+ *  新增一則相簿上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsCreate
+ *
+ *  @param setId      相簿 ID
+ *  @param body       留言內容
+ *  @param password   如果被留言的相本被密碼保護，則需要指定這個參數以通過授權
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion;
+/**
+ *  新增一則相片上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsCreate
+ *
+ *  @param elementID  相片 ID
+ *  @param body       留言內容
+ *  @param password   如果被留言的相本被密碼保護，則需要指定這個參數以通過授權
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)createElementCommentWithElementID:(NSString *)elementID body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion;
 
 /**
  *  附近的相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
