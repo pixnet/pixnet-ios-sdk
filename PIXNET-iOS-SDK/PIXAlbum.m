@@ -308,16 +308,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
--(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
-    [self fetchAlbumCommentsWithUserName:userName elementID:elementId setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth apiPath:@"album/set_comments" completion:completion];
-}
--(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
-    [self fetchAlbumCommentsWithUserName:userName elementID:elementId setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth apiPath:@"album/comments" completion:completion];
+-(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
+    [self fetchAlbumCommentsWithUserName:userName elementID:nil setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth completion:completion];
 }
 /**
- *  取得 comments 有兩個 api，參數都一樣，只有 api 路徑不同，所以有這個 private method 的產生
+ * album/comments 可以用來取得相簿及相片的留言，所以取得 setComments 及 elementComments 都 call 這個 method
  */
--(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth apiPath:(NSString *)apiPath completion:(PIXHandlerCompletion)completion{
+-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     BOOL isElement = YES;
     if (elementId==nil || elementId.length == 0) {
         isElement = NO;
@@ -331,7 +328,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         return;
     }
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"UserName 參數有誤");
+        completion(NO, nil, @"userName 參數有誤");
         return;
     }
     
@@ -351,7 +348,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     if (shouldAuth) {
         
     } else {
-        [[PIXAPIHandler new] callAPI:apiPath parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        [[PIXAPIHandler new] callAPI:@"album/comments" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
             if (succeed) {
                 [self succeedHandleWithData:result completion:completion];
             } else {
@@ -363,7 +360,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     [self fetchAlbumElementsOrSetsNearbyWithPath:[kSetsNearbyPath copy] userName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:perPage withDetail:NO type:999 trimUser:trimUser shouldAuth:shouldAuth completion:completion];
 }
--(void)fetchAlbumElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
+-(void)fetchElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     [self fetchAlbumElementsOrSetsNearbyWithPath:@"album/elements/nearby" userName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:perPage withDetail:withDetail type:type trimUser:trimUser shouldAuth:shouldAuth completion:completion];
 }
 /**
@@ -428,7 +425,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
--(void)fetchAlbumElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion{
+-(void)fetchElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
         return;
@@ -445,37 +442,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }];
 }
 -(void)fetchElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
-    if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"userName 參數有誤");
-        return;
-    }
-    if (elementId == nil || elementId.length == 0) {
-        completion(NO, nil, @"elementId 參數有誤");
-        return;
-    }
-    if (page > NSUIntegerMax || page<1) {
-        completion(NO, nil, @"page 參數有誤");
-        return;
-    }
-    if (perPage > NSUIntegerMax || perPage < 1) {
-        completion(NO, nil, @"perPage 參數有誤");
-        return;
-    }
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"user"] = userName;
-    params[@"element_id"] = elementId;
-    if (password) {
-        params[@"password"] = password;
-    }
-    params[@"page"] = [NSString stringWithFormat:@"%li", page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
-    [[PIXAPIHandler new] callAPI:@"album/comments" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, errorMessage);
-        }
-    }];
+    [self fetchAlbumCommentsWithUserName:userName elementID:elementId setID:nil password:password page:page perPage:perPage shouldAuth:NO completion:completion];
+    return;
 }
 -(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
@@ -578,16 +546,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
--(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
-    [self fetchAlbumOrSetCommentWithPath:@"album/set_comments/" userName:userName commentId:commentId shouldAuth:shouldAuth completion:completion];
-}
--(void)fetchAlbumCommentWithUserName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
-    [self fetchAlbumOrSetCommentWithPath:@"album/comments/" userName:userName commentId:commentId shouldAuth:shouldAuth completion:completion];
-}
-/**
- *  將 Album comment 及 Album set comment 兩支 api 利用 path 這參數，在這裡結合起來
- */
--(void)fetchAlbumOrSetCommentWithPath:(NSString *)path userName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
+-(void)fetchCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
         return;
@@ -599,18 +558,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     
-    NSString *pathString = [NSString stringWithFormat:@"%@%@", path, commentId];
-    if (shouldAuth) {
-        
-    } else {
-        [[PIXAPIHandler new] callAPI:pathString parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-            if (succeed) {
-                [self succeedHandleWithData:result completion:completion];
-            } else {
-                completion(NO, nil, errorMessage);
-            }
-        }];
-    }
+    [[PIXAPIHandler new] callAPI:@"album/comments/" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
 }
 -(void)updateElementWithElementID:(NSString *)elementId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription setID:(NSString *)setId videoThumbType:(PIXVideoThumbType)videoThumbType tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
     if (elementId==nil || elementId.length==0) {
