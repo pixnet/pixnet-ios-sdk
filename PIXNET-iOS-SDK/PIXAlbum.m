@@ -230,15 +230,12 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
--(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-
-}
--(void)deleteAlbumSetCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+-(void)deleteCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
     if (commentId==nil || commentId.length==0) {
         completion(NO, nil, @"commentId 參數有誤");
         return;
     }
-    NSString *path = [NSString stringWithFormat:@"album/set_comments/%@", commentId];
+    NSString *path = [NSString stringWithFormat:@"album/comments/%@", commentId];
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:@{@"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
