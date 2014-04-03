@@ -72,7 +72,13 @@ static const NSString *kOauthTokenSecret;
         });
     }];
 }
-
++(BOOL)isAuthed{
+    if (kConsumerKey==nil || kConsumerSecret == nil) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
 -(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:@"GET" parameters:parameters requestCompletion:completion];
 }

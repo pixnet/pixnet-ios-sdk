@@ -27,6 +27,12 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMe
  */
 +(BOOL)isConsumerKeyAndSecrectAssigned;
 /**
+ *  用來判斷 oauth/xauth 是否已成功
+ *
+ *  @return 授權成功就回傳 YES
+ */
++(BOOL)isAuthed;
+/**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
  *  @param userName   使用者名稱(帳號)
