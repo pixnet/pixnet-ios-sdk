@@ -205,13 +205,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
--(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:YES completion:completion];
+-(void)markAlbumSetCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markAlbumSetCommentAsSpamOrHamWithCommentID:commentId isSpam:YES completion:completion];
 }
--(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO completion:completion];
+-(void)markAlbumSetCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markAlbumSetCommentAsSpamOrHamWithCommentID:commentId isSpam:NO completion:completion];
 }
--(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion{
+-(void)markAlbumSetCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion{
     if (commentId==nil || commentId.length==0) {
         completion(NO, nil, @"commentId 參數有誤");
         return;
@@ -223,6 +223,23 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         path = [NSString stringWithFormat:@"album/set_comments/%@/mark_ham", commentId];
     }
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
+-(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+
+}
+-(void)deleteAlbumSetCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    if (commentId==nil || commentId.length==0) {
+        completion(NO, nil, @"commentId 參數有誤");
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"album/set_comments/%@", commentId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:@{@"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
@@ -420,6 +437,39 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"user"] = userName;
     NSString *path = [NSString stringWithFormat:@"album/elements/%@", elementId];
     [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
+-(void)fetchElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"userName 參數有誤");
+        return;
+    }
+    if (elementId == nil || elementId.length == 0) {
+        completion(NO, nil, @"elementId 參數有誤");
+        return;
+    }
+    if (page > NSUIntegerMax || page<1) {
+        completion(NO, nil, @"page 參數有誤");
+        return;
+    }
+    if (perPage > NSUIntegerMax || perPage < 1) {
+        completion(NO, nil, @"perPage 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = userName;
+    params[@"element_id"] = elementId;
+    if (password) {
+        params[@"password"] = password;
+    }
+    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
+    [[PIXAPIHandler new] callAPI:@"album/comments" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {

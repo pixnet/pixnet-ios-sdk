@@ -220,23 +220,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
- *  將某則留言標記為廣告留言
- *
- *  @param commentId  留言ID, 必要參數
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
- */
--(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-/**
- *  將某則留言標記為非廣告留言
- *
- *  @param commentId  留言ID, 必要參數
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
- */
--(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-//TODO: 等票的答案(32020)
-//-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body userName:(NSString *)userName password:(NSString *)password completion:(PIXHandlerCompletion)completion;
-/**
- *  取得相本單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsId
+ *  取得相本裡的單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsId
  *
  *  @param userName   相本擁有者, 必要參數
  *  @param commentId  該則留言的 id, 必要參數
@@ -244,6 +228,30 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchAlbumSetCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  將某則相簿留言標記為廣告留言
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markAlbumSetCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將某則留言標記為非廣告留言
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markAlbumSetCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除相簿裡的某則留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsDelete
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)deleteAlbumSetCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+//TODO: 等票的答案(32020)
+//-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body userName:(NSString *)userName password:(NSString *)password completion:(PIXHandlerCompletion)completion;
 
 /**
  *  附近的相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
@@ -260,7 +268,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 -(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
-#pragma mark Folders(VIP 才會有資料夾)
+#pragma mark Folders(PIXNET VIP 才會有 folder)
 /**
  *  列出某個使用者所有的資料夾 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFolders
  *
@@ -319,15 +327,15 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  列出相本(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumComments
  *
  *  @param userName   相本擁有者, 必要參數
- *  @param elementId  指定要回傳的留言所在的相簿 setID 與 elementID 只要指定其中一個即可, 未用到的參數請給0
- *  @param setId      指定要回傳的留言所在的相簿 setID 與 elementID 只要指定其中一個即可, 未用到的參數請給0
+ *  @param elementId  指定要回傳的留言所在的相簿 setID 與 elementID 只要指定其中一個即可, 未用到的參數請給 nil
+ *  @param setId      指定要回傳的留言所在的相簿 setID 與 elementID 只要指定其中一個即可, 未用到的參數請給 nil
  *  @param password   如果指定使用者的相簿被密碼保護，則需要指定這個參數以通過授權
  *  @param page       頁數
  *  @param perPage    每頁幾筆
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+//-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  取得相簿單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsId
  *
@@ -336,7 +344,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumCommentWithUserName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+//-(void)fetchAlbumCommentWithUserName:(NSString *)userName commentId:(NSString *)commentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
 /**
  *  附近的相片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsNearby
@@ -391,6 +399,17 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)sortElementsWithSetID:(NSString *)setId elementIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
+/**
+ *  取得相片裡的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumComments
+ *
+ *  @param userName   相片擁有者名稱，必要參數
+ *  @param elementId  相片 ID，必要參數
+ *  @param password   相片所屬相簿如果有密碼保護，就代入這個參數
+ *  @param page       頁數
+ *  @param perPage    一頁幾筆
+ *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
 //TODO: 這個比較麻煩，晚點再來做
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
