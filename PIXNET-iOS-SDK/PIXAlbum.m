@@ -205,22 +205,22 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
--(void)markAlbumSetCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-    [self markAlbumSetCommentAsSpamOrHamWithCommentID:commentId isSpam:YES completion:completion];
+-(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:YES completion:completion];
 }
--(void)markAlbumSetCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-    [self markAlbumSetCommentAsSpamOrHamWithCommentID:commentId isSpam:NO completion:completion];
+-(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO completion:completion];
 }
--(void)markAlbumSetCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion{
+-(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion{
     if (commentId==nil || commentId.length==0) {
         completion(NO, nil, @"commentId 參數有誤");
         return;
     }
     NSString *path = nil;
     if (isSpam) {
-        path = [NSString stringWithFormat:@"album/set_comments/%@/mark_spam", commentId];
+        path = [NSString stringWithFormat:@"album/comments/%@/mark_spam", commentId];
     } else {
-        path = [NSString stringWithFormat:@"album/set_comments/%@/mark_ham", commentId];
+        path = [NSString stringWithFormat:@"album/comments/%@/mark_ham", commentId];
     }
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {

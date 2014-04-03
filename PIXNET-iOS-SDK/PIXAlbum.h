@@ -220,19 +220,19 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
- *  將某則相簿留言標記為廣告留言
+ *  將某則留言標記為廣告留言
  *
  *  @param commentId  留言ID, 必要參數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)markAlbumSetCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+-(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
 /**
  *  將某則留言標記為非廣告留言
  *
  *  @param commentId  留言ID, 必要參數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)markAlbumSetCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+-(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
 /**
  *  刪除相簿裡的某則留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsDelete
  *
