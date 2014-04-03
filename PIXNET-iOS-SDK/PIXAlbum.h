@@ -102,6 +102,14 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 -(void)fetchAlbumMainWithCompletion:(PIXHandlerCompletion)completion;
 
+#pragma mark config
+/**
+ *  列出相簿個人設定
+ *
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumConfigWithCompletion:(PIXHandlerCompletion)completion;
+
 #pragma mark SetFolders
 /**
  *  列出相本列表 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfolders
@@ -220,27 +228,6 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 -(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
- *  將某則留言標記為廣告留言
- *
- *  @param commentId  留言ID, 必要參數
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
- */
--(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-/**
- *  將某則留言標記為非廣告留言
- *
- *  @param commentId  留言ID, 必要參數
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
- */
--(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-/**
- *  刪除相簿裡的某則留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsDelete
- *
- *  @param commentId  留言ID, 必要參數
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
- */
--(void)deleteCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-/**
  *  新增一則相簿上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsCreate
  *
  *  @param setId      相簿 ID
@@ -343,6 +330,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 //-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
+#pragma mark Element
 /**
  *  附近的相片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsNearby
  *
@@ -367,7 +355,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)fetchElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
-#pragma mark Element
+
 /**
  *  修改圖片(或影片)裡的參數 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsUpdate
  *
@@ -407,6 +395,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
  */
 -(void)fetchElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+#pragma mark 留言
 /**
  *  取得單一則留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsId
  *
@@ -415,6 +404,28 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
  */
 -(void)fetchCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將某則留言標記為廣告留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsMarkSpam
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將某則留言標記為非廣告留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsMarkHam
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除某則留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsDelete
+ *
+ *  @param commentId  留言ID, 必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)deleteCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+
 //TODO: 這個比較麻煩，晚點再來做
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
