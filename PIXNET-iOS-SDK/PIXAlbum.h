@@ -94,9 +94,18 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 #import <CoreLocation/CoreLocation.h>
 
 @interface PIXAlbum : NSObject
+#pragma mark site categories
+/**
+ *  列出相簿全站分類 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSiteCategories
+ *
+ *  @param isIncludeGroups 當被設為 YES 時, 回傳資訊會以全站分類群組為分類
+ *  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
+ *  @param completion      succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)fetchAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
 #pragma mark Main
 /**
- *  列出相簿主圖及相片牆資訊
+ *  列出相簿主圖及相片牆資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/albumMain
  *
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
@@ -104,7 +113,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 
 #pragma mark config
 /**
- *  列出相簿個人設定
+ *  列出相簿個人設定 http://developer.pixnet.pro/#!/doc/pixnetApi/albumConfig
  *
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */

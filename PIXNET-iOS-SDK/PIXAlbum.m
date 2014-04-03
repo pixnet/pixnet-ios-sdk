@@ -10,6 +10,18 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 #import "PIXAlbum.h"
 
 @implementation PIXAlbum
+-(void)fetchAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion{
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"include_groups"] = [NSString stringWithFormat:@"%i", isIncludeGroups];
+    params[@"include_thumbs"] = [NSString stringWithFormat:@"%i", isIncludeThumbs];
+    [[PIXAPIHandler new] callAPI:@"album/site_categories" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+}
 -(void)fetchAlbumMainWithCompletion:(PIXHandlerCompletion)completion{
     [[PIXAPIHandler new] callAPI:@"album/main" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
