@@ -454,4 +454,16 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param isElementFirst          新上傳照片(或影片)的放相簿前面
  */
 //-(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId dataIsBase64Encoded:(BOOL)dataIsBase64Encoded elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
+
+#pragma mark faces
+/**
+ *  新增人臉標記
+ *
+ *  @param elementId   要加人臉標記的相片 ID，必要欄位
+ *  @param beTagedUser 要被標記的使用者帳號，被標記者必須設定標記者為好友。必要欄位
+ *  @param tagFrame    被標記的影像範圍，必要欄位
+ *  @param recommendId 如果在 -fetchCommentWithUserName:commentID:completion: 有系統推薦標記的使用者，可在這裡使用
+ *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame recommendID:(NSString *)recommendId completion:(PIXHandlerCompletion)completion;
 @end

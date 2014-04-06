@@ -760,6 +760,39 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
+
+-(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame recommendID:(NSString *)recommendId completion:(PIXHandlerCompletion)completion{
+    if (elementId==nil || elementId.length==0) {
+        completion(NO, nil, @"elementId 參數有誤");
+        return;
+    }
+    if (beTaggedUser==nil || beTaggedUser.length==0) {
+        completion(NO, nil, @"beTaggedUser 參數有誤");
+        return;
+    }
+    if (CGRectIsNull(tagFrame)) {
+        completion(NO, nil, @"tagFrame 參數有誤");
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"user"] = beTaggedUser;
+    params[@"element_id"] = elementId;
+    params[@"x"] = [NSString stringWithFormat:@"%g", tagFrame.origin.x];
+    params[@"y"] = [NSString stringWithFormat:@"%g", tagFrame.origin.y];
+    params[@"w"] = [NSString stringWithFormat:@"%g", tagFrame.size.width];
+    params[@"h"] = [NSString stringWithFormat:@"%g", tagFrame.size.height];
+    if (recommendId) {
+        params[@"recommend_id"] = recommendId;
+    }
+    [[PIXAPIHandler new] callAPI:@"album/faces" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+    
+}
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
