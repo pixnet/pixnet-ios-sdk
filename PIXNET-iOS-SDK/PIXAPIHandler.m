@@ -11,6 +11,7 @@ static const NSString *kConsumerSecret;
 
 #import "PIXAPIHandler.h"
 #import <GCOAuth.h>
+#import "NSMutableURLRequest+PIXCategory.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
@@ -109,30 +110,33 @@ static const NSString *kOauthTokenSecret;
     NSURL *requestUrl = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
+    if (uploadData) {
+        [urlRequest PIXAttachData:uploadData];
+    }
     
     if (backgroundExec) {
         //這裡要用 NSURLSession
     } else {
         //這裡可以用 NSURLConnection
-        if (uploadData == nil) {
-            //NSURLConnection 下載
-            [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    if (connectionError == nil) {
-                        NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
-                        if (hr.statusCode == 200) {
-                            completion(YES, data, nil);
-                        } else {
-                            completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
-                        }
+        [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (connectionError == nil) {
+                    NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
+                    if (hr.statusCode == 200) {
+                        completion(YES, data, nil);
                     } else {
-                        completion(NO, data, connectionError.localizedDescription);
+                        completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
                     }
-                });
-            }];
-        } else {
-           //NSURLConnection 上傳
-        }
+                } else {
+                    if (data) {
+                        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                        completion(NO, nil, string);
+                    } else {
+                        completion(NO, nil, connectionError.localizedDescription);
+                    }
+                }
+            });
+        }];
     }
 }
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{

@@ -667,7 +667,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
-//TODO: 還沒做上傳檔案的 query!
+
 -(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId dataIsBase64Encoded:(BOOL)dataIsBase64Encoded elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion{
     if (elementData==nil || elementData.length==0) {
         completion(NO, nil, @"elementData 參數有誤");
@@ -678,7 +678,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"upload_file"] = elementData;
     params[@"set_id"] = setId;
     params[@"upload_method"] = [NSString stringWithFormat:@"%i", dataIsBase64Encoded];
     if (elementTitle) {
@@ -713,8 +712,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"quadrate"] = [NSString stringWithFormat:@"%i", shouldUseQuadrate];
     params[@"add_watermark"] = [NSString stringWithFormat:@"%i", shouldAddWatermark];
     params[@"element_first"] = [NSString stringWithFormat:@"%i", isElementFirst];
-    
-    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+
+    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:NO uploadData:elementData parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
