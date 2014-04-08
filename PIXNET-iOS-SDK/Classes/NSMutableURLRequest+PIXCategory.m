@@ -9,7 +9,7 @@
 static const NSString *kBoundaryConstant = @"---------------------------14737809831466499882746641449";
 
 #import "NSMutableURLRequest+PIXCategory.h"
-#import "NSData+PIXCategory.h"
+//#import "NSData+PIXCategory.h"
 #import "OARequestParameter.h"
 
 @implementation NSMutableURLRequest (PIXCategory)
