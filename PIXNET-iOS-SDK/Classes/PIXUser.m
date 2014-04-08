@@ -29,9 +29,9 @@
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing userName");
     }
-    NSMutableDictionary *params = [NSMutableDictionary new];
+//    NSMutableDictionary *params = [NSMutableDictionary new];
     
-    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"users/%@", userName] parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"users/%@", userName] parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
