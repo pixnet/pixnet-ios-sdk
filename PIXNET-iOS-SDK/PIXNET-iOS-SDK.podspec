@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
 # Source Info
   s.platform     =  :ios, '6.0'
   s.source       =  :git => 'https://github.com/pixnet/pixnet-ios-sdk', :tag => '1.0'
-  s.source_files = '<#Resources#>'
-  s.framework    =  '<#Required Frameworks#>'
+  s.source_files =  'Classes/*.{h,m}'
+  s.framework    =  'CoreLocation'
 
   s.requires_arc = true
   
