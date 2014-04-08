@@ -24,25 +24,9 @@
     }
 }
 
-
--(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
-    if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"Missing userName");
-    }
-    
-    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"users/%@", userName] parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-        //檢查出去的參數
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, errorMessage);
-        }
-
-    }];
-}
-
--(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{        
-    [[PIXAPIHandler new] callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil  requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+// 傳 PIXAPIHandler 給測試用
+-(void)getAccountWithCompletion:(PIXHandlerCompletion)completion handler:(PIXAPIHandler *)handler{
+    [handler callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil  requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
@@ -51,6 +35,32 @@
         }
         
     }];
+}
+
+-(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion handler:(PIXAPIHandler *)handler{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, @"Missing userName");
+    }
+    
+    [handler callAPI:[NSString stringWithFormat:@"users/%@", userName] parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        //檢查出去的參數
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+        
+    }];
+}
+
+-(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    PIXAPIHandler *handler = [PIXAPIHandler new];
+    [self getUserWithUserName:userName completion:completion handler:handler];
+}
+
+-(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
+    PIXAPIHandler *handler = [PIXAPIHandler new];
+    [self getAccountWithCompletion:completion handler:handler];
 }
 
 
