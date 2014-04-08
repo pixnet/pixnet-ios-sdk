@@ -40,7 +40,12 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMe
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  為目前的使用者做登出的動作
+ */
++(void)logout;
 //+(instancetype)sharedInstance;
+#pragma mark instance method
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
  *
@@ -48,7 +53,6 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMe
  *  @param parameters value 的部份請給 NSString instance
  *  @param requestCompletion succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
-#pragma mark instance method
 -(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 /**
  *  用來呼叫 PIXNET 後台的 method, 不需 oAuth 認證
@@ -75,10 +79,9 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMe
  *  @param apiPath        emma.pixnet.cc/ 開始到 問號 前那一串
  *  @param httpMethod     GET, POST, DELETE, etc...(這裡使用 DELETE 會失敗...，所以要 DELETE 東西請用POST，然後在 parameters裡加 _method=delete)
  *  @param shouldAuth     該 API 是否需要 OAuth 認證
- *  @param backgroundExec 是否支援背景執行(iOS 7.0 以上才有的功能，尚未完成 XD)
- *  @param uploadData     要上傳給後台的檔案
+ *  @param uploadData     要上傳給後台的檔案(only for 圖片)
  *  @param parameters     value 的部份請給 NSString instance
  *  @param completion     succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 @end

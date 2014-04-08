@@ -441,7 +441,6 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *
  *  @param elementData             必要參數，圖片的 NSData instance，如果有使用 base64 加密，在 dataIsBase64Encoded 需為 YES
  *  @param setId                   必要參數，上傳進哪本相簿的相簿 ID
- *  @param dataIsBase64Encoded     如果 elementData 有做過 base64 加密，這裡請給 YES
  *  @param elementTitle            照片(或影片)標題
  *  @param elementDescription      照片(或影片)描述
  *  @param tags                    由 NSString instance 組成的 array
@@ -453,7 +452,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAddWatermark      是否加浮水印
  *  @param isElementFirst          新上傳照片(或影片)的放相簿前面
  */
--(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId dataIsBase64Encoded:(BOOL)dataIsBase64Encoded elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
+-(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
 
 #pragma mark faces
 /**
