@@ -866,9 +866,9 @@
 }
 
 
-- (void)updateBlogCommentWithCommentID:(NSString *)commentID
-                                      isOpen:(BOOL)isOpen
-                                  completion:(PIXHandlerCompletion)completion{
+- (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
+                                    isOpen:(BOOL)isOpen
+                                completion:(PIXHandlerCompletion)completion{
     if (!commentID || commentID == nil || commentID.length == 0) {
         completion(NO, nil, @"Missing Comment ID");
         return;
