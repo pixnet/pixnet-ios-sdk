@@ -27,6 +27,10 @@
 		CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CAA18D2F7D000D14D0C /* PIXNETSDK.m */; };
 		CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */; };
 		CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */; };
+		CEDCD0DD18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0DC18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.m */; };
+		CEDCD0E018F3A12E00B32ACC /* NSData+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0DF18F3A12E00B32ACC /* NSData+PIXCategory.m */; };
+		CEDCD0E318F3A13A00B32ACC /* OARequestParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0E218F3A13A00B32ACC /* OARequestParameter.m */; };
+		CEDCD0E618F3A15000B32ACC /* PIXCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0E518F3A15000B32ACC /* PIXCredentialStorage.m */; };
 		CEDFA6B018DA793200BB70B3 /* PIXAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDFA6AF18DA793200BB70B3 /* PIXAlbum.m */; };
 		D2C300279399403B84D4742C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDB24BB1BB342F89ED09330 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -71,6 +75,14 @@
 		CEDB7CAD18D2F7EF00D14D0C /* PIXBlog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlog.m; sourceTree = "<group>"; };
 		CEDB7CAF18D2F7FA00D14D0C /* PIXAPIHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXAPIHandler.h; sourceTree = "<group>"; };
 		CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAPIHandler.m; sourceTree = "<group>"; };
+		CEDCD0DB18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+PIXCategory.h"; sourceTree = "<group>"; };
+		CEDCD0DC18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+PIXCategory.m"; sourceTree = "<group>"; };
+		CEDCD0DE18F3A12E00B32ACC /* NSData+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PIXCategory.h"; sourceTree = "<group>"; };
+		CEDCD0DF18F3A12E00B32ACC /* NSData+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+PIXCategory.m"; sourceTree = "<group>"; };
+		CEDCD0E118F3A13A00B32ACC /* OARequestParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OARequestParameter.h; sourceTree = "<group>"; };
+		CEDCD0E218F3A13A00B32ACC /* OARequestParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OARequestParameter.m; sourceTree = "<group>"; };
+		CEDCD0E418F3A15000B32ACC /* PIXCredentialStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXCredentialStorage.h; sourceTree = "<group>"; };
+		CEDCD0E518F3A15000B32ACC /* PIXCredentialStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXCredentialStorage.m; sourceTree = "<group>"; };
 		CEDFA6AE18DA793200BB70B3 /* PIXAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXAlbum.h; sourceTree = "<group>"; };
 		CEDFA6AF18DA793200BB70B3 /* PIXAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAlbum.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,6 +203,14 @@
 			children = (
 				CEDB7CAF18D2F7FA00D14D0C /* PIXAPIHandler.h */,
 				CEDB7CB018D2F7FA00D14D0C /* PIXAPIHandler.m */,
+				CEDCD0DB18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.h */,
+				CEDCD0DC18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.m */,
+				CEDCD0DE18F3A12E00B32ACC /* NSData+PIXCategory.h */,
+				CEDCD0DF18F3A12E00B32ACC /* NSData+PIXCategory.m */,
+				CEDCD0E118F3A13A00B32ACC /* OARequestParameter.h */,
+				CEDCD0E218F3A13A00B32ACC /* OARequestParameter.m */,
+				CEDCD0E418F3A15000B32ACC /* PIXCredentialStorage.h */,
+				CEDCD0E518F3A15000B32ACC /* PIXCredentialStorage.m */,
 			);
 			name = NetworkHandle;
 			sourceTree = "<group>";
@@ -343,8 +363,12 @@
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
 				CEDB7CAE18D2F7EF00D14D0C /* PIXBlog.m in Sources */,
 				5078D12018DD868100479317 /* PIXUser.m in Sources */,
+				CEDCD0DD18F3A0A800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */,
+				CEDCD0E018F3A12E00B32ACC /* NSData+PIXCategory.m in Sources */,
 				5078D12418DD894800479317 /* PIXConstant.m in Sources */,
+				CEDCD0E618F3A15000B32ACC /* PIXCredentialStorage.m in Sources */,
 				CEDB7CAB18D2F7D000D14D0C /* PIXNETSDK.m in Sources */,
+				CEDCD0E318F3A13A00B32ACC /* OARequestParameter.m in Sources */,
 				CEDFA6B018DA793200BB70B3 /* PIXAlbum.m in Sources */,
 				CEDB7CB118D2F7FA00D14D0C /* PIXAPIHandler.m in Sources */,
 				CEDB7C8618D2ECF700D14D0C /* main.m in Sources */,
