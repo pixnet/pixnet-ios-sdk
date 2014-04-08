@@ -78,7 +78,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
     PIXSiteBlogCategoryDecorationDesign = 43,
     PIXSiteBlogCategoryActivityRecord = 44
 };
-//+(instancetype)sharedInstance;
+
 #pragma mark - Blog imformation
 /**
  *  列出部落格資訊 http://emma.pixnet.cc/blog

@@ -11,15 +11,6 @@
 
 @implementation PIXBlog
 
-+(instancetype)sharedInstance{
-    static PIXBlog *sharedInstance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sharedInstance = [[PIXBlog alloc] init];
-    });
-    return sharedInstance;
-}
-
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
