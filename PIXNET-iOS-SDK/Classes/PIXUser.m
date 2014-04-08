@@ -29,7 +29,6 @@
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing userName");
     }
-//    NSMutableDictionary *params = [NSMutableDictionary new];
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"users/%@", userName] parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
