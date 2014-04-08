@@ -77,6 +77,154 @@
         }
     }];
 }
+#pragma mark Categories need access token
+- (void)postBlogCategoriesWithName:(NSString *)name
+                              type:(PIXBlogCategoryType)type
+                       description:(NSString *)description
+                      siteCategory:(PIXSiteBlogCategory)siteCateID
+                        completion:(PIXHandlerCompletion)completion{
+    
+    if (!name || name == nil || name.length == 0) {
+        completion(NO, nil, @"請輸入要新增的分類名稱");
+        return;
+    }
+    if (!type) {
+        completion(NO, nil, @"請輸入要新增的是 Category 或 Folder");
+        return;
+    }
+    
+    if (type == PIXBlogCategoryTypeCategory) {
+        if (!siteCateID) {
+            completion(NO, nil, @"請輸入對應的全站文章類別 ID");
+        }
+    }
+
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"name"] = name;
+    
+    if (type == PIXBlogCategoryTypeCategory) {
+        params[@"type"] = @"category";
+        params[@"site_category_done"] = @(1);
+        params[@"site_category_id"] = @(siteCateID);
+    }else{
+        params[@"type"] = @"folder";
+    }
+    
+    if (description || description != nil || description.length != 0) {
+        params[@"description"] = description;
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/categories"
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+    
+}
+
+- (void)changeBlogCategoriesFromID:(NSString *)categoriesID
+                           newName:(NSString *)newName
+                              type:(PIXBlogCategoryType)type
+                       description:(NSString *)description
+                        completion:(PIXHandlerCompletion)completion{
+
+    if (!newName || newName == nil || newName.length == 0) {
+        completion(NO, nil, @"請輸入修改後的名稱");
+    }
+    if (!categoriesID || categoriesID == nil || categoriesID.length == 0) {
+        completion(NO, nil, @"請輸入要更改的 Category/Folder ID");
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"name"] = newName;
+    if (type == PIXBlogCategoryTypeCategory) {
+        params[@"type"] = @"category";
+    }else{
+        params[@"type"] = @"folder";
+    }
+    if (description || description != nil || description.length != 0) {
+        params[@"description"] = description;
+    }
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/categories/%@", categoriesID]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+    }];
+    
+}
+
+- (void)deleteBlogCategoriesByID:(NSString *)categoriesID
+                            type:(PIXBlogCategoryType)type
+                      completion:(PIXHandlerCompletion)completion{
+    if (!categoriesID || categoriesID == nil || categoriesID.length == 0) {
+        completion(NO, nil, @"請輸入要刪除的 Category/Folder ID");
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    
+    if (type == PIXBlogCategoryTypeCategory) {
+        params[@"type"] = @"category";
+    }else{
+        params[@"type"] = @"folder";
+    }
+    
+    params[@"_method"] = @"delete";
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/categories/%@", categoriesID]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+
+}
+
+- (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
+                  completion:(PIXHandlerCompletion)completion{
+    
+    NSMutableString *idsString = [NSMutableString new];
+    
+    for (NSUInteger i = 0; i <= categoriesIDArray.count; i++) {
+        if (i == categoriesIDArray.count - 1) {
+            [idsString appendString:categoriesIDArray[i]];
+        }else{
+            [idsString appendString:[NSMutableString stringWithFormat:@"%@-", categoriesIDArray[i]]];
+        }
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"ids"] = idsString;
+    
+    [[PIXAPIHandler new] callAPI:@"blog/categories/position"
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
 
 #pragma mark - Blog Articles
 - (void)getBlogAllArticlesWithUserName:(NSString *)userName
@@ -253,7 +401,7 @@
 }
 
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
-                               passwd:(NSString *)passwd
+                             password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0) {
@@ -322,6 +470,214 @@
                    }
                }];
     
+}
+#pragma mark Article method need access token
+- (void)postBlogNewArticleWithTitle:(NSString *)title
+                               body:(NSString *)body
+                             status:(PIXArticleStatus)status
+                           publicAt:(NSDate *)date
+                     siteCategoryID:(PIXSiteBlogCategory)cateID
+                        commentPerm:(PIXArticleCommentPerm)commentPerm
+                      commentHidden:(BOOL)commentHidden
+                               tags:(NSArray *)tagArray
+                           thumbURL:(NSString *)thumburl
+                           password:(NSString *)passwd
+                       passwordHine:(NSString *)passwdHint
+                      friendGroupID:(NSString *)friendGroupID
+                         completion:(PIXHandlerCompletion)completion{
+    if (title == nil || title.length == 0 || !title) {
+        completion(NO, nil, @"Missing Article Title");
+        return;
+    }
+    if (body == nil || body.length == 0 || !body) {
+        completion(NO, nil, @"Missing Article Body");
+        return;
+    }
+    
+    if (status == PIXArticleStatusPassword) {
+        if (!passwd || passwd == nil || passwd.length == 0) {
+            completion(NO, nil, @"請輸入欲設定之文章密碼");
+            return;
+        }else if (!passwdHint || passwdHint == nil || passwdHint.length == 0){
+            completion(NO, nil, @"請輸入欲設定文章密碼提示");
+            return;
+        }
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"title"] = title;
+    params[@"body"] = body;
+    
+    if (status) {
+        params[@"status"] = @(status);
+    }
+    if (date) {
+        params[@"public_at"] = [NSString stringWithFormat:@"%f", [date timeIntervalSince1970]];
+    }
+    if (cateID) {
+        params[@"category_id"] = @(cateID);
+    }
+    if (commentPerm) {
+        params[@"comment_perm"] = @(commentPerm);
+    }
+    if (commentHidden) {
+        params[@"comment_hidden"] = @(1);
+    }else{
+        params[@"comment_hidden"] = @(0);
+    }
+    if (tagArray) {
+        NSMutableString *tagsString = [NSMutableString new];
+        for (NSInteger i = 0; i < tagArray.count; i++) {
+            if (i == tagArray.count - 1) {
+                [tagsString appendString:tagArray[i]];
+            }else{
+                [tagsString appendString:[NSMutableString stringWithFormat:@"%@,", tagArray[i]]];
+            }
+        }
+    }
+    if (thumburl || thumburl != nil || thumburl.length != 0) {
+        params[@"thumb"] = thumburl;
+    }
+    
+    if (status == PIXArticleStatusPassword) {
+        params[@"password"] = passwd;
+        params[@"password_hint"] = passwdHint;
+    }
+    
+    if (status == PIXArticleStatusFriend && friendGroupID) {
+        params[@"friend_group_ids"] = friendGroupID;
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/articles"
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+- (void)postBlogUpdateArticleWithArticleID:(NSString *)articleID
+                                     Title:(NSString *)title
+                                      body:(NSString *)body
+                                    status:(PIXArticleStatus)status
+                                  publicAt:(NSDate *)date
+                            siteCategoryID:(PIXSiteBlogCategory)cateID
+                               commentPerm:(PIXArticleCommentPerm)commentPerm
+                             commentHidden:(BOOL)commentHidden
+                                      tags:(NSArray *)tagArray
+                                  thumbURL:(NSString *)thumburl
+                                  password:(NSString *)passwd
+                              passwordHine:(NSString *)passwdHint
+                             friendGroupID:(NSString *)friendGroupID
+                                completion:(PIXHandlerCompletion)completion{
+    if (articleID == nil || articleID.length == 0 || !articleID) {
+        completion(NO, nil, @"Missing Article ID");
+        return;
+    }
+    
+    if (title == nil || title.length == 0 || !title) {
+        completion(NO, nil, @"Missing Article Title");
+        return;
+    }
+    if (body == nil || body.length == 0 || !body) {
+        completion(NO, nil, @"Missing Article Body");
+        return;
+    }
+    
+    if (status == PIXArticleStatusPassword) {
+        if (!passwd || passwd == nil || passwd.length == 0) {
+            completion(NO, nil, @"請輸入欲設定之文章密碼");
+            return;
+        }else if (!passwdHint || passwdHint == nil || passwdHint.length == 0){
+            completion(NO, nil, @"請輸入欲設定文章密碼提示");
+            return;
+        }
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"title"] = title;
+    params[@"body"] = body;
+    
+    if (status) {
+        params[@"status"] = @(status);
+    }
+    if (date) {
+        params[@"public_at"] = [NSString stringWithFormat:@"%f", [date timeIntervalSince1970]];
+    }
+    if (cateID) {
+        params[@"category_id"] = @(cateID);
+    }
+    if (commentPerm) {
+        params[@"comment_perm"] = @(commentPerm);
+    }
+    if (commentHidden) {
+        params[@"comment_hidden"] = @(1);
+    }else{
+        params[@"comment_hidden"] = @(0);
+    }
+    if (tagArray) {
+        NSMutableString *tagsString = [NSMutableString new];
+        for (NSInteger i = 0; i < tagArray.count; i++) {
+            if (i == tagArray.count - 1) {
+                [tagsString appendString:tagArray[i]];
+            }else{
+                [tagsString appendString:[NSMutableString stringWithFormat:@"%@,", tagArray[i]]];
+            }
+        }
+    }
+    if (thumburl || thumburl != nil || thumburl.length != 0) {
+        params[@"thumb"] = thumburl;
+    }
+    
+    if (status == PIXArticleStatusPassword) {
+        params[@"password"] = passwd;
+        params[@"password_hint"] = passwdHint;
+    }
+    
+    if (status == PIXArticleStatusFriend && friendGroupID) {
+        params[@"friend_group_ids"] = friendGroupID;
+    }
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@", articleID]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+
+}
+
+- (void)deleteBlogArticleByArticleID:(NSString *)articleID
+                          completion:(PIXHandlerCompletion)completion{
+    
+    if (articleID == nil || articleID.length == 0 || !articleID) {
+        completion(NO, nil, @"Missing Article ID");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"_method"] = @"delete";
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@", articleID]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+
 }
 
 #pragma mark - Blog Comments
@@ -415,6 +771,196 @@
                }];
     
 }
+#pragma mark Comment Method need access token
+
+- (void)postBlogNewCommentWithArticleID:(NSString *)articleID
+                                   body:(NSString *)body
+                               userName:(NSString *)userName
+                                 author:(NSString *)author
+                                  title:(NSString *)title
+                                    url:(NSString *)url
+                                 isOpen:(BOOL)isOpen
+                                  email:(NSString *)email
+                           blogPassword:(NSString *)blogPasswd
+                        articlePassword:(NSString *)articlePasswd
+                             completion:(PIXHandlerCompletion)completion{
+
+    if (!articleID || articleID == nil || articleID.length == 0) {
+        completion(NO, nil, @"Missing Article ID");
+        return;
+    }
+    if (!body || body == nil || body.length == 0) {
+        completion(NO, nil, @"Missing Comment Body");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"article_id"] = articleID;
+    params[@"body"] = body;
+    
+    if (userName || userName != nil || userName.length != 0) {
+        params[@"user"] = userName;
+    }
+    
+    if (author || author != nil || author.length != 0) {
+        params[@"author"] = author;
+    }
+    
+    if (title || title != nil || title.length != 0) {
+        params[@"title"] = title;
+    }
+    
+    if (url || url != nil || url.length != 0) {
+        params[@"url"] = url;
+    }
+    
+    if (isOpen) {
+        params[@"is_open"] = @"0";
+    }else{
+        params[@"is_open"] = @"1";
+    }
+    
+    if (email || email != nil || email.length != 0) {
+        params[@"email"] = email;
+    }
+    
+    if (blogPasswd || blogPasswd != nil || blogPasswd.length != 0) {
+        params[@"blog_password"] = blogPasswd;
+    }
+    
+    if (articlePasswd || articlePasswd != nil || articlePasswd.length != 0) {
+        params[@"article_password"] = articlePasswd;
+    }
+    
+    [[PIXAPIHandler new] callAPI:@"blog/comments"
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+- (void)postBlogReplyCommentWithCommnetID:(NSString *)commentID
+                                     body:(NSString *)body
+                               completion:(PIXHandlerCompletion)completion{
+    if (!commentID || commentID == nil || commentID.length == 0) {
+        completion(NO, nil, @"Missing Comment ID");
+        return;
+    }
+    
+    if (!body || body == nil || body.length == 0) {
+        completion(NO, nil, @"Missing Comment Body");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"body"] = body;
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@/reply", commentID]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+
+- (void)postBlogCommentOpenStatusWithCommentID:(NSString *)commentID
+                                        isOpen:(BOOL)isOpen
+                                    completion:(PIXHandlerCompletion)completion{
+    if (!commentID || commentID == nil || commentID.length == 0) {
+        completion(NO, nil, @"Missing Comment ID");
+        return;
+    }
+    NSString *isOpenString = [NSString new];
+    
+    if (isOpen) {
+        isOpenString = @"open";
+    }else{
+        isOpenString = @"close";
+    }
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@/%@", commentID, isOpenString]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:nil
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+    
+}
+
+
+- (void)postBlogCommentSpamStatusWithCommentID:(NSString *)commentID
+                                        isSpam:(BOOL)isSpam
+                                    completion:(PIXHandlerCompletion)completion{
+    
+    if (!commentID || commentID == nil || commentID.length == 0) {
+        completion(NO, nil, @"Missing Comment ID");
+        return;
+    }
+    
+    NSString *isSpamString = [NSString new];
+    
+    if (isSpam) {
+        isSpamString = @"mark_spam";
+    }else{
+        isSpamString = @"mark_ham";
+    }
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@/%@", commentID, isSpamString]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:nil
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+    
+}
+
+- (void)deleteBlogCommentWithCommentID:(NSString *)commentID
+                            completion:(PIXHandlerCompletion)completion{
+
+    if (!commentID || commentID == nil || commentID.length == 0) {
+        completion(NO, nil, @"Missing Comment ID");
+        return;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    params[@"_method"] = @"delete";
+    
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
+                      httpMethod:@"POST"
+                      shouldAuth:YES
+                      parameters:nil
+               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+                   if (succeed) {
+                       [self succeedHandleWithData:result completion:completion];
+                   } else {
+                       completion(NO, nil, errorMessage);
+                   }
+               }];
+}
+
+
 #pragma mark - Site Blog Categories list
 
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group
