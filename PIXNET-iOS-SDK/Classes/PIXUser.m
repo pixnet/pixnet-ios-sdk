@@ -41,5 +41,18 @@
     }];
 }
 
+-(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{        
+    [[PIXAPIHandler new] callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil  requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        //檢查出去的參數
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+        
+    }];
+}
+
+
 
 @end
