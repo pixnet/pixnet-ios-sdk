@@ -89,7 +89,9 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     }];
 }
 +(BOOL)isAuthed{
-    if (kConsumerKey==nil || kConsumerSecret == nil) {
+    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
+    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+    if (token==nil || secret == nil) {
         return NO;
     } else {
         return YES;
