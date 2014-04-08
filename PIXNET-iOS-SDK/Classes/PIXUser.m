@@ -24,20 +24,14 @@
     }
 }
 
-// 傳 PIXAPIHandler 給測試用
--(void)getAccountWithCompletion:(PIXHandlerCompletion)completion handler:(PIXAPIHandler *)handler{
-    [handler callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil  requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-        //檢查出去的參數
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, errorMessage);
-        }
-        
-    }];
-}
-
--(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion handler:(PIXAPIHandler *)handler{
+-(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    PIXAPIHandler *handler;
+    if (self.apihandler == nil) {
+        handler = [PIXAPIHandler new];
+    } else {
+        handler = self.apihandler;
+    }
+    
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"Missing userName");
     }
@@ -53,14 +47,23 @@
     }];
 }
 
--(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
-    PIXAPIHandler *handler = [PIXAPIHandler new];
-    [self getUserWithUserName:userName completion:completion handler:handler];
-}
-
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
-    PIXAPIHandler *handler = [PIXAPIHandler new];
-    [self getAccountWithCompletion:completion handler:handler];
+    PIXAPIHandler *handler;
+    if (self.apihandler == nil) {
+        handler = [PIXAPIHandler new];
+    } else {
+        handler = self.apihandler;
+    }
+
+    [handler callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil  requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        //檢查出去的參數
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, errorMessage);
+        }
+        
+    }];
 }
 
 

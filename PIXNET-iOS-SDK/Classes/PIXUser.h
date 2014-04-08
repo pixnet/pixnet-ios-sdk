@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
 
-@interface PIXUser : NSObject
+@interface PIXUser : NSObject {
+    PIXAPIHandler *apihandler;
+}
 
 #pragma mark -
 /**
@@ -28,5 +30,6 @@
  */
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion;
 
+@property (nonatomic, retain) PIXAPIHandler *apihandler;
 
 @end
