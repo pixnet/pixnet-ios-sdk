@@ -39,7 +39,9 @@
 
 #pragma mark - Blog Categories
 
-- (void)getblogCategoriesWithUserName:(NSString *)userName password:(NSString *)passwd completion:(PIXHandlerCompletion)completion{
+- (void)getBlogCategoriesWithUserName:(NSString *)userName
+                             password:(NSString *)passwd
+                           completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] getBlogCategoriesWithUserName:userName password:passwd completion:completion];
     
 }
@@ -99,5 +101,34 @@
 
 
 #pragma mark - Blog Comments
+
+- (void)getBlogCommentsWithUserName:(NSString *)userName
+                          articleID:(NSString *)articleID
+                               page:(NSUInteger)page
+                            perPage:(NSUInteger)perPage
+                         completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogCommentsWithUserName:userName articleID:articleID page:page perPage:perPage completion:completion];
+    
+}
+
+- (void)getBlogSingleCommentWithUserName:(NSString *)userName
+                              commmentID:(NSString *)commentID
+                              completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogSingleCommentWithUserName:userName commmentID:commentID completion:completion];
+
+}
+
+- (void)getBlogLatestCommentWithUserName:(NSString *)userName
+                              completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogLatestCommentWithUserName:userName completion:completion];
+}
+
+
+#pragma mark - Site Blog Categories
+- (void)getBlogCategoriesListIncludeGroups:(BOOL)group
+                                    thumbs:(BOOL)thumb
+                                completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] getBlogCategoriesListIncludeGroups:group thumbs:thumb completion:completion];
+}
 
 @end

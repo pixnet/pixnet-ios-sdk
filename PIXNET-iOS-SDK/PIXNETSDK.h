@@ -57,19 +57,19 @@
                              password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion;
 
-//need access token
-- (void)postBlogCategoriesWithName:(NSString *)name
-                        completion:(PIXHandlerCompletion)completion;
-
-- (void)changeBlogCategoriesFromID:(NSString *)categoriesID
-                                to:(NSString *)newName
-                        completion:(PIXHandlerCompletion)completion;
-
-- (void)deleteBlogCategoriesByID:(NSString *)categoriesID
-                      completion:(PIXHandlerCompletion)completion;
-
-- (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
-                  completion:(PIXHandlerCompletion)completion;
+////need access token
+//- (void)postBlogCategoriesWithName:(NSString *)name
+//                        completion:(PIXHandlerCompletion)completion;
+//
+//- (void)changeBlogCategoriesFromID:(NSString *)categoriesID
+//                                to:(NSString *)newName
+//                        completion:(PIXHandlerCompletion)completion;
+//
+//- (void)deleteBlogCategoriesByID:(NSString *)categoriesID
+//                      completion:(PIXHandlerCompletion)completion;
+//
+//- (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
+//                  completion:(PIXHandlerCompletion)completion;
 
 #pragma mark - Blog Articles
 //dosen't need Access token

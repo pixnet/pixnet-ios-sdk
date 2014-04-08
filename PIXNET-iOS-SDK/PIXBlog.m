@@ -401,7 +401,7 @@
 }
 
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
-                               passwd:(NSString *)passwd
+                             password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0) {
