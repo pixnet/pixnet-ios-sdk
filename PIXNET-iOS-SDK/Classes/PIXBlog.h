@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
+#import "PIXConstant.h"
 
 @interface PIXBlog : NSObject
 
