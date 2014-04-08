@@ -102,14 +102,14 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
  *  @param completion      succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
 #pragma mark Main
 /**
  *  列出相簿主圖及相片牆資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/albumMain
  *
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumMainWithCompletion:(PIXHandlerCompletion)completion;
+-(void)getAlbumMainWithCompletion:(PIXHandlerCompletion)completion;
 
 #pragma mark config
 /**
@@ -117,7 +117,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumConfigWithCompletion:(PIXHandlerCompletion)completion;
+-(void)getAlbumConfigWithCompletion:(PIXHandlerCompletion)completion;
 
 #pragma mark SetFolders
 /**
@@ -129,7 +129,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param perPage    每頁幾筆, 預設為100
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetsWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
 /**
  *  修改相簿首頁排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfoldersPosition
  *
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  讀取個人某一本相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsShow
  *
@@ -161,7 +161,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  新增相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsCreate
  *
@@ -222,7 +222,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth  是否需要認證
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page perPage:(NSUInteger)perPage password:(NSString *)password withDetail:(BOOL)withDetail trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  列出相本(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetComments
  *
@@ -235,7 +235,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  新增一則相簿上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsCreate
  *
@@ -268,7 +268,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth  是否需要認證
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
 #pragma mark Folders(PIXNET VIP 才會有 folder)
 /**
@@ -281,7 +281,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  列出某個使用者單一資料夾裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersShow
  *
@@ -292,7 +292,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  修改資料夾裡的相簿排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsPosition
  *
@@ -337,7 +337,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
-//-(void)fetchAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+//-(void)getAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
 #pragma mark Element
 /**
@@ -355,7 +355,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth  是否需要認證
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 /**
  *  取得單一照片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsId
  *
@@ -363,7 +363,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param elementId  照片 ID，必要參數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)fetchElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
+-(void)getElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
 
 /**
  *  修改圖片(或影片)裡的參數 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsUpdate
@@ -403,7 +403,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param perPage    一頁幾筆
  *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
  */
--(void)fetchElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+-(void)getElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
 #pragma mark 留言
 /**
  *  取得單一則留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsId
@@ -412,7 +412,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param commentId  該則留言ID，必要參數
  *  @param completion succeed=YES 時 result 可以用(而 errorMessage 就會是 nil)，succeed=NO 時 result 會是 nil，而錯誤原因會在 errorMessage 裡
  */
--(void)fetchCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+-(void)getCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
 /**
  *  將某則留言標記為廣告留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsMarkSpam
  *
@@ -461,7 +461,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param elementId   要加人臉標記的相片 ID，必要欄位
  *  @param beTagedUser 要被標記的使用者帳號，被標記者必須設定標記者為好友。必要欄位
  *  @param tagFrame    被標記的影像範圍，必要欄位
- *  @param recommendId 如果在 -fetchCommentWithUserName:commentID:completion: 有系統推薦標記的使用者，可在這裡使用
+ *  @param recommendId 如果在 -getCommentWithUserName:commentID:completion: 有系統推薦標記的使用者，可在這裡使用
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame recommendID:(NSString *)recommendId completion:(PIXHandlerCompletion)completion;
