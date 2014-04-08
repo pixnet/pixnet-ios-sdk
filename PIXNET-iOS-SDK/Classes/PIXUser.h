@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
-#import "PIXConstant.h"
 
 @interface PIXUser : NSObject
 
+#pragma mark -
 /**
  *  讀取 User 公開資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/users
  *

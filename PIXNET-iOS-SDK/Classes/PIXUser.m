@@ -12,7 +12,7 @@
 
 -(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, [NSString stringWithFormat:MsgFmtRequiredParameter, "User"]);
+        completion(NO, nil, @"Missing userName");
     }
     NSString *api = [NSString stringWithFormat:@"users/%@", userName];
     NSMutableDictionary *params = [NSMutableDictionary new];
