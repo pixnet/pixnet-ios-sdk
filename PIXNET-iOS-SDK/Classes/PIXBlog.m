@@ -29,10 +29,9 @@
 #pragma mark - Blog information
 - (void)getBlogInformationWithUserName:(NSString *)userName
                           completion:(PIXHandlerCompletion)completion{
-    PIXConstant *constant = [PIXConstant sharedConstant];
     //檢查進來的參數
     if (userName == nil) {
-        completion(NO, nil, constant.msgMissingUserName);
+        completion(NO, nil, @"userName 不可為 nil");
         return;
     }
     [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userName} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
@@ -49,10 +48,9 @@
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
                              password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion{
-    PIXConstant *constant = [PIXConstant sharedConstant];
     //檢查進來的參數
     if (userName == nil) {
-        completion(NO, nil, constant.msgMissingUserName);
+        completion(NO, nil, @"userName 不可為 nil");
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
