@@ -10,6 +10,28 @@
 
 @implementation PIXConstant
 
-NSString *const MsgFmtRequiredParameter = @"%s is a required parameter";
+@synthesize msgFmtRequiredParameter;
+@synthesize msgMissingUserName;
+
++ (id)sharedConstant{
+    static PIXConstant *sharedConstant = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedConstant = [[self alloc] init];
+    });
+    return sharedConstant;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        msgFmtRequiredParameter = @"Missing required parameter %s";
+        msgMissingUserName = @"Missing userName";
+    }
+    return self;
+}
+
+- (void)dealloc {
+    // Should never be called, but just here for clarity really.
+}
 
 @end

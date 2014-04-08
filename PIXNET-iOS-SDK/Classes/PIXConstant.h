@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PIXConstant : NSObject
+@interface PIXConstant : NSObject {
+    NSString *msgFmtRequiredParameter;
+    NSString *msgMissingUserName;
+}
 
-FOUNDATION_EXPORT NSString *const MsgFmtRequiredParameter;
+@property (nonatomic, retain) NSString *msgFmtRequiredParameter;
+@property (nonatomic, retain) NSString *msgMissingUserName;
+
++ (id)sharedConstant;
 
 @end
+
+
