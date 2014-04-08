@@ -71,11 +71,11 @@
     }];
 }
 #pragma mark Categories need access token
-- (void)postBlogCategoriesWithName:(NSString *)name
-                              type:(PIXBlogCategoryType)type
-                       description:(NSString *)description
-                      siteCategory:(PIXSiteBlogCategory)siteCateID
-                        completion:(PIXHandlerCompletion)completion{
+- (void)createBlogCategoriesWithName:(NSString *)name
+                                type:(PIXBlogCategoryType)type
+                         description:(NSString *)description
+                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                          completion:(PIXHandlerCompletion)completion{
     
     if (!name || name == nil || name.length == 0) {
         completion(NO, nil, @"請輸入要新增的分類名稱");
@@ -121,7 +121,7 @@
     
 }
 
-- (void)changeBlogCategoriesFromID:(NSString *)categoriesID
+- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
                            newName:(NSString *)newName
                               type:(PIXBlogCategoryType)type
                        description:(NSString *)description
@@ -465,19 +465,19 @@
     
 }
 #pragma mark Article method need access token
-- (void)postBlogNewArticleWithTitle:(NSString *)title
-                               body:(NSString *)body
-                             status:(PIXArticleStatus)status
-                           publicAt:(NSDate *)date
-                     siteCategoryID:(PIXSiteBlogCategory)cateID
-                        commentPerm:(PIXArticleCommentPerm)commentPerm
-                      commentHidden:(BOOL)commentHidden
-                               tags:(NSArray *)tagArray
-                           thumbURL:(NSString *)thumburl
-                           password:(NSString *)passwd
-                       passwordHine:(NSString *)passwdHint
-                      friendGroupID:(NSString *)friendGroupID
-                         completion:(PIXHandlerCompletion)completion{
+- (void)createBlogArticleWithTitle:(NSString *)title
+                              body:(NSString *)body
+                            status:(PIXArticleStatus)status
+                          publicAt:(NSDate *)date
+                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                       commentPerm:(PIXArticleCommentPerm)commentPerm
+                     commentHidden:(BOOL)commentHidden
+                              tags:(NSArray *)tagArray
+                          thumbURL:(NSString *)thumburl
+                          password:(NSString *)passwd
+                      passwordHine:(NSString *)passwdHint
+                     friendGroupID:(NSString *)friendGroupID
+                        completion:(PIXHandlerCompletion)completion{
     if (title == nil || title.length == 0 || !title) {
         completion(NO, nil, @"Missing Article Title");
         return;
@@ -553,20 +553,20 @@
                }];
 }
 
-- (void)postBlogUpdateArticleWithArticleID:(NSString *)articleID
-                                     Title:(NSString *)title
-                                      body:(NSString *)body
-                                    status:(PIXArticleStatus)status
-                                  publicAt:(NSDate *)date
-                            siteCategoryID:(PIXSiteBlogCategory)cateID
-                               commentPerm:(PIXArticleCommentPerm)commentPerm
-                             commentHidden:(BOOL)commentHidden
-                                      tags:(NSArray *)tagArray
-                                  thumbURL:(NSString *)thumburl
-                                  password:(NSString *)passwd
-                              passwordHine:(NSString *)passwdHint
-                             friendGroupID:(NSString *)friendGroupID
-                                completion:(PIXHandlerCompletion)completion{
+- (void)updateBlogArticleWithArticleID:(NSString *)articleID
+                                 Title:(NSString *)title
+                                  body:(NSString *)body
+                                status:(PIXArticleStatus)status
+                              publicAt:(NSDate *)date
+                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                           commentPerm:(PIXArticleCommentPerm)commentPerm
+                         commentHidden:(BOOL)commentHidden
+                                  tags:(NSArray *)tagArray
+                              thumbURL:(NSString *)thumburl
+                              password:(NSString *)passwd
+                          passwordHine:(NSString *)passwdHint
+                         friendGroupID:(NSString *)friendGroupID
+                            completion:(PIXHandlerCompletion)completion{
     if (articleID == nil || articleID.length == 0 || !articleID) {
         completion(NO, nil, @"Missing Article ID");
         return;
@@ -766,17 +766,17 @@
 }
 #pragma mark Comment Method need access token
 
-- (void)postBlogNewCommentWithArticleID:(NSString *)articleID
-                                   body:(NSString *)body
-                               userName:(NSString *)userName
-                                 author:(NSString *)author
-                                  title:(NSString *)title
-                                    url:(NSString *)url
-                                 isOpen:(BOOL)isOpen
-                                  email:(NSString *)email
-                           blogPassword:(NSString *)blogPasswd
-                        articlePassword:(NSString *)articlePasswd
-                             completion:(PIXHandlerCompletion)completion{
+- (void)createBlogCommentWithArticleID:(NSString *)articleID
+                                  body:(NSString *)body
+                              userName:(NSString *)userName
+                                author:(NSString *)author
+                                 title:(NSString *)title
+                                   url:(NSString *)url
+                                isOpen:(BOOL)isOpen
+                                 email:(NSString *)email
+                          blogPassword:(NSString *)blogPasswd
+                       articlePassword:(NSString *)articlePasswd
+                            completion:(PIXHandlerCompletion)completion{
 
     if (!articleID || articleID == nil || articleID.length == 0) {
         completion(NO, nil, @"Missing Article ID");
@@ -838,9 +838,9 @@
                }];
 }
 
-- (void)postBlogReplyCommentWithCommnetID:(NSString *)commentID
-                                     body:(NSString *)body
-                               completion:(PIXHandlerCompletion)completion{
+- (void)replyBlogCommentWithCommnetID:(NSString *)commentID
+                                 body:(NSString *)body
+                           completion:(PIXHandlerCompletion)completion{
     if (!commentID || commentID == nil || commentID.length == 0) {
         completion(NO, nil, @"Missing Comment ID");
         return;
@@ -868,9 +868,9 @@
 }
 
 
-- (void)postBlogCommentOpenStatusWithCommentID:(NSString *)commentID
-                                        isOpen:(BOOL)isOpen
-                                    completion:(PIXHandlerCompletion)completion{
+- (void)updateBlogCommentWithCommentID:(NSString *)commentID
+                                      isOpen:(BOOL)isOpen
+                                  completion:(PIXHandlerCompletion)completion{
     if (!commentID || commentID == nil || commentID.length == 0) {
         completion(NO, nil, @"Missing Comment ID");
         return;
@@ -898,9 +898,9 @@
 }
 
 
-- (void)postBlogCommentSpamStatusWithCommentID:(NSString *)commentID
-                                        isSpam:(BOOL)isSpam
-                                    completion:(PIXHandlerCompletion)completion{
+- (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
+                                    isSpam:(BOOL)isSpam
+                                completion:(PIXHandlerCompletion)completion{
     
     if (!commentID || commentID == nil || commentID.length == 0) {
         completion(NO, nil, @"Missing Comment ID");

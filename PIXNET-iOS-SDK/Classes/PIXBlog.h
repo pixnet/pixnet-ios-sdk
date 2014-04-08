@@ -113,11 +113,11 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param cateID      *對應的全站文章類別 id. 當 type 為 category 為必須參數
  *  @param completion  succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogCategoriesWithName:(NSString *)name
-                              type:(PIXBlogCategoryType)type
-                       description:(NSString *)description
-                      siteCategory:(PIXSiteBlogCategory)cateID
-                        completion:(PIXHandlerCompletion)completion;
+- (void)createBlogCategoriesWithName:(NSString *)name
+                                type:(PIXBlogCategoryType)type
+                         description:(NSString *)description
+                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                          completion:(PIXHandlerCompletion)completion;
 /**
  *  修改部落格個人分類 (需認證) http://emma.pixnet.cc/blog/categories/:id
  *
@@ -127,7 +127,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param description  修改後的分類說明
  *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)changeBlogCategoriesFromID:(NSString *)categoriesID
+- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
                            newName:(NSString *)newName
                               type:(PIXBlogCategoryType)type
                        description:(NSString *)description
@@ -270,19 +270,19 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
  *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogNewArticleWithTitle:(NSString *)title
-                               body:(NSString *)body
-                             status:(PIXArticleStatus)status
-                           publicAt:(NSDate *)date
-                     siteCategoryID:(PIXSiteBlogCategory)cateID
-                        commentPerm:(PIXArticleCommentPerm)commentPerm
-                      commentHidden:(BOOL)commentHidden
-                               tags:(NSArray *)tagArray
-                           thumbURL:(NSString *)thumburl
-                           password:(NSString *)passwd
-                       passwordHine:(NSString *)passwdHint
-                      friendGroupID:(NSString *)friendGroupID
-                         completion:(PIXHandlerCompletion)completion;
+- (void)createBlogArticleWithTitle:(NSString *)title
+                              body:(NSString *)body
+                            status:(PIXArticleStatus)status
+                          publicAt:(NSDate *)date
+                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                       commentPerm:(PIXArticleCommentPerm)commentPerm
+                     commentHidden:(BOOL)commentHidden
+                              tags:(NSArray *)tagArray
+                          thumbURL:(NSString *)thumburl
+                          password:(NSString *)passwd
+                      passwordHine:(NSString *)passwdHint
+                     friendGroupID:(NSString *)friendGroupID
+                        completion:(PIXHandlerCompletion)completion;
 /**
  *  修改部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
  *
@@ -301,20 +301,20 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
  *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogUpdateArticleWithArticleID:(NSString *)articleID
-                                     Title:(NSString *)title
-                                      body:(NSString *)body
-                                    status:(PIXArticleStatus)status
-                                  publicAt:(NSDate *)date
-                            siteCategoryID:(PIXSiteBlogCategory)cateID
-                               commentPerm:(PIXArticleCommentPerm)commentPerm
-                             commentHidden:(BOOL)commentHidden
-                                      tags:(NSArray *)tagArray
-                                  thumbURL:(NSString *)thumburl
-                                  password:(NSString *)passwd
-                              passwordHine:(NSString *)passwdHint
-                             friendGroupID:(NSString *)friendGroupID
-                                completion:(PIXHandlerCompletion)completion;
+- (void)updateBlogArticleWithArticleID:(NSString *)articleID
+                                 Title:(NSString *)title
+                                  body:(NSString *)body
+                                status:(PIXArticleStatus)status
+                              publicAt:(NSDate *)date
+                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                           commentPerm:(PIXArticleCommentPerm)commentPerm
+                         commentHidden:(BOOL)commentHidden
+                                  tags:(NSArray *)tagArray
+                              thumbURL:(NSString *)thumburl
+                              password:(NSString *)passwd
+                          passwordHine:(NSString *)passwdHint
+                         friendGroupID:(NSString *)friendGroupID
+                            completion:(PIXHandlerCompletion)completion;
 
 /**
  *  刪除部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
@@ -381,17 +381,17 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權
  *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogNewCommentWithArticleID:(NSString *)articleID
-                                   body:(NSString *)body
-                               userName:(NSString *)userName
-                                 author:(NSString *)author
-                                  title:(NSString *)title
-                                    url:(NSString *)url
-                                 isOpen:(BOOL)isOpen
-                                  email:(NSString *)email
-                           blogPassword:(NSString *)blogPasswd
-                        articlePassword:(NSString *)articlePasswd
-                             completion:(PIXHandlerCompletion)completion;
+- (void)createBlogCommentWithArticleID:(NSString *)articleID
+                                  body:(NSString *)body
+                              userName:(NSString *)userName
+                                author:(NSString *)author
+                                 title:(NSString *)title
+                                   url:(NSString *)url
+                                isOpen:(BOOL)isOpen
+                                 email:(NSString *)email
+                          blogPassword:(NSString *)blogPasswd
+                       articlePassword:(NSString *)articlePasswd
+                            completion:(PIXHandlerCompletion)completion;
 /**
  *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容 http://emma.pixnet.cc/blog/comments/:id/reply
  *
@@ -399,9 +399,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param body       *留言內容/修改後的內容
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogReplyCommentWithCommnetID:(NSString *)commentID
-                                     body:(NSString *)body
-                               completion:(PIXHandlerCompletion)completion;
+- (void)replyBlogCommentWithCommnetID:(NSString *)commentID
+                                 body:(NSString *)body
+                           completion:(PIXHandlerCompletion)completion;
 
 /**
  *  將留言設為公開/關閉 http://emma.pixnet.cc/blog/comments/:id/open http://emma.pixnet.cc/blog/comments/:id/close
@@ -410,9 +410,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param isOpen     * YSE 為 公開， NO 為 關閉 該則留言
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogCommentOpenStatusWithCommentID:(NSString *)commentID
-                                        isOpen:(BOOL)isOpen
-                                    completion:(PIXHandlerCompletion)completion;
+- (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
+                                    isOpen:(BOOL)isOpen
+                                completion:(PIXHandlerCompletion)completion;
 
 /**
  *  將留言設為廣告留言/非廣告留言 http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
@@ -421,9 +421,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param isSpam     * YSE 為設成廣告留言， NO 為設成非廣告留言
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
-- (void)postBlogCommentSpamStatusWithCommentID:(NSString *)commentID
-                                       isSpam:(BOOL)isSpam
-                                   completion:(PIXHandlerCompletion)completion;
+- (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
+                                    isSpam:(BOOL)isSpam
+                                completion:(PIXHandlerCompletion)completion;
 
 /**
  *  刪除部落格留言 http://emma.pixnet.cc/blog/comments/:id
