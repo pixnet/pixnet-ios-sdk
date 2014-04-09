@@ -153,9 +153,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     [self createOrUpdateAlbumSetWithSetID:setId setTitle:setTitle setDescription:setDescription permission:permission categoryID:categoryId isLockRight:isLockRight isAllowCC:isAllowCc commentRightType:commentRightType password:password passwordHint:passwordHint friendGroupIDs:friendGroupIds allowCommercialUse:allowCommercialUse allowDerivation:allowDerivation parentID:parentId completion:completion];
 }
-/**
- *  create 及 update album set 的 API 參數幾乎都一樣，所以用這個 method 做整合
- */
 -(void)createOrUpdateAlbumSetWithSetID:(NSString *)setId setTitle:(NSString *)setTitle setDescription:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion{
     if (setTitle == nil) {
         completion(NO, nil, @"相簿標題是必要參數");
@@ -329,9 +326,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 -(void)getAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     [self getAlbumCommentsWithUserName:userName elementID:nil setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth completion:completion];
 }
-/**
- * album/comments 可以用來取得相簿及相片的留言，所以取得 setComments 及 elementComments 都 call 這個 method
- */
 -(void)getAlbumCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     BOOL isElement = YES;
     if (elementId==nil || elementId.length == 0) {
@@ -381,9 +375,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 -(void)getElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     [self getAlbumElementsOrSetsNearbyWithPath:@"album/elements/nearby" userName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:perPage withDetail:withDetail type:type trimUser:trimUser shouldAuth:shouldAuth completion:completion];
 }
-/**
- *  取得附近的相簿及照片的 API 參數幾乎都一樣，所以利用這個 method 來簡化 code
- */
 -(void)getAlbumElementsOrSetsNearbyWithPath:(NSString *)path userName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page perPage:(NSUInteger)perPage withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, @"UserName 參數有誤");
@@ -523,9 +514,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     [self createOrUpdateAlbumFolderWithFolderID:folderId title:folderTitle description:folderDescription completion:completion];
 }
-/**
- *  新增/修改資料夾的參數幾乎一樣，所以用這個 method 合併起來
- */
 -(void)createOrUpdateAlbumFolderWithFolderID:(NSString *)folderId title:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
     if (folderTitle==nil || folderTitle.length==0) {
         completion(NO, nil, @"一定要有資料夾標題");
