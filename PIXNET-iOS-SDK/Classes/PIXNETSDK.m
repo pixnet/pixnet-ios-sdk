@@ -7,7 +7,6 @@
 //
 
 #import "PIXNETSDK.h"
-#import "PIXBlog.h"
 
 @implementation PIXNETSDK
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
@@ -44,6 +43,39 @@
                            completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] getBlogCategoriesWithUserName:userName password:passwd completion:completion];
     
+}
+#pragma mark Categories method need access token
+
+- (void)createBlogCategoriesWithName:(NSString *)name
+                                type:(PIXBlogCategoryType)type
+                         description:(NSString *)description
+                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                          completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] createBlogCategoriesWithName:name type:type description:description siteCategory:siteCateID completion:completion];
+
+}
+
+- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
+                           newName:(NSString *)newName
+                              type:(PIXBlogCategoryType)type
+                       description:(NSString *)description
+                        completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] updateBlogCategoriesFromID:categoriesID newName:newName type:type description:description completion:completion];
+}
+
+- (void)deleteBlogCategoriesByID:(NSString *)categoriesID
+                      completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] deleteBlogCategoriesByID:categoriesID type:PIXBlogCategoryTypeCategory completion:completion];
+}
+
+- (void)deleteBlogFolderByID:(NSString *)folderID
+                  completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] deleteBlogCategoriesByID:folderID type:PIXBlogCategoryTypeFolder completion:completion];
+}
+
+- (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
+                  completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] sortBlogCategoriesTo:categoriesIDArray completion:completion];
 }
 
 #pragma mark - Blog Articles
@@ -98,7 +130,70 @@
                              completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] getblogSearchArticleWithKeyword:keyword userName:userName page:page perPage:perPage completion:completion];
 }
+#pragma mark Article method need access token
+- (void)createBlogArticleWithTitle:(NSString *)title
+                              body:(NSString *)body
+                            status:(PIXArticleStatus)status
+                          publicAt:(NSDate *)date
+                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                       commentPerm:(PIXArticleCommentPerm)commentPerm
+                     commentHidden:(BOOL)commentHidden
+                              tags:(NSArray *)tagArray
+                          thumbURL:(NSString *)thumburl
+                          password:(NSString *)passwd
+                      passwordHine:(NSString *)passwdHint
+                     friendGroupID:(NSString *)friendGroupID
+                        completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] createBlogArticleWithTitle:title
+                                         body:body
+                                       status:PIXArticleStatusPublic
+                                     publicAt:date
+                               siteCategoryID:cateID
+                                  commentPerm:commentPerm
+                                commentHidden:commentHidden
+                                         tags:tagArray
+                                     thumbURL:thumburl
+                                     password:passwd
+                                 passwordHine:passwdHint
+                                friendGroupID:friendGroupID
+                                   completion:completion];
+    
+}
 
+- (void)updateBlogArticleWithArticleID:(NSString *)articleID
+                                 title:(NSString *)title
+                                  body:(NSString *)body
+                                status:(PIXArticleStatus)status
+                              publicAt:(NSDate *)date
+                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                           commentPerm:(PIXArticleCommentPerm)commentPerm
+                         commentHidden:(BOOL)commentHidden
+                                  tags:(NSArray *)tagArray
+                              thumbURL:(NSString *)thumburl
+                              password:(NSString *)passwd
+                          passwordHine:(NSString *)passwdHint
+                         friendGroupID:(NSString *)friendGroupID
+                            completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] updateBlogArticleWithArticleID:articleID
+                                            title:title
+                                             body:body
+                                           status:status
+                                         publicAt:date
+                                   siteCategoryID:cateID
+                                      commentPerm:commentPerm
+                                    commentHidden:commentHidden
+                                             tags:tagArray
+                                         thumbURL:thumburl
+                                         password:passwd
+                                     passwordHine:passwdHint
+                                    friendGroupID:friendGroupID
+                                       completion:completion];
+}
+
+- (void)deleteBlogArticleByArticleID:(NSString *)articleID
+                          completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] deleteBlogArticleByArticleID:articleID completion:completion];
+}
 
 #pragma mark - Blog Comments
 
@@ -123,6 +218,54 @@
     [[PIXBlog new] getBlogLatestCommentWithUserName:userName completion:completion];
 }
 
+#pragma mark Comment method need access token
+
+- (void)createBlogCommentWithArticleID:(NSString *)articleID
+                                  body:(NSString *)body
+                              userName:(NSString *)userName
+                                author:(NSString *)author
+                                 title:(NSString *)title
+                                   url:(NSString *)url
+                                isOpen:(BOOL)isOpen
+                                 email:(NSString *)email
+                          blogPassword:(NSString *)blogPasswd
+                       articlePassword:(NSString *)articlePasswd
+                            completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] createBlogCommentWithArticleID:articleID
+                                             body:body
+                                         userName:userName
+                                           author:author
+                                            title:title
+                                              url:url
+                                           isOpen:isOpen
+                                            email:email
+                                     blogPassword:blogPasswd
+                                  articlePassword:articlePasswd
+                                       completion:completion];
+}
+
+- (void)replyBlogCommentWithCommnetID:(NSString *)commentID
+                                 body:(NSString *)body
+                           completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] replyBlogCommentWithCommnetID:commentID body:body completion:completion];
+}
+
+- (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
+                                    isOpen:(BOOL)isOpen
+                                completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] updateBlogCommentOpenWithCommentID:commentID isOpen:isOpen completion:completion];
+}
+
+- (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
+                                    isSpam:(BOOL)isSpam
+                                completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] updateBlogCommentSpamWithCommentID:commentID isSpam:isSpam completion:completion];
+}
+
+- (void)deleteBlogCommentWithCommentID:(NSString *)commentID
+                            completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] deleteBlogCommentWithCommentID:commentID completion:completion];
+}
 
 #pragma mark - Site Blog Categories
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group

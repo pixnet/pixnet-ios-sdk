@@ -552,7 +552,7 @@
 }
 
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
-                                 Title:(NSString *)title
+                                 title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
                               publicAt:(NSDate *)date

@@ -301,7 +301,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
-                                 Title:(NSString *)title
+                                 title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
                               publicAt:(NSDate *)date
@@ -435,7 +435,6 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 
 
 #pragma mark - Site Blog Categories list
-//dosen't need Access token
 
 /**
  *  列出部落格全站分類 http://emma.pixnet.cc/blog/site_categories
@@ -448,7 +447,5 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                                     thumbs:(BOOL)thumb
                                 completion:(PIXHandlerCompletion)completion;
 
-//need access token
-//還沒寫
 
 @end

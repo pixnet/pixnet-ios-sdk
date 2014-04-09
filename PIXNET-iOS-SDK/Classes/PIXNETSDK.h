@@ -11,6 +11,7 @@
 @class PIXBlog;
 #import "PIXAPIHandler.h"
 #import "PIXAlbum.h"
+#import "PIXBlog.h"
 
 @interface PIXNETSDK : NSObject
 
@@ -57,19 +58,64 @@
                              password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion;
 
-////need access token
-//- (void)postBlogCategoriesWithName:(NSString *)name
-//                        completion:(PIXHandlerCompletion)completion;
-//
-//- (void)changeBlogCategoriesFromID:(NSString *)categoriesID
-//                                to:(NSString *)newName
-//                        completion:(PIXHandlerCompletion)completion;
-//
-//- (void)deleteBlogCategoriesByID:(NSString *)categoriesID
-//                      completion:(PIXHandlerCompletion)completion;
-//
-//- (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
-//                  completion:(PIXHandlerCompletion)completion;
+#pragma mark Categories method need access token
+/**
+ *  新增部落格個人分類（需認證） http://emma.pixnet.cc/blog/categories
+ *
+ *  @param name        *分類名稱
+ *  @param type        *請輸入分類 PIXBlogCategoryType 型別，有 Folder 及 Category 可選
+ *  @param description 分類說明
+ *  @param cateID      *對應的全站文章類別 id. 當 type 為 category 為必須參數
+ *  @param completion  succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)createBlogCategoriesWithName:(NSString *)name
+                                type:(PIXBlogCategoryType)type
+                         description:(NSString *)description
+                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                          completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改部落格個人分類 (需認證) http://emma.pixnet.cc/blog/categories/:id
+ *
+ *  @param categoriesID *要修改的 Category / Folder ID
+ *  @param newName      *修改後的顯示名稱
+ *  @param type         要修改的類型是 Category / Folder
+ *  @param description  修改後的分類說明
+ *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
+                           newName:(NSString *)newName
+                              type:(PIXBlogCategoryType)type
+                       description:(NSString *)description
+                        completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除部落格個人分類 http://emma.pixnet.cc/blog/categories/:id
+ *
+ *
+ *  @param categoriesID *要刪除的 Category ID
+ *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)deleteBlogCategoriesByID:(NSString *)categoriesID
+                      completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  刪除部落格個人資料夾 http://emma.pixnet.cc/blog/categories/:id
+ *
+ *  @param categoriesID *要刪除的 Folder ID
+ *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)deleteBlogFolderByID:(NSString *)folderID
+                  completion:(PIXHandlerCompletion)completion;
+
+
+/**
+ *  修改部落格分類排序 http://emma.pixnet.cc/blog/categories/position
+ *
+ *  @param categoriesIDArray *輸入以部落格分類ID組成已排序好的 Array，分類將會已陣列順序重新排序。放在越前面的表示圖片的順序越優先。不過在排序上分類資料夾的排序要優先於分類，所以對分類資料夾的排序指定只會影響資料夾群本身
+ *  @param completion        succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
+                  completion:(PIXHandlerCompletion)completion;
+
 
 #pragma mark - Blog Articles
 //dosen't need Access token
@@ -168,8 +214,82 @@
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
                              completion:(PIXHandlerCompletion)completion;
-//need access token
-//還沒寫
+
+#pragma mark Article method need access token
+/**
+ *  新增部落格個人文章 http://emma.pixnet.cc/blog/articles
+ *
+ *  @param title         *文章標題
+ *  @param body          *文章內容
+ *  @param status        文章狀態，使用 PIXArticleStatus 型別
+ *  @param date          公開時間，這個表示文章的發表時間，預設為現在時間
+ *  @param cateID        全站分類，使用 PIXSiteBlogCategory 型別
+ *  @param commentPerm   可留言權限，使用 PIXArticleCommentPerm 型別
+ *  @param commentHidden 預設留言狀態， Yes 為強制隱藏 NO 為顯示(公開)，預設為 NO 公開(顯示)
+ *  @param tagArray      文章標籤
+ *  @param thumburl      文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
+ *  @param passwd        當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
+ *  @param passwdHint    當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
+ *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
+ *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)createBlogArticleWithTitle:(NSString *)title
+                              body:(NSString *)body
+                            status:(PIXArticleStatus)status
+                          publicAt:(NSDate *)date
+                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                       commentPerm:(PIXArticleCommentPerm)commentPerm
+                     commentHidden:(BOOL)commentHidden
+                              tags:(NSArray *)tagArray
+                          thumbURL:(NSString *)thumburl
+                          password:(NSString *)passwd
+                      passwordHine:(NSString *)passwdHint
+                     friendGroupID:(NSString *)friendGroupID
+                        completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
+ *
+ *  @param articleID     *要修改的文章 ID
+ *  @param title         *修改後的文章標題
+ *  @param body          *修改後的文章內容
+ *  @param status        文章狀態，使用 PIXArticleStatus 型別
+ *  @param date          公開時間，這個表示文章的發表時間，預設為現在時間
+ *  @param cateID        全站分類，使用 PIXSiteBlogCategory 型別
+ *  @param commentPerm   可留言權限，使用 PIXArticleCommentPerm 型別
+ *  @param commentHidden 預設留言狀態， Yes 為強制隱藏 NO 為顯示(公開)，預設為 NO 公開(顯示)
+ *  @param tagArray      文章標籤
+ *  @param thumburl      文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
+ *  @param passwd        當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
+ *  @param passwdHint    當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
+ *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
+ *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)updateBlogArticleWithArticleID:(NSString *)articleID
+                                 title:(NSString *)title
+                                  body:(NSString *)body
+                                status:(PIXArticleStatus)status
+                              publicAt:(NSDate *)date
+                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                           commentPerm:(PIXArticleCommentPerm)commentPerm
+                         commentHidden:(BOOL)commentHidden
+                                  tags:(NSArray *)tagArray
+                              thumbURL:(NSString *)thumburl
+                              password:(NSString *)passwd
+                          passwordHine:(NSString *)passwdHint
+                         friendGroupID:(NSString *)friendGroupID
+                            completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  刪除部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
+ *
+ *  @param articleID  *要刪除的文章 ID
+ *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)deleteBlogArticleByArticleID:(NSString *)articleID
+                          completion:(PIXHandlerCompletion)completion;
+
+
+
 #pragma mark - Blog Comments
 //dosen't need Access token
 
@@ -210,12 +330,78 @@
                               completion:(PIXHandlerCompletion)completion;
 
 
-//need access token
-//還沒寫
+#pragma mark Comment method need access token
+
+/**
+ *  新增部落格留言 http://emma.pixnet.cc/blog/comments
+ *
+ *  @param articleID     *要留言的文章 ID
+ *  @param body          *留言內容
+ *  @param userName      要留言的部落格作者名稱, 若不填入則預設找自己的文章
+ *  @param author        留言的暱稱, 不填入則預設代入認證使用者的 display_name
+ *  @param title         留言標題
+ *  @param url           留言者個人網頁
+ *  @param isOpen        公開留言/悄悄話
+ *  @param email         留言者電子郵件
+ *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
+ *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權
+ *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)createBlogCommentWithArticleID:(NSString *)articleID
+                                  body:(NSString *)body
+                              userName:(NSString *)userName
+                                author:(NSString *)author
+                                 title:(NSString *)title
+                                   url:(NSString *)url
+                                isOpen:(BOOL)isOpen
+                                 email:(NSString *)email
+                          blogPassword:(NSString *)blogPasswd
+                       articlePassword:(NSString *)articlePasswd
+                            completion:(PIXHandlerCompletion)completion;
+/**
+ *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容 http://emma.pixnet.cc/blog/comments/:id/reply
+ *
+ *  @param commentID  *要回覆/修改的留言 ID
+ *  @param body       *留言內容/修改後的內容
+ *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)replyBlogCommentWithCommnetID:(NSString *)commentID
+                                 body:(NSString *)body
+                           completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  將留言設為公開/關閉 http://emma.pixnet.cc/blog/comments/:id/open http://emma.pixnet.cc/blog/comments/:id/close
+ *
+ *  @param commentID  *要公開/關閉的留言 ID
+ *  @param isOpen     * YSE 為 公開， NO 為 關閉 該則留言
+ *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
+                                    isOpen:(BOOL)isOpen
+                                completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  將留言設為廣告留言/非廣告留言 http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
+ *
+ *  @param commentID  *要公開/關閉的留言 ID
+ *  @param isSpam     * YSE 為設成廣告留言， NO 為設成非廣告留言
+ *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
+                                    isSpam:(BOOL)isSpam
+                                completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  刪除部落格留言 http://emma.pixnet.cc/blog/comments/:id
+ *
+ *  @param commentID  *要刪除的留言 ID
+ *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ */
+- (void)deleteBlogCommentWithCommentID:(NSString *)commentID
+                            completion:(PIXHandlerCompletion)completion;
 
 
 #pragma mark - Site Blog Categories list
-//dosen't need Access token
 
 /**
  *  列出部落格全站分類 http://emma.pixnet.cc/blog/site_categories
@@ -228,8 +414,6 @@
                                     thumbs:(BOOL)thumb
                                 completion:(PIXHandlerCompletion)completion;
 
-//need access token
-//還沒寫
 
 #pragma mark album(相簿)
 #pragma mark site categories
