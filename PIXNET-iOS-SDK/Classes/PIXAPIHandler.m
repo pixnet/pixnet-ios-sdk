@@ -66,10 +66,12 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
         dispatch_async(dispatch_get_main_queue(), ^{
             if (connectionError) {
                 completion(NO, nil, connectionError.localizedDescription);
+                return;
             } else {
                 NSHTTPURLResponse *hur = (NSHTTPURLResponse *)response;
                 if (hur.statusCode != 200) {
                     completion(NO, nil, [NSHTTPURLResponse localizedStringForStatusCode:hur.statusCode]);
+                    return;
                 } else {
                     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     NSArray *array = [dataString componentsSeparatedByString:@"&"];
@@ -83,6 +85,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
                         }
                     }
                     completion(YES, nil, nil);
+                    return;
                 }
             }
         });
@@ -114,6 +117,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth && kConsumerKey == nil) {
         completion(NO, nil, @"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:");
+        return;
     }
     NSString *parameterString = nil;
     if (parameters != nil) {
@@ -141,15 +145,19 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
                     NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
                     if (hr.statusCode == 200) {
                         completion(YES, data, nil);
+                        return;
                     } else {
                         completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
+                        return;
                     }
                 } else {
                     if (data) {
                         NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                         completion(NO, nil, string);
+                        return;
                     } else {
                         completion(NO, nil, connectionError.localizedDescription);
+                        return;
                     }
                 }
             });

@@ -54,7 +54,7 @@
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
     PIXAPIHandler *handler = [self getPIXAPIHandler];
 
-    [handler callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil  requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [handler callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         //檢查出去的參數
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
