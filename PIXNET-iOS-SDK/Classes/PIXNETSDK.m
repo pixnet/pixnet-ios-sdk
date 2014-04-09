@@ -130,5 +130,102 @@
                                 completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] getBlogCategoriesListIncludeGroups:group thumbs:thumb completion:completion];
 }
+#pragma mark - album(相簿)
+-(void)getAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSiteCategoriesWithIsIncludeGroups:isIncludeGroups isIncludeThumbs:isIncludeThumbs completion:completion];
+}
+-(void)getAlbumMainWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumMainWithCompletion:completion];
+}
+-(void)getAlbumConfigWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumConfigWithCompletion:completion];
+}
+-(void)getAlbumSetsWithUserName:(NSString *)userName page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSetsWithUserName:userName trimUser:NO page:page perPage:20 completion:completion];
+}
+-(void)sortSetFoldersWithFolderIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] sortSetFoldersWithFolderIDs:ids completion:completion];
+}
+-(void)getAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSetsWithUserName:userName parentID:parentID trimUser:NO page:page perPage:20 shouldAuth:NO completion:completion];
+}
+-(void)getAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSetWithUserName:userName setID:setId page:page perPage:20 shouldAuth:NO completion:completion];
+}
+-(void)createAlbumSetWithTitle:(NSString *)setTitle description:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] createAlbumSetWithTitle:setTitle description:setDescription permission:permission categoryID:@"0" isLockRight:NO isAllowCC:isAllowCc commentRightType:commentRightType password:password passwordHint:passwordHint friendGroupIDs:friendGroupIds allowCommercialUse:NO allowDerivation:NO parentID:parentId completion:completion];
+}
+-(void)updateAlbumSetWithSetID:(NSString *)setId setTitle:(NSString *)setTitle setDescription:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] updateAlbumSetWithSetID:setId setTitle:setTitle setDescription:setDescription permission:permission categoryID:categoryId isLockRight:isLockRight isAllowCC:isAllowCc commentRightType:commentRightType password:password passwordHint:passwordHint friendGroupIDs:friendGroupIds allowCommercialUse:allowCommercialUse allowDerivation:allowDerivation parentID:parentId completion:completion];
+}
+-(void)deleteAlbumSetWithSetID:(NSString *)setId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] deleteAlbumSetWithSetID:setId completion:completion];
+}
+-(void)getAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page password:(NSString *)password completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSetElementsWithUserName:userName setID:setId elementType:elementType page:page perPage:20 password:password withDetail:NO trimUser:NO shouldAuth:NO completion:completion];
+}
+-(void)getAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSetCommentsWithUserName:userName setID:setId password:password page:page perPage:20 shouldAuth:NO completion:completion];
+}
+-(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] createAlbumSetCommentWithSetID:setId body:body password:password completion:completion];
+}
+-(void)createElementCommentWithElementID:(NSString *)elementID body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] createElementCommentWithElementID:elementID body:body password:password completion:completion];
+}
+-(void)getAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumSetsNearbyWithUserName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:100 trimUser:NO shouldAuth:NO completion:completion];
+}
+-(void)getAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumFoldersWithUserName:userName trimUser:NO page:page perPage:20 shouldAuth:NO completion:completion];
+}
+-(void)getAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getAlbumFolderWithUserName:userName folderID:folderId page:page perPage:20 shouldAuth:NO completion:completion];
+}
+-(void)sortAlbumSetsWithParentID:(NSString *)parentId IDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] sortAlbumSetsWithParentID:parentId IDs:ids completion:completion];
+}
+-(void)createAlbumFolderWithTitle:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] createAlbumFolderWithTitle:folderTitle description:folderDescription completion:completion];
+}
+-(void)updateAlbumFolderWithFolderID:(NSString *)folderId title:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] updateAlbumFolderWithFolderID:folderId title:folderTitle description:folderDescription completion:completion];
+}
+-(void)deleteAlbumFolderWithFolderID:(NSString *)folderId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] deleteAlbumFolderWithFolderID:folderId completion:completion];
+}
+-(void)getElementsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page withDetail:(BOOL)withDetail type:(PIXAlbumElementType)type completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getElementsNearbyWithUserName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:100 withDetail:withDetail type:type trimUser:NO shouldAuth:NO completion:completion];
+}
+-(void)getElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getElementWithUserName:userName elementID:elementId completion:completion];
+}
+-(void)updateElementWithElementID:(NSString *)elementId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription setID:(NSString *)setId videoThumbType:(PIXVideoThumbType)videoThumbType tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] updateElementWithElementID:elementId elementTitle:elementTitle elementDescription:elementDescription setID:setId videoThumbType:videoThumbType tags:tags location:location completion:completion];
+}
+-(void)deleteElementWithElementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] deleteElementWithElementID:elementId completion:completion];
+}
+-(void)sortElementsWithSetID:(NSString *)setId elementIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] sortElementsWithSetID:setId elementIDs:ids completion:completion];
+}
+-(void)getElementCommentsWithUserName:(NSString *)userName elementID:(NSString *)elementId password:(NSString *)password page:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getElementCommentsWithUserName:userName elementID:elementId password:password page:page perPage:20 completion:completion];
+}
+-(void)getCommentWithUserName:(NSString *)userName commentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] getCommentWithUserName:userName commentID:commentId completion:completion];
+}
+-(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] markCommentAsSpamWithCommentID:commentId completion:completion];
+}
+-(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] markCommentAsHamWithCommentID:commentId completion:completion];
+}
+-(void)deleteCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] deleteCommentWithCommentID:commentId completion:completion];
+}
+-(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] addElementWithElementData:elementData setID:setId elementTitle:elementTitle elementDescription:elementDescription tags:tags location:location videoThumbType:PIXVideoThumbTypeEnd picShouldRotateByExif:YES videoShouldRotateByMeta:YES shouldUseQuadrate:YES shouldAddWatermark:YES isElementFirst:YES completion:completion];
+}
 
 @end
