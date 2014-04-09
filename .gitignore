@@ -16,7 +16,6 @@ DerivedData
 .idea/
 *.hmap
 *.xccheckout
-PIXNET-iOS-SDK/PIXNET-iOS-SDKTests
 
 #CocoaPods
 PIXNET-iOS-SDK/Pods
