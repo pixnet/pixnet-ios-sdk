@@ -27,7 +27,14 @@
     });
     return sharedInstance;
 }
+#pragma mark - User Method
+-(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] getUserWithUserName:userName completion:completion];
+}
 
+-(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] getAccountWithCompletion:completion];
+}
 
 #pragma mark - Blog Method
 #pragma mark - Blog Imformation

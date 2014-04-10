@@ -18,6 +18,36 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    [[PIXNETSDK new] getUserWithUserName:@"cloud" completion:
+     ^(BOOL succeed, id result, NSString *errorMessage) {
+         if (succeed) {
+             //做要做的東西
+         }else{
+             [[[UIAlertView alloc] initWithTitle:@"Ooops!"
+                                         message:errorMessage
+                                        delegate:self
+                               cancelButtonTitle:@"確定"
+                               otherButtonTitles:nil, nil] show];
+         }
+     }];
+    
+    [PIXNETSDK setConsumerKey:@"Consumer Key" consumerSecret:@"Consumer Secret"];
+    [PIXNETSDK authByXauthWithUserName:@"UserName" userPassword:@"Password" requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+        if (succeed) {
+            [[[UIAlertView alloc] initWithTitle:@"登入成功"
+                                        message:@"已登入PIXNET"
+                                       delegate:self
+                              cancelButtonTitle:@"確定"
+                              otherButtonTitles:nil, nil] show];
+        }else{
+            [[[UIAlertView alloc] initWithTitle:@"登入失敗"
+                                        message:errorMessage
+                                       delegate:self
+                              cancelButtonTitle:@"確定"
+                              otherButtonTitles:nil, nil] show];
+        }
+    }];
+    
     return YES;
 }
 

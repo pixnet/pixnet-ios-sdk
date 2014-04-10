@@ -12,6 +12,7 @@
 #import "PIXAPIHandler.h"
 #import "PIXAlbum.h"
 #import "PIXBlog.h"
+#import "PIXUser.h"
 
 @interface PIXNETSDK : NSObject
 
@@ -32,7 +33,23 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
 +(instancetype)sharedInstance;
 
-//Blog Method
+#pragma mark - User Method
+/**
+ *  讀取 User 公開資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/users
+ *
+ *  @param userName   指定要回傳的使用者資訊,必要參數
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
+
+/**
+ *  讀取 User 私人資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/account
+ *
+ *  @needAuth
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)getAccountWithCompletion:(PIXHandlerCompletion)completion;
+
 
 #pragma mark - Blog Method
 #pragma mark - Blog imformation
