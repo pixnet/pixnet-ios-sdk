@@ -31,6 +31,11 @@
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  為目前的使用者做登出的動作
+ */
++(void)logout;
+
 +(instancetype)sharedInstance;
 
 #pragma mark - User Method

@@ -15,6 +15,9 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
++(void)logout{
+    [PIXAPIHandler logout];
+}
 +(instancetype)sharedInstance{
     if (![PIXAPIHandler isConsumerKeyAndSecrectAssigned]) {
         NSLog(@"您尚未設定 consumer key 或 consumer secrect");
