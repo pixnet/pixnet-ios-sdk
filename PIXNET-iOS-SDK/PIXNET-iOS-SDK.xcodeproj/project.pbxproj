@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
+		61922C0318F5428500A9BEDE /* PhoneLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61922C0118F5428500A9BEDE /* PhoneLogin.m */; };
+		61922C0418F5428500A9BEDE /* PhoneLogin.xib in Resources */ = {isa = PBXBuildFile; fileRef = 61922C0218F5428500A9BEDE /* PhoneLogin.xib */; };
+		61922C0918F5482800A9BEDE /* PDMlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 61922C0718F5482800A9BEDE /* PDMlogo@2x.png */; };
+		61922C0D18F549F000A9BEDE /* PDMlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 61922C0C18F549F000A9BEDE /* PDMlogo.png */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
@@ -44,6 +48,11 @@
 /* Begin PBXFileReference section */
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		50845DAA18F4F1B3000813AF /* PIXUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXUserTests.m; sourceTree = "<group>"; };
+		61922C0018F5428500A9BEDE /* PhoneLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneLogin.h; path = LoginView/PhoneLogin.h; sourceTree = "<group>"; };
+		61922C0118F5428500A9BEDE /* PhoneLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneLogin.m; path = LoginView/PhoneLogin.m; sourceTree = "<group>"; };
+		61922C0218F5428500A9BEDE /* PhoneLogin.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhoneLogin.xib; path = LoginView/PhoneLogin.xib; sourceTree = "<group>"; };
+		61922C0718F5482800A9BEDE /* PDMlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PDMlogo@2x.png"; sourceTree = "<group>"; };
+		61922C0C18F549F000A9BEDE /* PDMlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PDMlogo.png; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +114,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61922BFF18F5422800A9BEDE /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				61922C0518F547FC00A9BEDE /* Image */,
+				61922C0018F5428500A9BEDE /* PhoneLogin.h */,
+				61922C0118F5428500A9BEDE /* PhoneLogin.m */,
+				61922C0218F5428500A9BEDE /* PhoneLogin.xib */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		61922C0518F547FC00A9BEDE /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				61922C0C18F549F000A9BEDE /* PDMlogo.png */,
+				61922C0718F5482800A9BEDE /* PDMlogo@2x.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
 		CEDB7C6D18D2ECF700D14D0C = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +213,7 @@
 			children = (
 				CEDCD0E718F3ABF700B32ACC /* PIXNETSDK.h */,
 				CEDCD0E818F3ABF700B32ACC /* PIXNETSDK.m */,
+				61922BFF18F5422800A9BEDE /* LoginView */,
 				CEDB7CB318D2F83B00D14D0C /* APIHandle */,
 				CEDB7CB218D2F82300D14D0C /* NetworkHandle */,
 			);
@@ -295,6 +325,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61922C0418F5428500A9BEDE /* PhoneLogin.xib in Resources */,
+				61922C0918F5482800A9BEDE /* PDMlogo@2x.png in Resources */,
+				61922C0D18F549F000A9BEDE /* PDMlogo.png in Resources */,
 				CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */,
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
 			);
@@ -356,6 +389,7 @@
 				CEDCD0FB18F3AD6800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */,
 				CEDCD0EE18F3AC5400B32ACC /* PIXAlbum.m in Sources */,
 				CEDCD0FC18F3AD6800B32ACC /* OARequestParameter.m in Sources */,
+				61922C0318F5428500A9BEDE /* PhoneLogin.m in Sources */,
 				CEDCD0FD18F3AD6800B32ACC /* PIXAPIHandler.m in Sources */,
 				CEDB7C8618D2ECF700D14D0C /* main.m in Sources */,
 			);
