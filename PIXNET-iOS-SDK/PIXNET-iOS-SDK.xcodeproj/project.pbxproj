@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
 		CE46037918F6231200A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037818F6231200A3BF84 /* NSObject+PIXCategory.m */; };
+		CE46037C18F6310E00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037B18F6310E00A3BF84 /* NSError+PIXCategory.m */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
@@ -62,6 +63,8 @@
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE46037718F6231200A3BF84 /* NSObject+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PIXCategory.h"; sourceTree = "<group>"; };
 		CE46037818F6231200A3BF84 /* NSObject+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PIXCategory.m"; sourceTree = "<group>"; };
+		CE46037A18F6310E00A3BF84 /* NSError+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+PIXCategory.h"; sourceTree = "<group>"; };
+		CE46037B18F6310E00A3BF84 /* NSError+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+PIXCategory.m"; sourceTree = "<group>"; };
 		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDB7C7918D2ECF700D14D0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -218,6 +221,8 @@
 				CEDCD0F818F3AD6800B32ACC /* PIXAPIHandler.m */,
 				CEDCD0F918F3AD6800B32ACC /* PIXCredentialStorage.h */,
 				CEDCD0FA18F3AD6800B32ACC /* PIXCredentialStorage.m */,
+				CE46037A18F6310E00A3BF84 /* NSError+PIXCategory.h */,
+				CE46037B18F6310E00A3BF84 /* NSError+PIXCategory.m */,
 			);
 			name = NetworkHandle;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE46037918F6231200A3BF84 /* NSObject+PIXCategory.m in Sources */,
+				CE46037C18F6310E00A3BF84 /* NSError+PIXCategory.m in Sources */,
 				CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */,
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
 				CEDCD0EF18F3AC5400B32ACC /* PIXBlog.m in Sources */,
