@@ -52,7 +52,6 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMe
  *  為目前的使用者做登出的動作
  */
 +(void)logout;
-//+(instancetype)sharedInstance;
 #pragma mark instance method
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
