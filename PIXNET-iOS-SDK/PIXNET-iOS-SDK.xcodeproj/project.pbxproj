@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		CEDF6BD418F51DB7001750D3 /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CEDF6BD718F51DB7001750D3 /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				CEDF6BD818F51E92001750D3 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
 		61922C0318F5428500A9BEDE /* PhoneLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = 61922C0118F5428500A9BEDE /* PhoneLogin.m */; };
@@ -54,6 +68,8 @@
 		61922C0718F5482800A9BEDE /* PDMlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PDMlogo@2x.png"; sourceTree = "<group>"; };
 		61922C0C18F549F000A9BEDE /* PDMlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PDMlogo.png; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE46037718F6231200A3BF84 /* NSObject+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PIXCategory.h"; sourceTree = "<group>"; };
+		CE46037818F6231200A3BF84 /* NSObject+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PIXCategory.m"; sourceTree = "<group>"; };
 		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDB7C7918D2ECF700D14D0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -244,6 +260,8 @@
 				CEDCD0EB18F3AC5400B32ACC /* PIXAlbum.m */,
 				CEDCD0EC18F3AC5400B32ACC /* PIXBlog.h */,
 				CEDCD0ED18F3AC5400B32ACC /* PIXBlog.m */,
+				CE46037718F6231200A3BF84 /* NSObject+PIXCategory.h */,
+				CE46037818F6231200A3BF84 /* NSObject+PIXCategory.m */,
 			);
 			name = APIHandle;
 			sourceTree = "<group>";
@@ -316,6 +334,7 @@
 			targets = (
 				CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */,
 				CEDB7C9018D2ECF700D14D0C /* PIXNET-iOS-SDKTests */,
+				CEDF6BD418F51DB7001750D3 /* Documentation */,
 			);
 		};
 /* End PBXProject section */
@@ -374,6 +393,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		CEDF6BD818F51E92001750D3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc Xcode script\n# Start constants\ncompany=\"PIXNET Inc.\";\ncompanyID=\"net.pixnet\";\ncompanyURL=\"http://www.pixnet.net/\";\ntarget=\"iphoneos\";\n#target=\"macosx\";\noutputPath=\"~/help\";\n# End constants\n/usr/local/bin/appledoc \\\n--project-name \"${PROJECT_NAME}\" \\\n--project-company \"${company}\" \\\n--company-id \"${companyID}\" \\\n--docset-atom-filename \"${company}.atom\" \\\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n--docset-fallback-url \"${companyURL}/${company}\" \\\n--output \"${outputPath}\" \\\n--publish-docset \\\n--docset-platform-family \"${target}\" \\\n--logformat xcode \\\n--keep-intermediate-files \\\n--no-repeat-first-par \\\n--no-warn-invalid-crossref \\\n--exit-threshold 2 \\\n\"${PROJECT_DIR}\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -381,6 +413,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE46037918F6231200A3BF84 /* NSObject+PIXCategory.m in Sources */,
 				CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */,
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
 				CEDCD0EF18F3AC5400B32ACC /* PIXBlog.m in Sources */,
@@ -571,6 +604,20 @@
 			};
 			name = Release;
 		};
+		CEDF6BD518F51DB7001750D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CEDF6BD618F51DB7001750D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -597,6 +644,15 @@
 			buildConfigurations = (
 				CEDB7CA618D2ECF700D14D0C /* Debug */,
 				CEDB7CA718D2ECF700D14D0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CEDF6BD718F51DB7001750D3 /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CEDF6BD518F51DB7001750D3 /* Debug */,
+				CEDF6BD618F51DB7001750D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
