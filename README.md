@@ -51,7 +51,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ###不需認證的情況下
 取得使用者個人資料：
 ```Objective-C
-    [[PIXNETSDK new] getUserWithUserName:@"username" completion:
+    [[PIXNETSDK new] getUserWithUserName:@"UserName" completion:
      ^(BOOL succeed, id result, NSString *errorMessage) {
          if (succeed) {
              //做要做的東西
@@ -86,23 +86,9 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 
 ###登出
 ```Objective-C
-    [PIXNETSDK authByXauthWithUserName:@"UserName" userPassword:@"Password" requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
-        if (succeed) {
-            [[[UIAlertView alloc] initWithTitle:@"登入成功"
-                                        message:@"已登入PIXNET"
-                                       delegate:self
-                              cancelButtonTitle:@"確定"
-                              otherButtonTitles:nil, nil] show];
-        }else{
-            [[[UIAlertView alloc] initWithTitle:@"登入失敗"
-                                        message:errorMessage
-                                       delegate:self
-                              cancelButtonTitle:@"確定"
-                              otherButtonTitles:nil, nil] show];
-        }
-    }];
+    [PIXNETSDK logout];
 ```
-確認後即可登出。
+即可登出。
 
 ## License
 PIXNET SDK is BSD-licensed. We also provide an additional patent grant.
