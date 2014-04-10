@@ -12,7 +12,7 @@ Learn More detail at [http://developer.pixnet.pro/](http://developer.pixnet.pro/
 PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[ARC](http://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 
 #使用 - Usage#
-##在使用之前，請先至 PIXNET Developer 註冊新的 APP。
+###在使用之前，請先至 PIXNET Developer 註冊新的 APP。
 [http://developer.pixnet.pro/#!/apps](http://developer.pixnet.pro/#!/apps)
 
 申請完成會拿到以下兩把鑰匙
@@ -50,7 +50,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ###不需認證的情況下
 取得使用者個人資料：
 ```Objective-C
-    [[PIXNETSDK new] getUserWithUserName:@"cloud" completion:
+    [[PIXNETSDK new] getUserWithUserName:@“UserName” completion:
      ^(BOOL succeed, id result, NSString *errorMessage) {
          if (succeed) {
              //做要做的東西
