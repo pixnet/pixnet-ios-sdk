@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "PIXNETSDK.h"
-#import "PhoneLogin.h"
 
 @implementation AppDelegate
 
@@ -18,10 +17,6 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    
-    PhoneLogin *PL = [[PhoneLogin alloc] initWithNibName:@"PhoneLogin" bundle:nil];
-    UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:PL];
-    [self.window setRootViewController:navi];
     
     return YES;
 }
