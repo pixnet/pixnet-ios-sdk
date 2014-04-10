@@ -8,23 +8,9 @@
 
 #import "PIXBlog.h"
 #import "PIXAPIHandler.h"
+#import "NSObject+PIXCategory.h"
 
 @implementation PIXBlog
-
--(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
-    NSError *jsonError;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
-    if (jsonError == nil) {
-        if ([dict[@"error"] intValue] == 0) {
-            completion(YES, dict, nil);
-        } else {
-            completion(NO, nil, dict[@"message"]);
-        }
-    } else {
-        completion(NO, nil, jsonError.localizedDescription);
-    }
-}
-
 
 #pragma mark - Blog information
 - (void)getBlogInformationWithUserName:(NSString *)userName

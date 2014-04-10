@@ -125,6 +125,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		61922BFF18F5422800A9BEDE /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				61922C0518F547FC00A9BEDE /* Image */,
+				61922C0018F5428500A9BEDE /* PhoneLogin.h */,
+				61922C0118F5428500A9BEDE /* PhoneLogin.m */,
+				61922C0218F5428500A9BEDE /* PhoneLogin.xib */,
+			);
+			name = LoginView;
+			sourceTree = "<group>";
+		};
+		61922C0518F547FC00A9BEDE /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				61922C0C18F549F000A9BEDE /* PDMlogo.png */,
+				61922C0718F5482800A9BEDE /* PDMlogo@2x.png */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
 		CEDB7C6D18D2ECF700D14D0C = {
 			isa = PBXGroup;
 			children = (
