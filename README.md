@@ -9,6 +9,7 @@ Learn More detail at [http://developer.pixnet.pro/](http://developer.pixnet.pro/
 
 #安裝 - Installation#
 強烈建議使用 [CocoaPods](http://cocoapods.org/) 搜尋並安裝`pixnet-ios-sdk`
+
 PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[ARC](http://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 
 #使用 - Usage#
@@ -50,7 +51,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ###不需認證的情況下
 取得使用者個人資料：
 ```Objective-C
-    [[PIXNETSDK new] getUserWithUserName:@“UserName” completion:
+    [[PIXNETSDK new] getUserWithUserName:@“username” completion:
      ^(BOOL succeed, id result, NSString *errorMessage) {
          if (succeed) {
              //做要做的東西
