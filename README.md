@@ -7,12 +7,12 @@ PIXNET SDK for iOS
 This open-source library allows you to integrate PIXNET into your iOS APP.
 Learn More detail at [http://developer.pixnet.pro/](http://developer.pixnet.pro/) 
 
-#安裝 - Installation#
+##安裝 - Installation#
 強烈建議使用 [CocoaPods](http://cocoapods.org/) 搜尋並安裝`pixnet-ios-sdk`
 
 PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[ARC](http://en.wikipedia.org/wiki/Automatic_Reference_Counting)
 
-#使用 - Usage#
+##使用 - Usage#
 ###在使用之前，請先至 PIXNET Developer 註冊新的 APP。
 [http://developer.pixnet.pro/#!/apps](http://developer.pixnet.pro/#!/apps)
 
@@ -28,7 +28,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 [PIXNETSDK setConsumerKey:@"Consumer Key" consumerSecret:@"Consumer Secret"];
 ```
 
-##初學使用者
+###初學使用者
 請在安裝後在需要用到的 Class 中
 
 ```objective-c
@@ -38,7 +38,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 就可以開始使用簡易功能。
 
 
-##進階使用者
+###進階使用者
 可依各種不同需求 import 你所需要的各種不同功能，目前開放：
 
  1. PIXBlog.h
@@ -47,8 +47,8 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 
 三隻不同的 Class 讓開發者使用並取得資料。
 
-##範例 - Sample Code
-###不需認證的情況下
+###範例 - Sample Code
+####不需認證的情況下
 取得使用者個人資料：
 ```Objective-C
     [[PIXNETSDK new] getUserWithUserName:@"UserName" completion:
@@ -64,7 +64,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
          }
      }];
 ```
-###認證/登入
+####認證/登入
 ```Objective-C
     [PIXNETSDK authByXauthWithUserName:@"UserName" userPassword:@"Password" requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
         if (succeed) {
@@ -84,7 +84,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ```
 登入後即可使用需認證後才可使用的 Method。
 
-###登出
+####登出
 ```Objective-C
     [PIXNETSDK logout];
 ```
