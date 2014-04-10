@@ -8,6 +8,7 @@
 static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 
 #import "PIXAlbum.h"
+#import "NSObject+PIXCategory.h"
 
 @implementation PIXAlbum
 -(void)getAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion{
@@ -779,19 +780,6 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
     
-}
--(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
-    NSError *jsonError;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
-    if (jsonError == nil) {
-        if ([dict[@"error"] intValue] == 0) {
-            completion(YES, dict, nil);
-        } else {
-            completion(NO, nil, dict[@"message"]);
-        }
-    } else {
-        completion(NO, nil, jsonError.localizedDescription);
-    }
 }
 
 @end
