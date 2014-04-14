@@ -10,7 +10,7 @@
 #import "PIXAPIHandler.h"
 
 @interface PIXUser : NSObject {
-    PIXAPIHandler *apihandler;
+//    PIXAPIHandler *apihandler;
 }
 
 #pragma mark -
