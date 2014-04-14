@@ -5,8 +5,16 @@
 //  Created by Dolphin Su on 4/10/14.
 //  Copyright (c) 2014 Dolphin Su. All rights reserved.
 //
-#import <Foundation/Foundation.h>
+static NSString *kPIXErrorDomain = @"PIXErrorDomain";
+typedef NS_ENUM(NSInteger, PIXErrorDomainStatus) {
+    PIXErrorDomainStatusHttp,
+    PIXErrorDomainStatusInputParameter
+};
 
+#import <Foundation/Foundation.h>
+/**
+ *  這個 class 用來產生一致的 NSError instance
+ */
 @interface NSError (PIXCategory)
 /**
  *  用來產生跟參數有關的 error 物件
