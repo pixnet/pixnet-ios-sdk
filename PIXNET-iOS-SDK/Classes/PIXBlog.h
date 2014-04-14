@@ -15,70 +15,240 @@
  *  除了 ＊ 是 required 參數外，其餘參數為 optional
  */
 @interface PIXBlog : NSObject
-
+/**
+ *  PIXNET Blog 分類設定
+ */
 typedef NS_ENUM(NSInteger, PIXBlogCategoryType) {
+    /**
+     *  設定為 分類
+     */
     PIXBlogCategoryTypeCategory,
+    /**
+     *  設定為 資料夾
+     */
     PIXBlogCategoryTypeFolder
 };
-
+/**
+ *  PIXNET Blog 文章狀態
+ */
 typedef NS_ENUM(NSInteger, PIXArticleStatus){
+    /**
+     *  刪除
+     */
     PIXArticleStatusDelete = 0,
+    /**
+     *  草稿
+     */
     PIXArticleStatusDraft = 1,
+    /**
+     *  公開
+     */
     PIXArticleStatusPublic = 2,
+    /**
+     *  密碼
+     */
     PIXArticleStatusPassword = 3,
+    /**
+     *  隱藏
+     */
     PIXArticleStatusPrivate = 4,
+    /**
+     *  好友
+     */
     PIXArticleStatusFriend = 5,
+    /**
+     *  共同作者
+     */
     PIXArticleStatusCoAuthor = 7
 };
-
+/**
+ *  PIXNET Blog 文章留言權限
+ */
 typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
+    /**
+     *  關閉留言
+     */
     PIXArticleCommentPermClose = 0,
+    /**
+     *  開放所有人留言
+     */
     PIXArticleCommentPermPublic = 1,
+    /**
+     *  僅開放會員留言
+     */
     PIXArticleCommentPermMember = 2,
+    /**
+     *  開放好友留言
+     */
     PIXArticleCommentPermFriend = 3
 };
-
+/**
+ *  PIXNET Blog 全站分類 ID 對照
+ */
 typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
+    /**
+     *  無分類
+     */
     PIXSiteBlogCategoryNone = 0,
+    /**
+     *  戀愛情事
+     */
     PIXSiteBlogCategoryLove = 1,
+    /**
+     *  心情日記
+     */
     PIXSiteBlogCategoryDiary = 2,
+    /**
+     *  寵物日記
+     */
     PIXSiteBlogCategoryPets = 3,
+    /**
+     *  結婚記錄
+     */
     PIXSiteBlogCategoryWeddings = 4,
+    /**
+     *  生活綜合
+     */
     PIXSiteBlogCategoryHome = 5,
+    /**
+     *  親子育兒
+     */
     PIXSiteBlogCategoryKids = 6,
+    /**
+     *  校園生活
+     */
     PIXSiteBlogCategorySchool = 7,
+    /**
+     *  進修深造
+     */
     PIXSiteBlogCategoryStudy = 8,
+    /**
+     *  職場甘苦
+     */
     PIXSiteBlogCategoryCareer = 9,
+    /**
+     *  圖文創作
+     */
     PIXSiteBlogCategoryIllustrations = 10,
+    /**
+     *  漫畫塗鴉
+     */
     PIXSiteBlogCategoryComics = 11,
+    /**
+     *  KUSO
+     */
     PIXSiteBlogCategoryKuso = 12,
+    /**
+     *  小說連載
+     */
     PIXSiteBlogCategoryFiction = 13,
+    /**
+     *  散文筆記
+     */
     PIXSiteBlogCategoryProse = 14,
+    /**
+     *  攝影寫真
+     */
     PIXSiteBlogCategoryPhotography = 15,
+    /**
+     *  視覺設計
+     */
     PIXSiteBlogCategoryDesign = 16,
+    /**
+     *  藝文評論
+     */
     PIXSiteBlogCategoryArts = 17,
+    /**
+     *  音樂評析
+     */
     PIXSiteBlogCategoryMusic = 18,
+    /**
+     *  電影評論
+     */
     PIXSiteBlogCategoryMovies = 19,
+    /**
+     *  收藏嗜好
+     */
     PIXSiteBlogCategoryHobbies = 20,
+    /**
+     *  電玩動漫
+     */
     PIXSiteBlogCategoryAnimation = 21,
+    /**
+     *  時尚流行
+     */
     PIXSiteBlogCategoryFashion = 22,
+    /**
+     *  美容彩妝
+     */
     PIXSiteBlogCategoryMakeup = 23,
+    /**
+     *  財經企管
+     */
     PIXSiteBlogCategoryDigitalLife = 24,
+    /**
+     *  美味食記
+     */
     PIXSiteBlogCategoryCuisine = 26,
+    /**
+     *  食譜分享
+     */
     PIXSiteBlogCategoryRecipes = 27,
+    /**
+     *  國內旅遊
+     */
     PIXSiteBlogCategoryTaiwanTravel = 28,
+    /**
+     *  國外旅遊
+     */
     PIXSiteBlogCategoryWorldTravel = 29,
+    /**
+     *  偶像明星
+     */
     PIXSiteBlogCategoryCelebrities = 30,
+    /**
+     *  視聽娛樂
+     */
     PIXSiteBlogCategoryEntertainment = 31,
+    /**
+     *  運動體育
+     */
     PIXSiteBlogCategorySport = 32,
+    /**
+     *  醫療保健
+     */
     PIXSiteBlogCategoryMedicine = 33,
+    /**
+     *  星座算命
+     */
     PIXSiteBlogCategoryAstrology = 34,
+    /**
+     *  心理測驗
+     */
     PIXSiteBlogCategoryPsychology = 35,
+    /**
+     *  財經企管
+     */
     PIXSiteBlogCategoryFinance = 36,
+    /**
+     *  政論人文
+     */
     PIXSiteBlogCategoryCommentary = 38,
+    /**
+     *  宗教超自然
+     */
     PIXSiteBlogCategorySupernatural = 41,
+    /**
+     *  汽機車
+     */
     PIXSiteBlogCategoryAutomobiles = 42,
+    /**
+     *  裝璜設計
+     */
     PIXSiteBlogCategoryDecorationDesign = 43,
+    /**
+     *  活動記錄
+     */
     PIXSiteBlogCategoryActivityRecord = 44
 };
 
