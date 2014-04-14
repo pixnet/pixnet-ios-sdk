@@ -22,11 +22,11 @@ typedef NS_ENUM(NSInteger, PIXBlogCategoryType) {
     /**
      *  設定為 分類
      */
-    PIXBlogCategoryTypeCategory,
+    PIXBlogCategoryTypeCategory = 0,
     /**
      *  設定為 資料夾
      */
-    PIXBlogCategoryTypeFolder
+    PIXBlogCategoryTypeFolder = 1
 };
 /**
  *  PIXNET Blog 文章狀態
@@ -280,7 +280,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  新增部落格個人分類（需認證） http://emma.pixnet.cc/blog/categories
  *
  *  @param name        *分類名稱
- *  @param type        *請輸入分類 PIXBlogCategoryType 型別，有 Folder 及 Category 可選
+ *  @param type        *請輸入分類 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
  *  @param description 分類說明
  *  @param cateID      *對應的全站文章類別 id. 當 type 為 category 為必須參數
  *  @param completion  succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
@@ -295,7 +295,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *
  *  @param categoriesID *要修改的 Category / Folder ID
  *  @param newName      *修改後的顯示名稱
- *  @param type         要修改的類型是 Category / Folder
+ *  @param type         請輸入修改類型 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
  *  @param description  修改後的分類說明
  *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
@@ -305,11 +305,11 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                        description:(NSString *)description
                         completion:(PIXHandlerCompletion)completion;
 /**
- *  刪除部落格個人分類 http://emma.pixnet.cc/blog/categories/:id
+ *  刪除部落格個人分類（需認證） http://emma.pixnet.cc/blog/categories/:id
  *
  *
  *  @param categoriesID *要刪除的 Category / Folder ID
- *  @param type         請輸入要刪除的分類 PIXBlogCategoryType 型別，有 Folder 及 Category 可選
+ *  @param type         請輸入要刪除類型 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
  *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID
@@ -317,7 +317,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                       completion:(PIXHandlerCompletion)completion;
 
 /**
- *  修改部落格分類排序 http://emma.pixnet.cc/blog/categories/position
+ *  修改部落格分類排序（需認證） http://emma.pixnet.cc/blog/categories/position
  *
  *  @param categoriesIDArray *輸入以部落格分類ID組成已排序好的 Array，分類將會已陣列順序重新排序。放在越前面的表示圖片的順序越優先。不過在排序上分類資料夾的排序要優先於分類，所以對分類資料夾的排序指定只會影響資料夾群本身
  *  @param completion        succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
@@ -426,7 +426,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 #pragma mark Article method need access token
 
 /**
- *  新增部落格個人文章 http://emma.pixnet.cc/blog/articles
+ *  新增部落格個人文章（需認證）  http://emma.pixnet.cc/blog/articles
  *
  *  @param title         *文章標題
  *  @param body          *文章內容
@@ -445,7 +445,6 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
-                          publicAt:(NSDate *)date
                     siteCategoryID:(PIXSiteBlogCategory)cateID
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
@@ -456,7 +455,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                      friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion;
 /**
- *  修改部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
+ *  修改部落格個人文章（需認證） http://emma.pixnet.cc/blog/articles/:id
  *
  *  @param articleID     *要修改的文章 ID
  *  @param title         *修改後的文章標題
@@ -477,7 +476,6 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                                  title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
-                              publicAt:(NSDate *)date
                         siteCategoryID:(PIXSiteBlogCategory)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
@@ -489,7 +487,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                             completion:(PIXHandlerCompletion)completion;
 
 /**
- *  刪除部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
+ *  刪除部落格個人文章（需認證） http://emma.pixnet.cc/blog/articles/:id
  *
  *  @param articleID  *要刪除的文章 ID
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
@@ -539,7 +537,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 
 #pragma mark Comment method need access token
 /**
- *  新增部落格留言 http://emma.pixnet.cc/blog/comments
+ *  新增部落格留言（需認證） http://emma.pixnet.cc/blog/comments
  *
  *  @param articleID     *要留言的文章 ID
  *  @param body          *留言內容
@@ -565,7 +563,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                        articlePassword:(NSString *)articlePasswd
                             completion:(PIXHandlerCompletion)completion;
 /**
- *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容 http://emma.pixnet.cc/blog/comments/:id/reply
+ *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容（需認證） http://emma.pixnet.cc/blog/comments/:id/reply
  *
  *  @param commentID  *要回覆/修改的留言 ID
  *  @param body       *留言內容/修改後的內容
@@ -576,7 +574,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                            completion:(PIXHandlerCompletion)completion;
 
 /**
- *  將留言設為公開/關閉 http://emma.pixnet.cc/blog/comments/:id/open http://emma.pixnet.cc/blog/comments/:id/close
+ *  將留言設為公開/關閉（需認證） http://emma.pixnet.cc/blog/comments/:id/open http://emma.pixnet.cc/blog/comments/:id/close
  *
  *  @param commentID  *要公開/關閉的留言 ID
  *  @param isOpen     * YSE 為 公開， NO 為 關閉 該則留言
@@ -587,7 +585,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                                 completion:(PIXHandlerCompletion)completion;
 
 /**
- *  將留言設為廣告留言/非廣告留言 http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
+ *  將留言設為廣告留言/非廣告留言（需認證） http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
  *
  *  @param commentID  *要公開/關閉的留言 ID
  *  @param isSpam     * YSE 為設成廣告留言， NO 為設成非廣告留言
@@ -598,7 +596,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
                                 completion:(PIXHandlerCompletion)completion;
 
 /**
- *  刪除部落格留言 http://emma.pixnet.cc/blog/comments/:id
+ *  刪除部落格留言（需認證） http://emma.pixnet.cc/blog/comments/:id
  *
  *  @param commentID  *要刪除的留言 ID
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
