@@ -81,7 +81,6 @@
     if (description || description != nil || description.length != 0) {
         params[@"description"] = description;
     }
-    NSLog(@"%@", params);
     
     [[PIXAPIHandler new] callAPI:@"blog/categories"
                       httpMethod:@"POST"
