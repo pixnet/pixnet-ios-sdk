@@ -65,25 +65,16 @@
         completion(NO, nil, @"請輸入要新增的分類名稱");
         return;
     }
-    if (!type) {
-        completion(NO, nil, @"請輸入要新增的是 Category 或 Folder");
-        return;
-    }
-    
-    if (type == PIXBlogCategoryTypeCategory) {
-        if (!siteCateID) {
-            completion(NO, nil, @"請輸入對應的全站文章類別 ID");
-        }
-    }
 
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"name"] = name;
     
     if (type == PIXBlogCategoryTypeCategory) {
         params[@"type"] = @"category";
-        params[@"site_category_done"] = @(1);
+        params[@"site_category_done"] = @"1";
         params[@"site_category_id"] = @(siteCateID);
-    }else{
+    
+    }else if (type == PIXBlogCategoryTypeFolder){
         params[@"type"] = @"folder";
     }
     
@@ -113,9 +104,6 @@
 
     if (!newName || newName == nil || newName.length == 0) {
         completion(NO, nil, @"請輸入修改後的名稱");
-    }
-    if (!categoriesID || categoriesID == nil || categoriesID.length == 0) {
-        completion(NO, nil, @"請輸入要更改的 Category/Folder ID");
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -452,7 +440,6 @@
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
-                          publicAt:(NSDate *)date
                     siteCategoryID:(PIXSiteBlogCategory)cateID
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
@@ -487,20 +474,20 @@
     if (status) {
         params[@"status"] = @(status);
     }
-    if (date) {
-        params[@"public_at"] = [NSString stringWithFormat:@"%f", [date timeIntervalSince1970]];
-    }
-    if (cateID) {
-        params[@"category_id"] = @(cateID);
-    }
-    if (commentPerm) {
-        params[@"comment_perm"] = @(commentPerm);
-    }
+
+    params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
+
+    
+    params[@"category_id"] = @(cateID);
+    
+    params[@"comment_perm"] = @(commentPerm);
+
     if (commentHidden) {
         params[@"comment_hidden"] = @(1);
     }else{
         params[@"comment_hidden"] = @(0);
     }
+
     if (tagArray) {
         NSMutableString *tagsString = [NSMutableString new];
         for (NSInteger i = 0; i < tagArray.count; i++) {
@@ -510,6 +497,7 @@
                 [tagsString appendString:[NSMutableString stringWithFormat:@"%@,", tagArray[i]]];
             }
         }
+        NSLog(@"tagstring : %@", tagsString);
     }
     if (thumburl || thumburl != nil || thumburl.length != 0) {
         params[@"thumb"] = thumburl;
@@ -541,7 +529,6 @@
                                  title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
-                              publicAt:(NSDate *)date
                         siteCategoryID:(PIXSiteBlogCategory)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
@@ -581,15 +568,12 @@
     if (status) {
         params[@"status"] = @(status);
     }
-    if (date) {
-        params[@"public_at"] = [NSString stringWithFormat:@"%f", [date timeIntervalSince1970]];
-    }
-    if (cateID) {
-        params[@"category_id"] = @(cateID);
-    }
-    if (commentPerm) {
-        params[@"comment_perm"] = @(commentPerm);
-    }
+    params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
+    
+    params[@"category_id"] = @(cateID);
+    
+    params[@"comment_perm"] = @(commentPerm);
+    
     if (commentHidden) {
         params[@"comment_hidden"] = @(1);
     }else{

@@ -157,7 +157,6 @@
     [[PIXBlog new] createBlogArticleWithTitle:title
                                          body:body
                                        status:PIXArticleStatusPublic
-                                     publicAt:date
                                siteCategoryID:cateID
                                   commentPerm:commentPerm
                                 commentHidden:commentHidden
@@ -188,7 +187,6 @@
                                             title:title
                                              body:body
                                            status:status
-                                         publicAt:date
                                    siteCategoryID:cateID
                                       commentPerm:commentPerm
                                     commentHidden:commentHidden
