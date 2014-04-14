@@ -9,20 +9,19 @@
 #import "NSError+PIXCategory.h"
 
 @implementation NSError (PIXCategory)
-+(instancetype)PIXErrorWithParameter:(NSString *)parameterName{
-//    NSString *description = [NSString stringWithFormat:@"%@ 參數有誤，請檢查一下", parameterName];
-//    NSError *error = [[super alloc] initWithDomain:kPIXErrorDomain code:kPIXErrorCode userInfo:@{NSLocalizedDescriptionKey: description}];
-//    return error;
-    return nil;
++(instancetype)PIXErrorWithHTTPStatusCode:(NSInteger)code{
+    NSError *error = [NSError errorWithDomain:kPIXHTTPErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: [NSHTTPURLResponse localizedStringForStatusCode:code]}];
+    return error;
+}
++(instancetype)PIXErrorWithParameterName:(NSString *)parameterName{
+    NSString *message = [NSString stringWithFormat:@"%@ 參數有誤", parameterName];
+    NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:PIXErrorDomainStatusInputParameter userInfo:@{NSLocalizedDescriptionKey: message}];
+    return error;
 }
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response{
-    NSInteger errorCode = [response[@"error"] integerValue];
-//    if (errorCode==0) {
-//        return nil;
-//    }
-
-    NSString *description = response[@"message"];
-    NSError *error = [[super alloc] initWithDomain:kPIXErrorDomain code:errorCode userInfo:@{NSLocalizedDescriptionKey: description}];
+    NSString *message = response[@"message"];
+    NSInteger code = [response[@"error"] integerValue];
+    NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;
 }
 @end
