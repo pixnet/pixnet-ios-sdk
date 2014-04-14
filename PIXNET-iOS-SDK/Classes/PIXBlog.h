@@ -10,7 +10,10 @@
 
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
-
+/**
+ *  這個 class 主要用來處理 Blog APU Request
+ *  除了 ＊ 是 required 參數外，其餘參數為 optional
+ */
 @interface PIXBlog : NSObject
 
 typedef NS_ENUM(NSInteger, PIXBlogCategoryType) {
