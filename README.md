@@ -52,7 +52,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 取得使用者個人資料：
 ```Objective-C
     [[PIXNETSDK new] getUserWithUserName:@"UserName" completion:
-     ^(BOOL succeed, id result, NSString *errorMessage) {
+     ^(BOOL succeed, id result, NSError *errorMessage) {
          if (succeed) {
              //做要做的東西
          }else{
@@ -66,7 +66,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ```
 ####認證/登入
 ```Objective-C
-    [PIXNETSDK authByXauthWithUserName:@"UserName" userPassword:@"Password" requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [PIXNETSDK authByXauthWithUserName:@"UserName" userPassword:@"Password" requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         if (succeed) {
             [[[UIAlertView alloc] initWithTitle:@"登入成功"
                                         message:@"已登入PIXNET"

@@ -17,6 +17,16 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    [PIXNETSDK setConsumerKey:@"41a94a84c7e6332f9cd4243f4c37d90f" consumerSecret:@"cfab6dfb07746104b8b9d086fca64f90"];
+    
+    [[PIXNETSDK new] getUserWithUserName:@"!!@#" completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"%@", result);
+        }else{
+            NSLog(@"%@", error);
+        }
+    }];
+    
     return YES;
 }
 

@@ -22,6 +22,9 @@
 
 /* Begin PBXBuildFile section */
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
+		619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09D918FD1DF900325991 /* PIXFriend.m */; };
+		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
+		619C09E018FD237400325991 /* PIXMainpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DF18FD237400325991 /* PIXMainpage.m */; };
 		CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */; };
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
@@ -60,6 +63,12 @@
 /* Begin PBXFileReference section */
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		50845DAA18F4F1B3000813AF /* PIXUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXUserTests.m; sourceTree = "<group>"; };
+		619C09D818FD1DF900325991 /* PIXFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXFriend.h; path = Classes/PIXFriend.h; sourceTree = "<group>"; };
+		619C09D918FD1DF900325991 /* PIXFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXFriend.m; path = Classes/PIXFriend.m; sourceTree = "<group>"; };
+		619C09DB18FD235300325991 /* PIXGuestbook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXGuestbook.h; path = Classes/PIXGuestbook.h; sourceTree = "<group>"; };
+		619C09DC18FD235300325991 /* PIXGuestbook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXGuestbook.m; path = Classes/PIXGuestbook.m; sourceTree = "<group>"; };
+		619C09DE18FD237400325991 /* PIXMainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXMainpage.h; path = Classes/PIXMainpage.h; sourceTree = "<group>"; };
+		619C09DF18FD237400325991 /* PIXMainpage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXMainpage.m; path = Classes/PIXMainpage.m; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE46037D18F6766A00A3BF84 /* NSError+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+PIXCategory.h"; path = "Classes/NSError+PIXCategory.h"; sourceTree = "<group>"; };
 		CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+PIXCategory.m"; path = "Classes/NSError+PIXCategory.m"; sourceTree = "<group>"; };
@@ -238,6 +247,12 @@
 				CEDCD0ED18F3AC5400B32ACC /* PIXBlog.m */,
 				CE46038018F6767600A3BF84 /* NSObject+PIXCategory.h */,
 				CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */,
+				619C09D818FD1DF900325991 /* PIXFriend.h */,
+				619C09D918FD1DF900325991 /* PIXFriend.m */,
+				619C09DB18FD235300325991 /* PIXGuestbook.h */,
+				619C09DC18FD235300325991 /* PIXGuestbook.m */,
+				619C09DE18FD237400325991 /* PIXMainpage.h */,
+				619C09DF18FD237400325991 /* PIXMainpage.m */,
 			);
 			name = APIHandle;
 			sourceTree = "<group>";
@@ -391,11 +406,14 @@
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
 				CEDCD0EF18F3AC5400B32ACC /* PIXBlog.m in Sources */,
 				CEDCD0E918F3ABF700B32ACC /* PIXNETSDK.m in Sources */,
+				619C09E018FD237400325991 /* PIXMainpage.m in Sources */,
 				CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */,
 				CEDCD0FB18F3AD6800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */,
+				619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */,
 				CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */,
 				CEDCD0EE18F3AC5400B32ACC /* PIXAlbum.m in Sources */,
 				CEDCD0FC18F3AD6800B32ACC /* OARequestParameter.m in Sources */,
+				619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */,
 				CEDCD0FD18F3AD6800B32ACC /* PIXAPIHandler.m in Sources */,
 				CEDB7C8618D2ECF700D14D0C /* main.m in Sources */,
 			);
