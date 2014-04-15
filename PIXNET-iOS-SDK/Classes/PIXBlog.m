@@ -9,6 +9,7 @@
 #import "PIXBlog.h"
 #import "PIXAPIHandler.h"
 #import "NSObject+PIXCategory.h"
+#import "NSError+PIXCategory.h"
 
 @implementation PIXBlog
 
@@ -17,10 +18,12 @@
                           completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
-        completion(NO, nil, @"userName 不可為 nil");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
-    [[PIXAPIHandler new] callAPI:@"blog" parameters:@{@"user": userName} requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [[PIXAPIHandler new] callAPI:@"blog"
+                      parameters:@{@"user": userName}
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         //檢查出去的參數
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
@@ -36,7 +39,7 @@
                            completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
-        completion(NO, nil, @"userName 不可為 nil");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -45,7 +48,9 @@
     if (passwd != nil) {
         params[@"password"] = passwd;
     }
-    [[PIXAPIHandler new] callAPI:@"blog/categories" parameters:params requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+    [[PIXAPIHandler new] callAPI:@"blog/categories"
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         completion(NO, nil, errorMessage);
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
@@ -62,7 +67,7 @@
                           completion:(PIXHandlerCompletion)completion{
     
     if (!name || name == nil || name.length == 0) {
-        completion(NO, nil, @"請輸入要新增的分類名稱");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Category Name"]);
         return;
     }
 
@@ -86,7 +91,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
@@ -103,7 +108,7 @@
                         completion:(PIXHandlerCompletion)completion{
 
     if (!newName || newName == nil || newName.length == 0) {
-        completion(NO, nil, @"請輸入修改後的名稱");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing New Name"]);
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -121,7 +126,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
@@ -135,7 +140,7 @@
                             type:(PIXBlogCategoryType)type
                       completion:(PIXHandlerCompletion)completion{
     if (!categoriesID || categoriesID == nil || categoriesID.length == 0) {
-        completion(NO, nil, @"請輸入要刪除的 Category/Folder ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Category/Folder ID"]);
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -152,7 +157,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -181,7 +186,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -199,7 +204,7 @@
                             completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
-        completion(NO, nil, @"userName 不可為 nil");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -217,7 +222,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/articles"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -234,11 +239,11 @@
                               completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0 || !userName) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     if (articleID == nil || articleID.length == 0) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     
@@ -254,7 +259,7 @@
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@", articleID]
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -269,11 +274,11 @@
                             relatedLimit:(NSUInteger)limit
                               completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     if (articleID == nil || articleID.length == 0) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     
@@ -285,7 +290,7 @@
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@/related", articleID]
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -304,11 +309,11 @@
                            commentsPerPage:(NSUInteger)commentPerPage
                                 completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     if (articleID == nil || articleID.length == 0) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     
@@ -332,7 +337,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/comments"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -345,7 +350,7 @@
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
                               completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -354,7 +359,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/articles/latest"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -370,7 +375,7 @@
                            completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -384,7 +389,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
                       parameters:params
-              requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+              requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -401,7 +406,7 @@
                              completion:(PIXHandlerCompletion)completion{
     
     if (keyword == nil || keyword.length == 0 || !keyword) {
-        completion(NO, nil, @"Missing Search String");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Search String"]);
         return;
     }
     
@@ -426,7 +431,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/articles/search"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -450,20 +455,20 @@
                      friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion{
     if (title == nil || title.length == 0 || !title) {
-        completion(NO, nil, @"Missing Article Title");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
         return;
     }
     if (body == nil || body.length == 0 || !body) {
-        completion(NO, nil, @"Missing Article Body");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Body"]);
         return;
     }
     
     if (status == PIXArticleStatusPassword) {
         if (!passwd || passwd == nil || passwd.length == 0) {
-            completion(NO, nil, @"請輸入欲設定之文章密碼");
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定之文章密碼"]);
             return;
         }else if (!passwdHint || passwdHint == nil || passwdHint.length == 0){
-            completion(NO, nil, @"請輸入欲設定文章密碼提示");
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
             return;
         }
     }
@@ -516,7 +521,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -539,25 +544,25 @@
                          friendGroupID:(NSString *)friendGroupID
                             completion:(PIXHandlerCompletion)completion{
     if (articleID == nil || articleID.length == 0 || !articleID) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     
     if (title == nil || title.length == 0 || !title) {
-        completion(NO, nil, @"Missing Article Title");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
         return;
     }
     if (body == nil || body.length == 0 || !body) {
-        completion(NO, nil, @"Missing Article Body");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
         return;
     }
     
     if (status == PIXArticleStatusPassword) {
         if (!passwd || passwd == nil || passwd.length == 0) {
-            completion(NO, nil, @"請輸入欲設定之文章密碼");
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定之文章密碼"]);
             return;
         }else if (!passwdHint || passwdHint == nil || passwdHint.length == 0){
-            completion(NO, nil, @"請輸入欲設定文章密碼提示");
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
             return;
         }
     }
@@ -606,7 +611,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -620,7 +625,7 @@
                           completion:(PIXHandlerCompletion)completion{
     
     if (articleID == nil || articleID.length == 0 || !articleID) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     
@@ -631,7 +636,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -650,12 +655,12 @@
                          completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0 || !userName) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     
     if (articleID == nil || articleID.length == 0 || !articleID) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -672,7 +677,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/comments"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -687,12 +692,12 @@
                               commmentID:(NSString *)commentID
                               completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
-        completion(NO, nil, @"Missing User Name");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
     
     if (commentID == nil || commentID.length == 0) {
-        completion(NO, nil, @"Missing Comment ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -701,7 +706,7 @@
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -722,7 +727,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/comments/latest"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
@@ -747,11 +752,11 @@
                             completion:(PIXHandlerCompletion)completion{
 
     if (!articleID || articleID == nil || articleID.length == 0) {
-        completion(NO, nil, @"Missing Article ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     if (!body || body == nil || body.length == 0) {
-        completion(NO, nil, @"Missing Comment Body");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment Body"]);
         return;
     }
     
@@ -797,7 +802,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -810,12 +815,12 @@
                                  body:(NSString *)body
                            completion:(PIXHandlerCompletion)completion{
     if (!commentID || commentID == nil || commentID.length == 0) {
-        completion(NO, nil, @"Missing Comment ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     
     if (!body || body == nil || body.length == 0) {
-        completion(NO, nil, @"Missing Comment Body");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment Body"]);
         return;
     }
     
@@ -826,7 +831,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -840,7 +845,7 @@
                                     isOpen:(BOOL)isOpen
                                 completion:(PIXHandlerCompletion)completion{
     if (!commentID || commentID == nil || commentID.length == 0) {
-        completion(NO, nil, @"Missing Comment ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     NSString *isOpenString = [NSString new];
@@ -855,7 +860,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:nil
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -871,7 +876,7 @@
                                 completion:(PIXHandlerCompletion)completion{
     
     if (!commentID || commentID == nil || commentID.length == 0) {
-        completion(NO, nil, @"Missing Comment ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     
@@ -887,7 +892,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:nil
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -901,7 +906,7 @@
                             completion:(PIXHandlerCompletion)completion{
 
     if (!commentID || commentID == nil || commentID.length == 0) {
-        completion(NO, nil, @"Missing Comment ID");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     
@@ -912,7 +917,7 @@
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:nil
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -944,7 +949,7 @@
     
     [[PIXAPIHandler new] callAPI:@"blog/site_categories"
                       parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSString *errorMessage) {
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
