@@ -117,7 +117,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth && kConsumerKey == nil) {
-        completion(NO, nil, @"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:"]);
         return;
     }
     NSString *parameterString = nil;
@@ -148,16 +148,16 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
                         completion(YES, data, nil);
                         return;
                     } else {
-                        completion(NO, data, [NSHTTPURLResponse localizedStringForStatusCode:hr.statusCode]);
+                        completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
                         return;
                     }
                 } else {
                     if (data) {
                         NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                        completion(NO, nil, string);
+                        completion(NO, nil, [NSError PIXErrorWithParameterName:string]);
                         return;
                     } else {
-                        completion(NO, nil, connectionError.localizedDescription);
+                        completion(NO, nil, connectionError);
                         return;
                     }
                 }
