@@ -13,7 +13,8 @@
  *  @param result       呼叫成功的話，這個 instance 可以直接使用
  *  @param errorMessage 呼叫失敗的話，這裡會有錯誤的發生原因
  */
-typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMessage);
+//typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMessage);
+typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
 
 #import <Foundation/Foundation.h>
 /**

@@ -13,6 +13,7 @@ static const NSString *kConsumerSecret;
 #import <GCOAuth.h>
 #import "NSMutableURLRequest+PIXCategory.h"
 #import "PIXCredentialStorage.h"
+#import "NSError+PIXCategory.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
@@ -46,7 +47,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 }
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     if (kConsumerSecret==nil || kConsumerKey==nil) {
-        completion(NO, nil, @"consumer key 或 consumer secrect 尚未設定");
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret"]);
         return;
     }
     [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserNameIdentifier copy] string:userName];
@@ -65,12 +66,12 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (connectionError) {
-                completion(NO, nil, connectionError.localizedDescription);
+                completion(NO, nil, connectionError);
                 return;
             } else {
                 NSHTTPURLResponse *hur = (NSHTTPURLResponse *)response;
                 if (hur.statusCode != 200) {
-                    completion(NO, nil, [NSHTTPURLResponse localizedStringForStatusCode:hur.statusCode]);
+                    completion(NO, nil, [NSError PIXErrorWithHTTPStatusCode:hur.statusCode]);
                     return;
                 } else {
                     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
