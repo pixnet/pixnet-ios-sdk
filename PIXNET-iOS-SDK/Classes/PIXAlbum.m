@@ -178,20 +178,20 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     for (id friendGroup in friendGroupIds) {
         if (![friendGroup isKindOfClass:[NSString class]]) {
-            completion(NO, nil, [NSError PIXErrorWithParameterName:@"%@ 不是 NSString instance 哦"]);
+            completion(NO, nil, [NSError PIXErrorWithParameterName:[NSString stringWithFormat:@"%@ 不是 NSString instance 哦", friendGroup]]);
             return;
         }
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"title"] = setTitle;
     params[@"description"] = setDescription;
-    params[@"permission"] = [NSString stringWithFormat:@"%li", permission];
+    params[@"permission"] = [NSString stringWithFormat:@"%ld", (long)permission];
     if (categoryId) {
         params[@"category_id"] = [NSString stringWithFormat:@"%@", categoryId];
     }
     params[@"is_lockright"] = [NSString stringWithFormat:@"%i", isLockRight];
     params[@"allow_cc"] = [NSString stringWithFormat:@"%i", isAllowCc];
-    params[@"cancomment"] = [NSString stringWithFormat:@"%li", commentRightType];
+    params[@"cancomment"] = [NSString stringWithFormat:@"%ld", (long)commentRightType];
     if (password) {
         params[@"password"] = password;
     }
