@@ -3,7 +3,7 @@
 //  PIXNET-iOS-SDK
 //
 //  Created by Dolphin Su on 4/7/14.
-//  Copyright (c) 2014 Dolphin Su. All rights reserved.
+//  Copyright (c) 2014 PIXNET. All rights reserved.
 //
 
 static const NSString *kBoundaryConstant = @"---------------------------14737809831466499882746641449";
