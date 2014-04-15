@@ -57,7 +57,7 @@
 
 
 #pragma mark - Blog Method
-#pragma mark - Blog imformation
+#pragma mark - Blog information
 /**
  *  列出部落格資訊 http://emma.pixnet.cc/blog
  *
