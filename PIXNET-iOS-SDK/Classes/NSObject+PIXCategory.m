@@ -7,6 +7,7 @@
 //
 
 #import "NSObject+PIXCategory.h"
+#import "NSError+PIXCategory.h"
 
 @implementation NSObject (PIXCategory)
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
@@ -16,10 +17,10 @@
         if ([dict[@"error"] intValue] == 0) {
             completion(YES, dict, nil);
         } else {
-            completion(NO, nil, dict[@"message"]);
+            completion(NO, nil, [NSError errorWithDomain:kPIXErrorDomain code:PIXErrorDomainStatusServerResponse userInfo:dict[@"message"]]);
         }
     } else {
-        completion(NO, nil, jsonError.localizedDescription);
+        completion(NO, nil, jsonError);
     }
 }
 

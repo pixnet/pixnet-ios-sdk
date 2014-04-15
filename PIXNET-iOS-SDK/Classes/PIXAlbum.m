@@ -185,13 +185,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"title"] = setTitle;
     params[@"description"] = setDescription;
-    params[@"permission"] = [NSString stringWithFormat:@"%i", permission];
+    params[@"permission"] = [NSString stringWithFormat:@"%li", permission];
     if (categoryId) {
         params[@"category_id"] = [NSString stringWithFormat:@"%@", categoryId];
     }
     params[@"is_lockright"] = [NSString stringWithFormat:@"%i", isLockRight];
     params[@"allow_cc"] = [NSString stringWithFormat:@"%i", isAllowCc];
-    params[@"cancomment"] = [NSString stringWithFormat:@"%i", commentRightType];
+    params[@"cancomment"] = [NSString stringWithFormat:@"%li", commentRightType];
     if (password) {
         params[@"password"] = password;
     }
@@ -308,8 +308,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         params[@"password"] = password;
     }
     params[@"set_id"] = setId;
-    params[@"page"] = [NSString stringWithFormat:@"%u", page];
-    params[@"per_page"] = [NSString stringWithFormat:@"%u", perPage];
+    params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"with_detail"] = [NSString stringWithFormat:@"%i", withDetail];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
@@ -404,8 +404,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"lon"] = [NSString stringWithFormat:@"%f", location.longitude];
     params[@"distance_min"] = [NSString stringWithFormat:@"%lu", (unsigned long)distanceMin];
     params[@"distance_max"] = [NSString stringWithFormat:@"%lu", (unsigned long)distanceMax];
-    params[@"page"] = [NSString stringWithFormat:@"%i", page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%i", perPage];
+    params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     switch (type) {
         case PIXAlbumElementTypePic:
@@ -463,8 +463,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
-    params[@"page"] = [NSString stringWithFormat:@"%i", page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%i", perPage];
+    params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
     if (shouldAuth) {
@@ -490,8 +490,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
-    params[@"page"] = [NSString stringWithFormat:@"%i", page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%i", perPage];
+    params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     
     NSString *pathString = [NSString stringWithFormat:@"album/folders/%@", folderId];
     if (shouldAuth) {

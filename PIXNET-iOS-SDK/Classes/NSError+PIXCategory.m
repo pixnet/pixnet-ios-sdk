@@ -14,7 +14,7 @@
     return error;
 }
 +(instancetype)PIXErrorWithParameterName:(NSString *)parameterName{
-    NSString *message = [NSString stringWithFormat:@"%@ 參數有誤", parameterName];
+    NSString *message = [NSString stringWithFormat:@"%@", parameterName];
     NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:PIXErrorDomainStatusInputParameter userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;
 }
