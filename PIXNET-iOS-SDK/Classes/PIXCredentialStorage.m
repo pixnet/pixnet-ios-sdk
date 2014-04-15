@@ -3,7 +3,7 @@
 //  PIXNET-iOS-SDK
 //
 //  Created by Dolphin Su on 4/8/14.
-//  Copyright (c) 2014 Dolphin Su. All rights reserved.
+//  Copyright (c) 2014 PIXNET. All rights reserved.
 //
 #import "PIXCredentialStorage.h"
 @interface PIXCredentialStorage()

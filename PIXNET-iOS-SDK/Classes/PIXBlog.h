@@ -11,8 +11,8 @@
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
 /**
- *  這個 class 主要用來處理 Blog APU Request
- *  除了 ＊ 是 required 參數外，其餘參數為 optional
+ *  這個 class 主要用來處理 Blog API Method ， 並檢查輸入參數正規性
+ *  除了 ＊ 是 require 參數外，其餘參數為 optional
  */
 @interface PIXBlog : NSObject
 /**
@@ -257,7 +257,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  列出部落格資訊 http://emma.pixnet.cc/blog
  *
  *  @param userName   ＊指定要回傳的使用者資訊
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogInformationWithUserName:(NSString *)userName
                           completion:(PIXHandlerCompletion)completion;
@@ -267,9 +267,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  讀取使用者部落格分類資訊 http://emma.pixnet.cc/blog/categories
  *
- *  @param userName   *指定要回傳的使用者資訊
+ *  @param userName   ＊指定要回傳的使用者資訊
  *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
                              password:(NSString *)passwd
@@ -279,11 +279,11 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  新增部落格個人分類（需認證） http://emma.pixnet.cc/blog/categories
  *
- *  @param name        *分類名稱
- *  @param type        *請輸入分類 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
+ *  @param name        ＊分類名稱
+ *  @param type        ＊請輸入分類 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
  *  @param description 分類說明
- *  @param cateID      *對應的全站文章類別 id. 當 type 為 category 為必須參數
- *  @param completion  succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param cateID      ＊對應的全站文章類別 id. 當 type 為 category 為必須參數
+ *  @param completion  succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)createBlogCategoriesWithName:(NSString *)name
                                 type:(PIXBlogCategoryType)type
@@ -293,11 +293,11 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  修改部落格個人分類 (需認證) http://emma.pixnet.cc/blog/categories/:id
  *
- *  @param categoriesID *要修改的 Category / Folder ID
- *  @param newName      *修改後的顯示名稱
+ *  @param categoriesID ＊要修改的 Category / Folder ID
+ *  @param newName      ＊修改後的顯示名稱
  *  @param type         請輸入修改類型 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
  *  @param description  修改後的分類說明
- *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion   succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)updateBlogCategoriesFromID:(NSString *)categoriesID
                            newName:(NSString *)newName
@@ -308,9 +308,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  刪除部落格個人分類（需認證） http://emma.pixnet.cc/blog/categories/:id
  *
  *
- *  @param categoriesID *要刪除的 Category / Folder ID
+ *  @param categoriesID ＊要刪除的 Category / Folder ID
  *  @param type         請輸入要刪除類型 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
- *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion   succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID
                             type:(PIXBlogCategoryType)type
@@ -319,8 +319,8 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  修改部落格分類排序（需認證） http://emma.pixnet.cc/blog/categories/position
  *
- *  @param categoriesIDArray *輸入以部落格分類ID組成已排序好的 Array，分類將會已陣列順序重新排序。放在越前面的表示圖片的順序越優先。不過在排序上分類資料夾的排序要優先於分類，所以對分類資料夾的排序指定只會影響資料夾群本身
- *  @param completion        succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param categoriesIDArray ＊輸入以部落格分類ID組成已排序好的 Array，分類將會已陣列順序重新排序。放在越前面的表示圖片的順序越優先。不過在排序上分類資料夾的排序要優先於分類，所以對分類資料夾的排序指定只會影響資料夾群本身
+ *  @param completion        succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
                   completion:(PIXHandlerCompletion)completion;
@@ -334,7 +334,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param page           頁數, 預設為 1, 不需要則輸入 nil
  *  @param articlePerPage 每頁幾筆, 預設為 100, 不需要則輸入 nil
- *  @param completion     succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogAllArticlesWithUserName:(NSString *)userName
                               password:(NSString *)passwd
@@ -349,7 +349,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param articleID     ＊指定要回傳的文章ID
  *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
- *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中 
  */
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName
                                articleID:(NSString *)articleID
@@ -363,7 +363,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param articleID  ＊指定要回傳的文章ID
  *  @param userName   ＊指定要回傳的使用者
  *  @param limit      限制回傳文章的筆數，預設值為1，最大值為10, 不設定則輸入 nil
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
                                 userName:(NSString *)userName
@@ -373,13 +373,13 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  列出部落格留言 http://emma.pixnet.cc/blog/comments
  *
- *  @param userName        *指定要回傳的使用者資訊
- *  @param articleID       *指定要回傳的留言文章
+ *  @param userName        ＊指定要回傳的使用者資訊
+ *  @param articleID       ＊指定要回傳的留言文章
  *  @param blogPasswd      如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param articlePassword 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param page            頁數, 預設為 1, 不需要則輸入 nil
  *  @param commentPerPage  每頁幾筆, 預設為 100, 不需要則輸入 nil
- *  @param completion      succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion      succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogArticleCommentsWithUserName:(NSString *)userName
                                articleID:(NSString *)articleID
@@ -391,8 +391,8 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  列出部落格最新文章 http://emma.pixnet.cc/blog/articles/latest
  *
- *  @param userName   *指定要回傳的使用者資訊
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param userName   ＊指定要回傳的使用者資訊
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
                             completion:(PIXHandlerCompletion)completion;
@@ -400,9 +400,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  列出部落格熱門文章 http://emma.pixnet.cc/blog/articles/hot
  *
- *  @param userName   *指定要回傳的使用者資訊
+ *  @param userName   ＊指定要回傳的使用者資訊
  *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                              password:(NSString *)passwd
@@ -411,11 +411,11 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  搜尋部落格個人文章 http://emma.pixnet.cc/blog/articles/search
  *
- *  @param keyword    *關鍵字或標籤
+ *  @param keyword    ＊關鍵字或標籤
  *  @param userName   指定要回傳的使用者資訊，如輸入 nil 則搜尋全站
  *  @param page       頁數, 預設為 1, 不需要則輸入 nil
  *  @param perPage    每頁幾筆, 預設為 100, 不需要則輸入 nil
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
                                userName:(NSString *)userName
@@ -428,8 +428,8 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  新增部落格個人文章（需認證）  http://emma.pixnet.cc/blog/articles
  *
- *  @param title         *文章標題
- *  @param body          *文章內容
+ *  @param title         ＊文章標題
+ *  @param body          ＊文章內容
  *  @param status        文章狀態，使用 PIXArticleStatus 型別
  *  @param date          公開時間，這個表示文章的發表時間，預設為現在時間
  *  @param cateID        全站分類，使用 PIXSiteBlogCategory 型別
@@ -440,7 +440,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param passwd        當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
  *  @param passwdHint    當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
  *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
- *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
@@ -457,9 +457,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  修改部落格個人文章（需認證） http://emma.pixnet.cc/blog/articles/:id
  *
- *  @param articleID     *要修改的文章 ID
- *  @param title         *修改後的文章標題
- *  @param body          *修改後的文章內容
+ *  @param articleID     ＊要修改的文章 ID
+ *  @param title         ＊修改後的文章標題
+ *  @param body          ＊修改後的文章內容
  *  @param status        文章狀態，使用 PIXArticleStatus 型別
  *  @param date          公開時間，這個表示文章的發表時間，預設為現在時間
  *  @param cateID        全站分類，使用 PIXSiteBlogCategory 型別
@@ -470,7 +470,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param passwd        當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
  *  @param passwdHint    當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
  *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
- *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
                                  title:(NSString *)title
@@ -489,8 +489,8 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  刪除部落格個人文章（需認證） http://emma.pixnet.cc/blog/articles/:id
  *
- *  @param articleID  *要刪除的文章 ID
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param articleID  ＊要刪除的文章 ID
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)deleteBlogArticleByArticleID:(NSString *)articleID
                           completion:(PIXHandlerCompletion)completion;
@@ -501,11 +501,11 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  列出部落格留言 http://emma.pixnet.cc/blog/comments
  *
- *  @param userName   *指定要回傳的使用者資訊
- *  @param articleID  *指定要回傳的留言文章
+ *  @param userName   ＊指定要回傳的使用者資訊
+ *  @param articleID  ＊指定要回傳的留言文章
  *  @param page       頁數, 預設為 1, 不需要則輸入 nil
  *  @param perPage    每頁幾筆, 預設為 100, 不需要則輸入 nil
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogCommentsWithUserName:(NSString *)userName
                           articleID:(NSString *)articleID
@@ -516,9 +516,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  讀取單一留言 http://emma.pixnet.cc/blog/comments/:id
  *
- *  @param userName   *指定要回傳的使用者資訊
- *  @param commentID  *指定要回傳的留言ID
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param userName   ＊指定要回傳的使用者資訊
+ *  @param commentID  ＊指定要回傳的留言ID
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogSingleCommentWithUserName:(NSString *)userName
                               commmentID:(NSString *)commentID
@@ -539,8 +539,8 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  新增部落格留言（需認證） http://emma.pixnet.cc/blog/comments
  *
- *  @param articleID     *要留言的文章 ID
- *  @param body          *留言內容
+ *  @param articleID     ＊要留言的文章 ID
+ *  @param body          ＊留言內容
  *  @param userName      要留言的部落格作者名稱, 若不填入則預設找自己的文章
  *  @param author        留言的暱稱, 不填入則預設代入認證使用者的 display_name
  *  @param title         留言標題
@@ -549,7 +549,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *  @param email         電子郵件
  *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權
- *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)createBlogCommentWithArticleID:(NSString *)articleID
                                   body:(NSString *)body
@@ -565,9 +565,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容（需認證） http://emma.pixnet.cc/blog/comments/:id/reply
  *
- *  @param commentID  *要回覆/修改的留言 ID
- *  @param body       *留言內容/修改後的內容
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param commentID  ＊要回覆/修改的留言 ID
+ *  @param body       ＊留言內容/修改後的內容
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)replyBlogCommentWithCommnetID:(NSString *)commentID
                                  body:(NSString *)body
@@ -576,9 +576,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  將留言設為公開/關閉（需認證） http://emma.pixnet.cc/blog/comments/:id/open http://emma.pixnet.cc/blog/comments/:id/close
  *
- *  @param commentID  *要公開/關閉的留言 ID
- *  @param isOpen     * YSE 為 公開， NO 為 關閉 該則留言
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param commentID  ＊要公開/關閉的留言 ID
+ *  @param isOpen     ＊YES 為 公開， NO 為 關閉 該則留言
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
                                     isOpen:(BOOL)isOpen
@@ -587,9 +587,9 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  將留言設為廣告留言/非廣告留言（需認證） http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
  *
- *  @param commentID  *要公開/關閉的留言 ID
- *  @param isSpam     * YSE 為設成廣告留言， NO 為設成非廣告留言
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param commentID  ＊要公開/關閉的留言 ID
+ *  @param isSpam     ＊YES 為設成廣告留言， NO 為設成非廣告留言
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
                                     isSpam:(BOOL)isSpam
@@ -598,8 +598,8 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 /**
  *  刪除部落格留言（需認證） http://emma.pixnet.cc/blog/comments/:id
  *
- *  @param commentID  *要刪除的留言 ID
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param commentID  ＊要刪除的留言 ID
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
                             completion:(PIXHandlerCompletion)completion;
@@ -612,7 +612,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
  *
  *  @param group      當被設為 YES 或 true 時, 回傳資訊會以全站分類群組為分類，不需要則輸入 NO 或 false
  *  @param thumb      當被設為 YES 或 true 時, 回傳分類資訊會包含縮圖網址，不需要則輸入 NO 或 false
- *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group
                                     thumbs:(BOOL)thumb
