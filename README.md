@@ -41,9 +41,9 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ###進階使用者
 可依各種不同需求 import 你所需要的各種不同功能，目前開放：
 
- 1. PIXBlog.h
- 2. PIXAlbum.h
- 3. PIXUser.h
+ 1. `PIXBlog.h`
+ 2. `PIXAlbum.h`
+ 3. `PIXUser.h`
 
 三隻不同的 Class 讓開發者使用並取得資料。
 
@@ -89,6 +89,9 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
     [PIXNETSDK logout];
 ```
 即可登出。
+
+####詳細說明文件
+請參考 [CocoaDocs PIXNET-iOS-SDK](http://cocoadocs.org/docsets/PIXNET-iOS-SDK/0.2/index.html) 說明文件
 
 ## License
 PIXNET SDK is BSD-licensed. We also provide an additional patent grant.
