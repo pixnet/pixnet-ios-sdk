@@ -34,10 +34,10 @@
     
     PIXUser *user = [PIXUser new];
     
-    [user getUserWithUserName:@"admin" completion:^(BOOL succeed, id result, NSString *errorMessage){
+    [user getUserWithUserName:@"admin" completion:^(BOOL succeed, id result, NSError *error){
         waitingForBlock = NO;
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        NSLog(@"%@", errorMessage);
+        NSLog(@"%@", error);
         XCTAssertTrue(succeed);
     }];
 }
@@ -49,10 +49,10 @@
     PIXUser *user = [PIXUser new];
     
     // 故意不認證，應該會回傳 False
-    [user getAccountWithCompletion:^(BOOL succeed, id result, NSString *errorMessage){
+    [user getAccountWithCompletion:^(BOOL succeed, id result, NSError *error){
         waitingForBlock = NO;
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        NSLog(@"%@", errorMessage);
+        NSLog(@"%@", error);
         XCTAssertFalse(succeed);
     }];
 
