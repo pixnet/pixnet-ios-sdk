@@ -25,6 +25,10 @@
 		619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09D918FD1DF900325991 /* PIXFriend.m */; };
 		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
 		619C09E018FD237400325991 /* PIXMainpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DF18FD237400325991 /* PIXMainpage.m */; };
+		CE3A34D818FE50070039A1BC /* NSDictionary+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34D718FE50070039A1BC /* NSDictionary+PIXCategory.m */; };
+		CE3A34DB18FE504F0039A1BC /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34DA18FE504F0039A1BC /* NSArray+PIXCategory.m */; };
+		CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */; };
+		CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */; };
 		CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */; };
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
@@ -70,6 +74,13 @@
 		619C09DE18FD237400325991 /* PIXMainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXMainpage.h; path = Classes/PIXMainpage.h; sourceTree = "<group>"; };
 		619C09DF18FD237400325991 /* PIXMainpage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXMainpage.m; path = Classes/PIXMainpage.m; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE3A34D618FE50070039A1BC /* NSDictionary+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+PIXCategory.h"; sourceTree = "<group>"; };
+		CE3A34D718FE50070039A1BC /* NSDictionary+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+PIXCategory.m"; sourceTree = "<group>"; };
+		CE3A34D918FE504F0039A1BC /* NSArray+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PIXCategory.h"; sourceTree = "<group>"; };
+		CE3A34DA18FE504F0039A1BC /* NSArray+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PIXCategory.m"; sourceTree = "<group>"; };
+		CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXCategoryTests.m; sourceTree = "<group>"; };
+		CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXTestObjectGenerator.h; sourceTree = "<group>"; };
+		CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXTestObjectGenerator.m; sourceTree = "<group>"; };
 		CE46037D18F6766A00A3BF84 /* NSError+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+PIXCategory.h"; path = "Classes/NSError+PIXCategory.h"; sourceTree = "<group>"; };
 		CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+PIXCategory.m"; path = "Classes/NSError+PIXCategory.m"; sourceTree = "<group>"; };
 		CE46038018F6767600A3BF84 /* NSObject+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+PIXCategory.h"; path = "Classes/NSObject+PIXCategory.h"; sourceTree = "<group>"; };
@@ -195,6 +206,9 @@
 			children = (
 				CEDB7C9918D2ECF700D14D0C /* Supporting Files */,
 				50845DAA18F4F1B3000813AF /* PIXUserTests.m */,
+				CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */,
+				CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */,
+				CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */,
 			);
 			path = "PIXNET-iOS-SDKTests";
 			sourceTree = "<group>";
@@ -232,6 +246,10 @@
 				CEDCD0FA18F3AD6800B32ACC /* PIXCredentialStorage.m */,
 				CE46037D18F6766A00A3BF84 /* NSError+PIXCategory.h */,
 				CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */,
+				CE3A34D618FE50070039A1BC /* NSDictionary+PIXCategory.h */,
+				CE3A34D718FE50070039A1BC /* NSDictionary+PIXCategory.m */,
+				CE3A34D918FE504F0039A1BC /* NSArray+PIXCategory.h */,
+				CE3A34DA18FE504F0039A1BC /* NSArray+PIXCategory.m */,
 			);
 			name = NetworkHandle;
 			sourceTree = "<group>";
@@ -423,7 +441,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3A34D818FE50070039A1BC /* NSDictionary+PIXCategory.m in Sources */,
 				50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */,
+				CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */,
+				CE3A34DB18FE504F0039A1BC /* NSArray+PIXCategory.m in Sources */,
+				CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
