@@ -28,12 +28,12 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testJSONValuesIsNSString
 {
     NSDictionary *dict = [PIXTestObjectGenerator PIXTestDictionary];
     NSDictionary *nDict = [dict PIXDictionaryByReplacingNullsWithBlanks];
-    NSLog(@"dict: %@", nDict);
     
+//    NSLog(@"dict: %@", nDict);
 }
 
 @end

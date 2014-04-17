@@ -51,6 +51,7 @@
 		CEDCD0FD18F3AD6800B32ACC /* PIXAPIHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0F818F3AD6800B32ACC /* PIXAPIHandler.m */; };
 		CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0FA18F3AD6800B32ACC /* PIXCredentialStorage.m */; };
 		CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD10018F3AD7E00B32ACC /* PIXUser.m */; };
+		CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */; };
 		D2C300279399403B84D4742C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDB24BB1BB342F89ED09330 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -117,6 +118,7 @@
 		CEDCD0FA18F3AD6800B32ACC /* PIXCredentialStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXCredentialStorage.m; path = Classes/PIXCredentialStorage.m; sourceTree = "<group>"; };
 		CEDCD0FF18F3AD7E00B32ACC /* PIXUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXUser.h; path = Classes/PIXUser.h; sourceTree = "<group>"; };
 		CEDCD10018F3AD7E00B32ACC /* PIXUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXUser.m; path = Classes/PIXUser.m; sourceTree = "<group>"; };
+		CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAlbumTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +209,7 @@
 				CEDB7C9918D2ECF700D14D0C /* Supporting Files */,
 				50845DAA18F4F1B3000813AF /* PIXUserTests.m */,
 				CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */,
+				CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */,
 				CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */,
 				CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */,
 			);
@@ -446,6 +449,7 @@
 				CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */,
 				CE3A34DB18FE504F0039A1BC /* NSArray+PIXCategory.m in Sources */,
 				CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */,
+				CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

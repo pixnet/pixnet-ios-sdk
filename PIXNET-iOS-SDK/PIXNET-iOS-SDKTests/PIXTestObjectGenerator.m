@@ -38,6 +38,7 @@
     [array addObject:@(INT16_MIN)];
     [array addObject:@(INT32_MIN)];
     [array addObject:@(INT64_MIN)];
+    [array addObject:[NSNull null]];
     return array;
 }
 +(NSArray *)PIXStringsArray{
@@ -47,21 +48,4 @@
     [array addObject:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789~!@#$%^&*()_+=[]\{}|`<>?,./\""];
     return array;
 }
-+(id)objectByRandom{
-    int randomIndex = arc4random()%4;
-    id thisObject;
-    switch (randomIndex) {
-        case 0:
-            thisObject = [NSNull null];
-            break;
-        case 1:{
-            
-            break;
-        }
-        default:
-            break;
-    }
-    return thisObject;
-}
-
 @end
