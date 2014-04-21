@@ -24,5 +24,11 @@
         completion(NO, nil, jsonError);
     }
 }
-
++(BOOL)PIXCheckNSUIntegerValid:(NSUInteger)integer{
+    if (integer<=0 || integer>INT32_MAX) {
+        return NO;
+    } else {
+        return YES;
+    }
+}
 @end

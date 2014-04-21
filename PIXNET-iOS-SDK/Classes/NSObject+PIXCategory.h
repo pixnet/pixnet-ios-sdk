@@ -11,4 +11,5 @@
 
 @interface NSObject (PIXCategory)
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion;
++(BOOL)PIXCheckNSUIntegerValid:(NSUInteger)integer;
 @end
