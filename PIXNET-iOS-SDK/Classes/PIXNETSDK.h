@@ -463,7 +463,7 @@
 -(void)getAlbumConfigWithCompletion:(PIXHandlerCompletion)completion;
 #pragma mark SetFolders
 /**
- *  列出相本列表,每頁20筆 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfolders
+ *  列出相本及資料夾列表,每頁20筆 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfolders
  *
  *  @param userName   相本擁有者,必要參數
  *  @param page       頁數
@@ -480,7 +480,7 @@
 -(void)sortSetFoldersWithFolderIDs:(NSArray *)ids completion:(PIXHandlerCompletion)completion;
 #pragma mark Sets
 /**
- *  列出個人所有相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
+ *  列出個人所有相本(不含資料夾)，每頁20筆 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
  *
  *  @param userName   相本擁有者,必要參數
  *  @param parentID   可以藉此指定拿到特定相簿資料夾底下的相簿
