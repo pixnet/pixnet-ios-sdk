@@ -50,4 +50,12 @@ typedef NS_ENUM(NSInteger, PIXErrorDomainStatus) {
  *  @return NSError instance
  */
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response;
+/**
+ *  當輸入參數為 NSUInteger 時，會在 SDK 裡檢查有效性，當變數無效時，就用這個 method 產生 error 物件
+ *
+ *  @param integerName 變數名稱
+ *
+ *  @return NSError instance
+ */
++(instancetype)PIXErrorWithNSUIntegerFormat:(NSString *)integerName;
 @end

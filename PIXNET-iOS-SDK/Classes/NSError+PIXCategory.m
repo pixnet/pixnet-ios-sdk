@@ -24,4 +24,9 @@
     NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;
 }
++(instancetype)PIXErrorWithNSUIntegerFormat:(NSString *)integerName{
+    NSString *message = [NSString stringWithFormat:@"%@ 值小於1或是大於2147483647了", integerName];
+    NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:PIXErrorDomainStatusInputParameter userInfo:@{NSLocalizedDescriptionKey:message}];
+    return error;
+}
 @end
