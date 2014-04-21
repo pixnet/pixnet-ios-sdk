@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 
 #pragma mark SetFolders
 /**
- *  列出相本列表 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfolders
+ *  列出相本及資料夾列表 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfolders
  *
  *  @param userName   相本擁有者,必要參數
  *  @param trimUser   是否每篇文章都要回傳作者資訊, 如果設定為 YES, 則就不回傳. 預設是 NO
@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 
 #pragma mark Sets
 /**
- *  列出個人所有相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
+ *  列出個人所有相本(不含資料夾) http://developer.pixnet.pro/#!/doc/pixnetApi/albumSets
  *
  *  @param userName   相本擁有者,必要參數
  *  @param parentID   可以藉此指定拿到特定相簿資料夾底下的相簿

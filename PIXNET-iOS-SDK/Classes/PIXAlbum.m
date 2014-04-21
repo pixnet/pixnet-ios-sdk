@@ -47,6 +47,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         completion(NO, nil,[NSError PIXErrorWithParameterName:@"userName"]);
         return;
     }
+
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     params[@"trim_user"] = @(trimUser);
