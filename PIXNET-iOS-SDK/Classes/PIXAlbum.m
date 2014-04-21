@@ -360,10 +360,16 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     if (password != nil) {
         params[@"password"] = password;
     }
+    NSString *path = nil;
+    if (isSetId) {
+        path = @"album/set_comments";
+    } else {
+        path = @"album/comments";
+    }
     if (shouldAuth) {
         
     } else {
-        [[PIXAPIHandler new] callAPI:@"album/comments" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
+        [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
             if (succeed) {
                 [self succeedHandleWithData:result completion:completion];
             } else {
