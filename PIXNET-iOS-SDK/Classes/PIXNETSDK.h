@@ -571,6 +571,21 @@
  */
 -(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion;
 /**
+ *  將相簿上某則留言註記為廣告 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsMarkSpam
+ *
+ *  @param commentId  該則留言的 id
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markAlbumSetCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將相簿上某則留言註記為非廣告 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsMarkHam
+ *
+ *  @param commentId  該則留言的 id
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)markAlbumSetCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+
+/**
  *  新增一則相片上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumCommentsCreate
  *
  *  @param elementID  相片 ID
@@ -579,6 +594,7 @@
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)createElementCommentWithElementID:(NSString *)elementID body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion;
+
 /**
  *  附近的相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
  *
