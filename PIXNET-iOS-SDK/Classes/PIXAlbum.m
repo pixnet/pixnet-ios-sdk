@@ -226,22 +226,34 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
+-(void)markAlbumSetCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO isCommentInSet:YES completion:completion];
+}
+-(void)markAlbumSetCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO isCommentInSet:YES completion:completion];
+}
 -(void)markCommentAsSpamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:YES completion:completion];
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:YES isCommentInSet:NO completion:completion];
 }
 -(void)markCommentAsHamWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion{
-    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO completion:completion];
+    [self markCommentAsSpamOrHamWithCommentID:commentId isSpam:NO isCommentInSet:NO completion:completion];
 }
--(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion{
+-(void)markCommentAsSpamOrHamWithCommentID:(NSString *)commentId isSpam:(BOOL)isSpam isCommentInSet:(BOOL)isCommentInSet completion:(PIXHandlerCompletion)completion{
     if (commentId==nil || commentId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"commentId 參數有誤"]);
         return;
     }
+    NSString *pathPrefix = nil;
+    if (isCommentInSet) {
+        pathPrefix = @"album/set_comments/";
+    } else {
+        pathPrefix = @"album/comments/";
+    }
     NSString *path = nil;
     if (isSpam) {
-        path = [NSString stringWithFormat:@"album/comments/%@/mark_spam", commentId];
+        path = [NSString stringWithFormat:@"%@%@/mark_spam", pathPrefix, commentId];
     } else {
-        path = [NSString stringWithFormat:@"album/comments/%@/mark_ham", commentId];
+        path = [NSString stringWithFormat:@"%@%@/mark_ham", pathPrefix, commentId];
     }
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         if (succeed) {
