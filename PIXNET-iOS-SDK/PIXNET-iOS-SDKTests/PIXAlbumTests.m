@@ -5,13 +5,18 @@
 //  Created by Dolphin Su on 4/17/14.
 //  Copyright (c) 2014 Dolphin Su. All rights reserved.
 //
-static NSString *kUser = @"";
-static NSString *kFolderTitle = @"Unit test folder title";
 
+//開始測試則請先設定好這四個常數
+static NSString *kUser = @"";
+static NSString *kUserPassword = @"";
+static NSString *kConsumerKey = @"";
+static NSString *kConsumerSecret = @"";
+
+static NSString *kFolderTitle = @"Unit test folder title";
 static NSString *kSetTitle = @"Unit test set";
 static NSString *kSetDescription = @"Unit test set description";
-
 static NSString *kSetComment = @"Unit test comment in set";
+
 #import <XCTest/XCTest.h>
 #import "PIXNETSDK.h"
 #import "PIXTestObjectGenerator.h"
@@ -37,10 +42,10 @@ static NSString *kSetComment = @"Unit test comment in set";
 
 - (void)testMain
 {
-    [PIXNETSDK setConsumerKey:@"" consumerSecret:@""];
+    [PIXNETSDK setConsumerKey:kConsumerKey consumerSecret:kConsumerSecret];
     __block BOOL done = NO;
     //登入
-    [PIXNETSDK authByXauthWithUserName:kUser userPassword:@"" requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [PIXNETSDK authByXauthWithUserName:kUser userPassword:kUserPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
         //產生一個 folder
         NSString *folderId = [self createAlbumFolder];
         //產生一個相簿
