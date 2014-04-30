@@ -7,10 +7,10 @@
 //
 
 //開始測試則請先設定好這四個常數
-static NSString *kUser = @"dolphinsue";
-static NSString *kUserPassword = @"howardSue319";
-static NSString *kConsumerKey = @"1a9dbd703c629400926a32effdda6d3f";
-static NSString *kConsumerSecret = @"70218adabeb077139a5e111bd088af8f";
+static NSString *kUser = @"";
+static NSString *kUserPassword = @"";
+static NSString *kConsumerKey = @"";
+static NSString *kConsumerSecret = @"";
 
 static NSString *kFolderTitle = @"Unit test folder title";
 static NSString *kSetTitle = @"Unit test set";
@@ -23,6 +23,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 
 @interface PIXAlbumTests : XCTestCase
 @property (nonatomic, strong) XCTestLog *testLog;
+@property (nonatomic) CLLocationCoordinate2D location;
 
 @end
 
@@ -32,6 +33,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 {
     [super setUp];
     _testLog = [XCTestLog new];
+    _location = CLLocationCoordinate2DMake(25.0685028,121.5456014);
 }
 
 - (void)tearDown
@@ -81,7 +83,9 @@ static NSString *kSetComment = @"Unit test comment in set";
         [self removeSet:albumSetId toFolder:folderId];
         
         //新增一張照片
-        [self addElementInAlbum:albumSetId];
+        NSString *elementId = [self addElementInAlbum:albumSetId];
+        //修改相片
+        [self updateElement:elementId];
         
         //刪除相簿
         [self deleteAlbum:albumSetId];
@@ -93,6 +97,22 @@ static NSString *kSetComment = @"Unit test comment in set";
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
+}
+-(void)updateElement:(NSString *)elementId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] updateElementWithElementID:elementId elementTitle:@"updated element title" elementDescription:@"updated element description" setID:nil videoThumbType:PIXVideoThumbTypeNone tags:nil location:_location completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"update element succeed: %@", elementId);
+        } else {
+            XCTFail(@"mark comment in set as ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(NSString *)addElementInAlbum:(NSString *)albumId{
     __block BOOL done = NO;
@@ -119,7 +139,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] getAlbumMainWithCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"get album main succeed");
-            NSLog(@"albums in main: %@", result);
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);
         }
@@ -133,8 +152,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 }
 -(void)getAlbumsetsNearby{
     __block BOOL done = NO;
-    CLLocationCoordinate2D location = CLLocationCoordinate2DMake(25.0685028,121.5456014);
-    [[PIXNETSDK new] getAlbumSetsNearbyWithUserName:kUser location:location distanceMin:1 distanceMax:5000 page:1 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getAlbumSetsNearbyWithUserName:kUser location:_location distanceMin:1 distanceMax:5000 page:1 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"get nearby albums count: %li", [result[@"sets"] count]);
         } else {
