@@ -309,7 +309,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 /**
  *  修改資料夾裡的相簿排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsPosition
  *
- *  @param parentId   屬於哪一個相簿資料夾
+ *  @param parentId   屬於哪一個相簿資料夾,必要欄位
  *  @param ids        相簿id, array 裡的值為 NSString, id 的順序即為相簿的新順序
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
