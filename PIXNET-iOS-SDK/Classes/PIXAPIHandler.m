@@ -46,6 +46,12 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
 }
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
+    NSString *localUser = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserNameIdentifier copy]];
+    NSString *localPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserPasswordIdentifier copy]];
+    if (![localUser isEqualToString:userName] || ![localPassword isEqualToString:password]) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"前一個使用者尚未登出，請先呼叫 +(void)logout 方法"]);
+        return;
+    }
     if (kConsumerSecret==nil || kConsumerKey==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret"]);
         return;
