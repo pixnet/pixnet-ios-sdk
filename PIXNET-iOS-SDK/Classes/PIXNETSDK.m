@@ -15,6 +15,9 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
++(BOOL)isAuthed{
+    return [PIXAPIHandler isAuthed];
+}
 +(void)logout{
     [PIXAPIHandler logout];
 }

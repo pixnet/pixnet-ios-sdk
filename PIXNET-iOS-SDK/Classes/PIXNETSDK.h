@@ -32,6 +32,12 @@
  */
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
 /**
+ *  判斷目前是否可呼叫需要認證的 API
+ *
+ *  @return 就 BOOL 值咩....可以就 YES，不行就 NO
+ */
++(BOOL)isAuthed;
+/**
  *  為目前的使用者做登出的動作
  */
 +(void)logout;
