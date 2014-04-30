@@ -36,15 +36,25 @@
 }
 -(NSURLCredential *)credentialForIdentifier:(NSString *)identifier{
     NSDictionary *credentials = [_storage credentialsForProtectionSpace:_space];
-    return credentials[identifier];
+    if (credentials) {
+        return credentials[identifier];
+    } else {
+        return nil;
+    }
 }
 
 -(NSString *)stringForIdentifier:(NSString *)identifier{
     NSURLCredential *credential = [self credentialForIdentifier:identifier];
-    return credential.password;
+    if (credential) {
+        return credential.password;
+    } else {
+        return nil;
+    }
 }
 -(void)removeStringForIdentifier:(NSString *)identifier{
     NSURLCredential *credential = [self credentialForIdentifier:identifier];
-    [_storage removeCredential:credential forProtectionSpace:_space];
+    if (credential) {
+        [_storage removeCredential:credential forProtectionSpace:_space];
+    }
 }
 @end

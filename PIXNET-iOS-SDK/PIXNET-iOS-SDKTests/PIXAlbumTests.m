@@ -7,10 +7,10 @@
 //
 
 //開始測試則請先設定好這四個常數
-static NSString *kUser = @"";
-static NSString *kUserPassword = @"";
-static NSString *kConsumerKey = @"";
-static NSString *kConsumerSecret = @"";
+//static NSString *kUser = @"";
+//static NSString *kUserPassword = @"";
+//static NSString *kConsumerKey = @"";
+//static NSString *kConsumerSecret = @"";
 
 static NSString *kFolderTitle = @"Unit test folder title";
 static NSString *kSetTitle = @"Unit test set";
@@ -20,10 +20,12 @@ static NSString *kSetComment = @"Unit test comment in set";
 #import <XCTest/XCTest.h>
 #import "PIXNETSDK.h"
 #import "PIXTestObjectGenerator.h"
+#import "UserForTest.h"
 
 @interface PIXAlbumTests : XCTestCase
 @property (nonatomic, strong) XCTestLog *testLog;
 @property (nonatomic) CLLocationCoordinate2D location;
+@property (nonatomic, strong) UserForTest *testUser;
 
 @end
 
@@ -34,6 +36,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     [super setUp];
     _testLog = [XCTestLog new];
     _location = CLLocationCoordinate2DMake(25.0685028,121.5456014);
+    _testUser = [[UserForTest alloc] init];
 }
 
 - (void)tearDown
@@ -44,10 +47,15 @@ static NSString *kSetComment = @"Unit test comment in set";
 
 - (void)testMain
 {
-    [PIXNETSDK setConsumerKey:kConsumerKey consumerSecret:kConsumerSecret];
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
     __block BOOL done = NO;
+
+    if ([PIXNETSDK isAuthed]) {
+        [PIXNETSDK logout];
+    }
+    
     //登入
-    [PIXNETSDK authByXauthWithUserName:kUser userPassword:kUserPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [PIXNETSDK authByXauthWithUserName:_testUser.userName userPassword:_testUser.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
         //列出相簿主圖及相片牆
         [self getAlbumMain];
         //列出相簿及folder 列表
@@ -152,7 +160,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 }
 -(void)getAlbumsetsNearby{
     __block BOOL done = NO;
-    [[PIXNETSDK new] getAlbumSetsNearbyWithUserName:kUser location:_location distanceMin:1 distanceMax:5000 page:1 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getAlbumSetsNearbyWithUserName:_testUser.userName location:_location distanceMin:1 distanceMax:5000 page:1 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"get nearby albums count: %li", [result[@"sets"] count]);
         } else {
@@ -191,7 +199,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 
 -(void)getAlbumFolders{
     __block BOOL done = NO;
-    [[PIXNETSDK new] getAlbumFoldersWithUserName:kUser trimUser:NO page:1 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getAlbumFoldersWithUserName:_testUser.userName trimUser:NO page:1 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             [_testLog testLogWithFormat:@"get folders succeed, folders count: %lu\n", (unsigned long)[result[@"setfolders"] count]];
         } else {
@@ -315,7 +323,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 -(NSArray *)getAlbumSetComments:(NSString *)setId{
     __block BOOL done = NO;
     __block NSArray *array = nil;
-    [[PIXNETSDK new] getAlbumSetCommentsWithUserName:kUser setID:setId password:nil page:1 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getAlbumSetCommentsWithUserName:_testUser.userName setID:setId password:nil page:1 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             array = result[@"comments"];
             NSLog(@"album set comments count: %lu in album set: %@\n", (unsigned long)array.count, setId);
@@ -402,7 +410,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 -(NSArray *)getAlbumSetsAndFolders{
     __block BOOL done = NO;
     __block NSArray *array = nil;
-    [[PIXNETSDK new] getAlbumSetsWithUserName:@"dolphinsue" page:1 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getAlbumSetsWithUserName:_testUser.userName page:1 completion:^(BOOL succeed, id result, NSError *error) {
         done = YES;
         if (succeed) {
             array = result[@"setfolders"];
@@ -420,7 +428,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 -(NSArray *)getAlbumSets{
     __block BOOL done = NO;
     __block NSArray *array = nil;
-    [[PIXNETSDK new] getAlbumSetsWithUserName:@"dolphinsue" parentID:nil page:1 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getAlbumSetsWithUserName:_testUser.userName parentID:nil page:1 completion:^(BOOL succeed, id result, NSError *error) {
         done = YES;
         if (succeed) {
             array = result[@"sets"];
