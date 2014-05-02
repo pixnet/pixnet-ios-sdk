@@ -768,4 +768,14 @@
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)deleteCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
+/**
+ *  在照片或影片上標記朋友 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFaces
+ *
+ *  @param elementId    要被標記的照片或影片ID，必要參數
+ *  @param beTaggedUser 要被標記的人的ID，必要參數
+ *  @param tagFrame     要被標記的範圍，必要參數
+ *  @param completion   succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame completion:(PIXHandlerCompletion)completion;
+//-(void)updateElementTagWithFaceId:(NSString )
 @end

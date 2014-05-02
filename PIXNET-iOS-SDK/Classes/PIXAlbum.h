@@ -473,9 +473,19 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *
  *  @param elementId   要加人臉標記的相片 ID，必要欄位
  *  @param beTagedUser 要被標記的使用者帳號，被標記者必須設定標記者為好友。必要欄位
- *  @param tagFrame    被標記的影像範圍，必要欄位
+ *  @param tagFrame    被標記的影像範圍，當沒有使用 recommendId 時，這是必要欄位
  *  @param recommendId 如果在 -getCommentWithUserName:commentID:completion: 有系統推薦標記的使用者，可在這裡使用
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame recommendID:(NSString *)recommendId completion:(PIXHandlerCompletion)completion;
+/**
+ *  更新人臉標記 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFacesFaceid
+ *
+ *  @param faceId      要被改變的人臉 id，必要欄位
+ *  @param elementId   相片或影像的 id，必要欄位
+ *  @param beTaggedUser    要更新標記的使用者帳號。被標記者必須設定標記者為好友。必要欄位。
+ *  @param newTagFrame 被標記的影像範圍，必要欄位
+ *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)updateTagedFriendWithFaceId:(NSString *)faceId elementId:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser newTagFrame:(CGRect)newTagFrame completion:(PIXHandlerCompletion)completion;
 @end
