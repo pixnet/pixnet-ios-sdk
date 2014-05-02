@@ -70,6 +70,10 @@ static NSString *kSetComment = @"Unit test comment in set";
     if (!authed) {
         return;
     }
+    //列出相簿全站分類
+    [self getAlbumSiteCategories];
+    //列出相簿個人設定
+    [self getAlbumConfig];
     //列出相簿主圖及相片牆
     [self getAlbumMain];
     //列出相簿及folder 列表
@@ -108,13 +112,232 @@ static NSString *kSetComment = @"Unit test comment in set";
     NSString *elementId = [self addElementInAlbum:albumSetId];
     //修改相片
     [self updateElement:elementId];
+
+    //新增相片留言
+    NSString *elementCommentId = [self createElementComment:elementId];
+    //讀取相片裡所有留言
+    [self getElementComments:elementId];
+    //將相片裡的留言設為廣告
+    [self markElementCommentAsSpam:elementCommentId];
+    //將相片裡的留言設為非廣告
+    [self markElementCommentAsHam:elementCommentId];
     
+    //新增人臉標記
+    NSString *faceId = [self tagFaceOnElement:elementId];
+    //更新人臉標記
+    [self updateFace:faceId element:elementId];
+    
+    //讀取單一照片
+    [self getElement:elementId];
+    
+    //刪除人臉標記
+    [self deleteFace:faceId];
+    //刪除相片裡的留言
+    [self deleteElementComment:elementCommentId];
+    //刪除相片
+    [self deleteElement:elementId];
     //刪除相簿
     [self deleteAlbum:albumSetId];
     //刪除資料夾
     [self deleteFolder:folderId];
 
 
+}
+-(void)getAlbumSiteCategories{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getAlbumSiteCategoriesWithIsIncludeGroups:YES isIncludeThumbs:NO completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"get album site categories succeed");
+        } else {
+            XCTFail(@"get album site categories failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)getAlbumConfig{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getAlbumConfigWithCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"get album config succeed");
+        } else {
+            XCTFail(@"get album config failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)deleteFace:(NSString *)faceId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] deleteTagWithFaceID:faceId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"face tag is deleted: %@", faceId);
+        } else {
+            XCTFail(@"delete face tag failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)updateFace:(NSString *)faceId element:(NSString *)elementId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] updateTagedFaceWithFaceId:faceId elementId:elementId beTaggedUser:_testUser.userName newTagFrame:CGRectMake(20, 20, 10, 10) completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"face tag is updated: %@", faceId);
+        } else {
+            XCTFail(@"update face tag failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(NSString *)tagFaceOnElement:(NSString *)elementId{
+    __block BOOL done = NO;
+    __block NSString *faceId = nil;
+    [[PIXNETSDK new] tagFriendWithElementID:elementId beTaggedUser:_testUser.userName tagFrame:CGRectMake(0, 0, 10, 10) completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            faceId = result[@"element"][@"faces"][@"tagged"][0][@"id"];
+            NSLog(@"tag face succeed: %@", faceId);
+        } else {
+            XCTFail(@"tag face failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return faceId;
+}
+-(void)deleteElementComment:(NSString *)commentId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] deleteCommentWithCommentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"element comment has been deleted: %@", commentId);
+        } else {
+            XCTFail(@"delete element comment failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)deleteElement:(NSString *)elementId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] deleteElementWithElementID:elementId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"element has been deleted: %@", elementId);
+        } else {
+            XCTFail(@"delete element failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)markElementCommentAsHam:(NSString *)commentId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] markCommentAsHamWithCommentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"mark element comment as ham: %@", commentId);
+        } else {
+            XCTFail(@"mark comment in set as ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)markElementCommentAsSpam:(NSString *)commentId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] markCommentAsSpamWithCommentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"mark element comment as spam: %@", commentId);
+        } else {
+            XCTFail(@"mark comment in set as spam failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)getElementComments:(NSString *)elementId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getElementCommentsWithUserName:_testUser.userName elementID:elementId password:nil page:1 completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"get element comments count: %lu", (unsigned long)[result[@"comments"] count]);
+        } else {
+            XCTFail(@"mark comment in set as ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(NSString *)createElementComment:(NSString *)elementId{
+    __block BOOL done = NO;
+    __block NSString *comId = nil;
+    [[PIXNETSDK new] createElementCommentWithElementID:elementId body:@"unit test comment body in element" password:nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            comId = result[@"comment"][@"id"];
+            NSLog(@"create element comment succeed: %@", comId);
+        } else {
+            XCTFail(@"mark comment in set as ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return comId;
+}
+-(void)getElement:(NSString *)elementId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getElementWithUserName:_testUser.userName elementID:elementId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"get element succeed: %@", elementId);
+        } else {
+            XCTFail(@"mark comment in set as ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)updateElement:(NSString *)elementId{
     __block BOOL done = NO;
