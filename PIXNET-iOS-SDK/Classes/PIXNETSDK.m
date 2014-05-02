@@ -390,4 +390,7 @@
 -(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame completion:(PIXHandlerCompletion)completion{
     [[PIXAlbum new] tagFriendWithElementID:elementId beTaggedUser:beTaggedUser tagFrame:tagFrame recommendID:nil completion:completion];
 }
+-(void)updateTagedFaceWithFaceId:(NSString *)faceId elementId:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser newTagFrame:(CGRect)newTagFrame completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] updateTagedFaceWithFaceId:faceId elementId:elementId beTaggedUser:beTaggedUser newTagFrame:newTagFrame completion:completion];
+}
 @end

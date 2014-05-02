@@ -452,7 +452,9 @@
  *  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
  *  @param completion      succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups
+                                 isIncludeThumbs:(BOOL)isIncludeThumbs
+                                      completion:(PIXHandlerCompletion)completion;
 #pragma mark Main
 /**
  *  列出相簿主圖及相片牆資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/albumMain
@@ -475,7 +477,9 @@
  *  @param page       頁數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetsWithUserName:(NSString *)userName page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsWithUserName:(NSString *)userName
+                           page:(NSUInteger)page
+                     completion:(PIXHandlerCompletion)completion;
 
 /**
  *  修改相簿首頁排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetfoldersPosition
@@ -493,7 +497,10 @@
  *  @param page       頁數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsWithUserName:(NSString *)userName
+                       parentID:(NSString *)parentID
+                           page:(NSUInteger)page
+                     completion:(PIXHandlerCompletion)completion;
 /**
  *  讀取個人某一本相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsShow
  *
@@ -502,7 +509,10 @@
  *  @param page       頁數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetWithUserName:(NSString *)userName setID:(NSString *)setId page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetWithUserName:(NSString *)userName
+                         setID:(NSString *)setId
+                          page:(NSUInteger)page
+                    completion:(PIXHandlerCompletion)completion;
 /**
  *  新增相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsCreate
  *
@@ -517,7 +527,16 @@
  *  @param parentId           如果這個 parent_id 被指定, 則此相簿會放置在這個相簿資料夾底下(只能放在資料夾底下)
  *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)createAlbumSetWithTitle:(NSString *)setTitle description:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
+-(void)createAlbumSetWithTitle:(NSString *)setTitle
+                   description:(NSString *)setDescription
+                    permission:(PIXAlbumSetPermissionType)permission
+                     isAllowCC:(BOOL)isAllowCc
+              commentRightType:(PIXAlbumSetCommentRightType)commentRightType
+                      password:(NSString *)password
+                  passwordHint:(NSString *)passwordHint
+                friendGroupIDs:(NSArray *)friendGroupIds
+                      parentID:(NSString *)parentId
+                    completion:(PIXHandlerCompletion)completion;
 /**
  *  修改相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsUpdate
  *
@@ -537,7 +556,21 @@
  *  @param parentId           如果這個 parent_id 被指定, 則此相簿會放置在這個相簿資料夾底下(只能放在資料夾底下)
  *  @param completion         succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)updateAlbumSetWithSetID:(NSString *)setId setTitle:(NSString *)setTitle setDescription:(NSString *)setDescription permission:(PIXAlbumSetPermissionType)permission categoryID:(NSString *)categoryId isLockRight:(BOOL)isLockRight isAllowCC:(BOOL)isAllowCc commentRightType:(PIXAlbumSetCommentRightType)commentRightType password:(NSString *)password passwordHint:(NSString *)passwordHint friendGroupIDs:(NSArray *)friendGroupIds allowCommercialUse:(BOOL)allowCommercialUse allowDerivation:(BOOL)allowDerivation parentID:(NSString *)parentId completion:(PIXHandlerCompletion)completion;
+-(void)updateAlbumSetWithSetID:(NSString *)setId
+                      setTitle:(NSString *)setTitle
+                setDescription:(NSString *)setDescription
+                    permission:(PIXAlbumSetPermissionType)permission
+                    categoryID:(NSString *)categoryId
+                   isLockRight:(BOOL)isLockRight
+                     isAllowCC:(BOOL)isAllowCc
+              commentRightType:(PIXAlbumSetCommentRightType)commentRightType
+                      password:(NSString *)password
+                  passwordHint:(NSString *)passwordHint
+                friendGroupIDs:(NSArray *)friendGroupIds
+            allowCommercialUse:(BOOL)allowCommercialUse
+               allowDerivation:(BOOL)allowDerivation
+                      parentID:(NSString *)parentId
+                    completion:(PIXHandlerCompletion)completion;
 /**
  *  刪除單一相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsDelete
  *
@@ -555,7 +588,12 @@
  *  @param password    相簿密碼，當使用者相簿設定為密碼相簿時使用
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetElementsWithUserName:(NSString *)userName setID:(NSString *)setId elementType:(PIXAlbumElementType)elementType page:(NSUInteger)page password:(NSString *)password completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetElementsWithUserName:(NSString *)userName
+                                 setID:(NSString *)setId
+                           elementType:(PIXAlbumElementType)elementType
+                                  page:(NSUInteger)page
+                              password:(NSString *)password
+                            completion:(PIXHandlerCompletion)completion;
 /**
  *  列出相本(或照片)的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetComments
  *
@@ -566,7 +604,11 @@
  *  @param page       頁數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetCommentsWithUserName:(NSString *)userName
+                                 setID:(NSString *)setId
+                              password:(NSString *)password
+                                  page:(NSUInteger)page
+                            completion:(PIXHandlerCompletion)completion;
 /**
  *  新增一則相簿上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsCreate
  *
@@ -575,7 +617,10 @@
  *  @param password   如果被留言的相本被密碼保護，則需要指定這個參數以通過授權
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)createAlbumSetCommentWithSetID:(NSString *)setId body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion;
+-(void)createAlbumSetCommentWithSetID:(NSString *)setId
+                                 body:(NSString *)body
+                             password:(NSString *)password
+                           completion:(PIXHandlerCompletion)completion;
 /**
  *  將相簿上某則留言註記為廣告 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetCommentsMarkSpam
  *
@@ -599,7 +644,10 @@
  *  @param password   如果被留言的相本被密碼保護，則需要指定這個參數以通過授權
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)createElementCommentWithElementID:(NSString *)elementID body:(NSString *)body password:(NSString *)password completion:(PIXHandlerCompletion)completion;
+-(void)createElementCommentWithElementID:(NSString *)elementID
+                                    body:(NSString *)body
+                                password:(NSString *)password
+                              completion:(PIXHandlerCompletion)completion;
 
 /**
  *  附近的相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsNearby
@@ -611,7 +659,12 @@
  *  @param page        頁數
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetsNearbyWithUserName:(NSString *)userName location:(CLLocationCoordinate2D)location distanceMin:(NSUInteger)distanceMin distanceMax:(NSUInteger)distanceMax page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsNearbyWithUserName:(NSString *)userName
+                             location:(CLLocationCoordinate2D)location
+                          distanceMin:(NSUInteger)distanceMin
+                          distanceMax:(NSUInteger)distanceMax
+                                 page:(NSUInteger)page
+                           completion:(PIXHandlerCompletion)completion;
 
 #pragma mark Folders(PIXNET VIP 才會有 folder)
 /**
@@ -622,7 +675,10 @@
  *  @param page       頁數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumFoldersWithUserName:(NSString *)userName trimUser:(BOOL)trimUser page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumFoldersWithUserName:(NSString *)userName
+                          trimUser:(BOOL)trimUser
+                              page:(NSUInteger)page
+                        completion:(PIXHandlerCompletion)completion;
 /**
  *  列出某個使用者單一資料夾裡有些什麼東西 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFoldersShow
  *
@@ -631,7 +687,10 @@
  *  @param page       頁數
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumFolderWithUserName:(NSString *)userName
+                         folderID:(NSString *)folderId
+                             page:(NSUInteger)page
+                       completion:(PIXHandlerCompletion)completion;
 /**
  *  修改資料夾裡的相簿排序 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsPosition
  *
@@ -772,10 +831,23 @@
  *  在照片或影片上標記朋友 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFaces
  *
  *  @param elementId    要被標記的照片或影片ID，必要參數
- *  @param beTaggedUser 要被標記的人的ID，必要參數
+ *  @param beTaggedUser 要更新標記的使用者帳號。被標記者必須設定標記者為好友，必要參數
  *  @param tagFrame     要被標記的範圍，必要參數
  *  @param completion   succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame completion:(PIXHandlerCompletion)completion;
-//-(void)updateElementTagWithFaceId:(NSString )
+/**
+ *  更新人臉標記 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFacesFaceid
+ *
+ *  @param faceId       要被更正的人臉 ID，必要欄位
+ *  @param elementId    相片或影像的 ID
+ *  @param beTaggedUser 要更新標記的使用者帳號。被標記者必須設定標記者為好友。必要參數
+ *  @param newTagFrame  人臉範圍，必要參數
+ *  @param completion   succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)updateTagedFaceWithFaceId:(NSString *)faceId
+                       elementId:(NSString *)elementId
+                    beTaggedUser:(NSString *)beTaggedUser
+                     newTagFrame:(CGRect)newTagFrame
+                      completion:(PIXHandlerCompletion)completion;
 @end

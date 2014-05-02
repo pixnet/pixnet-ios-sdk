@@ -803,7 +803,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }];
     
 }
--(void)updateTagedFriendWithFaceId:(NSString *)faceId elementId:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser newTagFrame:(CGRect)newTagFrame completion:(PIXHandlerCompletion)completion{
+-(void)updateTagedFaceWithFaceId:(NSString *)faceId elementId:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser newTagFrame:(CGRect)newTagFrame completion:(PIXHandlerCompletion)completion{
     if (faceId==nil ||faceId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"faceId 參數有誤"]);
         return;
@@ -820,7 +820,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"newTagFrame 參數有誤"]);
         return;
     }
-    NSString *path = [NSString stringWithFormat:@"album/faces/%@", elementId];
+    NSString *path = [NSString stringWithFormat:@"album/faces/%@", faceId];
 
     NSDictionary *params = @{@"user":beTaggedUser,
                              @"element_id":elementId,
