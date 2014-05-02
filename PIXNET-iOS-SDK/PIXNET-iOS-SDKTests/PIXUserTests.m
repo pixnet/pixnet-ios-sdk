@@ -48,17 +48,17 @@
     }
 }
 
-- (void)testAccount
-{
-    PIXUser *user = [PIXUser new];
-    
-    // 故意不認證，應該會回傳 False
-    [user getAccountWithCompletion:^(BOOL succeed, id result, NSError *error){
-        NSLog(@"%s", __PRETTY_FUNCTION__);
-        NSLog(@"%@", error);
-        XCTAssertFalse(succeed);
-    }];
-
-}
+//- (void)testAccount
+//{
+//    PIXUser *user = [PIXUser new];
+//    
+//    // 故意不認證，應該會回傳 False
+//    [user getAccountWithCompletion:^(BOOL succeed, id result, NSError *error){
+//        NSLog(@"%s", __PRETTY_FUNCTION__);
+//        NSLog(@"%@", error);
+//        XCTAssertFalse(succeed);
+//    }];
+//
+//}
 
 @end
