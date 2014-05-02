@@ -46,23 +46,29 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
 }
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
+    //檢查是否已設定 consumer key 及 consumer secret
     if (kConsumerSecret==nil || kConsumerKey==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret"]);
         return;
     }
 
+    NSString *localUser = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserNameIdentifier copy]];
+    NSString *localPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserPasswordIdentifier copy]];
+    if ((localUser!=nil && ![localUser isEqualToString:userName]) || (localPassword!=nil && ![localPassword isEqualToString:password])) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"前一個使用者尚未登出，請先執行 +logout"]);
+        return;
+    }
+    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserNameIdentifier copy] string:userName];
+    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserPasswordIdentifier copy] string:password];
+
     //如果 local 端已有 token 就不再去跟後台要
     NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
     NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
-    NSString *localUser = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserNameIdentifier copy]];
-    NSString *localPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserPasswordIdentifier copy]];
-    if (token && secret && [localUser isEqualToString:userName] && [localPassword isEqualToString:password]) {
+
+    if (token && secret) {
         completion(YES, token, nil);
         return;
     }
-
-    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserNameIdentifier copy] string:userName];
-    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserPasswordIdentifier copy] string:password];
 
     NSURLRequest *request = [self requestForXAuthWithPath:@"oauth/access_token" parameters:nil httpMethod:@"POST"];
     
@@ -128,7 +134,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
         parameterString = [self parametersStringFromDictionary:parameters];
     }
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@", kApiURLPrefix, apiPath];
-    if (httpMethod == nil || [httpMethod isEqualToString:@"GET"]) {
+    if ((httpMethod == nil || [httpMethod isEqualToString:@"GET"]) && parameterString) {
         [urlString appendString:[NSString stringWithFormat:@"?%@", [parameterString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     }
     
@@ -143,7 +149,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
         //這裡要用 NSURLSession
     } else {
         //這裡可以用 NSURLConnection
-        [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (connectionError == nil) {
                     NSHTTPURLResponse *hr = (NSHTTPURLResponse *)response;
@@ -166,6 +172,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
                 }
             });
         }];
+        
     }
 }
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
