@@ -56,55 +56,62 @@ static NSString *kSetComment = @"Unit test comment in set";
     
     //登入
     [PIXNETSDK authByXauthWithUserName:_testUser.userName userPassword:_testUser.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        //列出相簿主圖及相片牆
-        [self getAlbumMain];
-        //列出相簿及folder 列表
-        [self getAlbumSetsAndFolders];
-        
-        //產生一個 folder
-        NSString *folderId = [self createAlbumFolder];
-        //修改 folder
-        [self updateFolder:folderId];
-        //取得 folder 列表
-        [self getAlbumFolders];
-        
-        //產生一個相簿
-        NSString *albumSetId = [self createAlbumSet];
-        //修改相簿
-        [self updateAlbum:albumSetId];
-        //取得相簿列表
-        NSArray *albums = [self getAlbumSets];
-        //修改相簿的順序
-        [self sortAlbumsWithOrdinaryAlbums:albums];
-        //取得附近的相簿
-        [self getAlbumsetsNearby];
-        
-        //產生一個相簿裡的留言
-        NSString *commentId = [self createAlbumSetComment:albumSetId Comment:kSetComment];
-        //將相簿留言設為廣告
-        [self markCommentInSetAsSpam:commentId];
-        //將相簿留言設為非廣告
-        [self markCommentInSetAsHam:commentId];
-        //取得相簿裡所有留言
-        [self getAlbumSetComments:albumSetId];
-        //將相簿移到 folder 底下
-        [self removeSet:albumSetId toFolder:folderId];
-        
-        //新增一張照片
-        NSString *elementId = [self addElementInAlbum:albumSetId];
-        //修改相片
-        [self updateElement:elementId];
-        
-        //刪除相簿
-        [self deleteAlbum:albumSetId];
-        //刪除資料夾
-        [self deleteFolder:folderId];
-        
         done = YES;
+        if (succeed) {
+            NSLog(@"auth succeed!");
+        } else {
+            NSLog(@"auth failed: %@", error);
+        }
+        
     }];
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
+    
+    //列出相簿主圖及相片牆
+    [self getAlbumMain];
+    //列出相簿及folder 列表
+    [self getAlbumSetsAndFolders];
+    
+    //產生一個 folder
+    NSString *folderId = [self createAlbumFolder];
+    //修改 folder
+    [self updateFolder:folderId];
+    //取得 folder 列表
+    [self getAlbumFolders];
+    
+    //產生一個相簿
+    NSString *albumSetId = [self createAlbumSet];
+    //修改相簿
+    [self updateAlbum:albumSetId];
+    //取得相簿列表
+    NSArray *albums = [self getAlbumSets];
+    //修改相簿的順序
+    [self sortAlbumsWithOrdinaryAlbums:albums];
+    //取得附近的相簿
+    [self getAlbumsetsNearby];
+    
+    //產生一個相簿裡的留言
+    NSString *commentId = [self createAlbumSetComment:albumSetId Comment:kSetComment];
+    //將相簿留言設為廣告
+    [self markCommentInSetAsSpam:commentId];
+    //將相簿留言設為非廣告
+    [self markCommentInSetAsHam:commentId];
+    //取得相簿裡所有留言
+    [self getAlbumSetComments:albumSetId];
+    //將相簿移到 folder 底下
+    [self removeSet:albumSetId toFolder:folderId];
+    
+    //新增一張照片
+    NSString *elementId = [self addElementInAlbum:albumSetId];
+    //修改相片
+    [self updateElement:elementId];
+    
+    //刪除相簿
+    [self deleteAlbum:albumSetId];
+    //刪除資料夾
+    [self deleteFolder:folderId];
+
 }
 -(void)updateElement:(NSString *)elementId{
     __block BOOL done = NO;
