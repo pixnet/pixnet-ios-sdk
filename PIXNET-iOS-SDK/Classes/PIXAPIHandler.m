@@ -73,7 +73,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     NSURLRequest *request = [self requestForXAuthWithPath:@"oauth/access_token" parameters:nil httpMethod:@"POST"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
             if (connectionError) {
                 completion(NO, nil, connectionError);
                 return;

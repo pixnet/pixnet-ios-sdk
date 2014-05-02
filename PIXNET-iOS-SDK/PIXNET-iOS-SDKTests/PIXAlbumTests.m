@@ -50,15 +50,15 @@ static NSString *kSetComment = @"Unit test comment in set";
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
     __block BOOL done = NO;
 
-    if ([PIXNETSDK isAuthed]) {
-        [PIXNETSDK logout];
-    }
+    [PIXNETSDK logout];
     
+    __block BOOL authed = NO;
     //登入
     [PIXNETSDK authByXauthWithUserName:_testUser.userName userPassword:_testUser.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
         done = YES;
         if (succeed) {
             NSLog(@"auth succeed!");
+            authed = YES;
         } else {
             NSLog(@"auth failed: %@", error);
         }
@@ -67,7 +67,9 @@ static NSString *kSetComment = @"Unit test comment in set";
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
-    
+    if (!authed) {
+        return;
+    }
     //列出相簿主圖及相片牆
     [self getAlbumMain];
     //列出相簿及folder 列表
@@ -111,6 +113,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     [self deleteAlbum:albumSetId];
     //刪除資料夾
     [self deleteFolder:folderId];
+
 
 }
 -(void)updateElement:(NSString *)elementId{
