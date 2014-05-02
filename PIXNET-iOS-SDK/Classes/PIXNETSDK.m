@@ -393,4 +393,7 @@
 -(void)updateTagedFaceWithFaceId:(NSString *)faceId elementId:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser newTagFrame:(CGRect)newTagFrame completion:(PIXHandlerCompletion)completion{
     [[PIXAlbum new] updateTagedFaceWithFaceId:faceId elementId:elementId beTaggedUser:beTaggedUser newTagFrame:newTagFrame completion:completion];
 }
+-(void)deleteTagWithFaceID:(NSString *)faceId completion:(PIXHandlerCompletion)completion{
+    [[PIXAlbum new] deleteTagWithFaceId:faceId completion:completion];
+}
 @end

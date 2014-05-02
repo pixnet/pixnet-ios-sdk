@@ -488,4 +488,11 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)updateTagedFaceWithFaceId:(NSString *)faceId elementId:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser newTagFrame:(CGRect)newTagFrame completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除人臉標記 http://developer.pixnet.pro/#!/doc/pixnetApi/albumFacesDelete
+ *
+ *  @param faceId     要被刪除的人臉 id，必要欄位
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)deleteTagWithFaceId:(NSString *)faceId completion:(PIXHandlerCompletion)completion;
 @end

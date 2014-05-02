@@ -836,4 +836,19 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
+-(void)deleteTagWithFaceId:(NSString *)faceId completion:(PIXHandlerCompletion)completion{
+    if (faceId==nil || faceId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"faceId 參數有誤"]);
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"album/faces/%@", faceId];
+    
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:@{@"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+}
 @end
