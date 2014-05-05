@@ -677,7 +677,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     }];
 }
 
--(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion{
+-(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion{
     if (elementData==nil || elementData.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"elementData 參數有誤"]);
         return;

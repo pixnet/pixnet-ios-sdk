@@ -360,7 +360,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     __block NSString *elementId = nil;
     UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
     NSData *data = UIImageJPEGRepresentation(image, 0.7);
-    [[PIXNETSDK new] addElementWithElementData:data setID:albumId elementTitle:@"unit test photo title" elementDescription:@"unit test photo description" tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] createElementWithElementData:data setID:albumId elementTitle:@"unit test photo title" elementDescription:@"unit test photo description" tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"add element succeed");
             elementId = result[@"element"][@"id"];

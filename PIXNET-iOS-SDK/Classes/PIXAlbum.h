@@ -465,7 +465,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAddWatermark      是否加浮水印
  *  @param isElementFirst          新上傳照片(或影片)的放相簿前面
  */
--(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
+-(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
 
 #pragma mark faces
 /**

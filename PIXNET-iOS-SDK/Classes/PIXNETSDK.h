@@ -757,7 +757,7 @@
  *  @param tags                    由 NSString instance 組成的 array
  *  @param location                照片(或影片)的經緯度，如不需要此參數，可使用 kCLLocationCoordinate2DInvalid
  */
--(void)addElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion;
+-(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion;
 
 /**
  *  修改圖片(或影片)裡的參數 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsUpdate
