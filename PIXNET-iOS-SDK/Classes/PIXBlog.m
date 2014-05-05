@@ -62,7 +62,7 @@
 - (void)createBlogCategoriesWithName:(NSString *)name
                                 type:(PIXBlogCategoryType)type
                          description:(NSString *)description
-                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                        siteCategory:(NSString *)siteCateID
                           completion:(PIXHandlerCompletion)completion{
     
     if (!name || name == nil || name.length == 0) {
@@ -76,7 +76,7 @@
     if (type == PIXBlogCategoryTypeCategory) {
         params[@"type"] = @"category";
         params[@"site_category_done"] = @"1";
-        params[@"site_category_id"] = [NSString stringWithFormat:@"%li", siteCateID];
+        params[@"site_category_id"] = siteCateID;
     
     }else if (type == PIXBlogCategoryTypeFolder){
         params[@"type"] = @"folder";
@@ -444,7 +444,7 @@
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
-                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                    siteCategoryID:(NSString *)cateID
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
@@ -482,7 +482,7 @@
     params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
 
     
-    params[@"category_id"] = @(cateID);
+    params[@"category_id"] = cateID;
     
     params[@"comment_perm"] = @(commentPerm);
 
@@ -533,7 +533,7 @@
                                  title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
-                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                        siteCategoryID:(NSString *)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
@@ -574,7 +574,7 @@
     }
     params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
     
-    params[@"category_id"] = @(cateID);
+    params[@"category_id"] = cateID;
     
     params[@"comment_perm"] = @(commentPerm);
     

@@ -99,7 +99,7 @@
 - (void)createBlogCategoriesWithName:(NSString *)name
                                 type:(PIXBlogCategoryType)type
                          description:(NSString *)description
-                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                        siteCategory:(NSString *)siteCateID
                           completion:(PIXHandlerCompletion)completion;
 /**
  *  修改部落格個人分類 (需認證) http://emma.pixnet.cc/blog/categories/:id
@@ -265,7 +265,7 @@
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
                           publicAt:(NSDate *)date
-                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                    siteCategoryID:(NSString *)cateID
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
@@ -297,7 +297,7 @@
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
                               publicAt:(NSDate *)date
-                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                        siteCategoryID:(NSString *)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray

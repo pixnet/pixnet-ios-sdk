@@ -62,7 +62,7 @@
 - (void)createBlogCategoriesWithName:(NSString *)name
                                 type:(PIXBlogCategoryType)type
                          description:(NSString *)description
-                        siteCategory:(PIXSiteBlogCategory)siteCateID
+                        siteCategory:(NSString *)siteCateID
                           completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] createBlogCategoriesWithName:name type:type description:description siteCategory:siteCateID completion:completion];
 
@@ -148,7 +148,7 @@
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
                           publicAt:(NSDate *)date
-                    siteCategoryID:(PIXSiteBlogCategory)cateID
+                    siteCategoryID:(NSString *)cateID
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
@@ -177,7 +177,7 @@
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
                               publicAt:(NSDate *)date
-                        siteCategoryID:(PIXSiteBlogCategory)cateID
+                        siteCategoryID:(NSString *)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
