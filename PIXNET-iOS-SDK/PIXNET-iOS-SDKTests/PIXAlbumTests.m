@@ -84,7 +84,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     //修改 folder
     [self updateFolder:folderId];
     //取得 folder 列表
-    [self getAlbumFolders];
+    NSArray *folders = [self getAlbumFolders];
     
     //產生一個相簿
     NSString *albumSetId = [self createAlbumSet];
@@ -93,7 +93,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     //取得相簿列表
     NSArray *albums = [self getAlbumSets];
     //修改相簿的順序
-    [self sortAlbumsWithOrdinaryAlbums:albums];
+    [self sortAlbumsWithOrdinaryAlbums:folders];
     //取得附近的相簿
     [self getAlbumsetsNearby];
     
@@ -419,7 +419,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"albums are reversed");
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"sort folders failed: %@", error);
         }
         done = YES;
     }];
@@ -430,11 +430,13 @@ static NSString *kSetComment = @"Unit test comment in set";
     return;
 }
 
--(void)getAlbumFolders{
+-(NSArray *)getAlbumFolders{
     __block BOOL done = NO;
+    __block NSArray *folder = nil;
     [[PIXNETSDK new] getAlbumFoldersWithUserName:_testUser.userName trimUser:NO page:1 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            [_testLog testLogWithFormat:@"get folders succeed, folders count: %lu\n", (unsigned long)[result[@"setfolders"] count]];
+            folder = result[@"folders"];
+            [_testLog testLogWithFormat:@"get folders succeed, folders count: %lu\n", (unsigned long)[result[@"folders"] count]];
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);
         }
@@ -444,7 +446,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
-    return;
+    return folder;
 }
 -(void)updateFolder:(NSString *)folderId{
     __block BOOL done = NO;
