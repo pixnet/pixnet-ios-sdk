@@ -608,7 +608,7 @@ typedef NS_ENUM(NSInteger, PIXSiteBlogCategory){
 #pragma mark - Site Blog Categories list
 
 /**
- *  列出部落格全站分類 http://emma.pixnet.cc/blog/site_categories
+ *  列出部落格全站分類 http://developer.pixnet.pro/#!/doc/pixnetApi/blogSiteCategories
  *
  *  @param group      當被設為 YES 或 true 時, 回傳資訊會以全站分類群組為分類，不需要則輸入 NO 或 false
  *  @param thumb      當被設為 YES 或 true 時, 回傳分類資訊會包含縮圖網址，不需要則輸入 NO 或 false

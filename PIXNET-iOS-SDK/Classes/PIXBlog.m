@@ -76,7 +76,7 @@
     if (type == PIXBlogCategoryTypeCategory) {
         params[@"type"] = @"category";
         params[@"site_category_done"] = @"1";
-        params[@"site_category_id"] = @(siteCateID);
+        params[@"site_category_id"] = [NSString stringWithFormat:@"%li", siteCateID];
     
     }else if (type == PIXBlogCategoryTypeFolder){
         params[@"type"] = @"folder";
@@ -958,5 +958,4 @@
                }];
     
 }
-
 @end
