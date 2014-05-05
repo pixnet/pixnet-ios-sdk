@@ -65,9 +65,9 @@
 #pragma mark - Blog Method
 #pragma mark - Blog information
 /**
- *  列出部落格資訊 http://emma.pixnet.cc/blog
+ *  列出部落格資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/blog
  *
- *  @param userName   ＊指定要回傳的使用者資訊
+ *  @param userName   *指定要回傳的使用者資訊,必要參數
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogInformationWithUserName:(NSString *)userName
@@ -76,9 +76,9 @@
 #pragma mark - Blog Categories
 //dosen't need Access token
 /**
- *  讀取使用者部落格分類資訊 http://emma.pixnet.cc/blog/categories
+ *  讀取使用者部落格分類資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/blogCategories
  *
- *  @param userName   *指定要回傳的使用者資訊
+ *  @param userName   *指定要回傳的使用者資訊，必要參數
  *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
