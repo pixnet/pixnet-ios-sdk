@@ -38,7 +38,7 @@
                              password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
-    if (userName == nil) {
+    if (userName == nil || userName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
@@ -46,12 +46,11 @@
     params[@"user"] = userName;
     
     if (passwd != nil) {
-        params[@"password"] = passwd;
+        params[@"blog_password"] = passwd;
     }
     [[PIXAPIHandler new] callAPI:@"blog/categories"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-        completion(NO, nil, errorMessage);
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
