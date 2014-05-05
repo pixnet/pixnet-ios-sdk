@@ -55,6 +55,7 @@
 		CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0FA18F3AD6800B32ACC /* PIXCredentialStorage.m */; };
 		CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD10018F3AD7E00B32ACC /* PIXUser.m */; };
 		CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */; };
+		CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */; };
 		D2C300279399403B84D4742C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDB24BB1BB342F89ED09330 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +126,7 @@
 		CEDCD0FF18F3AD7E00B32ACC /* PIXUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXUser.h; path = Classes/PIXUser.h; sourceTree = "<group>"; };
 		CEDCD10018F3AD7E00B32ACC /* PIXUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXUser.m; path = Classes/PIXUser.m; sourceTree = "<group>"; };
 		CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAlbumTests.m; sourceTree = "<group>"; };
+		CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlogTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 				CED461A41910D4C7003A96C2 /* UserForTest.m */,
 				CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */,
 				CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */,
+				CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */,
 				CED461591910C1CD003A96C2 /* pixFox.jpg */,
 				CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */,
 				CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */,
@@ -458,6 +461,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */,
+				CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */,
 				50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */,
 				CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */,
 				CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */,
