@@ -91,7 +91,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     //修改相簿
     [self updateAlbum:albumSetId];
     //取得相簿列表
-    NSArray *albums = [self getAlbumSets];
+    [self getAlbumSets];
     //修改相簿的順序
     [self sortAlbumsWithOrdinaryAlbums:folders];
     //取得附近的相簿
