@@ -220,7 +220,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/articles"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -257,7 +256,6 @@
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@", articleID]
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -288,7 +286,6 @@
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@/related", articleID]
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -335,7 +332,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/comments"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -357,7 +353,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/articles/latest"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -387,7 +382,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
                       parameters:params
               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -429,7 +423,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/articles/search"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -675,7 +668,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/comments"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -704,7 +696,6 @@
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
@@ -725,7 +716,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/comments/latest"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {
