@@ -68,12 +68,12 @@
 
 }
 
-- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
+- (void)updateBlogCategoryFromID:(NSString *)categoryID
                            newName:(NSString *)newName
                               type:(PIXBlogCategoryType)type
                        description:(NSString *)description
                         completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] updateBlogCategoriesFromID:categoriesID newName:newName type:type description:description completion:completion];
+    [[PIXBlog new] updateBlogCategoryFromID:categoryID newName:newName type:type description:description completion:completion];
 }
 
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID

@@ -100,28 +100,36 @@
     
 }
 
-- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
+- (void)updateBlogCategoryFromID:(NSString *)categoryID
                            newName:(NSString *)newName
                               type:(PIXBlogCategoryType)type
                        description:(NSString *)description
                         completion:(PIXHandlerCompletion)completion{
-
-    if (!newName || newName == nil || newName.length == 0) {
+    if (categoryID==nil || categoryID.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"categoryID 參數有誤"]);
+    }
+    if (newName == nil || newName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing New Name"]);
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"name"] = newName;
-    if (type == PIXBlogCategoryTypeCategory) {
-        params[@"type"] = @"category";
-    }else{
-        params[@"type"] = @"folder";
+    switch (type) {
+        case PIXBlogCategoryTypeCategory:
+            params[@"type"] = @"category";
+            break;
+        case PIXBlogCategoryTypeFolder:
+            params[@"type"] = @"folder";
+            break;
+        default:
+            break;
     }
-    if (description || description != nil || description.length != 0) {
+
+    if (description != nil && description.length > 0) {
         params[@"description"] = description;
     }
     
-    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/categories/%@", categoriesID]
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/categories/%@", categoryID]
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
@@ -168,19 +176,9 @@
 
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
                   completion:(PIXHandlerCompletion)completion{
-    
-    NSMutableString *idsString = [NSMutableString new];
-    
-    for (NSUInteger i = 0; i <= categoriesIDArray.count; i++) {
-        if (i == categoriesIDArray.count - 1) {
-            [idsString appendString:categoriesIDArray[i]];
-        }else{
-            [idsString appendString:[NSMutableString stringWithFormat:@"%@-", categoriesIDArray[i]]];
-        }
-    }
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"ids"] = idsString;
-    
+    NSString *idsString = [categoriesIDArray componentsJoinedByString:@"-"];
+    NSDictionary *params = @{@"ids": idsString};
+
     [[PIXAPIHandler new] callAPI:@"blog/categories/position"
                       httpMethod:@"POST"
                       shouldAuth:YES
@@ -934,22 +932,12 @@
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     
-    if (group) {
-        params[@"include_groups"] = @"1";
-    }else{
-        params[@"include_groups"] = @"0";
-    }
-    
-    if (thumb) {
-        params[@"include_thumbs"] = @"1";
-    }else{
-        params[@"include_thumbs"] = @"0";
-    }
+    params[@"include_groups"] = [NSString stringWithFormat:@"%i", group];
+    params[@"include_thumbs"] = [NSString stringWithFormat:@"%i", thumb];
     
     [[PIXAPIHandler new] callAPI:@"blog/site_categories"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   completion(NO, nil, errorMessage);
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
                    } else {

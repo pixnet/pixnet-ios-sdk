@@ -122,15 +122,15 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
                         siteCategory:(NSString *)siteCateID
                           completion:(PIXHandlerCompletion)completion;
 /**
- *  修改部落格個人分類 (需認證) http://emma.pixnet.cc/blog/categories/:id
+ *  修改部落格個人分類 (需認證) http://developer.pixnet.pro/#!/doc/pixnetApi/blogCategoriesUpdate
  *
- *  @param categoriesID ＊要修改的 Category / Folder ID
+ *  @param categoryID ＊要修改的 Category / Folder ID
  *  @param newName      ＊修改後的顯示名稱
  *  @param type         請輸入修改類型 PIXBlogCategoryType 型別, 輸入 nil 即預設為 Category
  *  @param description  修改後的分類說明
  *  @param completion   succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
-- (void)updateBlogCategoriesFromID:(NSString *)categoriesID
+- (void)updateBlogCategoryFromID:(NSString *)categoryID
                            newName:(NSString *)newName
                               type:(PIXBlogCategoryType)type
                        description:(NSString *)description
