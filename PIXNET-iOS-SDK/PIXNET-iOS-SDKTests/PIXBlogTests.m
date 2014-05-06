@@ -73,9 +73,43 @@
     //修改部落格個人分類排序
     [self sortCategories:categoriesUser];
     
+    //新增部落格個人文章
+    NSString *articleId = [self createBlogArticle];
+    
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(NSString *)createBlogArticle{
+    __block BOOL done = NO;
+    __block NSString *articleId = nil;
+    [[PIXNETSDK new] createBlogArticleWithTitle:@"Article title for unit test"
+                                           body:@"article body for unit test"
+                                         status:PIXArticleStatusPublic
+                                       publicAt:nil
+                                 siteCategoryID:nil
+                                    commentPerm:PIXArticleCommentPermPublic
+                                  commentHidden:YES
+                                           tags:nil
+                                       thumbURL:nil
+                                       password:nil
+                                   passwordHine:nil
+                                  friendGroupID:nil
+                                     completion:^(BOOL succeed, id result, NSError *error) {
+                                         if (succeed) {
+                                             articleId = result[@"article"][@"id"];
+                                             NSLog(@"create blog article succeed: %i", articleId);
+                                         } else {
+                                             XCTFail(@"create blog article failed: %@", error);
+                                         }
+                                         done = YES;
+
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return articleId;
 }
 -(void)getBlogSiteCategories{
     __block BOOL done = NO;

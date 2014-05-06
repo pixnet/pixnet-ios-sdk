@@ -444,20 +444,20 @@
                       passwordHine:(NSString *)passwdHint
                      friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion{
-    if (title == nil || title.length == 0 || !title) {
+    if (title == nil || title.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
         return;
     }
-    if (body == nil || body.length == 0 || !body) {
+    if (body == nil || body.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Body"]);
         return;
     }
     
     if (status == PIXArticleStatusPassword) {
-        if (!passwd || passwd == nil || passwd.length == 0) {
+        if (passwd == nil || passwd.length == 0) {
             completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定之文章密碼"]);
             return;
-        }else if (!passwdHint || passwdHint == nil || passwdHint.length == 0){
+        }else if (passwdHint == nil || passwdHint.length == 0){
             completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
             return;
         }
@@ -466,41 +466,33 @@
     params[@"title"] = title;
     params[@"body"] = body;
     
-    if (status) {
-        params[@"status"] = @(status);
-    }
+    params[@"status"] = [NSString stringWithFormat:@"%li", status];
 
     params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-
     
-    params[@"category_id"] = cateID;
-    
-    params[@"comment_perm"] = @(commentPerm);
-
-    if (commentHidden) {
-        params[@"comment_hidden"] = @(1);
-    }else{
-        params[@"comment_hidden"] = @(0);
+    if (cateID!=nil && cateID.length>0) {
+        params[@"category_id"] = cateID;
     }
+
+    
+    params[@"comment_perm"] = [NSString stringWithFormat:@"%li", commentPerm];
+
+    params[@"comment_hidden"] = [NSString stringWithFormat:@"%i", commentHidden];
 
     if (tagArray) {
-        NSMutableString *tagsString = [NSMutableString new];
-        for (NSInteger i = 0; i < tagArray.count; i++) {
-            if (i == tagArray.count - 1) {
-                [tagsString appendString:tagArray[i]];
-            }else{
-                [tagsString appendString:[NSMutableString stringWithFormat:@"%@,", tagArray[i]]];
-            }
-        }
-        NSLog(@"tagstring : %@", tagsString);
+        params[@"tags"] = [tagArray componentsJoinedByString:@","];
     }
-    if (thumburl || thumburl != nil || thumburl.length != 0) {
+    if (thumburl && thumburl.length!=0) {
         params[@"thumb"] = thumburl;
     }
     
     if (status == PIXArticleStatusPassword) {
-        params[@"password"] = passwd;
-        params[@"password_hint"] = passwdHint;
+        if (passwd==nil || passwd.length==0 || passwdHint==nil || passwdHint.length==0) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
+        } else {
+            params[@"password"] = passwd;
+            params[@"password_hint"] = passwdHint;
+        }
     }
     
     if (status == PIXArticleStatusFriend && friendGroupID) {

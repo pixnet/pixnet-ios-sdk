@@ -148,9 +148,9 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
                       completion:(PIXHandlerCompletion)completion;
 
 /**
- *  修改部落格分類排序（需認證） http://emma.pixnet.cc/blog/categories/position
+ *  修改部落格分類排序（需認證） http://developer.pixnet.pro/#!/doc/pixnetApi/blogCategoriesPosition
  *
- *  @param categoriesIDArray ＊輸入以部落格分類ID組成已排序好的 Array，分類將會已陣列順序重新排序。放在越前面的表示圖片的順序越優先。不過在排序上分類資料夾的排序要優先於分類，所以對分類資料夾的排序指定只會影響資料夾群本身
+ *  @param categoriesIDArray ＊輸入以部落格分類ID組成已排序好的 Array(value 必為 NSString)，分類將會以陣列順序重新排序。放在越前面的表示圖片的順序越優先。不過在排序上分類資料夾的排序要優先於分類，所以對分類資料夾的排序指定只會影響資料夾群本身
  *  @param completion        succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
