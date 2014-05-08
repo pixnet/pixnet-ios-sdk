@@ -245,33 +245,31 @@
 
 #pragma mark Article method need access token
 /**
- *  新增部落格個人文章 http://emma.pixnet.cc/blog/articles
+ *  新增部落格個人文章（需認證）  http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesCreate
  *
- *  @param title         *文章標題
- *  @param body          *文章內容
- *  @param status        文章狀態，使用 PIXArticleStatus 型別
- *  @param date          公開時間，這個表示文章的發表時間，預設為現在時間
- *  @param cateID        全站分類，使用 PIXSiteBlogCategory 型別
- *  @param commentPerm   可留言權限，使用 PIXArticleCommentPerm 型別
- *  @param commentHidden 預設留言狀態， Yes 為強制隱藏 NO 為顯示(公開)，預設為 NO 公開(顯示)
- *  @param tagArray      文章標籤
- *  @param thumburl      文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
- *  @param passwd        當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
- *  @param passwdHint    當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
- *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
- *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param title          ＊文章標題
+ *  @param body           ＊文章內容
+ *  @param status         文章狀態，使用 PIXArticleStatus 型別
+ *  @param userCategoryId 使用者自訂的類別 id。使用者自訂的類別，可透過 -(void)getBlogCategoriesWithUserName:password:completion: 取得
+ *  @param cateID         全站分類的該類別 id，全站的部落格類別，可透過 -(void)getBlogCategoriesListIncludeGroups:thumbs:completion: 取得
+ *  @param tagArray       文章標籤，內容的值必為 NSString 物件
+ *  @param thumburl       文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
+ *  @param trackback      這篇文章引用了哪些網頁，內容的值必為 NSString 物件
+ *  @param passwd         當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
+ *  @param passwdHint     當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
+ *  @param friendGroupID  當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組
+ *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
-                          publicAt:(NSDate *)date
+                    userCategoryID:(NSString *)userCategoryId
                     siteCategoryID:(NSString *)cateID
-                       commentPerm:(PIXArticleCommentPerm)commentPerm
-                     commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
                           thumbURL:(NSString *)thumburl
+                         trackback:(NSArray *)trackback
                           password:(NSString *)passwd
-                      passwordHine:(NSString *)passwdHint
+                      passwordHint:(NSString *)passwdHint
                      friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion;
 /**

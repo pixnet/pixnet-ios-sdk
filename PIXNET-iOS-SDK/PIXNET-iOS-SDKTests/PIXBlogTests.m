@@ -44,13 +44,15 @@
     __block BOOL done = NO;
     __block BOOL authed = NO;
     
-    [PIXNETSDK authByXauthWithUserName:_testUser.userName userPassword:_testUser.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        done = YES;
-        if (succeed) {
-            authed = YES;
-        } else {
-            XCTFail(@"auth failed: %@", error);
-        }
+    [PIXNETSDK authByXauthWithUserName:_testUser.userName
+                          userPassword:_testUser.userPassword
+                     requestCompletion:^(BOOL succeed, id result, NSError *error) {
+                         done = YES;
+                         if (succeed) {
+                             authed = YES;
+                         } else {
+                             XCTFail(@"auth failed: %@", error);
+                         }
     }];
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -76,34 +78,41 @@
     //新增部落格個人文章
     NSString *articleId = [self createBlogArticle];
     
+    //修改部落格個人文章
+    
+    //刪除部落格個人文章
+    [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
 }
+-(void)deleteBlogArticle:(NSString *)articleId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] deleteBlogArticleByArticleID:articleId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"delete blog article succeed: %@", articleId);
+        } else {
+            XCTFail(@"delete blog article failed: %@", error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(NSString *)createBlogArticle{
     __block BOOL done = NO;
     __block NSString *articleId = nil;
-    [[PIXNETSDK new] createBlogArticleWithTitle:@"Article title for unit test"
-                                           body:@"article body for unit test"
-                                         status:PIXArticleStatusPublic
-                                       publicAt:nil
-                                 siteCategoryID:nil
-                                    commentPerm:PIXArticleCommentPermPublic
-                                  commentHidden:YES
-                                           tags:nil
-                                       thumbURL:nil
-                                       password:nil
-                                   passwordHine:nil
-                                  friendGroupID:nil
-                                     completion:^(BOOL succeed, id result, NSError *error) {
-                                         if (succeed) {
-                                             articleId = result[@"article"][@"id"];
-                                             NSLog(@"create blog article succeed: %i", articleId);
-                                         } else {
-                                             XCTFail(@"create blog article failed: %@", error);
-                                         }
-                                         done = YES;
-
+    [[PIXNETSDK new] createBlogArticleWithTitle:@"Article title for unit test" body:@"article body for unit test" status:PIXArticleStatusPublic userCategoryID:nil siteCategoryID:nil tags:nil thumbURL:nil trackback:nil password:nil passwordHint:nil friendGroupID:nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            articleId = result[@"article"][@"id"];
+            NSLog(@"create blog article succeed: %@", articleId);
+        } else {
+            XCTFail(@"create blog article failed: %@", error);
+        }
+        done = YES;
     }];
     
     while (!done) {

@@ -147,28 +147,16 @@
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
-                          publicAt:(NSDate *)date
+                    userCategoryID:(NSString *)userCategoryId
                     siteCategoryID:(NSString *)cateID
-                       commentPerm:(PIXArticleCommentPerm)commentPerm
-                     commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
                           thumbURL:(NSString *)thumburl
+                         trackback:(NSArray *)trackback
                           password:(NSString *)passwd
-                      passwordHine:(NSString *)passwdHint
+                      passwordHint:(NSString *)passwdHint
                      friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] createBlogArticleWithTitle:title
-                                         body:body
-                                       status:PIXArticleStatusPublic
-                               siteCategoryID:cateID
-                                  commentPerm:commentPerm
-                                commentHidden:commentHidden
-                                         tags:tagArray
-                                     thumbURL:thumburl
-                                     password:passwd
-                                 passwordHine:passwdHint
-                                friendGroupID:friendGroupID
-                                   completion:completion];
+    [[PIXBlog new] createBlogArticleWithTitle:title body:body status:status publicAt:nil userCategoryID:userCategoryId siteCategoryID:cateID commentPerm:PIXArticleCommentPermBlogConfig commentHidden:NO tags:tagArray thumbURL:thumburl trackback:trackback password:passwd passwordHint:passwdHint friendGroupID:friendGroupID notifyTwitter:-1 notifyFacebook:-1 completion:completion];
     
 }
 
@@ -358,7 +346,7 @@
     [[PIXAlbum new] getElementsNearbyWithUserName:userName location:location distanceMin:distanceMin distanceMax:distanceMax page:page perPage:100 withDetail:withDetail type:type trimUser:NO shouldAuth:NO completion:completion];
 }
 -(void)getElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion{
-    [[PIXAlbum new] getElementWithUserName:userName elementID:elementId completion:completion];
+    [[PIXAlbum new] getElementWithUserName:userName elementID:elementId withSetInfo:NO completion:completion];
 }
 -(void)updateElementWithElementID:(NSString *)elementId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription setID:(NSString *)setId videoThumbType:(PIXVideoThumbType)videoThumbType tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
     [[PIXAlbum new] updateElementWithElementID:elementId elementTitle:elementTitle elementDescription:elementDescription setID:setId videoThumbType:videoThumbType tags:tags location:location completion:completion];

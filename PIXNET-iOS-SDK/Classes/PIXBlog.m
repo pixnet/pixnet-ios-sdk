@@ -435,14 +435,19 @@
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
                             status:(PIXArticleStatus)status
+                          publicAt:(NSDate *)date
+                    userCategoryID:(NSString *)userCategoryId
                     siteCategoryID:(NSString *)cateID
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
                           thumbURL:(NSString *)thumburl
+                         trackback:(NSArray *)trackback
                           password:(NSString *)passwd
-                      passwordHine:(NSString *)passwdHint
+                      passwordHint:(NSString *)passwdHint
                      friendGroupID:(NSString *)friendGroupID
+                     notifyTwitter:(BOOL)notifyTwitter
+                    notifyFacebook:(BOOL)notifyFacebook
                         completion:(PIXHandlerCompletion)completion{
     if (title == nil || title.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
@@ -468,35 +473,57 @@
     
     params[@"status"] = [NSString stringWithFormat:@"%li", status];
 
-    params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-    
-    if (cateID!=nil && cateID.length>0) {
-        params[@"category_id"] = cateID;
+    if (date) {
+        params[@"public_at"] = [NSString stringWithFormat:@"%g", [date timeIntervalSince1970]];
+    } else {
+        params[@"public_at"] = [NSString stringWithFormat:@"%g", [[NSDate date] timeIntervalSince1970]];
     }
-
+    
+    if (userCategoryId!=nil && userCategoryId.length>0) {
+        params[@"category_id"] = userCategoryId;
+    }
+    if (cateID!=nil && cateID.length>0) {
+        params[@"site_category_id"] = cateID;
+    }
     
     params[@"comment_perm"] = [NSString stringWithFormat:@"%li", commentPerm];
 
     params[@"comment_hidden"] = [NSString stringWithFormat:@"%i", commentHidden];
 
     if (tagArray) {
+        for (id value in tagArray) {
+            if (![value isMemberOfClass:[NSString class]]) {
+                completion(NO, nil, [NSError PIXErrorWithParameterName:@"tagArray 裡的每個值都一定要是 NSString 物件"]);
+                return;
+            }
+        }
         params[@"tags"] = [tagArray componentsJoinedByString:@","];
     }
     if (thumburl && thumburl.length!=0) {
         params[@"thumb"] = thumburl;
     }
-    
-    if (status == PIXArticleStatusPassword) {
-        if (passwd==nil || passwd.length==0 || passwdHint==nil || passwdHint.length==0) {
-            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
-        } else {
-            params[@"password"] = passwd;
-            params[@"password_hint"] = passwdHint;
+    if (trackback && trackback.count>0) {
+        for (id value in trackback) {
+            if (![value isMemberOfClass:[NSString class]]) {
+                completion(NO, nil, [NSError PIXErrorWithParameterName:@"trackback 裡每一個值都一定要是 NSString 物件"]);
+                return;
+            }
         }
+        params[@"trackback"] = trackback;
+    }
+    if (status == PIXArticleStatusPassword) {
+        params[@"password"] = passwd;
+        params[@"password_hint"] = passwdHint;
     }
     
     if (status == PIXArticleStatusFriend && friendGroupID) {
         params[@"friend_group_ids"] = friendGroupID;
+    }
+    if (notifyTwitter >= 0) {
+        params[@"notify_twitter"] = [NSString stringWithFormat:@"%i", notifyTwitter];
+    }
+    if (notifyFacebook >= 0) {
+        params[@"notify_facebook"] = [NSString stringWithFormat:@"%i", notifyFacebook];
     }
     
     [[PIXAPIHandler new] callAPI:@"blog/articles"
@@ -525,36 +552,33 @@
                           passwordHine:(NSString *)passwdHint
                          friendGroupID:(NSString *)friendGroupID
                             completion:(PIXHandlerCompletion)completion{
-    if (articleID == nil || articleID.length == 0 || !articleID) {
+    if (articleID == nil || articleID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
     
-    if (title == nil || title.length == 0 || !title) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
-        return;
-    }
-    if (body == nil || body.length == 0 || !body) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
-        return;
-    }
-    
     if (status == PIXArticleStatusPassword) {
-        if (!passwd || passwd == nil || passwd.length == 0) {
+        if (passwd == nil || passwd.length == 0) {
             completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定之文章密碼"]);
             return;
-        }else if (!passwdHint || passwdHint == nil || passwdHint.length == 0){
+        }
+        if (passwdHint == nil || passwdHint.length == 0){
             completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
             return;
         }
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"title"] = title;
-    params[@"body"] = body;
-    
-    if (status) {
-        params[@"status"] = @(status);
+    if (articleID!=nil && articleID.length>0) {
+        params[@"title"] = title;
     }
+    if (body!=nil && body.length>0) {
+        params[@"body"] = body;
+    }
+    
+    params[@"status"] = [NSString stringWithFormat:@"%li", status];
+//    if (status) {
+//        params[@"status"] = @(status);
+//    }
     params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
     
     params[@"category_id"] = cateID;
