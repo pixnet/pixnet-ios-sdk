@@ -150,7 +150,13 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param shouldAuth 是否需要認證
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+-(void)getAlbumSetsWithUserName:(NSString *)userName
+                       parentID:(NSString *)parentID
+                       trimUser:(BOOL)trimUser
+                           page:(NSUInteger)page
+                        perPage:(NSUInteger)perPage
+                     shouldAuth:(BOOL)shouldAuth
+                     completion:(PIXHandlerCompletion)completion;
 /**
  *  讀取個人某一本相本 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSetsShow
  *
@@ -372,11 +378,15 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 /**
  *  取得單一照片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsId
  *
- *  @param userName   相本擁有者，必要參數
- *  @param elementId  照片 ID，必要參數
- *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ *  @param userName    相本擁有者，必要參數
+ *  @param elementId   照片 ID，必要參數
+ *  @param withSetInfo 是否要回傳這張照片所屬的相簿資訊
+ *  @param completion  succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
--(void)getElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion;
+-(void)getElementWithUserName:(NSString *)userName
+                    elementID:(NSString *)elementId
+                  withSetInfo:(BOOL)withSetInfo
+                   completion:(PIXHandlerCompletion)completion;
 
 /**
  *  修改圖片(或影片)裡的參數 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsUpdate
@@ -447,8 +457,6 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)deleteCommentWithCommentID:(NSString *)commentId completion:(PIXHandlerCompletion)completion;
-
-//TODO: 這個比較麻煩，晚點再來做
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
  *

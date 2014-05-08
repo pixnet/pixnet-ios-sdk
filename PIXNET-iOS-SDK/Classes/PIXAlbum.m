@@ -97,7 +97,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }
     }];
 }
--(void)getAlbumSetsWithUserName:(NSString *)userName parentID:(NSString *)parentID trimUser:(BOOL)trimUser page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
+-(void)getAlbumSetsWithUserName:(NSString *)userName
+                       parentID:(NSString *)parentID
+                       trimUser:(BOOL)trimUser
+                           page:(NSUInteger)page
+                        perPage:(NSUInteger)perPage
+                     shouldAuth:(BOOL)shouldAuth
+                     completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"userName"]);
     }
@@ -455,15 +461,23 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
--(void)getElementWithUserName:(NSString *)userName elementID:(NSString *)elementId completion:(PIXHandlerCompletion)completion{
+-(void)getElementWithUserName:(NSString *)userName
+                    elementID:(NSString *)elementId
+                  withSetInfo:(BOOL)withSetInfo
+                   completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"UserName 參數有誤"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
+    params[@"with_set"] = [NSString stringWithFormat:@"%i", withSetInfo];
     NSString *path = [NSString stringWithFormat:@"album/elements/%@", elementId];
-    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
+    [[PIXAPIHandler new] callAPI:path
+                      httpMethod:@"GET"
+                      shouldAuth:YES
+                      parameters:params
+               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
