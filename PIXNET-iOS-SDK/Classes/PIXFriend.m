@@ -11,4 +11,9 @@
 
 @implementation PIXFriend
 
+- (void)getFriendGroupCompletion:(PIXHandlerCompletion)completion{
+    
+}
+
+
 @end
