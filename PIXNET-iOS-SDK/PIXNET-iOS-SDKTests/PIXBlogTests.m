@@ -79,12 +79,45 @@
     NSString *articleId = [self createBlogArticle];
     
     //修改部落格個人文章
+    [self modifyBlogArticle:articleId];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)modifyBlogArticle:(NSString *)articleId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] updateBlogArticleWithArticleID:articleId
+                                              title:@"title"
+                                               body:@"body"
+                                             status:PIXArticleStatusDraft
+                                           publicAt:nil
+                                     userCategoryID:nil
+                                     siteCategoryID:nil
+                                        commentPerm:PIXArticleCommentPermClose
+                                      commentHidden:NO
+                                               tags:nil
+                                           thumbURL:nil
+                                          trackback:nil
+                                           password:nil
+                                       passwordHint:nil
+                                      friendGroupID:nil
+                                      notifyTwitter:NO
+                                     notifyFacebook:NO
+                                         completion:^(BOOL succeed, id result, NSError *error) {
+                                             if (succeed) {
+                                                 
+                                             } else {
+                                                 XCTFail(@"fail");
+                                             }
+                                             done = YES;
+                                         }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)deleteBlogArticle:(NSString *)articleId{
     __block BOOL done = NO;

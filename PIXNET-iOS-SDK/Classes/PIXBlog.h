@@ -299,35 +299,44 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
                     notifyFacebook:(BOOL)notifyFacebook
                         completion:(PIXHandlerCompletion)completion;
 /**
- *  修改部落格個人文章（需認證） http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesUpdate
+ *  修改部落格個人文章(需認證) http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesUpdate
  *
- *  @param articleID     ＊要修改的文章 ID
- *  @param title         ＊修改後的文章標題
- *  @param body          ＊修改後的文章內容
- *  @param status        文章狀態，使用 PIXArticleStatus 型別
- *  @param date          公開時間，這個表示文章的發表時間，預設為現在時間
- *  @param cateID        全站分類的類別id
- *  @param commentPerm   可留言權限，使用 PIXArticleCommentPerm 型別
- *  @param commentHidden 預設留言狀態， Yes 為強制隱藏 NO 為顯示(公開)，預設為 NO 公開(顯示)
- *  @param tagArray      文章標籤
- *  @param thumburl      文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
- *  @param passwd        當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
- *  @param passwdHint    當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
- *  @param friendGroupID 當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
- *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
+ *  @param articleID      要修改的文章的 id, 必要欄位
+ *  @param title          文章標題
+ *  @param body           文章內文
+ *  @param status         文章狀態
+ *  @param date           文章的發表時間
+ *  @param userCategoryId 使用者自訂的類別 id。使用者自訂的類別，可透過 -(void)getBlogCategoriesWithUserName:password:completion: 取得
+ *  @param cateID         全站分類 id
+ *  @param commentPerm    全站分類的該類別 id，全站的部落格類別，可透過 -(void)getBlogCategoriesListIncludeGroups:thumbs:completion: 取得
+ *  @param commentHidden  是否將留言公開
+ *  @param tagArray       標籤
+ *  @param thumburl       文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
+ *  @param trackback      發送引用通知, 可以輸入複數網站
+ *  @param passwd         當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
+ *  @param passwdHint     當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
+ *  @param friendGroupID  當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組
+ *  @param notifyTwitter  是否動態發送至 Twitter. 必須先有同步關係才能發送
+ *  @param notifyFacebook 動態發送至 Facebook. 必須先有同步關係才能發送
+ *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
                                  title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
+                              publicAt:(NSDate *)date
+                        userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
                               thumbURL:(NSString *)thumburl
+                             trackback:(NSArray *)trackback
                               password:(NSString *)passwd
-                          passwordHine:(NSString *)passwdHint
+                          passwordHint:(NSString *)passwdHint
                          friendGroupID:(NSString *)friendGroupID
+                         notifyTwitter:(BOOL)notifyTwitter
+                        notifyFacebook:(BOOL)notifyFacebook
                             completion:(PIXHandlerCompletion)completion;
 
 /**

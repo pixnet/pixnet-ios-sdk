@@ -165,27 +165,36 @@
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
                               publicAt:(NSDate *)date
+                        userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
                               thumbURL:(NSString *)thumburl
+                             trackback:(NSArray *)trackback
                               password:(NSString *)passwd
-                          passwordHine:(NSString *)passwdHint
+                          passwordHint:(NSString *)passwdHint
                          friendGroupID:(NSString *)friendGroupID
+                         notifyTwitter:(BOOL)notifyTwitter
+                        notifyFacebook:(BOOL)notifyFacebook
                             completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] updateBlogArticleWithArticleID:articleID
                                             title:title
                                              body:body
                                            status:status
+                                         publicAt:date
+                                   userCategoryID:userCategoryId
                                    siteCategoryID:cateID
                                       commentPerm:commentPerm
                                     commentHidden:commentHidden
                                              tags:tagArray
                                          thumbURL:thumburl
+                                        trackback:trackback
                                          password:passwd
-                                     passwordHine:passwdHint
+                                     passwordHint:passwdHint
                                     friendGroupID:friendGroupID
+                                    notifyTwitter:notifyTwitter
+                                   notifyFacebook:notifyFacebook
                                        completion:completion];
 }
 

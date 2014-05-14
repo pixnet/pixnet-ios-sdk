@@ -449,12 +449,60 @@
                      notifyTwitter:(BOOL)notifyTwitter
                     notifyFacebook:(BOOL)notifyFacebook
                         completion:(PIXHandlerCompletion)completion{
-    if (title == nil || title.length == 0) {
+    [self createOrUpdateBlogArticleWithAPIPath:@"blog/articles"
+                                     articleID:nil
+                                         title:title
+                                          body:body
+                                        status:status
+                                      publicAt:date
+                                userCategoryID:userCategoryId
+                                siteCategoryID:cateID
+                                   commentPerm:commentPerm
+                                 commentHidden:commentHidden
+                                          tags:tagArray
+                                      thumbURL:thumburl
+                                     trackback:trackback
+                                      password:passwd
+                                  passwordHint:passwdHint
+                                 friendGroupID:friendGroupID
+                                 notifyTwitter:notifyTwitter
+                                notifyFacebook:notifyFacebook
+                                    completion:completion];
+}
+/*
+ * 由於 create 及 update article 的參數都一樣，所以用這個 method 合併處理
+ */
+- (void)createOrUpdateBlogArticleWithAPIPath:(NSString *)path
+                                   articleID:(NSString *)articleId
+                                         title:(NSString *)title
+                                          body:(NSString *)body
+                                        status:(PIXArticleStatus)status
+                                    publicAt:(NSDate *)date
+                                userCategoryID:(NSString *)userCategoryId
+                                siteCategoryID:(NSString *)cateID
+                                   commentPerm:(PIXArticleCommentPerm)commentPerm
+                                 commentHidden:(BOOL)commentHidden
+                                          tags:(NSArray *)tagArray
+                                      thumbURL:(NSString *)thumburl
+                                     trackback:(NSArray *)trackback
+                                      password:(NSString *)passwd
+                                  passwordHint:(NSString *)passwdHint
+                                 friendGroupID:(NSString *)friendGroupID
+                                 notifyTwitter:(BOOL)notifyTwitter
+                                notifyFacebook:(BOOL)notifyFacebook
+                                    completion:(PIXHandlerCompletion)completion{
+    BOOL isCreating = [path isEqualToString:@"blog/articles"];
+
+    if (isCreating && (title == nil || title.length == 0)) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Title"]);
         return;
     }
-    if (body == nil || body.length == 0) {
+    if (isCreating && (body == nil || body.length == 0)) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Body"]);
+        return;
+    }
+    if (!isCreating && (articleId==nil || articleId.length==0)) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article Id"]);
         return;
     }
     
@@ -468,15 +516,17 @@
         }
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"title"] = title;
-    params[@"body"] = body;
+    if (title && title.length>0) {
+        params[@"title"] = title;
+    }
+    if (body && body.length>0) {
+        params[@"body"] = body;
+    }
     
     params[@"status"] = [NSString stringWithFormat:@"%li", status];
-
+    
     if (date) {
         params[@"public_at"] = [NSString stringWithFormat:@"%g", [date timeIntervalSince1970]];
-    } else {
-        params[@"public_at"] = [NSString stringWithFormat:@"%g", [[NSDate date] timeIntervalSince1970]];
     }
     
     if (userCategoryId!=nil && userCategoryId.length>0) {
@@ -487,9 +537,9 @@
     }
     
     params[@"comment_perm"] = [NSString stringWithFormat:@"%li", commentPerm];
-
+    
     params[@"comment_hidden"] = [NSString stringWithFormat:@"%i", commentHidden];
-
+    
     if (tagArray) {
         for (id value in tagArray) {
             if (![value isMemberOfClass:[NSString class]]) {
@@ -526,7 +576,7 @@
         params[@"notify_facebook"] = [NSString stringWithFormat:@"%i", notifyFacebook];
     }
     
-    [[PIXAPIHandler new] callAPI:@"blog/articles"
+    [[PIXAPIHandler new] callAPI:path
                       httpMethod:@"POST"
                       shouldAuth:YES
                       parameters:params
@@ -538,93 +588,47 @@
                    }
                }];
 }
-
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
                                  title:(NSString *)title
                                   body:(NSString *)body
                                 status:(PIXArticleStatus)status
+                              publicAt:(NSDate *)date
+                        userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
                               thumbURL:(NSString *)thumburl
+                             trackback:(NSArray *)trackback
                               password:(NSString *)passwd
-                          passwordHine:(NSString *)passwdHint
+                          passwordHint:(NSString *)passwdHint
                          friendGroupID:(NSString *)friendGroupID
+                         notifyTwitter:(BOOL)notifyTwitter
+                        notifyFacebook:(BOOL)notifyFacebook
                             completion:(PIXHandlerCompletion)completion{
-    if (articleID == nil || articleID.length == 0) {
+    if (articleID==nil || articleID.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
-    
-    if (status == PIXArticleStatusPassword) {
-        if (passwd == nil || passwd.length == 0) {
-            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定之文章密碼"]);
-            return;
-        }
-        if (passwdHint == nil || passwdHint.length == 0){
-            completion(NO, nil, [NSError PIXErrorWithParameterName:@"請輸入欲設定文章密碼提示"]);
-            return;
-        }
-    }
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    if (articleID!=nil && articleID.length>0) {
-        params[@"title"] = title;
-    }
-    if (body!=nil && body.length>0) {
-        params[@"body"] = body;
-    }
-    
-    params[@"status"] = [NSString stringWithFormat:@"%li", status];
-//    if (status) {
-//        params[@"status"] = @(status);
-//    }
-    params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
-    
-    params[@"category_id"] = cateID;
-    
-    params[@"comment_perm"] = @(commentPerm);
-    
-    if (commentHidden) {
-        params[@"comment_hidden"] = @(1);
-    }else{
-        params[@"comment_hidden"] = @(0);
-    }
-    if (tagArray) {
-        NSMutableString *tagsString = [NSMutableString new];
-        for (NSInteger i = 0; i < tagArray.count; i++) {
-            if (i == tagArray.count - 1) {
-                [tagsString appendString:tagArray[i]];
-            }else{
-                [tagsString appendString:[NSMutableString stringWithFormat:@"%@,", tagArray[i]]];
-            }
-        }
-    }
-    if (thumburl || thumburl != nil || thumburl.length != 0) {
-        params[@"thumb"] = thumburl;
-    }
-    
-    if (status == PIXArticleStatusPassword) {
-        params[@"password"] = passwd;
-        params[@"password_hint"] = passwdHint;
-    }
-    
-    if (status == PIXArticleStatusFriend && friendGroupID) {
-        params[@"friend_group_ids"] = friendGroupID;
-    }
-    
-    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@", articleID]
-                      httpMethod:@"POST"
-                      shouldAuth:YES
-                      parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   if (succeed) {
-                       [self succeedHandleWithData:result completion:completion];
-                   } else {
-                       completion(NO, nil, errorMessage);
-                   }
-               }];
-
+    [self createOrUpdateBlogArticleWithAPIPath:[NSString stringWithFormat:@"blog/articles/%@", articleID]
+                                     articleID:articleID
+                                         title:title
+                                          body:body
+                                        status:status
+                                      publicAt:date
+                                userCategoryID:userCategoryId
+                                siteCategoryID:cateID
+                                   commentPerm:commentPerm
+                                 commentHidden:commentHidden
+                                          tags:tagArray
+                                      thumbURL:thumburl
+                                     trackback:trackback
+                                      password:passwd
+                                  passwordHint:passwdHint
+                                 friendGroupID:friendGroupID
+                                 notifyTwitter:notifyTwitter
+                                notifyFacebook:notifyFacebook
+                                    completion:completion];
 }
 
 - (void)deleteBlogArticleByArticleID:(NSString *)articleID
