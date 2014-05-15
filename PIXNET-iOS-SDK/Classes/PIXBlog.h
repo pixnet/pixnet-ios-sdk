@@ -163,18 +163,26 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
 #pragma mark - Blog Articles
 //dosen't need Access token
 /**
- *  列出部落格個人文章 http://emma.pixnet.cc/blog/articles
+ *  列出部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticles
  *
- *  @param userName       ＊指定要回傳的使用者資訊
- *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
- *  @param page           頁數, 預設為 1, 不需要則輸入 nil
- *  @param articlePerPage 每頁幾筆, 預設為 100, 不需要則輸入 nil
+ *  @param userName       部落格 id，必要參數
+ *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
+ *  @param page           頁數
+ *  @param articlePerPage 每頁幾筆，建議使用20
+ *  @param userCategories 個人自行定義的分類，最多10個，由 NSString 組成這個 NSArray
+ *  @param status         文章狀態，如不指定，請輸入-1
+ *  @param isTop          是否回傳置頂文章
+ *  @param trimUser       是否每篇文章都要回傳作者資訊，輸入 YES 就不回傳
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogAllArticlesWithUserName:(NSString *)userName
                               password:(NSString *)passwd
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage
+                        userCategories:(NSArray *)userCategories
+                                status:(PIXArticleStatus)status
+                                 isTop:(BOOL)isTop
+                              trimUser:(BOOL)trimUser
                             completion:(PIXHandlerCompletion)completion;
 
 /**

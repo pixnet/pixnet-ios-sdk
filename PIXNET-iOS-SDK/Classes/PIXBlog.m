@@ -198,6 +198,10 @@
                               password:(NSString *)passwd
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage
+                        userCategories:(NSArray *)userCategories
+                                status:(PIXArticleStatus)status
+                                 isTop:(BOOL)isTop
+                              trimUser:(BOOL)trimUser
                             completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil) {
@@ -207,15 +211,37 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     
-    if (passwd != nil) {
-        params[@"password"] = passwd;
+    if (passwd && passwd.length>0) {
+        params[@"blog_password"] = passwd;
     }
-    if (page != 0 || page) {
-        params[@"page"] = @(page);
+    if (page <= 0) {
+        params[@"page"] = @"1";
+    } else {
+        params[@"page"] = [NSString stringWithFormat:@"%li", page];
     }
-    if (articlePerPage !=0 || articlePerPage) {
-        params[@"per_page"] = @(articlePerPage);
+    if (articlePerPage <= 0) {
+        params[@"per_page"] = @"20";
+    } else {
+        params[@"per_page"] = [NSString stringWithFormat:@"%li", articlePerPage];
     }
+    if (userCategories) {
+        if (userCategories.count > 10) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"個人自行定義的分類最多只能10個"]);
+            return;
+        }
+        for (id value in userCategories) {
+            if (![value isMemberOfClass:[NSString class]]) {
+                completion(NO, nil, [NSError PIXErrorWithParameterName:@"個人自行定義的分類裡每個值都一定要是 NSString"]);
+                return;
+            }
+        }
+        params[@"category_id"] = [userCategories componentsJoinedByString:@","];
+    }
+    if (status >= 0) {
+        params[@"status"] = [NSString stringWithFormat:@"%li", status];
+    }
+    params[@"is_top"] = [NSString stringWithFormat:@"%i", isTop];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
     [[PIXAPIHandler new] callAPI:@"blog/articles"
                       parameters:params

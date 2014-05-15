@@ -80,12 +80,33 @@
     
     //修改部落格個人文章
     [self modifyBlogArticle:articleId];
+    //列出所有部落格個人文章
+    [self getBlogArticles];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)getBlogArticles{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogAllArticlesWithUserName:@"emmademo"
+                                           password:nil
+                                               page:1
+                                            perpage:30
+                                         completion:^(BOOL succeed, id result, NSError *error) {
+                                             if (succeed) {
+//                                                 NSLog(@"blog articles: %@", result);
+                                             } else {
+                                                 XCTFail(@"get blog articles failed: %@", error);
+                                             }
+                                             done = YES;
+                                         }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)modifyBlogArticle:(NSString *)articleId{
     __block BOOL done = NO;
