@@ -88,6 +88,8 @@
     [self getBlogRelatedArticleWithArticle:articles[0][@"id"]];
     //讀取部落格最新文章
     [self getBlogLatestArticles];
+    //讀取部落格熱門文章
+    [self getBlogHotArticles];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
@@ -95,13 +97,28 @@
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
 }
+-(void)getBlogHotArticles{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogHotArticleWithUserName:_testUser.userName password: nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"get blog hot articles failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(void)getBlogLatestArticles{
     __block BOOL done = NO;
     [[PIXNETSDK new] getBlogLatestArticleWithUserName:_testUser.userName blogPassword:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             
         } else {
-            XCTFail(@"get blog articles failed: %@", error);
+            XCTFail(@"get blog latest articles failed: %@", error);
         }
         done = YES;
     }];

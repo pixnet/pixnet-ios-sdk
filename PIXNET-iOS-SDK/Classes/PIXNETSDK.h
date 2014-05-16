@@ -220,7 +220,7 @@
                               completion:(PIXHandlerCompletion)completion;
 
 /**
- *  列出部落格熱門文章 http://emma.pixnet.cc/blog/articles/hot
+ *  列出部落格熱門文章，預設會回傳1筆文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesHot
  *
  *  @param userName   *指定要回傳的使用者資訊
  *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil

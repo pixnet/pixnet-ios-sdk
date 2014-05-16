@@ -399,6 +399,8 @@
 
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                              password:(NSString *)passwd
+                                limit:(NSUInteger)limit
+                             trimUser:(BOOL)trimUser
                            completion:(PIXHandlerCompletion)completion{
     
     if (userName == nil || userName.length == 0) {
@@ -412,7 +414,8 @@
     if (passwd || passwd.length >>0 || passwd !=nil) {
         params[@"blog_password"] = passwd;
     }
-    
+    params[@"limit"] = [NSString stringWithFormat:@"%li", limit];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
     [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
                       parameters:params
