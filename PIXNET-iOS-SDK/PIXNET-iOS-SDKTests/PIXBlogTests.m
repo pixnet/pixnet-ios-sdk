@@ -86,12 +86,29 @@
     [self getBlogArticle:articles[0][@"id"]];
     //讀取相關文章
     [self getBlogRelatedArticleWithArticle:articles[0][@"id"]];
+    //讀取部落格最新文章
+    [self getBlogLatestArticles];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)getBlogLatestArticles{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogLatestArticleWithUserName:_testUser.userName blogPassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"get blog articles failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)getBlogRelatedArticleWithArticle:(NSString *)articleId{
     __block BOOL done = NO;

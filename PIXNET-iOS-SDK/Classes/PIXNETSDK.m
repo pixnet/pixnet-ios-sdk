@@ -138,8 +138,13 @@
 }
 
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
+                            blogPassword:(NSString *)blogPassword
                               completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogLatestCommentWithUserName:userName completion:completion];
+    [[PIXBlog new] getBlogLatestArticleWithUserName:userName
+                                       blogPassword:blogPassword
+                                              limit:20
+                                           trimUser:YES
+                                         completion:completion];
 }
 
 - (void)getBlogHotArticleWithUserName:(NSString *)userName

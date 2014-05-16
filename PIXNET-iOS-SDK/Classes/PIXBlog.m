@@ -368,6 +368,9 @@
 }
 
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
+                            blogPassword:(NSString *)blogPassword
+                                   limit:(NSUInteger)limit
+                                trimUser:(BOOL)trimUser
                               completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
@@ -376,6 +379,11 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     
     params[@"user"] = userName;
+    if (blogPassword && blogPassword.length>0) {
+        params[@"blog_password"] = blogPassword;
+    }
+    params[@"limit"] = [NSString stringWithFormat:@"%li", limit];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
     [[PIXAPIHandler new] callAPI:@"blog/articles/latest"
                       parameters:params
