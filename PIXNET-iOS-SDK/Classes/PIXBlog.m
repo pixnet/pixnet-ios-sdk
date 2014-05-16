@@ -260,7 +260,7 @@
                          articlePassword:(NSString *)articlePasswd
                               completion:(PIXHandlerCompletion)completion{
     
-    if (userName == nil || userName.length == 0 || !userName) {
+    if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }

@@ -81,7 +81,9 @@
     //修改部落格個人文章
     [self modifyBlogArticle:articleId];
     //列出所有部落格個人文章
-    [self getBlogArticles];
+    NSArray *articles = [self getBlogArticles];
+    //讀取部落格個人單篇文章
+    [self getBlogArticle:articles[0][@"id"]];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
@@ -89,15 +91,32 @@
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
 }
--(void)getBlogArticles{
+-(void)getBlogArticle:(NSString *)articleId{
     __block BOOL done = NO;
-    [[PIXNETSDK new] getBlogAllArticlesWithUserName:@"emmademo"
+    NSLog(@"article id: %@", articleId);
+    [[PIXNETSDK new] getBlogSingleArticleWithUserName:_testUser.userName articleID:articleId blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"get blog articles failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(NSArray *)getBlogArticles{
+    __block BOOL done = NO;
+    __block NSArray *articles = nil;
+    [[PIXNETSDK new] getBlogAllArticlesWithUserName:_testUser.userName
                                            password:nil
                                                page:1
                                             perpage:30
                                          completion:^(BOOL succeed, id result, NSError *error) {
                                              if (succeed) {
-//                                                 NSLog(@"blog articles: %@", result);
+                                                 articles = result[@"articles"];
                                              } else {
                                                  XCTFail(@"get blog articles failed: %@", error);
                                              }
@@ -106,7 +125,7 @@
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
-    return;
+    return articles;
 }
 -(void)modifyBlogArticle:(NSString *)articleId{
     __block BOOL done = NO;
