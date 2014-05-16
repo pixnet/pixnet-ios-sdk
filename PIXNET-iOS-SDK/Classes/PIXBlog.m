@@ -961,18 +961,17 @@
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
                             completion:(PIXHandlerCompletion)completion{
 
-    if (!commentID || commentID == nil || commentID.length == 0) {
+    if (commentID == nil || commentID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"_method"] = @"delete";
+    NSDictionary *params = @{@"_method":@"delete"};
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
                       httpMethod:@"POST"
                       shouldAuth:YES
-                      parameters:nil
+                      parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];

@@ -108,11 +108,11 @@
 }
 -(void)deleteComment:(NSString *)commentId{
     __block BOOL done = NO;
-    [[PIXNETSDK new] getBlogHotArticleWithUserName:_testUser.userName password: nil completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] deleteBlogCommentWithCommentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             
         } else {
-            XCTFail(@"get blog hot articles failed: %@", error);
+            XCTFail(@"delete blog comment failed: %@", error);
         }
         done = YES;
     }];
