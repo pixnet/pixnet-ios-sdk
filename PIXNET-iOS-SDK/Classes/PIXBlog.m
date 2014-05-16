@@ -430,11 +430,12 @@
 
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
                                userName:(NSString *)userName
+                             searchType:(PIXArticleSearchType)searchType
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
                              completion:(PIXHandlerCompletion)completion{
     
-    if (keyword == nil || keyword.length == 0 || !keyword) {
+    if (keyword == nil || keyword.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Search String"]);
         return;
     }
@@ -443,18 +444,27 @@
 
     params[@"key"] = keyword;
  
-    if (userName || userName.length >> 0 || userName != nil) {
+    if (userName && userName.length > 0) {
         params[@"user"] = userName;
     } else {
         params[@"site"] = @"true";
     }
-    
+    switch (searchType) {
+        case PIXArticleSearchTypeTag:
+            params[@"type"] = @"tag";
+            break;
+        case PIXArticleSearchTypeKeyword:
+            params[@"type"] = @"keyword";
+            break;
+        default:
+            break;
+    }
     if (page) {
-        params[@"page"] = @(page);
+        params[@"page"] = [NSString stringWithFormat:@"%li", page];
     }
     
     if (perPage) {
-        params[@"per_page"] = @(perPage);
+        params[@"per_page"] = [NSString stringWithFormat:@"%li", perPage];
     }
     
     

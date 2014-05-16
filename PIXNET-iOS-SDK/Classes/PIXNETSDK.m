@@ -158,7 +158,7 @@
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
                              completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getblogSearchArticleWithKeyword:keyword userName:userName page:page perPage:perPage completion:completion];
+    [[PIXBlog new] getblogSearchArticleWithKeyword:keyword userName:userName searchType:PIXArticleSearchTypeKeyword page:page perPage:perPage completion:completion];
 }
 #pragma mark Article method need access token
 - (void)createBlogArticleWithTitle:(NSString *)title

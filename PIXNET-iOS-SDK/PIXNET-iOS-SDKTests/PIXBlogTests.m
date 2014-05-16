@@ -90,12 +90,35 @@
     [self getBlogLatestArticles];
     //讀取部落格熱門文章
     [self getBlogHotArticles];
+    //搜尋全站文章
+    [self searchArticlesInAllSite:YES];
+    //搜尋某部落客的文章
+    [self searchArticlesInAllSite:NO];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)searchArticlesInAllSite:(BOOL)allSite{
+    __block BOOL done = NO;
+    NSString *userName = nil;
+    if (!allSite) {
+        userName = _testUser.userName;
+    }
+    [[PIXNETSDK new] getblogSearchArticleWithKeyword:@"鞋子" userName:userName page:1 perPage:2 completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"search result: %@", result);
+        } else {
+            XCTFail(@"get blog hot articles failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)getBlogHotArticles{
     __block BOOL done = NO;

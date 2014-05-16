@@ -86,6 +86,19 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
      */
     PIXArticleCommentPermBlogConfig = 4
 };
+/**
+ *  部落格文章搜尋類型
+ */
+typedef NS_ENUM(NSInteger, PIXArticleSearchType){
+    /**
+     *  搜尋標的物為文章標籤
+     */
+    PIXArticleSearchTypeTag,
+    /**
+     *  搜尋標的物為全文
+     */
+    PIXArticleSearchTypeKeyword
+};
 
 #pragma mark - Blog imformation
 /**
@@ -264,16 +277,18 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
                          completion:(PIXHandlerCompletion)completion;
 
 /**
- *  搜尋部落格個人文章 http://emma.pixnet.cc/blog/articles/search
+ *  搜尋部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesSearch
  *
  *  @param keyword    ＊關鍵字或標籤
  *  @param userName   指定要回傳的使用者資訊，如輸入 nil 則搜尋全站
- *  @param page       頁數, 預設為 1, 不需要則輸入 nil
- *  @param perPage    每頁幾筆, 預設為 100, 不需要則輸入 nil
+ *  @param searchType 搜尋類型
+ *  @param page       頁數
+ *  @param perPage    每頁幾筆
  *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
                                userName:(NSString *)userName
+                             searchType:(PIXArticleSearchType)searchType
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
                              completion:(PIXHandlerCompletion)completion;
