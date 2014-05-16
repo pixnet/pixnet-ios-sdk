@@ -120,7 +120,11 @@
                                 userName:(NSString *)userName
                             relatedLimit:(NSUInteger)limit
                               completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogRelatedArticleByArticleID:articleID userName:userName relatedLimit:limit completion:completion];
+    [[PIXBlog new] getBlogRelatedArticleByArticleID:articleID
+                                           userName:userName
+                                           withBody:NO
+                                       relatedLimit:limit
+                                         completion:completion];
 }
 
 - (void)getBlogArticleCommentsWithUserName:(NSString *)userName

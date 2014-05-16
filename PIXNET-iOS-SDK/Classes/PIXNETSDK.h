@@ -178,7 +178,7 @@
                               completion:(PIXHandlerCompletion)completion;
 
 /**
- *  讀取指定 ID 文章的相關文章 http://emma.pixnet.cc/blog/articles/:id/related
+ *  讀取指定 ID 文章的相關文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesIdRelated
  *
  *  @param articleID  ＊指定要回傳的文章ID
  *  @param userName   ＊指定要回傳的使用者

@@ -292,6 +292,7 @@
 
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
                                 userName:(NSString *)userName
+                                withBody:(BOOL)withBody
                             relatedLimit:(NSUInteger)limit
                               completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
@@ -305,10 +306,10 @@
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
-    if (limit != 0 || limit) {
-        params[@"limit"] = @(limit);
+    if (limit > 0) {
+        params[@"limit"] = [NSString stringWithFormat:@"%li", limit];
     }
-    
+    params[@"with_body"] = [NSString stringWithFormat:@"%i", withBody];
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/articles/%@/related", articleID]
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {

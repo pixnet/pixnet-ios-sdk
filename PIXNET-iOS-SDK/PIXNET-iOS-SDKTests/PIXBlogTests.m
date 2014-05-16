@@ -84,6 +84,8 @@
     NSArray *articles = [self getBlogArticles];
     //讀取部落格個人單篇文章
     [self getBlogArticle:articles[0][@"id"]];
+    //讀取相關文章
+    [self getBlogRelatedArticleWithArticle:articles[0][@"id"]];
     
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
@@ -91,9 +93,23 @@
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
 }
+-(void)getBlogRelatedArticleWithArticle:(NSString *)articleId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogRelatedArticleByArticleID:articleId userName:_testUser.userName relatedLimit:10 completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"get blog articles failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(void)getBlogArticle:(NSString *)articleId{
     __block BOOL done = NO;
-    NSLog(@"article id: %@", articleId);
     [[PIXNETSDK new] getBlogSingleArticleWithUserName:_testUser.userName articleID:articleId blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             

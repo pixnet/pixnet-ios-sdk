@@ -205,11 +205,13 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
  *
  *  @param articleID  ＊指定要回傳的文章ID
  *  @param userName   ＊指定要回傳的使用者
+ *  @param withBody   是否包含文章本文的內容
  *  @param limit      限制回傳文章的筆數，預設值為1，最大值為10, 不設定則輸入 nil
  *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
                                 userName:(NSString *)userName
+                                withBody:(BOOL)withBody
                             relatedLimit:(NSUInteger)limit
                               completion:(PIXHandlerCompletion)completion;
 
