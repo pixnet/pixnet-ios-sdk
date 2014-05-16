@@ -95,11 +95,47 @@
     //搜尋某部落客的文章
     [self searchArticlesInAllSite:NO];
     
+    //新增部落格留言
+    NSString *commentId = [self createBlogArticleComment:articles[0][@"id"]];
+    
+    //刪除部落格留言
+    [self deleteComment:commentId];
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)deleteComment:(NSString *)commentId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogHotArticleWithUserName:_testUser.userName password: nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"get blog hot articles failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(NSString *)createBlogArticleComment:(NSString *)articleId{
+    __block BOOL done = NO;
+    __block NSString *commentId = nil;
+    [[PIXNETSDK new] createBlogCommentWithArticleID:articleId body:@"test comment" userName:_testUser.userName author:nil title:nil url:nil isOpen:YES email:nil blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            commentId = result[@"comment"][@"id"];
+        } else {
+            XCTFail(@"create blog comment failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return commentId;
 }
 -(void)searchArticlesInAllSite:(BOOL)allSite{
     __block BOOL done = NO;
@@ -109,7 +145,7 @@
     }
     [[PIXNETSDK new] getblogSearchArticleWithKeyword:@"鞋子" userName:userName page:1 perPage:2 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            NSLog(@"search result: %@", result);
+//            NSLog(@"search result: %@", result);
         } else {
             XCTFail(@"get blog hot articles failed: %@", error);
         }

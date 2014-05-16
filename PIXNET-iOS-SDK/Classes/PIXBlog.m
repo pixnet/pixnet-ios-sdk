@@ -811,50 +811,46 @@
                        articlePassword:(NSString *)articlePasswd
                             completion:(PIXHandlerCompletion)completion{
 
-    if (!articleID || articleID == nil || articleID.length == 0) {
+    if (articleID == nil || articleID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
-    if (!body || body == nil || body.length == 0) {
+    if (body == nil || body.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment Body"]);
         return;
+    }
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing userName"]);
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"article_id"] = articleID;
     params[@"body"] = body;
+    params[@"user"] = userName;
     
-    if (userName || userName != nil || userName.length != 0) {
-        params[@"user"] = userName;
-    }
-    
-    if (author || author != nil || author.length != 0) {
+    if (author != nil && author.length != 0) {
         params[@"author"] = author;
     }
     
-    if (title || title != nil || title.length != 0) {
+    if (title != nil && title.length != 0) {
         params[@"title"] = title;
     }
     
-    if (url || url != nil || url.length != 0) {
+    if (url != nil && url.length != 0) {
         params[@"url"] = url;
     }
     
-    if (isOpen) {
-        params[@"is_open"] = @"0";
-    }else{
-        params[@"is_open"] = @"1";
-    }
+    params[@"is_open"] = [NSString stringWithFormat:@"%i", isOpen];
     
-    if (email || email != nil || email.length != 0) {
+    if (email != nil && email.length != 0) {
         params[@"email"] = email;
     }
     
-    if (blogPasswd || blogPasswd != nil || blogPasswd.length != 0) {
+    if (blogPasswd != nil && blogPasswd.length != 0) {
         params[@"blog_password"] = blogPasswd;
     }
     
-    if (articlePasswd || articlePasswd != nil || articlePasswd.length != 0) {
+    if (articlePasswd != nil && articlePasswd.length != 0) {
         params[@"article_password"] = articlePasswd;
     }
     

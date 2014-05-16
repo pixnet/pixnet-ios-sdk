@@ -433,11 +433,11 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
  *
  *  @param articleID     ＊要留言的文章 ID
  *  @param body          ＊留言內容
- *  @param userName      要留言的部落格作者名稱, 若不填入則預設找自己的文章
+ *  @param userName      ＊要被留言的部落格作者名稱
  *  @param author        留言的暱稱, 不填入則預設代入認證使用者的 display_name
  *  @param title         留言標題
  *  @param url           個人網頁
- *  @param isOpen        公開留言/悄悄話
+ *  @param isOpen        是否為公開留言
  *  @param email         電子郵件
  *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權
