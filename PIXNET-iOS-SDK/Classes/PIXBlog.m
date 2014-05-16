@@ -464,6 +464,7 @@
                           publicAt:(NSDate *)date
                     userCategoryID:(NSString *)userCategoryId
                     siteCategoryID:(NSString *)cateID
+                    useNewLineToBR:(BOOL)useNewLineToBR
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
@@ -483,6 +484,7 @@
                                       publicAt:date
                                 userCategoryID:userCategoryId
                                 siteCategoryID:cateID
+                                useNewLineToBR:useNewLineToBR
                                    commentPerm:commentPerm
                                  commentHidden:commentHidden
                                           tags:tagArray
@@ -506,6 +508,7 @@
                                     publicAt:(NSDate *)date
                                 userCategoryID:(NSString *)userCategoryId
                                 siteCategoryID:(NSString *)cateID
+                                useNewLineToBR:(BOOL)useNewLineToBR
                                    commentPerm:(PIXArticleCommentPerm)commentPerm
                                  commentHidden:(BOOL)commentHidden
                                           tags:(NSArray *)tagArray
@@ -561,7 +564,8 @@
     if (cateID!=nil && cateID.length>0) {
         params[@"site_category_id"] = cateID;
     }
-    
+    params[@"use_nl2br"] = [NSString stringWithFormat:@"%i", useNewLineToBR];
+
     params[@"comment_perm"] = [NSString stringWithFormat:@"%li", commentPerm];
     
     params[@"comment_hidden"] = [NSString stringWithFormat:@"%i", commentHidden];
@@ -601,7 +605,6 @@
     if (notifyFacebook >= 0) {
         params[@"notify_facebook"] = [NSString stringWithFormat:@"%i", notifyFacebook];
     }
-    
     [[PIXAPIHandler new] callAPI:path
                       httpMethod:@"POST"
                       shouldAuth:YES
@@ -621,6 +624,7 @@
                               publicAt:(NSDate *)date
                         userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
+                        useNewLineToBR:(BOOL)useNewLineToBR
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
@@ -644,6 +648,7 @@
                                       publicAt:date
                                 userCategoryID:userCategoryId
                                 siteCategoryID:cateID
+                                useNewLineToBR:useNewLineToBR
                                    commentPerm:commentPerm
                                  commentHidden:commentHidden
                                           tags:tagArray

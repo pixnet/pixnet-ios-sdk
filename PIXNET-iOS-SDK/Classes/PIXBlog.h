@@ -277,6 +277,7 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
  *  @param date           文章公開時間
  *  @param userCategoryId 使用者自訂的類別 id。使用者自訂的類別，可透過 -(void)getBlogCategoriesWithUserName:password:completion: 取得
  *  @param cateID         全站分類的該類別 id，全站的部落格類別，可透過 -(void)getBlogCategoriesListIncludeGroups:thumbs:completion: 取得
+ *  @param useNewLineToBR  是否要將 \n 轉為 <BR>
  *  @param commentPerm    可留言權限，使用 PIXArticleCommentPerm 型別
  *  @param commentHidden  預設留言狀態， Yes 為強制隱藏 NO 為顯示(公開)，建議使用 NO (顯示)
  *  @param tagArray       文章標籤，內容的值必為 NSString 物件
@@ -295,6 +296,7 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
                           publicAt:(NSDate *)date
                     userCategoryID:(NSString *)userCategoryId
                     siteCategoryID:(NSString *)cateID
+                         useNewLineToBR:(BOOL)useNewLineToBR
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
                               tags:(NSArray *)tagArray
@@ -316,6 +318,7 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
  *  @param date           文章的發表時間
  *  @param userCategoryId 使用者自訂的類別 id。使用者自訂的類別，可透過 -(void)getBlogCategoriesWithUserName:password:completion: 取得
  *  @param cateID         全站分類 id
+ *  @param useNewLineToBR 是否要將 /n 轉成 <BR>
  *  @param commentPerm    全站分類的該類別 id，全站的部落格類別，可透過 -(void)getBlogCategoriesListIncludeGroups:thumbs:completion: 取得
  *  @param commentHidden  是否將留言公開
  *  @param tagArray       標籤
@@ -335,6 +338,7 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
                               publicAt:(NSDate *)date
                         userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
+                        useNewLineToBR:(BOOL)useNewLineToBR
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
