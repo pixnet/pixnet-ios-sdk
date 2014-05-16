@@ -164,7 +164,24 @@
                       passwordHint:(NSString *)passwdHint
                      friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] createBlogArticleWithTitle:title body:body status:status publicAt:nil userCategoryID:userCategoryId siteCategoryID:cateID commentPerm:PIXArticleCommentPermBlogConfig commentHidden:NO tags:tagArray thumbURL:thumburl trackback:trackback password:passwd passwordHint:passwdHint friendGroupID:friendGroupID notifyTwitter:-1 notifyFacebook:-1 completion:completion];
+    [[PIXBlog new] createBlogArticleWithTitle:title
+                                         body:body
+                                       status:status
+                                     publicAt:nil
+                               userCategoryID:userCategoryId
+                               siteCategoryID:cateID
+                               useNewLineToBR:YES
+                                  commentPerm:PIXArticleCommentPermBlogConfig
+                                commentHidden:NO
+                                         tags:tagArray
+                                     thumbURL:thumburl
+                                    trackback:trackback
+                                     password:passwd
+                                 passwordHint:passwdHint
+                                friendGroupID:friendGroupID
+                                notifyTwitter:-1
+                               notifyFacebook:-1
+                                   completion:completion];
     
 }
 
@@ -193,6 +210,7 @@
                                          publicAt:date
                                    userCategoryID:userCategoryId
                                    siteCategoryID:cateID
+                                   useNewLineToBR:YES
                                       commentPerm:commentPerm
                                     commentHidden:commentHidden
                                              tags:tagArray
