@@ -333,9 +333,9 @@
  *  列出部落格留言 http://emma.pixnet.cc/blog/comments
  *
  *  @param userName   *指定要回傳的使用者資訊
- *  @param articleID  *指定要回傳的留言文章
- *  @param page       頁數, 預設為 1, 不需要則輸入 nil
- *  @param perPage    每頁幾筆, 預設為 100, 不需要則輸入 nil
+ *  @param articleID  指定要回傳的留言文章
+ *  @param page       頁數
+ *  @param perPage    每頁幾筆
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogCommentsWithUserName:(NSString *)userName

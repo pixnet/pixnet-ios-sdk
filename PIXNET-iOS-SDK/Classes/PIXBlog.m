@@ -713,30 +713,59 @@
 
 - (void)getBlogCommentsWithUserName:(NSString *)userName
                           articleID:(NSString *)articleID
+                       blogPassword:(NSString *)blogPassword
+                    articlePassword:(NSString *)articlePassword
+                             filter:(PIXBlogCommentFilterType)filter
+                    isSortAscending:(BOOL)isSortAscending
                                page:(NSUInteger)page
                             perPage:(NSUInteger)perPage
                          completion:(PIXHandlerCompletion)completion{
     
-    if (userName == nil || userName.length == 0 || !userName) {
+    if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
-    
-    if (articleID == nil || articleID.length == 0 || !articleID) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
+    if (articleID == nil || articleID.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing articleId"]);
         return;
     }
+    if (page<=0 || perPage<=0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"page 及 perPage 都一定要大於0"]);
+        return;
+    }
+    
     NSMutableDictionary *params = [NSMutableDictionary new];
     
     params[@"user"] = userName;
-    params[@"article_id"] = articleID;
-    
-    if (page) {
-        params[@"page"] = @(page);
+    if (articleID) {
+        params[@"article_id"] = articleID;
     }
-    if (perPage) {
-        params[@"per_page"] = @(perPage);
+    if (blogPassword) {
+        params[@"blog_password"] = blogPassword;
     }
+    if (articlePassword) {
+        params[@"article_password"] = articlePassword;
+    }
+    switch (filter) {
+        case PIXBlogCommentFilterTypeNoReply:
+            params[@"filter"] = @"noreply";
+            break;
+        case PIXBlogCommentFilterTypeWhisper:
+            params[@"filter"] = @"shisper";
+            break;
+        case PIXBlogCommentFilterTypeNoSpam:
+            params[@"filter"] = @"nospam";
+            break;
+        default:
+            break;
+    }
+    if (isSortAscending) {
+        params[@"sort"] = @"date-posted-asc";
+    } else {
+        params[@"sort"] = @"date-posted-desc";
+    }
+    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
     
     [[PIXAPIHandler new] callAPI:@"blog/comments"
                       parameters:params

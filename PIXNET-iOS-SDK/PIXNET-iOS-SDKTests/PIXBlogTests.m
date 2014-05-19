@@ -109,6 +109,8 @@
     [self markBlogComment:commentId isSpam:NO];
     //列出部落格最新留言
     [self getBlogCommentsLatest];
+    //列出部落格留言
+    [self getBlogCommentsWithArticle:articles[0][@"id"]];
     
     //刪除部落格留言
     [self deleteComment:commentId];
@@ -118,11 +120,13 @@
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
 }
--(void)getBlogCommentsLatest{
+-(NSArray *)getBlogCommentsWithArticle:(NSString *)articleId{
     __block BOOL done = NO;
-    [[PIXNETSDK new] getBlogLatestCommentWithUserName:_testUser.userName completion:^(BOOL succeed, id result, NSError *error) {
+    __block NSArray *array = nil;
+    [[PIXNETSDK new] getBlogCommentsWithUserName:_testUser.userName articleID:articleId page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            
+            NSLog(@"comments: %@", result);
+            array = result[@"comments"];
         } else {
             XCTFail(@"mark blog comment as spam or ham failed: %@", error);
         }
@@ -131,7 +135,23 @@
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
-    return;
+    return array;
+}
+-(NSArray *)getBlogCommentsLatest{
+    __block BOOL done = NO;
+    __block NSArray *array = nil;
+    [[PIXNETSDK new] getBlogLatestCommentWithUserName:_testUser.userName completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            array = result[@"latest_comments"];
+        } else {
+            XCTFail(@"mark blog comment as spam or ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return array;
 }
 -(void)markBlogComment:(NSString *)commentId isSpam:(BOOL)isSpam{
     __block BOOL done = NO;

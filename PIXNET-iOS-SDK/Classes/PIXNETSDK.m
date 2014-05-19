@@ -245,7 +245,7 @@
                                page:(NSUInteger)page
                             perPage:(NSUInteger)perPage
                          completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogCommentsWithUserName:userName articleID:articleID page:page perPage:perPage completion:completion];
+    [[PIXBlog new] getBlogCommentsWithUserName:userName articleID:articleID blogPassword:nil articlePassword:nil filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:10 completion:completion];
     
 }
 

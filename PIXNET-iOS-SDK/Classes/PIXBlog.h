@@ -87,6 +87,27 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
     PIXArticleCommentPermBlogConfig = 4
 };
 /**
+ *  部落格留言屬性
+ */
+typedef NS_ENUM(NSInteger, PIXBlogCommentFilterType){
+    /**
+     *  悄悄話留言
+     */
+    PIXBlogCommentFilterTypeWhisper,
+    /**
+     *  非廣告留言
+     */
+    PIXBlogCommentFilterTypeNoSpam,
+    /**
+     *  未回覆留言
+     */
+    PIXBlogCommentFilterTypeNoReply,
+    /**
+     *  所有留言
+     */
+    PIXBlogCommentFilterTypeAll
+};
+/**
  *  部落格文章搜尋類型
  */
 typedef NS_ENUM(NSInteger, PIXArticleSearchType){
@@ -389,18 +410,25 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 
 
 #pragma mark - Blog Comments
-
 /**
- *  列出部落格留言 http://emma.pixnet.cc/blog/comments
+ *  列出部落格留言 http://developer.pixnet.pro/#!/doc/pixnetApi/blogComments
  *
- *  @param userName   ＊指定要回傳的使用者資訊
- *  @param articleID  ＊指定要回傳的留言文章
- *  @param page       頁數, 預設為 1, 不需要則輸入 nil
- *  @param perPage    每頁幾筆, 預設為 100, 不需要則輸入 nil
- *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
+ *  @param userName        部落客 id, 必要欄位
+ *  @param articleID       文章 id, 必要欄位
+ *  @param blogPassword    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
+ *  @param articlePassword 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權
+ *  @param filter          顯示特別屬性的留言
+ *  @param isSortAscending 是否依照留言時間做舊到新的排序
+ *  @param page            頁數
+ *  @param perPage         每頁幾筆
+ *  @param completion      succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogCommentsWithUserName:(NSString *)userName
                           articleID:(NSString *)articleID
+                       blogPassword:(NSString *)blogPassword
+                    articlePassword:(NSString *)articlePassword
+                             filter:(PIXBlogCommentFilterType)filter
+                    isSortAscending:(BOOL)isSortAscending
                                page:(NSUInteger)page
                             perPage:(NSUInteger)perPage
                          completion:(PIXHandlerCompletion)completion;
