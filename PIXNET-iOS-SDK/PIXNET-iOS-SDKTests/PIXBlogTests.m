@@ -107,7 +107,8 @@
     [self markBlogComment:commentId isSpam:YES];
     //將留言設為非廣告留言
     [self markBlogComment:commentId isSpam:NO];
-    
+    //列出部落格最新留言
+    [self getBlogCommentsLatest];
     
     //刪除部落格留言
     [self deleteComment:commentId];
@@ -116,6 +117,21 @@
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)getBlogCommentsLatest{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogLatestCommentWithUserName:_testUser.userName completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"mark blog comment as spam or ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)markBlogComment:(NSString *)commentId isSpam:(BOOL)isSpam{
     __block BOOL done = NO;

@@ -780,14 +780,13 @@
 - (void)getBlogLatestCommentWithUserName:(NSString *)userName
                               completion:(PIXHandlerCompletion)completion{
     
-    NSMutableDictionary *params = [NSMutableDictionary new];
-
-    if (userName || userName != nil || userName.length >> 0) {
-        params[@"user"] = userName;
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"userName 參數有誤"]);
+        return;
     }
     
     [[PIXAPIHandler new] callAPI:@"blog/comments/latest"
-                      parameters:params
+                      parameters:@{@"user": userName}
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];

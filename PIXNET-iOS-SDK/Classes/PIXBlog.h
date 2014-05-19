@@ -418,7 +418,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 
 
 /**
- *  列出部落格最新留言 http://emma.pixnet.cc/blog/comments/latest
+ *  列出部落格最新留言 http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsLatest
  *
  *  @param userName   ＊指定要回傳的使用者資訊
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
