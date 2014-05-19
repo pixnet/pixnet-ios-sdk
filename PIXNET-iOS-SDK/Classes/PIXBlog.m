@@ -65,7 +65,7 @@
                         siteCategory:(NSString *)siteCateID
                           completion:(PIXHandlerCompletion)completion{
     
-    if (!name || name == nil || name.length == 0) {
+    if (name == nil || name.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Category Name"]);
         return;
     }
@@ -76,13 +76,14 @@
     if (type == PIXBlogCategoryTypeCategory) {
         params[@"type"] = @"category";
         params[@"site_category_done"] = @"1";
-        params[@"site_category_id"] = siteCateID;
-    
+        if (siteCateID) {
+            params[@"site_category_id"] = siteCateID;
+        }
     }else if (type == PIXBlogCategoryTypeFolder){
         params[@"type"] = @"folder";
     }
     
-    if (description || description != nil || description.length != 0) {
+    if (description != nil && description.length != 0) {
         params[@"description"] = description;
     }
     
@@ -107,9 +108,11 @@
                         completion:(PIXHandlerCompletion)completion{
     if (categoryID==nil || categoryID.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"categoryID 參數有誤"]);
+        return;
     }
     if (newName == nil || newName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing New Name"]);
+        return;
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -146,19 +149,26 @@
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID
                             type:(PIXBlogCategoryType)type
                       completion:(PIXHandlerCompletion)completion{
-    if (!categoriesID || categoriesID == nil || categoriesID.length == 0) {
+    if (categoriesID == nil || categoriesID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Category/Folder ID"]);
+        return;
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
     
-    if (type == PIXBlogCategoryTypeCategory) {
-        params[@"type"] = @"category";
-    }else{
-        params[@"type"] = @"folder";
+    switch (type) {
+        case PIXBlogCategoryTypeCategory:
+            params[@"type"] = @"category";
+            break;
+        case PIXBlogCategoryTypeFolder:
+            params[@"type"] = @"folder";
+            break;
+        default:
+            break;
     }
     
     params[@"_method"] = @"delete";
+    NSLog(@"delete category: %@", params);
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/categories/%@", categoriesID]
                       httpMethod:@"POST"

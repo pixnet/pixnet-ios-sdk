@@ -35,8 +35,6 @@
 		CED461A21910D4A0003A96C2 /* NSDictionary+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A01910D4A0003A96C2 /* NSDictionary+PIXCategory.m */; };
 		CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
-		CEDAEE5B192612FA00D651FD /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CEDAEE5A192612FA00D651FD /* test.mp4 */; };
-		CEDAEE5C192612FA00D651FD /* test.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = CEDAEE5A192612FA00D651FD /* test.mp4 */; };
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
 		CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
@@ -96,7 +94,6 @@
 		CED461A31910D4C7003A96C2 /* UserForTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserForTest.h; sourceTree = "<group>"; };
 		CED461A41910D4C7003A96C2 /* UserForTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForTest.m; sourceTree = "<group>"; };
 		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		CEDAEE5A192612FA00D651FD /* test.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.mp4; sourceTree = "<group>"; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEDB7C7918D2ECF700D14D0C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -225,7 +222,6 @@
 				CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */,
 				CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */,
 				CED461591910C1CD003A96C2 /* pixFox.jpg */,
-				CEDAEE5A192612FA00D651FD /* test.mp4 */,
 				CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */,
 				CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */,
 			);
@@ -375,7 +371,6 @@
 				CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */,
 				CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */,
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
-				CEDAEE5B192612FA00D651FD /* test.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +379,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEDB7C9D18D2ECF700D14D0C /* InfoPlist.strings in Resources */,
-				CEDAEE5C192612FA00D651FD /* test.mp4 in Resources */,
 				CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -119,8 +119,8 @@
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
-    [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
-    [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+    [self deleteBlogCategory:categoryId];
+    [self deleteBlogFoler:folderId];
 }
 -(void)getComment:(NSString *)commentId{
     __block BOOL done = NO;
@@ -461,7 +461,7 @@
             NSLog(@"update blog categories succeed");
         } else {
             //總是在修改 categoryType 為 category 的時候死掉
-            XCTFail(@"update blog categories failed: %@, category name: %@", error, newName);
+            XCTFail(@"update blog categories failed: %@, category name: %@, categoryId: %@", error, newName, categoryId);
         }
         done = YES;
     }];
@@ -471,27 +471,32 @@
     }
     return;
 }
--(void)deleteBlogCategory:(NSString *)categoryId categoryType:(PIXBlogCategoryType)categoryType{
+-(void)deleteBlogFoler:(NSString *)folderId{
     __block BOOL done = NO;
-    if (categoryId == PIXBlogCategoryTypeCategory) {
-        [[PIXNETSDK new] deleteBlogCategoriesByID:categoryId completion:^(BOOL succeed, id result, NSError *error) {
-            if (succeed) {
-                NSLog(@"delete blog categories succeed");
-            } else {
-                XCTFail(@"delete blog categories failed: %@", error);
-            }
-            done = YES;
-        }];
-    } else {
-        [[PIXNETSDK new] deleteBlogFolderByID:categoryId completion:^(BOOL succeed, id result, NSError *error) {
-            if (succeed) {
-                NSLog(@"delete blog categories succeed");
-            } else {
-                XCTFail(@"delete blog categories failed: %@", error);
-            }
-            done = YES;
-        }];
+    [[PIXNETSDK new] deleteBlogFolderByID:folderId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"delete blog categories succeed");
+        } else {
+            XCTFail(@"delete blog categories failed: %@", error);
+        }
+        done = YES;
+    }];
+
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
+    return;
+}
+-(void)deleteBlogCategory:(NSString *)categoryId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] deleteBlogCategoriesByID:categoryId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"delete blog categories succeed");
+        } else {
+            XCTFail(@"delete blog categories failed: %@", error);
+        }
+        done = YES;
+    }];
     
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -501,7 +506,7 @@
 -(NSString *)createBlogCategory:(PIXBlogCategoryType)categoryType{
     __block BOOL done = NO;
     __block NSString *idString = nil;
-    [[PIXNETSDK new] createBlogCategoriesWithName:@"單元測試分類" type:PIXBlogCategoryTypeFolder description:nil siteCategory:nil completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] createBlogCategoriesWithName:@"單元測試分類" type:categoryType description:nil siteCategory:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             idString = result[@"category"][@"id"];
             NSLog(@"create blog category succeed: %@", idString);
