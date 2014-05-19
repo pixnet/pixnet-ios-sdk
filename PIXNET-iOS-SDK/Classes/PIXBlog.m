@@ -821,6 +821,7 @@
     }
     if (userName==nil || userName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing userName"]);
+        return;
     }
     
     NSMutableDictionary *params = [NSMutableDictionary new];
@@ -870,18 +871,17 @@
 - (void)replyBlogCommentWithCommnetID:(NSString *)commentID
                                  body:(NSString *)body
                            completion:(PIXHandlerCompletion)completion{
-    if (!commentID || commentID == nil || commentID.length == 0) {
+    if (commentID == nil || commentID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
     
-    if (!body || body == nil || body.length == 0) {
+    if (body == nil || body.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment Body"]);
         return;
     }
     
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    params[@"body"] = body;
+    NSDictionary *params = @{@"body": body};
     
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@/reply", commentID]
                       httpMethod:@"POST"
@@ -900,11 +900,11 @@
 - (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
                                     isOpen:(BOOL)isOpen
                                 completion:(PIXHandlerCompletion)completion{
-    if (!commentID || commentID == nil || commentID.length == 0) {
+    if (commentID == nil || commentID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
-    NSString *isOpenString = [NSString new];
+    NSString *isOpenString = nil;
     
     if (isOpen) {
         isOpenString = @"open";
@@ -931,7 +931,7 @@
                                     isSpam:(BOOL)isSpam
                                 completion:(PIXHandlerCompletion)completion{
     
-    if (!commentID || commentID == nil || commentID.length == 0) {
+    if (commentID == nil || commentID.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }

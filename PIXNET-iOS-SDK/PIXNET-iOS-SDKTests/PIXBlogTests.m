@@ -97,6 +97,17 @@
     
     //新增部落格留言
     NSString *commentId = [self createBlogArticleComment:articles[0][@"id"]];
+    //回覆部落格留言
+    [self replyBlogComment:commentId];
+    //將留言設為悄悄話
+    [self closeOrOpenBlogComment:commentId isOpen:NO];
+    //將留言設為公開
+    [self closeOrOpenBlogComment:commentId isOpen:YES];
+    //將留言設為廣告留言
+    [self markBlogComment:commentId isSpam:YES];
+    //將留言設為非廣告留言
+    [self markBlogComment:commentId isSpam:NO];
+    
     
     //刪除部落格留言
     [self deleteComment:commentId];
@@ -105,6 +116,51 @@
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
+}
+-(void)markBlogComment:(NSString *)commentId isSpam:(BOOL)isSpam{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] updateBlogCommentSpamWithCommentID:commentId isSpam:isSpam completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"mark blog comment as spam or ham failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)closeOrOpenBlogComment:(NSString *)commentId isOpen:(BOOL)isOpen{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] updateBlogCommentOpenWithCommentID:commentId isOpen:isOpen completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"close or open blog comment failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(void)replyBlogComment:(NSString *)commentId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] replyBlogCommentWithCommnetID:commentId body:@"reply comment" completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"replay blog comment failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)deleteComment:(NSString *)commentId{
     __block BOOL done = NO;

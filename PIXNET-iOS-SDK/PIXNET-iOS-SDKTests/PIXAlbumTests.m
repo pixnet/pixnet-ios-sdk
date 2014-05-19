@@ -362,7 +362,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     NSData *data = UIImageJPEGRepresentation(image, 0.7);
     [[PIXNETSDK new] createElementWithElementData:data setID:albumId elementTitle:@"unit test photo title" elementDescription:@"unit test photo description" tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            NSLog(@"add element succeed");
+            NSLog(@"add element succeed: %@", result);
             elementId = result[@"element"][@"id"];
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);

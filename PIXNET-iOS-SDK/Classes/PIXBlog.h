@@ -429,7 +429,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 
 #pragma mark Comment method need access token
 /**
- *  新增部落格留言（需認證） http://emma.pixnet.cc/blog/comments
+ *  新增部落格留言（需認證） http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsCreate
  *
  *  @param articleID     ＊要留言的文章 ID
  *  @param body          ＊留言內容
@@ -455,7 +455,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                        articlePassword:(NSString *)articlePasswd
                             completion:(PIXHandlerCompletion)completion;
 /**
- *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容（需認證） http://emma.pixnet.cc/blog/comments/:id/reply
+ *  回覆部落格留言，可以重覆使用這個功能來修改回覆內容（需認證） http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsReply
  *
  *  @param commentID  ＊要回覆/修改的留言 ID
  *  @param body       ＊留言內容/修改後的內容
@@ -466,7 +466,9 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                            completion:(PIXHandlerCompletion)completion;
 
 /**
- *  將留言設為公開/關閉（需認證） http://emma.pixnet.cc/blog/comments/:id/open http://emma.pixnet.cc/blog/comments/:id/close
+ *  將留言設為公開/關閉（需認證） 
+ *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsOpen
+ *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsClose
  *
  *  @param commentID  ＊要公開/關閉的留言 ID
  *  @param isOpen     ＊YES 為 公開， NO 為 關閉 該則留言
@@ -477,7 +479,9 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                                 completion:(PIXHandlerCompletion)completion;
 
 /**
- *  將留言設為廣告留言/非廣告留言（需認證） http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
+ *  將留言設為廣告留言/非廣告留言（需認證
+ *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkSpam
+ *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkHam
  *
  *  @param commentID  ＊要公開/關閉的留言 ID
  *  @param isSpam     ＊YES 為設成廣告留言， NO 為設成非廣告留言
