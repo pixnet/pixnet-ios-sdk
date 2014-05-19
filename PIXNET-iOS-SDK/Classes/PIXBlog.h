@@ -434,7 +434,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                          completion:(PIXHandlerCompletion)completion;
 
 /**
- *  讀取單一留言 http://emma.pixnet.cc/blog/comments/:id
+ *  讀取單一留言 http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsId
  *
  *  @param userName   ＊指定要回傳的使用者資訊
  *  @param commentID  ＊指定要回傳的留言ID

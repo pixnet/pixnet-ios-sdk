@@ -109,6 +109,8 @@
     [self markBlogComment:commentId isSpam:NO];
     //列出部落格最新留言
     [self getBlogCommentsLatest];
+    //讀取單一留言
+    [self getComment:commentId];
     //列出部落格留言
     [self getBlogCommentsWithArticle:articles[0][@"id"]];
     
@@ -120,15 +122,29 @@
     [self deleteBlogCategory:categoryId categoryType:PIXBlogCategoryTypeCategory];
     [self deleteBlogCategory:folderId categoryType:PIXBlogCategoryTypeFolder];
 }
+-(void)getComment:(NSString *)commentId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlogSingleCommentWithUserName:_testUser.userName commmentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+            XCTFail(@"get blog comment failed: %@", error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(NSArray *)getBlogCommentsWithArticle:(NSString *)articleId{
     __block BOOL done = NO;
     __block NSArray *array = nil;
     [[PIXNETSDK new] getBlogCommentsWithUserName:_testUser.userName articleID:articleId page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            NSLog(@"comments: %@", result);
             array = result[@"comments"];
         } else {
-            XCTFail(@"mark blog comment as spam or ham failed: %@", error);
+            XCTFail(@"get blog comments failed: %@", error);
         }
         done = YES;
     }];
@@ -144,7 +160,7 @@
         if (succeed) {
             array = result[@"latest_comments"];
         } else {
-            XCTFail(@"mark blog comment as spam or ham failed: %@", error);
+            XCTFail(@"get blog latest comments failed: %@", error);
         }
         done = YES;
     }];

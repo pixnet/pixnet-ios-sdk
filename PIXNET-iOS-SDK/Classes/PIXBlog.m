@@ -791,12 +791,9 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary new];
-    
-    params[@"user"] = userName;
-    
+
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
-                      parameters:params
+                      parameters:@{@"user": userName}
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {
                        [self succeedHandleWithData:result completion:completion];
