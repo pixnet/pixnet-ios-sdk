@@ -395,7 +395,7 @@
 -(NSString *)createBlogArticle{
     __block BOOL done = NO;
     __block NSString *articleId = nil;
-    [[PIXNETSDK new] createBlogArticleWithTitle:@"Article title for unit test" body:@"article body for unit test" status:PIXArticleStatusPublic userCategoryID:nil siteCategoryID:nil tags:nil thumbURL:nil trackback:nil password:nil passwordHint:nil friendGroupID:nil completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] createBlogArticleWithTitle:@"article title for unit test" body:@"article body for unit test" completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             articleId = result[@"article"][@"id"];
             NSLog(@"create blog article succeed: %@", articleId);

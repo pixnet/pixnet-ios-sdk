@@ -163,31 +163,22 @@
 #pragma mark Article method need access token
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
-                            status:(PIXArticleStatus)status
-                    userCategoryID:(NSString *)userCategoryId
-                    siteCategoryID:(NSString *)cateID
-                              tags:(NSArray *)tagArray
-                          thumbURL:(NSString *)thumburl
-                         trackback:(NSArray *)trackback
-                          password:(NSString *)passwd
-                      passwordHint:(NSString *)passwdHint
-                     friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] createBlogArticleWithTitle:title
                                          body:body
-                                       status:status
+                                       status:PIXArticleStatusPublic
                                      publicAt:nil
-                               userCategoryID:userCategoryId
-                               siteCategoryID:cateID
+                               userCategoryID:nil
+                               siteCategoryID:nil
                                useNewLineToBR:YES
                                   commentPerm:PIXArticleCommentPermBlogConfig
                                 commentHidden:NO
-                                         tags:tagArray
-                                     thumbURL:thumburl
-                                    trackback:trackback
-                                     password:passwd
-                                 passwordHint:passwdHint
-                                friendGroupID:friendGroupID
+                                         tags:nil
+                                     thumbURL:nil
+                                    trackback:nil
+                                     password:nil
+                                 passwordHint:nil
+                                friendGroupID:nil
                                 notifyTwitter:-1
                                notifyFacebook:-1
                                    completion:completion];

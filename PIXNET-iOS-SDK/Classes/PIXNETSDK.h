@@ -26,8 +26,8 @@
 /**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
- *  @param userName   使用者名稱(帳號)
- *  @param password   使用者密碼
+ *  @param userName   使用者名稱(帳號)，必要參數
+ *  @param password   使用者密碼，必要參數
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
@@ -150,7 +150,7 @@
 /**
  *  列出部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticles
  *
- *  @param userName       部落格 id，必要參數
+ *  @param userName       部落客 id，必要參數
  *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param page           頁數
  *  @param articlePerPage 每頁幾筆，建議使用20
@@ -251,28 +251,10 @@
  *
  *  @param title          ＊文章標題
  *  @param body           ＊文章內容
- *  @param status         文章狀態，使用 PIXArticleStatus 型別
- *  @param userCategoryId 使用者自訂的類別 id。使用者自訂的類別，可透過 -(void)getBlogCategoriesWithUserName:password:completion: 取得
- *  @param cateID         全站分類的該類別 id，全站的部落格類別，可透過 -(void)getBlogCategoriesListIncludeGroups:thumbs:completion: 取得
- *  @param tagArray       文章標籤，內容的值必為 NSString 物件
- *  @param thumburl       文章縮圖網址, 會影響 oEmbed 與 SNS (Twitter, Facebook, Plurk …) 抓到的縮圖
- *  @param trackback      這篇文章引用了哪些網頁，內容的值必為 NSString 物件
- *  @param passwd         當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼
- *  @param passwdHint     當 status 被設定為 PIXArticleStatusPassword 時需要輸入這個參數以設定為此文章的密碼提示
- *  @param friendGroupID  當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)createBlogArticleWithTitle:(NSString *)title
                               body:(NSString *)body
-                            status:(PIXArticleStatus)status
-                    userCategoryID:(NSString *)userCategoryId
-                    siteCategoryID:(NSString *)cateID
-                              tags:(NSArray *)tagArray
-                          thumbURL:(NSString *)thumburl
-                         trackback:(NSArray *)trackback
-                          password:(NSString *)passwd
-                      passwordHint:(NSString *)passwdHint
-                     friendGroupID:(NSString *)friendGroupID
                         completion:(PIXHandlerCompletion)completion;
 /**
  *  修改部落格個人文章(需認證) http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesUpdate

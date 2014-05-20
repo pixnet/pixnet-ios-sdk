@@ -121,7 +121,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
     PIXArticleSearchTypeKeyword
 };
 
-#pragma mark - Blog imformation
+#pragma mark - Blog information
 /**
  *  列出部落格資訊 http://emma.pixnet.cc/blog
  *
@@ -199,7 +199,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 /**
  *  列出部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticles
  *
- *  @param userName       部落格 id，必要參數
+ *  @param userName       部落客 id，必要參數
  *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param page           頁數
  *  @param articlePerPage 每頁幾筆，建議使用20
