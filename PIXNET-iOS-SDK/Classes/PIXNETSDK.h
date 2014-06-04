@@ -50,6 +50,12 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)getIndexRateWithCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  讀取 API Server 時間資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/indexNow
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getIndexNowWithcompletion:(PIXHandlerCompletion)completion;
 #pragma mark - User Method
 /**
  *  讀取 User 公開資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/users

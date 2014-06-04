@@ -18,4 +18,10 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)getIndexRateWithCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  讀取 API Server 時間資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/indexNow
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getIndexNowWithCompletion:(PIXHandlerCompletion)completion;
 @end

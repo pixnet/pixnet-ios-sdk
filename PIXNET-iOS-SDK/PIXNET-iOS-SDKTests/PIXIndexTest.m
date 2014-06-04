@@ -37,4 +37,13 @@
     }];
 }
 
+-(void)testNow{
+    [[PIXNETSDK new] getIndexNowWithcompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"get server now");
+        } else {
+            XCTFail(@"get server now failed: %@", error);
+        }
+    }];
+}
 @end

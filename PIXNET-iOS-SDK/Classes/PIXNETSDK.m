@@ -38,6 +38,9 @@
 -(void)getIndexRateWithCompletion:(PIXHandlerCompletion)completion{
     [[PIXIndex new] getIndexRateWithCompletion:completion];
 }
+-(void)getIndexNowWithcompletion:(PIXHandlerCompletion)completion{
+    [[PIXIndex new] getIndexNowWithCompletion:completion];
+}
 #pragma mark - User Method
 -(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getUserWithUserName:userName completion:completion];
