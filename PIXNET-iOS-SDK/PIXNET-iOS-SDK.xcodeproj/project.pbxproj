@@ -30,6 +30,7 @@
 		CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */; };
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */; };
+		CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */; };
@@ -89,6 +90,7 @@
 		CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+PIXCategory.m"; path = "Classes/NSObject+PIXCategory.m"; sourceTree = "<group>"; };
 		CE7BDD3E193EEF53008C8A32 /* PIXIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXIndex.h; path = Classes/PIXIndex.h; sourceTree = "<group>"; };
 		CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXIndex.m; path = Classes/PIXIndex.m; sourceTree = "<group>"; };
+		CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXIndexTest.m; sourceTree = "<group>"; };
 		CED461591910C1CD003A96C2 /* pixFox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pixFox.jpg; sourceTree = "<group>"; };
 		CED4619D1910D4A0003A96C2 /* NSArray+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PIXCategory.h"; path = "Classes/NSArray+PIXCategory.h"; sourceTree = "<group>"; };
 		CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+PIXCategory.m"; path = "Classes/NSArray+PIXCategory.m"; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */,
 				CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */,
 				CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */,
+				CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */,
 				CED461591910C1CD003A96C2 /* pixFox.jpg */,
 				CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */,
 				CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */,
@@ -470,6 +473,7 @@
 				CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */,
 				50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */,
 				CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */,
+				CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */,
 				CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */,
 				CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */,
 			);

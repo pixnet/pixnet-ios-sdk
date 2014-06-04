@@ -7,6 +7,7 @@
 //
 
 #import "PIXNETSDK.h"
+#import "PIXIndex.h"
 
 @implementation PIXNETSDK
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
@@ -32,6 +33,10 @@
         sharedInstance = [[PIXNETSDK alloc] init];
     });
     return sharedInstance;
+}
+#pragma mark Index methods
+-(void)getIndexRateWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXIndex new] getIndexRateWithCompletion:completion];
 }
 #pragma mark - User Method
 -(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{

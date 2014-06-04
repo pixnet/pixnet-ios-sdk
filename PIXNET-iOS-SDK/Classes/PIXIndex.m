@@ -7,7 +7,17 @@
 //
 
 #import "PIXIndex.h"
+#import "NSObject+PIXCategory.h"
+#import "NSError+PIXCategory.h"
 
 @implementation PIXIndex
-
+-(void)getIndexRateWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXAPIHandler new] callAPI:@"index/rate" parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+}
 @end

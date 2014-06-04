@@ -43,7 +43,13 @@
 +(void)logout;
 
 +(instancetype)sharedInstance;
-
+#pragma mark Index methods
+/**
+ *  讀取 API 使用次數資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/indexRate
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getIndexRateWithCompletion:(PIXHandlerCompletion)completion;
 #pragma mark - User Method
 /**
  *  讀取 User 公開資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/users
