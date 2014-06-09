@@ -26,6 +26,7 @@
     PIXAPIHandler *handler = [self getPIXAPIHandler];
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing userName"]);
+        return;
     }
     
     [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[[NSString stringWithFormat:@"users/%@", userName], [NSNull null], completion] receiver:handler];
