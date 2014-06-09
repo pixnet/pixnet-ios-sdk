@@ -45,7 +45,7 @@
     while (waitingForBlock) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         [NSThread sleepForTimeInterval:0.5];
-        NSLog(@"Waiting...");
+//        NSLog(@"Waiting...");
     }
 }
 

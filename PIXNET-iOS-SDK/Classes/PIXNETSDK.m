@@ -427,4 +427,7 @@
 -(void)deleteTagWithFaceID:(NSString *)faceId completion:(PIXHandlerCompletion)completion{
     [[PIXAlbum new] deleteTagWithFaceId:faceId completion:completion];
 }
+-(void)getGuestbookMessagesWithUserName:(NSString *)userName cursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] getGuestbookMessagesWithUserName:userName filter:PIXGuestbookFilterNone cursor:cursor perPage:20 completion:completion];
+}
 @end

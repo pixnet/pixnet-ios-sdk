@@ -8,11 +8,13 @@
 
 
 #import <Foundation/Foundation.h>
-@class PIXBlog;
+//@class PIXBlog;
+//#import "PIXBlog.h"
 #import "PIXAPIHandler.h"
 #import "PIXAlbum.h"
 #import "PIXBlog.h"
 #import "PIXUser.h"
+#import "PIXGuestbook.h"
 
 @interface PIXNETSDK : NSObject
 
@@ -859,4 +861,13 @@
  *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
  */
 -(void)deleteTagWithFaceID:(NSString *)faceId completion:(PIXHandlerCompletion)completion;
+#pragma mark getbook 留言板
+/**
+ *  列出留言板上的留言, 每頁20筆  http://developer.pixnet.pro/#!/doc/pixnetApi/guestbook
+ *
+ *  @param userName     哪個使用者的留言板
+ *  @param cursor       頁數指標。倘若留言板有下一頁或上一頁時，server 會回傳 next_cursor 或 previours_cursor。
+ *  @param completion   PIXHandlerCompletion
+ */
+-(void)getGuestbookMessagesWithUserName:(NSString *)userName cursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion;
 @end
