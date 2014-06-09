@@ -34,15 +34,7 @@
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
     PIXAPIHandler *handler = [self getPIXAPIHandler];
 
-    [handler callAPI:@"account" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-        //檢查出去的參數
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, errorMessage);
-        }
-        
-    }];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuthObj:uploadData:parameters:requestCompletion:) parameters:@[@"account", @"GET", @YES, [NSNull null], [NSNull null], completion] receiver:handler];
 }
 
 
