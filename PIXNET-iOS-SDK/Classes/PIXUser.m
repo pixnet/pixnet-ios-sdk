@@ -28,15 +28,7 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing userName"]);
     }
     
-    [handler callAPI:[NSString stringWithFormat:@"users/%@", userName] parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-        //檢查出去的參數
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, errorMessage);
-        }
-        
-    }];
+    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[[NSString stringWithFormat:@"users/%@", userName], [NSNull null], completion] receiver:handler];
 }
 
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
