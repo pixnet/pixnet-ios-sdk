@@ -12,26 +12,20 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 #import "NSError+PIXCategory.h"
 @implementation PIXAlbum
 -(void)getAlbumSiteCategoriesWithIsIncludeGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion{
-    NSMutableDictionary *params = [NSMutableDictionary new];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     params[@"include_groups"] = [NSString stringWithFormat:@"%i", isIncludeGroups];
     params[@"include_thumbs"] = [NSString stringWithFormat:@"%i", isIncludeThumbs];
-    
-    [[PIXAPIHandler new] callAPI:@"album/site_categories" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, error);
-        }
-    }];
+    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"album/site_categories", params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAlbumMainWithCompletion:(PIXHandlerCompletion)completion{
-    [[PIXAPIHandler new] callAPI:@"album/main" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, error);
-        }
-    }];
+//    [[PIXAPIHandler new] callAPI:@"album/main" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+//        if (succeed) {
+//            [self succeedHandleWithData:result completion:completion];
+//        } else {
+//            completion(NO, nil, error);
+//        }
+//    }];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuthObj:uploadData:parameters:requestCompletion:) parameters:@[@"album/main", @"GET", @YES, [NSNull null], [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAlbumConfigWithCompletion:(PIXHandlerCompletion)completion{
     [[PIXAPIHandler new] callAPI:@"album/config" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {

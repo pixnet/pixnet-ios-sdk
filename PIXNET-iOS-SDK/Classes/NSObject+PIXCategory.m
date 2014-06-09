@@ -31,4 +31,16 @@
         return YES;
     }
 }
+-(void)invokeMethod:(SEL)method parameters:(NSArray *)parameters receiver:(id)receiver{
+    NSMethodSignature *signature = [receiver methodSignatureForSelector:method];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    [invocation setTarget:receiver];
+    [invocation setSelector:method];
+    for (__unsafe_unretained id parameter in parameters) {
+        NSUInteger paramIndex = [parameters indexOfObject:parameter]+2;
+        [invocation setArgument:&parameter atIndex:paramIndex];
+    }
+    [invocation performSelector:@selector(invoke) withObject:nil];
+
+}
 @end

@@ -12,4 +12,5 @@
 @interface NSObject (PIXCategory)
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion;
 +(BOOL)PIXCheckNSUIntegerValid:(NSUInteger)integer;
+-(void)invokeMethod:(SEL)method parameters:(NSArray *)parameters receiver:(id)receiver;
 @end

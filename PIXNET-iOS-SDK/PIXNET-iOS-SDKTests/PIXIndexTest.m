@@ -28,22 +28,48 @@
 }
 
 - (void)testRate{
-    [[PIXNETSDK new] getIndexRateWithCompletion:^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            NSLog(@"get index rate succeed");
-        } else {
-            XCTFail(@"get index rate failed: %@", error);
-        }
-    }];
+    [self asyncToSyncWithTarget:[PIXNETSDK new] Method:@selector(getIndexRateWithCompletion:) params:nil];
+//    [[PIXNETSDK new] getIndexRateWithCompletion:^(BOOL succeed, id result, NSError *error) {
+//        if (succeed) {
+//            NSLog(@"get index rate succeed");
+//        } else {
+//            XCTFail(@"get index rate failed: %@", error);
+//        }
+//    }];
 }
 
 -(void)testNow{
-    [[PIXNETSDK new] getIndexNowWithcompletion:^(BOOL succeed, id result, NSError *error) {
+    PIXNETSDK *sdk = [PIXNETSDK new];
+//    PIXHandlerCompletion completion = ^(BOOL succeed, id result, NSError *error){};
+    [self asyncToSyncWithTarget:sdk Method:@selector(getIndexNowWithcompletion:) params:nil];
+//    [[PIXNETSDK new] getIndexNowWithcompletion:^(BOOL succeed, id result, NSError *error) {
+//        if (succeed) {
+//            NSLog(@"get server now");
+//        } else {
+//            XCTFail(@"get server now failed: %@", error);
+//        }
+//    }];
+}
+-(void)asyncToSyncWithTarget:(id)target Method:(SEL)method params:(NSArray *)params{
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[PIXNETSDK instanceMethodSignatureForSelector:method]];
+    [invocation setTarget:target];
+
+    static int paramIndex = 2;
+    for (id param in params) {
+        [invocation setArgument:(__bridge void *)(param) atIndex:paramIndex++];
+    }
+    PIXHandlerCompletion completion = ^(BOOL succeed, id result, NSError *error){
+        NSString *methodName = NSStringFromSelector(method);
         if (succeed) {
-            NSLog(@"get server now");
+            NSLog(@"%@ succeed", methodName);
         } else {
-            XCTFail(@"get server now failed: %@", error);
+            XCTFail(@"%@ failed: %@", methodName, error);
         }
-    }];
+    };
+    [invocation setArgument:&completion atIndex:paramIndex];
+    [invocation setSelector:method];
+
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    [invocation getArgument:&completion atIndex:paramIndex];
 }
 @end

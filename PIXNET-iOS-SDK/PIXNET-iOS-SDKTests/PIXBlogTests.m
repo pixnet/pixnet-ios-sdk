@@ -60,6 +60,8 @@
     if (!authed) {
         return;
     }
+    //刪除所有測試用分類
+    [self deleteBlogTestCategories];
 
     //新增部落格個人分類
     NSString *categoryId = [self createBlogCategory:PIXBlogCategoryTypeCategory];
@@ -121,6 +123,19 @@
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId];
     [self deleteBlogFoler:folderId];
+    
+}
+-(void)deleteBlogTestCategories{
+    NSArray *categoriesUser = [self getBlogCategories];
+    for (NSDictionary *category in categoriesUser) {
+        if ([category[@"name"] isEqualToString:@"updated folder name"]) {
+            if ([category[@"type"] isEqualToString:@"category"]) {
+                [self deleteBlogCategory:@"id"];
+            } else {
+                [self deleteBlogFoler:category[@"id"]];
+            }
+        }
+    }
 }
 -(void)getComment:(NSString *)commentId{
     __block BOOL done = NO;

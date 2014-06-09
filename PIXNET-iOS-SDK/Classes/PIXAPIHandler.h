@@ -92,4 +92,8 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
  *  @param completion     succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  這個 method 用來 triger callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion: 因為 shouldAuth 為 BOOL 值，無法使用 NSInvocation invoke
+ */
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuthObj:(NSNumber *)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 @end

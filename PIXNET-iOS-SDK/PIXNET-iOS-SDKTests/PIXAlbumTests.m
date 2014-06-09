@@ -247,7 +247,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"element has been deleted: %@", elementId);
         } else {
-            XCTFail(@"delete element failed: %@", error);
+            XCTFail(@"element has been deleted failed: %@", error);
         }
         done = YES;
     }];
@@ -263,7 +263,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"mark element comment as ham: %@", commentId);
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"mark element comment as ham failed: %@", error);
         }
         done = YES;
     }];
@@ -279,7 +279,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"mark element comment as spam: %@", commentId);
         } else {
-            XCTFail(@"mark comment in set as spam failed: %@", error);
+            XCTFail(@"mark element comment as spam failed: %@", error);
         }
         done = YES;
     }];
@@ -295,7 +295,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"get element comments count: %lu", (unsigned long)[result[@"comments"] count]);
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"get element comments count failed: %@", error);
         }
         done = YES;
     }];
@@ -313,7 +313,7 @@ static NSString *kSetComment = @"Unit test comment in set";
             comId = result[@"comment"][@"id"];
             NSLog(@"create element comment succeed: %@", comId);
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"create element comment failed: %@", error);
         }
         done = YES;
     }];
@@ -329,7 +329,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"get element succeed: %@", elementId);
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"get element failed: %@", error);
         }
         done = YES;
     }];
@@ -345,7 +345,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             NSLog(@"update element succeed: %@", elementId);
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"update element failed: %@", error);
         }
         done = YES;
     }];
@@ -365,7 +365,7 @@ static NSString *kSetComment = @"Unit test comment in set";
             NSLog(@"add element succeed: %@", result);
             elementId = result[@"element"][@"id"];
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"add element in album failed: %@", error);
         }
         done = YES;
     }];

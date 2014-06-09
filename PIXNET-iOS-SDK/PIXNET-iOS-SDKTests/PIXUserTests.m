@@ -34,6 +34,7 @@
     
     PIXUser *user = [PIXUser new];
     
+    
     [user getUserWithUserName:@"admin" completion:^(BOOL succeed, id result, NSError *error){
         waitingForBlock = NO;
         NSLog(@"%s", __PRETTY_FUNCTION__);

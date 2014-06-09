@@ -124,13 +124,16 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
 }
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuthObj:(NSNumber *)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
+    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:[shouldAuth boolValue] shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
+}
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth && kConsumerKey == nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:"]);
         return;
     }
     NSString *parameterString = nil;
-    if (parameters != nil) {
+    if (parameters != nil && [parameters isKindOfClass:[NSDictionary class]]) {
         parameterString = [self parametersStringFromDictionary:parameters];
     }
     NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@%@", kApiURLPrefix, apiPath];
@@ -141,7 +144,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     NSURL *requestUrl = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
-    if (uploadData) {
+    if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
         [urlRequest PIXAttachData:uploadData];
     }
     
