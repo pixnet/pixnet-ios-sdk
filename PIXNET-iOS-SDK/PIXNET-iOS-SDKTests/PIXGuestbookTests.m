@@ -31,15 +31,64 @@
 
 - (void)testGetGuestbookMessages
 {
-    [self asyncToSyncWithTarget:[PIXNETSDK new] Method:@selector(getGuestbookMessagesWithUserName:cursor:completion:) params:@[_testUser.userName, [NSNull null], [NSNull null]]];
+    [self asyncToSyncWithTarget:[PIXNETSDK new] Method:@selector(getGuestbookMessagesWithUserName:cursor:completion:) params:@[_testUser.userName, [NSNull null]]];
+}
+- (void)testAuthNeededMethods
+{
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
+    __block BOOL done = NO;
+    
+    [PIXNETSDK logout];
+    
+    __block BOOL authed = NO;
+    //登入
+    [PIXNETSDK authByXauthWithUserName:_testUser.userName userPassword:_testUser.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        done = YES;
+        if (succeed) {
+            NSLog(@"auth succeed!");
+            authed = YES;
+        } else {
+            XCTFail(@"auth failed: %@", error);
+        }
+        
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    if (!authed) {
+        return;
+    }
+    NSString *messageId = [self createMessage];
+    
+}
+-(NSString *)createMessage{
+    __block NSString *messageId = nil;
+    __block BOOL done = NO;
+    [[PIXNETSDK new] createGuestbookMessageWithUserName:_testUser.userName body:@"message body 7788" author:_testUser.userName title:@"message title 5566" email:nil isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"createGuestbookMessageWithUserName";
+        if (succeed) {
+            messageId = result[@"article"][@"id"];
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return messageId;
 }
 -(void)asyncToSyncWithTarget:(id)target Method:(SEL)method params:(NSArray *)params{
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[PIXNETSDK instanceMethodSignatureForSelector:method]];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[target methodSignatureForSelector:method]];
     [invocation setTarget:target];
     
     static int paramIndex = 2;
     for (__unsafe_unretained id param in params) {
-        if (param != [params lastObject]) {
+        if ([param isKindOfClass:[NSNumber class]]) {
+            NSNumber *number = (NSNumber *)param;
+            NSInteger numberInt = [number boolValue];
+            [invocation setArgument:&numberInt atIndex:paramIndex++];
+        } else {
             [invocation setArgument:&param atIndex:paramIndex++];
         }
     }
@@ -51,7 +100,7 @@
             XCTFail(@"%@ failed: %@", methodName, error);
         }
     };
-    [invocation setArgument:&completion atIndex:++paramIndex];
+    [invocation setArgument:&completion atIndex:paramIndex];
     [invocation setSelector:method];
     
     [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];

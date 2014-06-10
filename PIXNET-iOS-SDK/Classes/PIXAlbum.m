@@ -18,7 +18,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"album/site_categories", params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAlbumMainWithCompletion:(PIXHandlerCompletion)completion{
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuthObj:uploadData:parameters:requestCompletion:) parameters:@[@"album/main", @"GET", @YES, [NSNull null], [NSNull null], completion] receiver:[PIXAPIHandler new]];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"album/main", @"GET", @YES, [NSNull null], [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAlbumConfigWithCompletion:(PIXHandlerCompletion)completion{
     [[PIXAPIHandler new] callAPI:@"album/config" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {

@@ -870,4 +870,16 @@
  *  @param completion   PIXHandlerCompletion
  */
 -(void)getGuestbookMessagesWithUserName:(NSString *)userName cursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion;
+/**
+ *  新增一則留言板留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookCreate
+ *
+ *  @param userName   被留言的板主名稱，必要參數
+ *  @param body       留言內容，必要參數
+ *  @param author     留言者的暱稱
+ *  @param title      留言標題
+ *  @param email      留言者電子郵件
+ *  @param isOpen     是否為公開留言
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
 @end

@@ -430,4 +430,7 @@
 -(void)getGuestbookMessagesWithUserName:(NSString *)userName cursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion{
     [[PIXGuestbook new] getGuestbookMessagesWithUserName:userName filter:PIXGuestbookFilterNone cursor:cursor perPage:20 completion:completion];
 }
+-(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] createGuestbookMessageWithUserName:userName body:body author:author title:title url:nil email:email isOpen:isOpen completion:completion];
+}
 @end

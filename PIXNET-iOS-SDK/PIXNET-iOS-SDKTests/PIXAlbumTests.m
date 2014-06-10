@@ -45,7 +45,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     [super tearDown];
 }
 
-- (void)testMain
+- (void)tesMain
 {
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
     __block BOOL done = NO;
@@ -362,7 +362,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     NSData *data = UIImageJPEGRepresentation(image, 0.7);
     [[PIXNETSDK new] createElementWithElementData:data setID:albumId elementTitle:@"unit test photo title" elementDescription:@"unit test photo description" tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            NSLog(@"add element succeed: %@", result);
+//            NSLog(@"add element succeed: %@", result);
             elementId = result[@"element"][@"id"];
         } else {
             XCTFail(@"add element in album failed: %@", error);

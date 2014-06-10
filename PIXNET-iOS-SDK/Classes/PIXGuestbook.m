@@ -41,4 +41,31 @@
     [params setObject:@(perPage) forKey:@"per_page"];
     [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"guestbook", params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title url:(NSString *)url email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion{
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"userName 參數格式有誤"]);
+        return;
+    }
+    if (body==nil || body.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"body 參數格式有誤"]);
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary new];
+    [params setObject:userName forKey:@"user"];
+    [params setObject:body forKey:@"body"];
+    if (author) {
+        [params setObject:author forKey:@"author"];
+    }
+    if (title) {
+        [params setObject:title forKey:@"title"];
+    }
+    if (url) {
+        [params setObject:url forKey:@"url"];
+    }
+    if (email) {
+        [params setObject:email forKey:@"email"];
+    }
+    [params setObject:[NSString stringWithFormat:@"%i", isOpen] forKey:@"is_open"];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"guestbook", @"POST", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
+}
 @end

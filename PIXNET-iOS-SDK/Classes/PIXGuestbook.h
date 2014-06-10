@@ -31,11 +31,24 @@ typedef NS_ENUM(NSInteger, PIXGuestbookFilter) {
 /**
  *  列出留言板上的留言  http://developer.pixnet.pro/#!/doc/pixnetApi/guestbook
  *
- *  @param userName     哪個使用者的留言板
+ *  @param userName     哪個使用者的留言板, 必要參數
  *  @param filter       回傳的留言屬性
  *  @param cursor       頁數指標。倘若留言板有下一頁或上一頁時，server 會回傳 next_cursor 或 previours_cursor。
  *  @param perPage      每頁幾筆
  *  @param completion   PIXHandlerCompletion
  */
 -(void)getGuestbookMessagesWithUserName:(NSString *)userName filter:(PIXGuestbookFilter)filter cursor:(NSString *)cursor perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+/**
+ *  新增一則留言板留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookCreate
+ *
+ *  @param userName   被留言的板主名稱，必要參數
+ *  @param body       留言內容，必要參數
+ *  @param author     留言者的暱稱
+ *  @param title      留言標題
+ *  @param url        留言者個人網頁網址
+ *  @param email      留言者電子郵件
+ *  @param isOpen     是否為公開留言
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title url:(NSString *)url email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
 @end

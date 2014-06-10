@@ -35,7 +35,7 @@
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
     PIXAPIHandler *handler = [self getPIXAPIHandler];
 
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuthObj:uploadData:parameters:requestCompletion:) parameters:@[@"account", @"GET", @YES, [NSNull null], [NSNull null], completion] receiver:handler];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account", @"GET", @YES, [NSNull null], [NSNull null], completion] receiver:handler];
 }
 
 
