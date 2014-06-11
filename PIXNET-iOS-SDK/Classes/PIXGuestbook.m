@@ -102,4 +102,28 @@
     NSDictionary *param = @{@"reply": body};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)markGuestbookMessageAsOpenWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [self operateGuestbookMessageWithAction:@"open" messageId:messageId completion:completion];
+}
+-(void)markGuestbookMessageAsCloseWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [self operateGuestbookMessageWithAction:@"close" messageId:messageId completion:completion];
+}
+-(void)markGuestbookMessageAsSpamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [self operateGuestbookMessageWithAction:@"mark_spam" messageId:messageId completion:completion];
+}
+-(void)markGuestbookMessageAsHamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [self operateGuestbookMessageWithAction:@"mark_ham" messageId:messageId completion:completion];
+}
+/**
+ *  將留言設定為 公開/悄悄話/廣告/非廣告 的參數都一樣，所以用這個 method 做整合
+ */
+-(void)operateGuestbookMessageWithAction:(NSString *)action messageId:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    if (messageId==nil || messageId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"messageId 參數格式有誤"]);
+        return;
+    }
+
+    NSString *path = [NSString stringWithFormat:@"guestbook/%@/%@", messageId, action];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+}
 @end

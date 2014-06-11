@@ -29,8 +29,8 @@
     [super tearDown];
 }
 
-#warning 
-- (void)tesFlow
+
+- (void)testFlow
 {
 //    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];

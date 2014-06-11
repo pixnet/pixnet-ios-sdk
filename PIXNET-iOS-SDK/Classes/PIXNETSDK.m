@@ -442,4 +442,16 @@
 -(void)replyGuestbookMessageWithMessageID:(NSString *)messageId body:(NSString *)body completion:(PIXHandlerCompletion)completion{
     [[PIXGuestbook new] replyGuestbookMessageWithMessageID:messageId body:body completion:completion];
 }
+-(void)markGuestbookMessageAsOpenWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] markGuestbookMessageAsOpenWithMessageID:messageId completion:completion];
+}
+-(void)markGuestbookMessageAsCloseWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] markGuestbookMessageAsCloseWithMessageID:messageId completion:completion];
+}
+-(void)markGuestbookMessageAsSpamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] markGuestbookMessageAsSpamWithMessageID:messageId completion:completion];
+}
+-(void)markGuestbookMessageAsHamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] markGuestbookMessageAsHamWithMessageID:messageId completion:completion];
+}
 @end

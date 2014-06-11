@@ -905,5 +905,32 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)deleteGuestbookMessageWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion;
-
+/**
+ *  將留言設為公開 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookOpen
+ *
+ *  @param messageId  要被設定為公開的留言的 ID
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)markGuestbookMessageAsOpenWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將留言設為悄悄話 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookClose
+ *
+ *  @param messageId  要被設定為悄悄話的留言的 ID
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)markGuestbookMessageAsCloseWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將留言設為廣告留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookMarkSpam
+ *
+ *  @param messageId  要被設定為廣告的留言的 ID
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)markGuestbookMessageAsSpamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將留言設為非廣告留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookMarkHam
+ *
+ *  @param messageId  要被設定為非廣告的留言的 ID
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)markGuestbookMessageAsHamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion;
 @end

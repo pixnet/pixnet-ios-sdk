@@ -181,7 +181,11 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
     NSMutableURLRequest *request = nil;
     if (auth) {
-        request = [PIXAPIHandler requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
+        if ([parameters isKindOfClass:[NSDictionary class]]) {
+            request = [PIXAPIHandler requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
+        } else {
+            request = [PIXAPIHandler requestForXAuthWithPath:path parameters:nil httpMethod:(NSString *)httpMethod];
+        }
     } else {
         request = [NSMutableURLRequest requestWithURL:url];
         if (![httpMethod isEqualToString:@"GET"]) {

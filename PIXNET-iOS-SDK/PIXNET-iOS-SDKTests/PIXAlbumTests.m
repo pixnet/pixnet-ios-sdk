@@ -45,7 +45,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     [super tearDown];
 }
 
-- (void)tesMain
+- (void)testMain
 {
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
     __block BOOL done = NO;

@@ -57,10 +57,42 @@ static NSString *kMessageTitle = @"message title 5566";
     }
     NSString *messageId = [self createMessage];
     [self getMessage:messageId];
+    [self setMessageState:@"close" messageId:messageId];
+    [self setMessageState:@"open" messageId:messageId];
+    [self setMessageState:@"spam" messageId:messageId];
+    [self setMessageState:@"ham" messageId:messageId];
+    
     [self replyMessage:messageId];
     [self deleteMessage:messageId];
+    
     NSArray *messages = [self getAllMessages];
     [self deleteAllTestMessagesInAllMessage:messages];
+}
+//這個 method 同時可測 open, close, as_mark, as_ham
+-(void)setMessageState:(NSString *)state messageId:(NSString *)messageId{
+    NSDictionary *selectors = @{@"open": NSStringFromSelector(@selector(markGuestbookMessageAsOpenWithMessageID:completion:)),
+                                @"close": NSStringFromSelector(@selector(markGuestbookMessageAsCloseWithMessageID:completion:)),
+                                @"spam": NSStringFromSelector(@selector(markGuestbookMessageAsSpamWithMessageID:completion:)),
+                                @"ham": NSStringFromSelector(@selector(markGuestbookMessageAsHamWithMessageID:completion:))};
+    SEL targetSelector = NSSelectorFromString(selectors[state]);
+    
+    PIXNETSDK *sdk = [PIXNETSDK new];
+    NSMethodSignature *sign = [sdk methodSignatureForSelector:targetSelector];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sign];
+    [invocation setTarget:sdk];
+    [invocation setSelector:targetSelector];
+    [invocation setArgument:&messageId atIndex:2];
+    PIXHandlerCompletion completion = ^(BOOL succeed, id result, NSError *error){
+        NSString *methodName = NSStringFromSelector(targetSelector);
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+    };
+    [invocation setArgument:&completion atIndex:3];
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    return;
 }
 -(void)replyMessage:(NSString *)messageId{
     __block BOOL done = NO;
@@ -145,6 +177,7 @@ static NSString *kMessageTitle = @"message title 5566";
     [[PIXNETSDK new] createGuestbookMessageWithUserName:_testUser.userName body:@"message body 7788" author:_testUser.userName title:kMessageTitle email:nil isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createGuestbookMessageWithUserName";
         if (succeed) {
+            NSLog(@"%@ succeed", methodName);
             messageId = result[@"article"][@"id"];
         } else {
             XCTFail(@"%@ failed: %@", methodName, error);
