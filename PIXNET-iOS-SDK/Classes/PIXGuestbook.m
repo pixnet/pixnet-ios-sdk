@@ -68,4 +68,11 @@
     [params setObject:[NSString stringWithFormat:@"%i", isOpen] forKey:@"is_open"];
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"guestbook", @"POST", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)deleteGuestbookMessageWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    if (messageId==nil || messageId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"messageId 參數格式有誤"]);
+        return;
+    }
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[[NSString stringWithFormat:@"guestbook/%@", messageId], @"POST", @YES, @{@"_method":@"delete"}, completion] receiver:[PIXAPIHandler new]];
+}
 @end

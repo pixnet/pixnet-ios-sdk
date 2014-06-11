@@ -433,4 +433,7 @@
 -(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion{
     [[PIXGuestbook new] createGuestbookMessageWithUserName:userName body:body author:author title:title url:nil email:email isOpen:isOpen completion:completion];
 }
+-(void)deleteGuestbookMessageWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] deleteGuestbookMessageWithMessageID:messageId completion:completion];
+}
 @end

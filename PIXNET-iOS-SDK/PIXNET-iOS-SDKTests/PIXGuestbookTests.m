@@ -5,6 +5,7 @@
 //  Created by Dolphin Su on 6/9/14.
 //  Copyright (c) 2014 Dolphin Su. All rights reserved.
 //
+static NSString *kMessageTitle = @"message title 5566";
 
 #import <XCTest/XCTest.h>
 #import "PIXNETSDK.h"
@@ -29,11 +30,7 @@
     [super tearDown];
 }
 
-- (void)testGetGuestbookMessages
-{
-    [self asyncToSyncWithTarget:[PIXNETSDK new] Method:@selector(getGuestbookMessagesWithUserName:cursor:completion:) params:@[_testUser.userName, [NSNull null]]];
-}
-- (void)testAuthNeededMethods
+- (void)testMain
 {
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
     __block BOOL done = NO;
@@ -59,12 +56,55 @@
         return;
     }
     NSString *messageId = [self createMessage];
-    
+    [self deleteMessage:messageId];
+    NSArray *messages = [self getAllMessages];
+    [self deleteAllTestMessagesInAllMessage:messages];
+}
+-(void)deleteAllTestMessagesInAllMessage:(NSArray *)messages{
+    for (NSDictionary *message in messages) {
+        if ([message[@"title"] isEqualToString:kMessageTitle]) {
+            [self deleteMessage:message[@"id"]];
+        }
+    }
+}
+-(NSArray *)getAllMessages{
+    __block BOOL done = NO;
+    __block NSArray *array;
+    [[PIXNETSDK new] getGuestbookMessagesWithUserName:_testUser.userName cursor:nil completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getGuestbookMessagesWithUserName";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+            array = result[@"articles"];
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return array;
+}
+-(void)deleteMessage:(NSString *)messageId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] deleteGuestbookMessageWithMessageID:messageId completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"deleteGuestbookMessageWithMessageID";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(NSString *)createMessage{
     __block NSString *messageId = nil;
     __block BOOL done = NO;
-    [[PIXNETSDK new] createGuestbookMessageWithUserName:_testUser.userName body:@"message body 7788" author:_testUser.userName title:@"message title 5566" email:nil isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] createGuestbookMessageWithUserName:_testUser.userName body:@"message body 7788" author:_testUser.userName title:kMessageTitle email:nil isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createGuestbookMessageWithUserName";
         if (succeed) {
             messageId = result[@"article"][@"id"];

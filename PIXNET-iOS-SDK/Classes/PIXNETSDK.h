@@ -882,4 +882,12 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除一則留言板留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookDelete
+ *
+ *  @param messageId  要被刪除的留言ID
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)deleteGuestbookMessageWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion;
+
 @end
