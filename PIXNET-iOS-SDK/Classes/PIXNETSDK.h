@@ -879,6 +879,14 @@
  */
 -(void)getGuestbookMessageWithMessageID:(NSString *)messageId userName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
 /**
+ *  回覆留言板留言，可以重覆使用這個功能來修改回覆內容 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookReply
+ *
+ *  @param messageId  要被回覆的留言 ID，必要參數
+ *  @param body       回覆的內容，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)replyGuestbookMessageWithMessageID:(NSString *)messageId body:(NSString *)body completion:(PIXHandlerCompletion)completion;
+/**
  *  新增一則留言板留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookCreate
  *
  *  @param userName   被留言的板主名稱，必要參數

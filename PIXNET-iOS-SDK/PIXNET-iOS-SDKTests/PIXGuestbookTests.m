@@ -57,9 +57,26 @@ static NSString *kMessageTitle = @"message title 5566";
     }
     NSString *messageId = [self createMessage];
     [self getMessage:messageId];
+    [self replyMessage:messageId];
     [self deleteMessage:messageId];
     NSArray *messages = [self getAllMessages];
     [self deleteAllTestMessagesInAllMessage:messages];
+}
+-(void)replyMessage:(NSString *)messageId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] replyGuestbookMessageWithMessageID:messageId body:@"reply 5566 and 7788" completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"replyGuestbookMessageWithMessageID";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)getMessage:(NSString *)messageId{
     __block BOOL done = NO;

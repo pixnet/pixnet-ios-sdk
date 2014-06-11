@@ -88,4 +88,18 @@
     NSDictionary *param = @{@"user": userName};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)replyGuestbookMessageWithMessageID:(NSString *)messageId body:(NSString *)body completion:(PIXHandlerCompletion)completion{
+    if (messageId==nil || messageId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"messageId 參數格式有誤"]);
+        return;
+    }
+    if (body==nil || body.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"body 參數格式有誤"]);
+        return;
+    }
+
+    NSString *path = [NSString stringWithFormat:@"guestbook/%@/reply", messageId];
+    NSDictionary *param = @{@"reply": body};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
+}
 @end

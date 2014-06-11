@@ -439,4 +439,7 @@
 -(void)deleteGuestbookMessageWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
     [[PIXGuestbook new] deleteGuestbookMessageWithMessageID:messageId completion:completion];
 }
+-(void)replyGuestbookMessageWithMessageID:(NSString *)messageId body:(NSString *)body completion:(PIXHandlerCompletion)completion{
+    [[PIXGuestbook new] replyGuestbookMessageWithMessageID:messageId body:body completion:completion];
+}
 @end
