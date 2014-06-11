@@ -75,4 +75,17 @@
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[[NSString stringWithFormat:@"guestbook/%@", messageId], @"POST", @YES, @{@"_method":@"delete"}, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)getGuestbookMessageWithMessageID:(NSString *)messageId userName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    if (messageId==nil || messageId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"messageId 參數格式有誤"]);
+        return;
+    }
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"userName 參數格式有誤"]);
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"guestbook/%@", messageId];
+    NSDictionary *param = @{@"user": userName};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
+}
 @end

@@ -56,9 +56,30 @@ static NSString *kMessageTitle = @"message title 5566";
         return;
     }
     NSString *messageId = [self createMessage];
+    [self getMessage:messageId];
     [self deleteMessage:messageId];
     NSArray *messages = [self getAllMessages];
     [self deleteAllTestMessagesInAllMessage:messages];
+}
+-(void)getMessage:(NSString *)messageId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getGuestbookMessageWithMessageID:messageId userName:_testUser.userName completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getGuestbookMessageWithMessageID";
+        if (succeed) {
+            if ([result[@"article"][@"title"] isEqualToString:kMessageTitle]) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)deleteAllTestMessagesInAllMessage:(NSArray *)messages{
     for (NSDictionary *message in messages) {

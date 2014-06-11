@@ -871,6 +871,14 @@
  */
 -(void)getGuestbookMessagesWithUserName:(NSString *)userName cursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion;
 /**
+ *  讀取單一留言板上的留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookId
+ *
+ *  @param messageId  要被讀取的單一留言 ID，必要參數
+ *  @param userName   該則留言所屬的留言板板主名稱，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getGuestbookMessageWithMessageID:(NSString *)messageId userName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
+/**
  *  新增一則留言板留言 http://developer.pixnet.pro/#!/doc/pixnetApi/guestbookCreate
  *
  *  @param userName   被留言的板主名稱，必要參數
