@@ -454,4 +454,23 @@
 -(void)markGuestbookMessageAsHamWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
     [[PIXGuestbook new] markGuestbookMessageAsHamWithMessageID:messageId completion:completion];
 }
+
+- (void)getFriendGroupsWithPage:(NSInteger)page Completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] getFriendGroupsWithPage:page perPage:20 Completion:completion];
+}
+- (void)createFriendGroupsWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] createFriendGroupsWithGroupName:groupName completion:completion];
+}
+- (void)updateFriendGroupWithGroupID:(NSString *)groupId newGroupName:(NSString *)newGroupName completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] updateFriendGroupWithGroupID:groupId newGroupName:newGroupName completion:completion];
+}
+- (void)deleteFriendGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] deleteFriendGroupWithGroupID:groupId completion:completion];
+}
+-(void)createFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] createFriendshipWithFriendName:friendName completion:completion];
+}
+-(void)appendFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] appendFriendGroupWithFriendName:friendName groupID:groupId completion:completion];
+}
 @end

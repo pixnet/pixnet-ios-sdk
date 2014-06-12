@@ -17,7 +17,7 @@
         if ([dict[@"error"] intValue] == 0) {
             completion(YES, [dict PIXDictionaryByReplacingNullsWithBlanks], nil);
         } else {
-            completion(NO, nil, [NSError errorWithDomain:kPIXErrorDomain code:PIXErrorDomainStatusServerResponse userInfo:dict[@"message"]]);
+            completion(NO, nil, [NSError PIXErrorWithServerResponse:dict]);
         }
     } else {
         completion(NO, nil, jsonError);
