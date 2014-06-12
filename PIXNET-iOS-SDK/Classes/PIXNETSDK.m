@@ -482,4 +482,8 @@
 -(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] deleteFriendshipWithFriendName:friendName completion:completion];
 }
+
+-(void)getFriendSubscriptionsWithPage:(NSUInteger)page completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] getFriendSubscriptionsWithPage:page perPage:20 completion:completion];
+}
 @end

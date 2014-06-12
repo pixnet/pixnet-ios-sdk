@@ -67,9 +67,30 @@ static NSString *kNewGroupName = @"updated group";
     [self appendFriendInGroup:groupId];
     [self removeFriendInGroup:groupId];
 
+    NSArray *subscriptions = [self getFriendSubscriptions];
+    
     [self deleteFriends];
     [self deleteGroup:groupId];
     [self deleteAllTestGroups:[self getGroups]];
+}
+-(NSArray *)getFriendSubscriptions{
+    __block BOOL done = NO;
+    __block NSArray *array;
+    [[PIXNETSDK new] getFriendSubscriptionsWithPage:1 completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getFriendSubscriptionsWithPage";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+            array = result[@"subscriptions"];
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return array;
 }
 -(void)getFriendshipUsingPIXFriend{
     __block BOOL done = NO;

@@ -102,4 +102,12 @@ typedef NS_ENUM(NSInteger, PIXFriendshipsSortType) {
  */
 -(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion;
 #pragma mark Friend Subscription
+/**
+ *  取得訂閱名單 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptions
+ *
+ *  @param page       第幾頁
+ *  @param perPage    每頁幾筆
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getFriendSubscriptionsWithPage:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
 @end

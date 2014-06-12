@@ -110,4 +110,15 @@
     NSDictionary *param = @{@"user_name":friendName};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships/delete", @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
+
+-(void)getFriendSubscriptionsWithPage:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
+    if (page<1) {
+        page = 1;
+    }
+    if (perPage<1) {
+        perPage = 20;
+    }
+    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
 @end

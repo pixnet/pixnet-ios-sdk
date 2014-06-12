@@ -1002,5 +1002,12 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion;
+/**
+ *  取得訂閱名單 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptions
+ *
+ *  @param page       第幾頁
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getFriendSubscriptionsWithPage:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
 
 @end
