@@ -50,7 +50,28 @@
     NSString *path = [NSString stringWithFormat:@"friend/groups/%@", groupId];
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, @{@"_method":@"delete"}, completion] receiver:[PIXAPIHandler new]];
 }
-
+-(void)getFriendshipsWithSortType:(PIXFriendshipsSortType)sortType cursor:(NSString *)cursor bidirectional:(BOOL)bidirectional completion:(PIXHandlerCompletion)completion{
+    NSString *sortTypeString = nil;
+    switch (sortType) {
+        case PIXFriendshipsSortTypeUserId:
+            sortTypeString = @"id";
+            break;
+            
+        case PIXFriendshipsSortTypeUserName:
+        default:
+            sortTypeString = @"user_name";
+            break;
+    }
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    [params setObject:sortTypeString forKey:@"cursor_name"];
+    if (cursor) {
+        [params setObject:cursor forKey:@"cursor"];
+    }
+    [params setObject:[NSString stringWithFormat:@"%i", bidirectional] forKey:@"bidirectonal"];
+    
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
 -(void)createFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
     if (friendName==nil || friendName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"friendName 參數有誤"]);
@@ -60,6 +81,15 @@
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)appendFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
+    [self operateFriendGroupWithAction:@"append_group" friendName:friendName groupID:groupId completion:completion];
+}
+-(void)removeFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
+    [self operateFriendGroupWithAction:@"remove_group" friendName:friendName groupID:groupId completion:completion];
+}
+/**
+ *  將某個朋友加入或移出 group 用這個 method 整合
+ */
+-(void)operateFriendGroupWithAction:(NSString *)action friendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     if (groupId==nil || groupId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupId 參數有誤"]);
         return;
@@ -69,6 +99,15 @@
         return;
     }
     NSDictionary *params = @{@"user_name":friendName, @"group_id":groupId};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships/append_group", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    NSString *path = [NSString stringWithFormat:@"friendships/%@", action];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
+    if (friendName==nil || friendName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"friendName 參數有誤"]);
+        return;
+    }
+    NSDictionary *param = @{@"user_name":friendName};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships/delete", @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
 @end

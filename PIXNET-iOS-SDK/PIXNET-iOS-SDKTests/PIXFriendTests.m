@@ -61,15 +61,20 @@ static NSString *kNewGroupName = @"updated group";
     [self updateGroup:groupId];
     
     [self createFriendship];
+    NSArray *friendships = [self getFriendship];
+    //用不同的參數組合取得好友名單
+    [self getFriendshipUsingPIXFriend];
     [self appendFriendInGroup:groupId];
+    [self removeFriendInGroup:groupId];
 
+    [self deleteFriends];
     [self deleteGroup:groupId];
     [self deleteAllTestGroups:[self getGroups]];
 }
--(void)appendFriendInGroup:(NSString *)groupId{
+-(void)getFriendshipUsingPIXFriend{
     __block BOOL done = NO;
-    [[PIXNETSDK new] appendFriendGroupWithFriendName:_testUser.friendName groupID:groupId completion:^(BOOL succeed, id result, NSError *error) {
-        NSString *methodName = @"appendFriendGroupWithFriendName";
+    [[PIXFriend new] getFriendshipsWithSortType:PIXFriendshipsSortTypeUserId cursor:nil bidirectional:YES completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getFriendshipsWithSortType";
         if (succeed) {
             NSLog(@"%@ succeed", methodName);
         } else {
@@ -83,12 +88,14 @@ static NSString *kNewGroupName = @"updated group";
     }
     return;
 }
--(void)createFriendship{
+-(NSArray *)getFriendship{
     __block BOOL done = NO;
-    [[PIXNETSDK new] createFriendshipWithFriendName:_testUser.friendName completion:^(BOOL succeed, id result, NSError *error) {
-        NSString *methodName = @"createFriendshipWithFriendName";
+    __block NSArray *array;
+    [[PIXNETSDK new] getFriendshipsWithCursor:nil completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getFriendshipsWithCursor";
         if (succeed) {
             NSLog(@"%@ succeed", methodName);
+            array = result[@"friend_pairs"];
         } else {
             XCTFail(@"%@ failed: %@", methodName, error);
         }
@@ -97,6 +104,86 @@ static NSString *kNewGroupName = @"updated group";
     
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return array;
+}
+-(void)deleteFriends{
+    __block BOOL done = NO;
+    for (NSString *friend in _testUser.friendNames) {
+        [[PIXNETSDK new] deleteFriendshipWithFriendName:friend completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"deleteFriendshipWithFriendName";
+            if (succeed) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
+    return;
+}
+-(void)removeFriendInGroup:(NSString *)groupId{
+    __block BOOL done = NO;
+    for (NSString *friend in _testUser.friendNames) {
+        [[PIXNETSDK new] removeFriendGroupWithFriendName:friend groupID:groupId completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"removeFriendGroupWithFriendName";
+            if (succeed) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
+    return;
+}
+-(void)appendFriendInGroup:(NSString *)groupId{
+    __block BOOL done = NO;
+    for (NSString *friend in _testUser.friendNames) {
+        [[PIXNETSDK new] appendFriendGroupWithFriendName:friend groupID:groupId completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"appendFriendGroupWithFriendName";
+            if (succeed) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
+    return;
+}
+-(void)createFriendship{
+    __block BOOL done = NO;
+    for (NSString *friend in _testUser.friendNames) {
+        [[PIXNETSDK new] createFriendshipWithFriendName:friend completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"createFriendshipWithFriendName";
+            if (succeed) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                if ([[error localizedDescription] isEqualToString:@"Add friend failed. Due to already friends or other reasons."]) {
+                    NSLog(@"this friend is already exist, not a bug.");
+                } else {
+                    XCTFail(@"%@ failed: %@", methodName, error);
+                }
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
     }
     return;
 }

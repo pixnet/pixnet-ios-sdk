@@ -966,6 +966,13 @@
  */
 - (void)deleteFriendGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
 /**
+ *  取得好友名單，一次100筆 http://developer.pixnet.pro/#!/doc/pixnetApi/friendships
+ *
+ *  @param cursor        當好友超過100個時，server 會回傳 next_cursor 或 previous_cursor，就是用它來取得上一頁或下一頁的資料！
+ *  @param completion    PIXHandlerCompletion
+ */
+-(void)getFriendshipsWithCursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion;
+/**
  *  新增好友 http://developer.pixnet.pro/#!/doc/pixnetApi/friendshipsCreate
  *
  *  @param friendName 好友名稱，必要參數
@@ -973,12 +980,27 @@
  */
 -(void)createFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion;
 /**
- *  將好友入指定的群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendshipsAppendGroup
+ *  將好友加入指定的群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendshipsAppendGroup
  *
  *  @param friendName 好友名稱，必要參數
  *  @param groupId    群組ID，必要參數
  *  @param completion PIXHandlerCompletion
  */
 -(void)appendFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
+/**
+ *  將好友從指定的群組移出 http://developer.pixnet.pro/#!/doc/pixnetApi/friendshipsRemoveGroup
+ *
+ *  @param friendName 好友名稱，必要參數
+ *  @param groupId    群組ID，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)removeFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
+/**
+ *  移除好友 http://developer.pixnet.pro/#!/doc/pixnetApi/friendshipsDelete
+ *
+ *  @param friendName 要被移除的好友名稱
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion;
 
 @end

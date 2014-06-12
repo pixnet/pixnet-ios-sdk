@@ -467,10 +467,19 @@
 - (void)deleteFriendGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] deleteFriendGroupWithGroupID:groupId completion:completion];
 }
+-(void)getFriendshipsWithCursor:(NSString *)cursor completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] getFriendshipsWithSortType:PIXFriendshipsSortTypeUserName cursor:cursor bidirectional:NO completion:completion];
+}
 -(void)createFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] createFriendshipWithFriendName:friendName completion:completion];
 }
 -(void)appendFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] appendFriendGroupWithFriendName:friendName groupID:groupId completion:completion];
+}
+-(void)removeFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] removeFriendGroupWithFriendName:friendName groupID:groupId completion:completion];
+}
+-(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] deleteFriendshipWithFriendName:friendName completion:completion];
 }
 @end
