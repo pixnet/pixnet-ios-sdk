@@ -1010,11 +1010,19 @@
  */
 -(void)getFriendSubscriptionsWithPage:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
 /**
+ *  訂閱某個使用者的動態 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsCreate
+ *
+ *  @param userName   被追蹤者的名稱，必要參數
+ *  @param groupIds   可同時將該名好友加入某幾個訂閱群組裡，這個 array 裡的每個值都要是 NSString instance
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)createFriendSubscriptionWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion;
+/**
  *  取得所有訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroups
  *
  *  @param completion PIXHandlerCompletion
  */
--(void)getFriendSubscriptionsGroupsWithCompletion:(PIXHandlerCompletion)completion;
+-(void)getFriendSubscriptionGroupsWithCompletion:(PIXHandlerCompletion)completion;
 /**
  *  新增訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroupsCreate
  *

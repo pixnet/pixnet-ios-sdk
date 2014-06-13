@@ -65,24 +65,45 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     NSArray *friendships = [self getFriendship];
     //用不同的參數組合取得好友名單
     [self getFriendshipUsingPIXFriend];
+
     [self appendFriendInGroup:groupId];
     [self removeFriendInGroup:groupId];
-
     
     NSArray *subscriptions = [self getFriendSubscriptions];
     
-    [self createSubscriptionGroup];
+    NSString *subscriptionGroupId = [self createSubscriptionGroup];
     NSArray *subscriptionGroups = [self getSubscriptionGroups];
+    [self createSubscriptionsWithUser:_testUser.subscriptionUser inGroups:subscriptionGroups];
     
     [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
     [self deleteFriends];
-    [self deleteGroup:groupId];
     [self deleteAllTestGroups:[self getGroups]];
+}
+-(void)createSubscriptionsWithUser:(NSString *)user inGroups:(NSArray *)groups{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:groups.count];
+    for (NSDictionary *group in groups) {
+        [array addObject:group[@"id"]];
+    }
+    __block BOOL done = NO;
+    [[PIXFriend new] createFriendSubscriptionWithUserName:user groupIDs:array completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"createFriendSubscriptionWithFriendName";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(NSArray *)getSubscriptionGroups{
     __block BOOL done = NO;
     __block NSArray *array;
-    [[PIXNETSDK new] getFriendSubscriptionsGroupsWithCompletion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getFriendSubscriptionGroupsWithCompletion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"getFriendSubscriptionsGroupsWithCompletion";
         if (succeed) {
             NSLog(@"%@ succeed", methodName);

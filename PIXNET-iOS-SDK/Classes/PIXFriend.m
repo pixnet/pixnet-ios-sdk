@@ -121,7 +121,27 @@
     NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
--(void)getFriendSubscriptionsGroupsWithCompletion:(PIXHandlerCompletion)completion{
+-(void)createFriendSubscriptionWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"friendName 參數有誤"]);
+        return;
+    }
+    if (groupIds) {
+        for (id groupId in groupIds) {
+            if (![groupId isKindOfClass:[NSString class]]) {
+                completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupIds 裡每個值都要是 NSString 才行"]);
+                return;
+            }
+        }
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    [params setObject:userName forKey:@"user"];
+    if (groupIds) {
+        [params setObject:[groupIds componentsJoinedByString:@","] forKey:@"group_ids"];
+    }
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)getFriendSubscriptionGroupsWithCompletion:(PIXHandlerCompletion)completion{
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion{
