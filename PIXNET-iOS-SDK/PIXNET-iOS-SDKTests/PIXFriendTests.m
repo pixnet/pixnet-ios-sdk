@@ -69,17 +69,47 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self appendFriendInGroup:groupId];
     [self removeFriendInGroup:groupId];
     
-    //取得訂閱名單
-    NSArray *subscriptions = [self getFriendSubscriptions];
-    
     [self createSubscriptionGroup];
     NSArray *subscriptionGroups = [self getSubscriptionGroups];
     [self createSubscriptionsWithUser:_testUser.subscriptionUser inGroups:subscriptionGroups];
+    [self addOrRemoveUserWithGroup:subscriptionGroups isAdd:NO];
+    [self addOrRemoveUserWithGroup:subscriptionGroups isAdd:YES];
+
+    //取得訂閱名單
+    NSArray *subscriptions = [self getFriendSubscriptions];
     
     [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
     [self deleteSubscription];
     [self deleteFriends];
     [self deleteAllTestGroups:[self getGroups]];
+}
+-(void)addOrRemoveUserWithGroup:(NSArray *)groups isAdd:(BOOL)isAdd{
+    NSMutableArray *array = [NSMutableArray arrayWithCapacity:groups.count];
+    for (NSDictionary *group in groups) {
+        [array addObject:group[@"id"]];
+    }
+    SEL selector;
+    if (isAdd) {
+        selector = @selector(joinFriendSubscriptionGroupsWithUserName:groupIDs:completion:);
+    } else {
+        selector = @selector(leaveFriendSubscriptionGroupsWithUserName:groupIDs:completion:);
+    }
+    PIXNETSDK *sdk = [PIXNETSDK new];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
+    [invocation setTarget:sdk];
+    [invocation setSelector:selector];
+    NSString *user = _testUser.subscriptionUser;
+    [invocation setArgument:&user atIndex:2];
+    [invocation setArgument:&array atIndex:3];
+    PIXHandlerCompletion completion = ^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"%@ succeed", NSStringFromSelector(selector));
+        } else {
+            NSLog(@"%@ failed: %@", NSStringFromSelector(selector), error);
+        }
+    };
+    [invocation setArgument:&completion atIndex:4];
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:sdk waitUntilDone:YES];
 }
 -(void)deleteSubscription{
     __block BOOL done = NO;

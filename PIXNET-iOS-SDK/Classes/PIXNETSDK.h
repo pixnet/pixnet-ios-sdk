@@ -1018,6 +1018,22 @@
  */
 -(void)createFriendSubscriptionWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion;
 /**
+ *  將某個使用者加入訂閱群組(們) http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsJoinSubscriptionGroup
+ *
+ *  @param userName   被追蹤者的名稱，必要參數
+ *  @param groupIds   哪幾個訂閱群組，這個 array 裡的每個值都要是 NSString instance，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)joinFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion;
+/**
+ *  將某個使用者從訂閱群組(們)移出 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsLeaveSubscriptionGroup
+ *
+ *  @param userName   被追蹤者的名稱，必要參數
+ *  @param groupIds   哪幾個訂閱群組，這個 array 裡的每個值都要是 NSString instance，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)leaveFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion;
+/**
  *  取消對某個使用者的訂閱 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsDelete
  *
  *  @param userName   要取消訂閱的 user name

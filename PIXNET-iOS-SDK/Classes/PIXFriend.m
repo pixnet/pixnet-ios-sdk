@@ -141,6 +141,36 @@
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)joinFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
+    [self joinOrLeaveFriendSubscriptionGroupsWithAction:@"join_subscription_group" UserName:userName groupIDs:groupIds completion:completion];
+}
+-(void)leaveFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
+    [self joinOrLeaveFriendSubscriptionGroupsWithAction:@"leave_subscription_group" UserName:userName groupIDs:groupIds completion:completion];
+}
+/**
+ *  用這個 method 來整合將使用者加入群組或自群組移除
+ */
+-(void)joinOrLeaveFriendSubscriptionGroupsWithAction:(NSString *)action UserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"friendName 參數有誤"]);
+        return;
+    }
+    if (groupIds) {
+        for (id groupId in groupIds) {
+            if (![groupId isKindOfClass:[NSString class]]) {
+                completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupIds 裡每個值都要是 NSString 才行"]);
+                return;
+            }
+        }
+    } else {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupIds 參數有誤"]);
+        return;
+    }
+    
+    NSDictionary *params = @{@"user": userName, @"group_ids":[groupIds componentsJoinedByString:@","]};
+    NSString *path = [NSString stringWithFormat:@"friend/subscriptions/%@/%@", userName, action];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
 -(void)deleteFriendSubscriptionWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     if (userName==nil || userName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"friendName 參數有誤"]);

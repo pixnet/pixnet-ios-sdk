@@ -498,6 +498,13 @@
 -(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] createFriendSubscriptionGroupWithGroupName:groupName completion:completion];
 }
+-(void)joinFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] joinFriendSubscriptionGroupsWithUserName:userName groupIDs:groupIds completion:completion];;
+}
+-(void)leaveFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] leaveFriendSubscriptionGroupsWithUserName:userName groupIDs:groupIds completion:completion];
+}
+
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] deleteFriendSubscriptionGroupWithGroupID:groupId completion:completion];
 }
