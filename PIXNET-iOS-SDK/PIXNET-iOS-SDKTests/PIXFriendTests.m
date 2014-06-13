@@ -69,15 +69,34 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self appendFriendInGroup:groupId];
     [self removeFriendInGroup:groupId];
     
+    //取得訂閱名單
     NSArray *subscriptions = [self getFriendSubscriptions];
     
-    NSString *subscriptionGroupId = [self createSubscriptionGroup];
+    [self createSubscriptionGroup];
     NSArray *subscriptionGroups = [self getSubscriptionGroups];
     [self createSubscriptionsWithUser:_testUser.subscriptionUser inGroups:subscriptionGroups];
     
     [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
+    [self deleteSubscription];
     [self deleteFriends];
     [self deleteAllTestGroups:[self getGroups]];
+}
+-(void)deleteSubscription{
+    __block BOOL done = NO;
+    [[PIXFriend new] deleteFriendSubscriptionWithUserName:_testUser.subscriptionUser completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"deleteFriendSubscriptionWithUserName";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)createSubscriptionsWithUser:(NSString *)user inGroups:(NSArray *)groups{
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:groups.count];

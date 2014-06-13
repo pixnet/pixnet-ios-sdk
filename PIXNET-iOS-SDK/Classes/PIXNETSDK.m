@@ -489,6 +489,9 @@
 -(void)createFriendSubscriptionWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] createFriendSubscriptionWithUserName:userName groupIDs:groupIds completion:completion];
 }
+-(void)deleteFriendSubscriptionWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] deleteFriendSubscriptionWithUserName:userName completion:completion];
+}
 -(void)getFriendSubscriptionGroupsWithCompletion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] getFriendSubscriptionGroupsWithCompletion:completion];
 }

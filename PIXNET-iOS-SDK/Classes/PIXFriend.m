@@ -141,6 +141,16 @@
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)deleteFriendSubscriptionWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    if (userName==nil || userName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"friendName 參數有誤"]);
+        return;
+    }
+    NSDictionary *params = @{@"_method":@"delete"};
+    NSString *path = [NSString stringWithFormat:@"friend/subscriptions/%@", userName];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+\
+}
 -(void)getFriendSubscriptionGroupsWithCompletion:(PIXHandlerCompletion)completion{
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
