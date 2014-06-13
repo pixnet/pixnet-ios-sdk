@@ -1009,5 +1009,25 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)getFriendSubscriptionsWithPage:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+/**
+ *  取得所有訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroups
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getFriendSubscriptionsGroupsWithCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  新增訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroupsCreate
+ *
+ *  @param groupName  新增的群組名稱，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsDelete
+ *
+ *  @param groupId    要被刪除的群組 ID，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
 
 @end

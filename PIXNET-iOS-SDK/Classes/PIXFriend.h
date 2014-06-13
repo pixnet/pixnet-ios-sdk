@@ -25,13 +25,13 @@ typedef NS_ENUM(NSInteger, PIXFriendshipsSortType) {
 #import "PIXAPIHandler.h"
 /**
  *  這個 class 主要用來處理 Friend API Method ， 並檢查輸入參數正規性
- *  除了標註 ＊ 為 require 參數外，其餘參數為 optional
+ *  這個 class 裡的 method 幾乎都要先經過認證，如不需要認證，會在 method 的說明裡註明
  */
 @interface PIXFriend : NSObject
 
 #pragma mark - Friend Groups
 /**
- *  取得好友群組列表 http://emma.pixnet.cc/friend/groups
+ *  取得好友群組列表 http://developer.pixnet.pro/#!/doc/pixnetApi/friendGroups
  *
  *  @param page       頁數, 必要參數
  *  @param perPage    每頁幾筆，必要參數
@@ -110,4 +110,25 @@ typedef NS_ENUM(NSInteger, PIXFriendshipsSortType) {
  *  @param completion PIXHandlerCompletion
  */
 -(void)getFriendSubscriptionsWithPage:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+#pragma mark Friend Subscription Group
+/**
+ *  取得所有訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroups
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getFriendSubscriptionsGroupsWithCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  新增訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroupsCreate
+ *
+ *  @param groupName  新增的群組名稱，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion;
+/**
+ *  刪除訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsDelete
+ *
+ *  @param groupId    要被刪除的群組 ID，必要參數
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
 @end

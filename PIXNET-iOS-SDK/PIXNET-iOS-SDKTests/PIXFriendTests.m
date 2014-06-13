@@ -7,6 +7,7 @@
 //
 static NSString *kGroupName = @"test group";
 static NSString *kNewGroupName = @"updated group";
+static NSString *kSubscriptionGroupName = @"test subscription group";
 
 #import <XCTest/XCTest.h>
 #import "PIXNETSDK.h"
@@ -67,11 +68,78 @@ static NSString *kNewGroupName = @"updated group";
     [self appendFriendInGroup:groupId];
     [self removeFriendInGroup:groupId];
 
+    
     NSArray *subscriptions = [self getFriendSubscriptions];
     
+    [self createSubscriptionGroup];
+    NSArray *subscriptionGroups = [self getSubscriptionGroups];
+    
+    [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
     [self deleteFriends];
     [self deleteGroup:groupId];
     [self deleteAllTestGroups:[self getGroups]];
+}
+-(NSArray *)getSubscriptionGroups{
+    __block BOOL done = NO;
+    __block NSArray *array;
+    [[PIXNETSDK new] getFriendSubscriptionsGroupsWithCompletion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getFriendSubscriptionsGroupsWithCompletion";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+            array = result[@"subscription_groups"];
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return array;
+}
+-(void)deleteAllTestSubscriptionsGroup:(NSArray *)groups{
+    for (NSDictionary *subscription in groups) {
+        if ([subscription[@"name"] isEqualToString:kSubscriptionGroupName]) {
+            [self deleteSubscriptionGroup:subscription[@"id"]];
+        }
+    }
+}
+-(void)deleteSubscriptionGroup:(NSString *)groupId{
+    __block BOOL done = NO;
+    [[PIXFriend new] deleteFriendSubscriptionGroupWithGroupID:groupId completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"deleteFriendSubscriptionGroupWithGroupID";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+-(NSString *)createSubscriptionGroup{
+    __block BOOL done = NO;
+    __block NSString *subId = nil;
+    [[PIXNETSDK new] createFriendSubscriptionGroupWithGroupName:kSubscriptionGroupName completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"createFriendSubscriptionGroupWithGroupName";
+        if (succeed) {
+            subId = result[@"subscription_group"][@"id"];
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return subId;
 }
 -(NSArray *)getFriendSubscriptions{
     __block BOOL done = NO;

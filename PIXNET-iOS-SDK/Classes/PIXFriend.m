@@ -121,4 +121,24 @@
     NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)getFriendSubscriptionsGroupsWithCompletion:(PIXHandlerCompletion)completion{
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+}
+-(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion{
+    if (groupName==nil || groupName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupName 參數有誤"]);
+        return;
+    }
+    NSDictionary *params = @{@"name": groupName};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
+    if (groupId==nil || groupId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupId 參數有誤"]);
+        return;
+    }
+    NSDictionary *params = @{@"_method":@"delete"};
+    NSString *path = [NSString stringWithFormat:@"friend/subscription_groups/%@", groupId];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
 @end
