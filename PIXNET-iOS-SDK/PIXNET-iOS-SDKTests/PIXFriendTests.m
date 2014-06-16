@@ -162,20 +162,37 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     for (NSDictionary *group in groups) {
         [array addObject:group[@"id"]];
     }
-    SEL selector;
+    [self invokeAddOrRemoveUserWithGroups:array user:_testUser.subscriptionUser isAdd:NO];
+    [self invokeAddOrRemoveUserWithGroups:array user:_testUser.subscriptionUser isAdd:YES];
+}
+-(void)invokeAddOrRemoveUserWithGroups:(NSArray *)groups user:(NSString *)user isAdd:(BOOL)isAdd{
+    __block BOOL done = NO;
     if (isAdd) {
-        selector = @selector(joinFriendSubscriptionGroupsWithUserName:groupIDs:completion:);
+        [[PIXFriend new] joinFriendSubscriptionGroupsWithUserName:user groupIDs:groups completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"joinFriendSubscriptionGroupsWithUserName";
+            if (succeed) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
     } else {
-        selector = @selector(leaveFriendSubscriptionGroupsWithUserName:groupIDs:completion:);
+        [[PIXFriend new] leaveFriendSubscriptionGroupsWithUserName:user groupIDs:groups completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"leaveFriendSubscriptionGroupsWithUserName";
+            if (succeed) {
+                NSLog(@"%@ succeed", methodName);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
     }
-    PIXNETSDK *sdk = [PIXNETSDK new];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
-    NSString *user = _testUser.subscriptionUser;
-    [invocation setArgument:&user atIndex:2];
-    [invocation setArgument:&array atIndex:3];
-    PIXHandlerCompletion completion = [self completionWithSelector:selector];
-    [invocation setArgument:&completion atIndex:4];
-    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)deleteSubscription{
     __block BOOL done = NO;
