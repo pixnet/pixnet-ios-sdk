@@ -192,6 +192,34 @@
     NSDictionary *params = @{@"name": groupName};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)updateFriendSubscriptionGroupWithGroupID:(NSString *)groupId newGroupName:(NSString *)newGroupName completion:(PIXHandlerCompletion)completion{
+    if (groupId==nil || groupId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupId 參數有誤"]);
+        return;
+    }
+    if (newGroupName==nil || newGroupName.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"newGroupName 參數有誤"]);
+        return;
+    }
+    NSDictionary *params = @{@"name": newGroupName};
+    NSString *path = [NSString stringWithFormat:@"friend/subscription_groups/%@", groupId];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)positionFriendSubscriptionGroupsWithSortedGroups:(NSArray *)sortedGroups completion:(PIXHandlerCompletion)completion{
+    if (sortedGroups || sortedGroups.count==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"sortedGroups 參數有誤"]);
+        return;
+    }
+    for (id group in sortedGroups) {
+        if (![group isKindOfClass:[NSString class]]) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"sortedGroups 裡每個值都要是 NSString"]);
+            return;
+        }
+    }
+    NSDictionary *params = @{@"ids": [sortedGroups componentsJoinedByString:@","]};
+    NSString *path = @"friend/subscription_groups/position";
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     if (groupId==nil || groupId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"groupId 參數有誤"]);

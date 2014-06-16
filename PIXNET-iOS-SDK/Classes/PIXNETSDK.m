@@ -504,7 +504,12 @@
 -(void)leaveFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] leaveFriendSubscriptionGroupsWithUserName:userName groupIDs:groupIds completion:completion];
 }
-
+-(void)updateFriendSubscriptionGroupWithGroupID:(NSString *)groupId newGroupName:(NSString *)newGroupName completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] updateFriendSubscriptionGroupWithGroupID:groupId newGroupName:newGroupName completion:completion];
+}
+-(void)positionFriendSubscriptionGroupsWithSortedGroups:(NSArray *)sortedGroups completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] positionFriendSubscriptionGroupsWithSortedGroups:sortedGroups completion:completion];
+}
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] deleteFriendSubscriptionGroupWithGroupID:groupId completion:completion];
 }

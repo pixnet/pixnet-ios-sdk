@@ -69,7 +69,8 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self appendFriendInGroup:groupId];
     [self removeFriendInGroup:groupId];
     
-    [self createSubscriptionGroup];
+    NSString *subscriptionId = [self createSubscriptionGroup];
+    [self updateSubscriptionGroup:subscriptionId];
     NSArray *subscriptionGroups = [self getSubscriptionGroups];
     [self createSubscriptionsWithUser:_testUser.subscriptionUser inGroups:subscriptionGroups];
     [self addOrRemoveUserWithGroup:subscriptionGroups isAdd:NO];
@@ -77,11 +78,33 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
 
     //取得訂閱名單
     NSArray *subscriptions = [self getFriendSubscriptions];
+    [self sortSbscriptionGroups:subscriptions];
     
     [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
     [self deleteSubscription];
     [self deleteFriends];
     [self deleteAllTestGroups:[self getGroups]];
+}
+-(void)sortSbscriptionGroups:(NSArray *)groups{
+    PIXNETSDK *sdk = [PIXNETSDK new];
+    SEL selector = @selector(positionFriendSubscriptionGroupsWithSortedGroups:completion:);
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
+    [invocation setArgument:&groups atIndex:2];
+    PIXHandlerCompletion completion = [self completionWithSelector:selector];
+    [invocation setArgument:&completion atIndex:3];
+    
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+}
+-(void)updateSubscriptionGroup:(NSString *)groupId{
+    PIXNETSDK *sdk = [PIXNETSDK new];
+    SEL selector = @selector(updateFriendSubscriptionGroupWithGroupID:newGroupName:completion:);
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
+    [invocation setArgument:&groupId atIndex:2];
+    [invocation setArgument:&kNewGroupName atIndex:3];
+    PIXHandlerCompletion completion = [self completionWithSelector:selector];
+    [invocation setArgument:&completion atIndex:4];
+    
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
 }
 -(void)addOrRemoveUserWithGroup:(NSArray *)groups isAdd:(BOOL)isAdd{
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:groups.count];
@@ -96,20 +119,12 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     }
     PIXNETSDK *sdk = [PIXNETSDK new];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
-    [invocation setTarget:sdk];
-    [invocation setSelector:selector];
     NSString *user = _testUser.subscriptionUser;
     [invocation setArgument:&user atIndex:2];
     [invocation setArgument:&array atIndex:3];
-    PIXHandlerCompletion completion = ^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            NSLog(@"%@ succeed", NSStringFromSelector(selector));
-        } else {
-            NSLog(@"%@ failed: %@", NSStringFromSelector(selector), error);
-        }
-    };
+    PIXHandlerCompletion completion = [self completionWithSelector:selector];
     [invocation setArgument:&completion atIndex:4];
-    [invocation performSelectorOnMainThread:@selector(invoke) withObject:sdk waitUntilDone:YES];
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
 }
 -(void)deleteSubscription{
     __block BOOL done = NO;
@@ -425,5 +440,14 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     return array;
+}
+-(PIXHandlerCompletion)completionWithSelector:(SEL)selector{
+    return ^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"%@ succeed", NSStringFromSelector(selector));
+        } else {
+            NSLog(@"%@ failed: %@", NSStringFromSelector(selector), error);
+        }
+    };
 }
 @end

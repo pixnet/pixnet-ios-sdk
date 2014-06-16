@@ -156,10 +156,26 @@ typedef NS_ENUM(NSInteger, PIXFriendshipsSortType) {
  */
 -(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion;
 /**
+ *  修改訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroupsUpdate
+ *
+ *  @param groupId      要被修改的群組 ID，必要參數
+ *  @param newGroupName 新的群組名稱，必要參數
+ *  @param completion   PIXHandlerCompletion
+ */
+-(void)updateFriendSubscriptionGroupWithGroupID:(NSString *)groupId newGroupName:(NSString *)newGroupName completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改訂閱群組排序 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionGroupsPosition
+ *
+ *  @param sortedGroups 用 group Id 組成的 array
+ *  @param completion   PIXHandlerCompletion
+ */
+-(void)positionFriendSubscriptionGroupsWithSortedGroups:(NSArray *)sortedGroups completion:(PIXHandlerCompletion)completion;
+/**
  *  刪除訂閱群組 http://developer.pixnet.pro/#!/doc/pixnetApi/friendSubscriptionsDelete
  *
  *  @param groupId    要被刪除的群組 ID，必要參數
  *  @param completion PIXHandlerCompletion
  */
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
+//要接著做訂閱群組相關功能
 @end
