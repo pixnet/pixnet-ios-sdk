@@ -91,13 +91,9 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     for (PIXFriendNewsType newsType=0; newsType<=1; newsType++) {
         for (NSDictionary *group in subscriptionGroups) {
             NSString *groupId = group[@"id"];
-            for (BOOL haveTime=0; haveTime<=1; haveTime++) {
-                NSDate *date = nil;
-                if (haveTime) {
-                     date = [NSDate dateWithTimeIntervalSince1970:933120000];
-                }
-                [self getNewsWithNewsType:newsType subscriptionGroup:groupId beforeTime:date];
-            }
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:933120000];
+            [self getNewsWithNewsType:newsType subscriptionGroup:groupId beforeTime:nil];
+            [self getNewsWithNewsType:newsType subscriptionGroup:groupId beforeTime:date];
         }
     }
     return;
@@ -106,7 +102,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     __block BOOL done = NO;
     [[PIXNETSDK new] getFriendNewsWithNewsType:newsType groupID:groupId beforeTime:beforeTime completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"getFriendNewsWithNewsType";
-        NSLog(@"newsType: %i, groupId: %@, beforeTime: %@", newsType, groupId, beforeTime);
+        NSLog(@"newsType: %li, groupId: %@, beforeTime: %@", newsType, groupId, beforeTime);
         if (succeed) {
             NSLog(@"%@ succeed", methodName);
         } else {
@@ -253,7 +249,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
 }
 -(void)deleteAllTestSubscriptionsGroup:(NSArray *)groups{
     for (NSDictionary *subscription in groups) {
-        if ([subscription[@"name"] isEqualToString:kSubscriptionGroupName]) {
+        if ([subscription[@"name"] isEqualToString:kSubscriptionGroupName] || [subscription[@"name"] isEqualToString:kNewGroupName]) {
             [self deleteSubscriptionGroup:subscription[@"id"]];
         }
     }
