@@ -139,27 +139,23 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     return;
-
-//    PIXNETSDK *sdk = [PIXNETSDK new];
-//    SEL selector = @selector(positionFriendSubscriptionGroupsWithSortedGroups:completion:);
-//    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
-//    NSArray *sorted = [[groups reverseObjectEnumerator] allObjects];
-//    [invocation setArgument:&sorted atIndex:2];
-//    PIXHandlerCompletion completion = [self completionWithSelector:selector];
-//    [invocation setArgument:&completion atIndex:3];
-//    
-//    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
 }
 -(void)updateSubscriptionGroup:(NSString *)groupId{
-    PIXNETSDK *sdk = [PIXNETSDK new];
-    SEL selector = @selector(updateFriendSubscriptionGroupWithGroupID:newGroupName:completion:);
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
-    [invocation setArgument:&groupId atIndex:2];
-    [invocation setArgument:&kNewGroupName atIndex:3];
-    PIXHandlerCompletion completion = [self completionWithSelector:selector];
-    [invocation setArgument:&completion atIndex:4];
+    __block BOOL done = NO;
+    [[PIXFriend new] updateFriendSubscriptionGroupWithGroupID:groupId newGroupName:kNewGroupName completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"updateFriendSubscriptionGroupWithGroupID";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
     
-    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(void)addOrRemoveUserWithGroup:(NSArray *)groups isAdd:(BOOL)isAdd{
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:groups.count];
