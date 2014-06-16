@@ -75,6 +75,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self createSubscriptionsWithUser:_testUser.subscriptionUser inGroups:subscriptionGroups];
     [self addOrRemoveUserWithGroup:subscriptionGroups isAdd:NO];
     [self addOrRemoveUserWithGroup:subscriptionGroups isAdd:YES];
+    [self getNewsWithSubscriptionGroups:subscriptionGroups];
 
     //取得訂閱名單
     NSArray *subscriptions = [self getFriendSubscriptions];
@@ -85,11 +86,45 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self deleteFriends];
     [self deleteAllTestGroups:[self getGroups]];
 }
+//終於有時間寫所有參數的測試了！
+-(void)getNewsWithSubscriptionGroups:(NSArray *)subscriptionGroups{
+    for (PIXFriendNewsType newsType=0; newsType<=1; newsType++) {
+        for (NSDictionary *group in subscriptionGroups) {
+            NSString *groupId = group[@"id"];
+            for (BOOL haveTime=0; haveTime<=1; haveTime++) {
+                NSDate *date = nil;
+                if (haveTime) {
+                     date = [NSDate dateWithTimeIntervalSince1970:933120000];
+                }
+                [self getNewsWithNewsType:newsType subscriptionGroup:groupId beforeTime:date];
+            }
+        }
+    }
+    return;
+}
+-(void)getNewsWithNewsType:(PIXFriendNewsType)newsType subscriptionGroup:(NSString *)groupId beforeTime:(NSDate *)beforeTime{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getFriendNewsWithNewsType:newsType groupID:groupId beforeTime:beforeTime completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getFriendNewsWithNewsType";
+        NSLog(@"newsType: %i, groupId: %@, beforeTime: %@", newsType, groupId, beforeTime);
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: error:%@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(void)sortSbscriptionGroups:(NSArray *)groups{
     PIXNETSDK *sdk = [PIXNETSDK new];
     SEL selector = @selector(positionFriendSubscriptionGroupsWithSortedGroups:completion:);
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
-    [invocation setArgument:&groups atIndex:2];
+    NSArray *sorted = [[groups reverseObjectEnumerator] allObjects];
+    [invocation setArgument:&sorted atIndex:2];
     PIXHandlerCompletion completion = [self completionWithSelector:selector];
     [invocation setArgument:&completion atIndex:3];
     
@@ -446,7 +481,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
         if (succeed) {
             NSLog(@"%@ succeed", NSStringFromSelector(selector));
         } else {
-            NSLog(@"%@ failed: %@", NSStringFromSelector(selector), error);
+            XCTFail(@"%@ failed: %@", NSStringFromSelector(selector), error);
         }
     };
 }

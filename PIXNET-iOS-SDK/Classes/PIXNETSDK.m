@@ -513,4 +513,7 @@
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] deleteFriendSubscriptionGroupWithGroupID:groupId completion:completion];
 }
+-(void)getFriendNewsWithNewsType:(PIXFriendNewsType)newsType groupID:(NSString *)groupId beforeTime:(NSDate *)beforeTime completion:(PIXHandlerCompletion)completion{
+    [[PIXFriend new] getFriendNewsWithNewsType:newsType groupID:groupId beforeTime:beforeTime completion:completion];
+}
 @end

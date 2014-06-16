@@ -19,6 +19,19 @@ typedef NS_ENUM(NSInteger, PIXFriendshipsSortType) {
      */
     PIXFriendshipsSortTypeUserId
 };
+/**
+ *  取得哪種族群的動態
+ */
+typedef NS_ENUM(NSInteger, PIXFriendNewsType) {
+    /**
+     *  取得訂閱者的動態
+     */
+    PIXFriendNewsTypeSubscription,
+    /**
+     *  取得朋友的動態
+     */
+    PIXFriendNewsTypeFriend
+};
 #import <Foundation/Foundation.h>
 #import "NSObject+PIXCategory.h"
 #import "NSError+PIXCategory.h"
@@ -177,5 +190,14 @@ typedef NS_ENUM(NSInteger, PIXFriendshipsSortType) {
  *  @param completion PIXHandlerCompletion
  */
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
-//要接著做訂閱群組相關功能
+#pragma mark Friend News
+/**
+ *  取得最新動態 http://developer.pixnet.pro/#!/doc/pixnetApi/friendNews
+ *
+ *  @param newsType   要取得何種族群的動態(朋友 or 訂閱的對象)
+ *  @param groupId    指定訂閱的群組ID
+ *  @param beforeTime 取出早於指定時間的動態
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getFriendNewsWithNewsType:(PIXFriendNewsType)newsType groupID:(NSString *)groupId beforeTime:(NSDate *)beforeTime completion:(PIXHandlerCompletion)completion;
 @end

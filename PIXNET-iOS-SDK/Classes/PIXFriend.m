@@ -229,4 +229,28 @@
     NSString *path = [NSString stringWithFormat:@"friend/subscription_groups/%@", groupId];
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)getFriendNewsWithNewsType:(PIXFriendNewsType)newsType groupID:(NSString *)groupId beforeTime:(NSDate *)beforeTime completion:(PIXHandlerCompletion)completion{
+    NSString *typeString = nil;
+    switch (newsType) {
+        case PIXFriendNewsTypeFriend:
+            typeString = @"friend";
+            break;
+            
+        default:
+        case PIXFriendNewsTypeSubscription:
+            typeString = @"subscription";
+            break;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:3];
+    params[@"group_type"] = typeString;
+    if (groupId && groupId.length>0) {
+        params[@"group_id"] = groupId;
+    }
+    if (beforeTime) {
+        params[@"before_time"] = [NSString stringWithFormat:@"%f", [beforeTime timeIntervalSince1970]];
+    }
+    NSString *path = [NSString stringWithFormat:@"friend/news"];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+
+}
 @end

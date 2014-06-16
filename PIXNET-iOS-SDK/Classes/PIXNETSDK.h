@@ -1075,5 +1075,13 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion;
-
+/**
+ *  取得最新動態 http://developer.pixnet.pro/#!/doc/pixnetApi/friendNews
+ *
+ *  @param newsType   要取得何種族群的動態(朋友 or 訂閱)
+ *  @param groupId    指定訂閱的群組ID
+ *  @param beforeTime 取出早於指定時間的動態
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getFriendNewsWithNewsType:(PIXFriendNewsType)newsType groupID:(NSString *)groupId beforeTime:(NSDate *)beforeTime completion:(PIXHandlerCompletion)completion;
 @end
