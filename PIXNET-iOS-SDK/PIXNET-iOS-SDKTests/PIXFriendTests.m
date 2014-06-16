@@ -79,7 +79,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
 
     //取得訂閱名單
     NSArray *subscriptions = [self getFriendSubscriptions];
-    [self sortSbscriptionGroups:subscriptions];
+    [self sortSbscriptionGroups:subscriptionGroups];
     
     [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
     [self deleteSubscription];
@@ -120,15 +120,35 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     return;
 }
 -(void)sortSbscriptionGroups:(NSArray *)groups{
-    PIXNETSDK *sdk = [PIXNETSDK new];
-    SEL selector = @selector(positionFriendSubscriptionGroupsWithSortedGroups:completion:);
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
-    NSArray *sorted = [[groups reverseObjectEnumerator] allObjects];
-    [invocation setArgument:&sorted atIndex:2];
-    PIXHandlerCompletion completion = [self completionWithSelector:selector];
-    [invocation setArgument:&completion atIndex:3];
-    
-    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    __block BOOL done = NO;
+    NSMutableArray *oArray = [NSMutableArray arrayWithCapacity:groups.count];
+    for (NSDictionary *group in groups) {
+        [oArray addObject:group[@"id"]];
+    }
+    NSArray *sorted = [[oArray reverseObjectEnumerator] allObjects];
+    [[PIXNETSDK new] positionFriendSubscriptionGroupsWithSortedGroups:sorted completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"positionFriendSubscriptionGroupsWithSortedGroups";
+        if (succeed) {
+            NSLog(@"%@ succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: error:%@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+
+//    PIXNETSDK *sdk = [PIXNETSDK new];
+//    SEL selector = @selector(positionFriendSubscriptionGroupsWithSortedGroups:completion:);
+//    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[sdk methodSignatureForSelector:selector]];
+//    NSArray *sorted = [[groups reverseObjectEnumerator] allObjects];
+//    [invocation setArgument:&sorted atIndex:2];
+//    PIXHandlerCompletion completion = [self completionWithSelector:selector];
+//    [invocation setArgument:&completion atIndex:3];
+//    
+//    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
 }
 -(void)updateSubscriptionGroup:(NSString *)groupId{
     PIXNETSDK *sdk = [PIXNETSDK new];

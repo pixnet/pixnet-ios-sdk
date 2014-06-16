@@ -206,7 +206,7 @@
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)positionFriendSubscriptionGroupsWithSortedGroups:(NSArray *)sortedGroups completion:(PIXHandlerCompletion)completion{
-    if (sortedGroups || sortedGroups.count==0) {
+    if (!sortedGroups || sortedGroups.count==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"sortedGroups 參數有誤"]);
         return;
     }
