@@ -62,7 +62,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self updateGroup:groupId];
     
     [self createFriendship];
-    NSArray *friendships = [self getFriendship];
+    [self getFriendship];
     //用不同的參數組合取得好友名單
     [self getFriendshipUsingPIXFriend];
 
@@ -78,7 +78,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self getNewsWithSubscriptionGroups:subscriptionGroups];
 
     //取得訂閱名單
-    NSArray *subscriptions = [self getFriendSubscriptions];
+    [self getFriendSubscriptions];
     [self sortSbscriptionGroups:subscriptionGroups];
     
     [self deleteAllTestSubscriptionsGroup:subscriptionGroups];
