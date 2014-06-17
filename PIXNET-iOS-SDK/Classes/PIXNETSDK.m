@@ -8,6 +8,7 @@
 
 #import "PIXNETSDK.h"
 #import "PIXIndex.h"
+#import "PIXBlock.h"
 
 @implementation PIXNETSDK
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
@@ -515,5 +516,14 @@
 }
 -(void)getFriendNewsWithNewsType:(PIXFriendNewsType)newsType groupID:(NSString *)groupId beforeTime:(NSDate *)beforeTime completion:(PIXHandlerCompletion)completion{
     [[PIXFriend new] getFriendNewsWithNewsType:newsType groupID:groupId beforeTime:beforeTime completion:completion];
+}
+-(void)getBlocksWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXBlock new] getBlocksWithCompletion:completion];
+}
+-(void)createBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    [[PIXBlock new] createBlockWithUserName:userName completion:completion];
+}
+-(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+    [[PIXBlock new] deleteBlockWithUserName:userName completion:completion];
 }
 @end
