@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4A81A744194FF1E7004DE00E /* PIXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A743194FF1E7004DE00E /* PIXBlock.m */; };
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
 		619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09D918FD1DF900325991 /* PIXFriend.m */; };
 		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
@@ -74,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A81A742194FF1E7004DE00E /* PIXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXBlock.h; path = Classes/PIXBlock.h; sourceTree = "<group>"; };
+		4A81A743194FF1E7004DE00E /* PIXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXBlock.m; path = Classes/PIXBlock.m; sourceTree = "<group>"; };
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		50845DAA18F4F1B3000813AF /* PIXUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXUserTests.m; sourceTree = "<group>"; };
 		619C09D818FD1DF900325991 /* PIXFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXFriend.h; path = Classes/PIXFriend.h; sourceTree = "<group>"; };
@@ -300,6 +303,8 @@
 				619C09DC18FD235300325991 /* PIXGuestbook.m */,
 				619C09DE18FD237400325991 /* PIXMainpage.h */,
 				619C09DF18FD237400325991 /* PIXMainpage.m */,
+				4A81A742194FF1E7004DE00E /* PIXBlock.h */,
+				4A81A743194FF1E7004DE00E /* PIXBlock.m */,
 			);
 			name = APIHandle;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */,
 				CEDCD0FB18F3AD6800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */,
 				619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */,
+				4A81A744194FF1E7004DE00E /* PIXBlock.m in Sources */,
 				CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */,
 				CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */,
 				CEDCD0EE18F3AC5400B32ACC /* PIXAlbum.m in Sources */,
