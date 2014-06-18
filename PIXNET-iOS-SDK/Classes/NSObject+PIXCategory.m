@@ -12,15 +12,23 @@
 @implementation NSObject (PIXCategory)
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError;
-    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+    id dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
     if (jsonError == nil) {
-        if ([dict[@"error"] intValue] == 0) {
-            completion(YES, [dict PIXDictionaryByReplacingNullsWithBlanks], nil);
+        if ([dict isKindOfClass:[NSDictionary class]]) {
+            if ([dict[@"error"] intValue] == 0) {
+                completion(YES, [dict PIXDictionaryByReplacingNullsWithBlanks], nil);
+                return;
+            } else {
+                completion(NO, nil, [NSError PIXErrorWithServerResponse:dict]);
+                return;
+            }
         } else {
-            completion(NO, nil, [NSError PIXErrorWithServerResponse:dict]);
+            completion(YES, dict, nil);
+            return;
         }
     } else {
         completion(NO, nil, jsonError);
+        return;
     }
 }
 +(BOOL)PIXCheckNSUIntegerValid:(NSUInteger)integer{

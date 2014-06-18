@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		4A81A744194FF1E7004DE00E /* PIXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A743194FF1E7004DE00E /* PIXBlock.m */; };
 		4A81A746195014C0004DE00E /* PIXBlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A745195014C0004DE00E /* PIXBlockTests.m */; };
+		4A81A74819503FBF004DE00E /* PIXMainpageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A74719503FBF004DE00E /* PIXMainpageTests.m */; };
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
 		619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09D918FD1DF900325991 /* PIXFriend.m */; };
 		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
@@ -79,6 +80,7 @@
 		4A81A742194FF1E7004DE00E /* PIXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXBlock.h; path = Classes/PIXBlock.h; sourceTree = "<group>"; };
 		4A81A743194FF1E7004DE00E /* PIXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXBlock.m; path = Classes/PIXBlock.m; sourceTree = "<group>"; };
 		4A81A745195014C0004DE00E /* PIXBlockTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlockTests.m; sourceTree = "<group>"; };
+		4A81A74719503FBF004DE00E /* PIXMainpageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXMainpageTests.m; sourceTree = "<group>"; };
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		50845DAA18F4F1B3000813AF /* PIXUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXUserTests.m; sourceTree = "<group>"; };
 		619C09D818FD1DF900325991 /* PIXFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXFriend.h; path = Classes/PIXFriend.h; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 				CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */,
 				CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */,
 				4A81A745195014C0004DE00E /* PIXBlockTests.m */,
+				4A81A74719503FBF004DE00E /* PIXMainpageTests.m */,
 				CED461591910C1CD003A96C2 /* pixFox.jpg */,
 				CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */,
 				CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */,
@@ -487,6 +490,7 @@
 				CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */,
 				CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */,
 				50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */,
+				4A81A74819503FBF004DE00E /* PIXMainpageTests.m in Sources */,
 				CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */,
 				CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */,
 				CEDD79FE194599EE00F0457A /* PIXGuestbookTests.m in Sources */,
