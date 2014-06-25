@@ -41,6 +41,7 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
  *  @return 授權成功就回傳 YES
  */
 +(BOOL)isAuthed;
++(void)loginByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *

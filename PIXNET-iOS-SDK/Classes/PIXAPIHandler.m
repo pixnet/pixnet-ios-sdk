@@ -14,6 +14,9 @@ static const NSString *kConsumerSecret;
 #import "NSMutableURLRequest+PIXCategory.h"
 #import "PIXCredentialStorage.h"
 #import "NSError+PIXCategory.h"
+#import <LROAuth2Client.h>
+#import <LROAuth2AccessToken.h>
+#import "LROAuth2ClientDelegateHandler.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
@@ -24,9 +27,22 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 
 @interface PIXAPIHandler ()
 @property (nonatomic, strong) NSDictionary *paramForXAuthRequest;
+@property (nonatomic, strong) LROAuth2Client *oauth2Client;
+@property (nonatomic, strong) LROAuth2ClientDelegateHandler *oauth2ClientDelegateHandler;
+
 @end
 
 @implementation PIXAPIHandler
+
++(instancetype)sharedInstance{
+    static PIXAPIHandler *sharedInstance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[PIXAPIHandler alloc] init];
+    });
+    return sharedInstance;
+}
+
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
     kConsumerKey = [aKey copy];
     kConsumerSecret = [aSecret copy];
@@ -45,10 +61,34 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
 }
++(void)loginByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
+    if (kConsumerSecret==nil || kConsumerKey==nil) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret 尚未設定"]);
+        return;
+    }
+    PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
+    singleton.oauth2Client = [[LROAuth2Client alloc] initWithClientID:[kConsumerKey copy]
+                                                               secret:[kConsumerSecret copy]
+                                                          redirectURL:[NSURL URLWithString:url]];
+    singleton.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
+    singleton.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
+    if (singleton.oauth2ClientDelegateHandler == nil) {
+        singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, NSString *token, NSError *error) {
+            if (succeed) {
+                [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kOauthTokenIdentifier copy] string:token];
+                completion(YES, token, nil);
+            } else {
+                completion(NO, nil, error);
+            }
+        }];
+    }
+    singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
+    [singleton.oauth2Client authorizeUsingWebView:loginView];
+}
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     //檢查是否已設定 consumer key 及 consumer secret
     if (kConsumerSecret==nil || kConsumerKey==nil) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret"]);
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret 尚未設定"]);
         return;
     }
 
