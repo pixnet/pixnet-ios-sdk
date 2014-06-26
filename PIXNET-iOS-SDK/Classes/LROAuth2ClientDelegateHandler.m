@@ -8,7 +8,6 @@
 
 #import "LROAuth2ClientDelegateHandler.h"
 #import "NSError+PIXCategory.h"
-#import <LROAuth2AccessToken.h>
 
 @interface LROAuth2ClientDelegateHandler()
 @property (nonatomic, copy) PIXGetOAuth2AccessTokenCompletion getTokenCompletion;
@@ -23,11 +22,10 @@
     return self;
 }
 - (void)oauthClientDidReceiveAccessToken:(LROAuth2Client *)client{
-    LROAuth2AccessToken *token = client.accessToken;
-    _getTokenCompletion(YES, token.accessToken, nil);
+    _getTokenCompletion(YES, client.accessToken, nil);
 }
 - (void)oauthClientDidRefreshAccessToken:(LROAuth2Client *)client{
-
+    _getTokenCompletion(YES, client.accessToken, nil);
 }
 - (void)oauthClientDidReceiveAccessCode:(LROAuth2Client *)client{
 

@@ -67,23 +67,46 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
         return;
     }
     PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
-    singleton.oauth2Client = [[LROAuth2Client alloc] initWithClientID:[kConsumerKey copy]
-                                                               secret:[kConsumerSecret copy]
-                                                          redirectURL:[NSURL URLWithString:url]];
+    if (!singleton.oauth2Client) {
+        singleton.oauth2Client = [[LROAuth2Client alloc] initWithClientID:[kConsumerKey copy]
+                                                                   secret:[kConsumerSecret copy]
+                                                              redirectURL:[NSURL URLWithString:url]];
+    }
     singleton.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
     singleton.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
     if (singleton.oauth2ClientDelegateHandler == nil) {
-        singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, NSString *token, NSError *error) {
+        singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
             if (succeed) {
-                [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kOauthTokenIdentifier copy] string:token];
-                completion(YES, token, nil);
+                [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+                completion(YES, accessToken.accessToken, nil);
+                return;
             } else {
                 completion(NO, nil, error);
+                return;
             }
         }];
+        singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
     }
-    singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
-    [singleton.oauth2Client authorizeUsingWebView:loginView];
+    
+    //先檢查是否已有之前已存下來的 token
+    LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+    if (storedToken) {
+        if ([storedToken hasExpired]) {
+            [singleton.oauth2Client refreshAccessToken:storedToken];
+            return;
+        } else {
+            completion(YES, storedToken.accessToken, nil);
+            return;
+        }
+    } else {
+        [singleton.oauth2Client authorizeUsingWebView:loginView];
+    }
+}
++(NSString *)filePathForOAuth2AccessToken{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask ,YES);
+    NSString *documentsDir = [paths objectAtIndex:0];
+    NSString *path = [documentsDir stringByAppendingPathComponent:@"oauth2token"];
+    return path;
 }
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     //檢查是否已設定 consumer key 及 consumer secret
