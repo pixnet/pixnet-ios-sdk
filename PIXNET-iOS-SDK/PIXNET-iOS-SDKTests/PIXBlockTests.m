@@ -31,7 +31,7 @@
 
 - (void)testMain
 {
-    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     
     //登出
     [PIXNETSDK logout];

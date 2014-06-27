@@ -13,9 +13,20 @@
  *  @param result       呼叫成功的話，這個 instance 可以直接使用
  *  @param errorMessage 呼叫失敗的話，這裡會有錯誤的發生原因
  */
-//typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSString *errorMessage);
 typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
-
+/**
+ *  用何種方式取得後台的 access token
+ */
+typedef NS_ENUM(NSInteger, PIXAuthType) {
+    /**
+     *  XAuth
+     */
+    PIXAuthTypeXAuth,
+    /**
+     *  OAuth2
+     */
+    PIXAuthTypeOAuth2
+};
 #import <Foundation/Foundation.h>
 /**
  *  這個 class 主要用來處理跟後台連線上的事情
@@ -28,7 +39,8 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
  *  @param aKey     consumer key
  *  @param aSecret consumer secret
  */
-+(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret;
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret __attribute__((deprecated("use '+setConsumerKey:consumerSecret:callbackURL:'.")));
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL;
 /**
  *  用來判斷 consumer key 及 secrect 是否已被設定
  *
@@ -41,7 +53,7 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
  *  @return 授權成功就回傳 YES
  */
 +(BOOL)isAuthed;
-+(void)loginByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
++(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *

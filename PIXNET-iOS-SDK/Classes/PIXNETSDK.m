@@ -12,7 +12,10 @@
 
 @implementation PIXNETSDK
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
-    [PIXAPIHandler setConsumerKey:aKey consumerSecret:aSecret];
+    [PIXAPIHandler setConsumerKey:aKey consumerSecret:aSecret callbackURL:nil];
+}
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL{
+    [PIXAPIHandler setConsumerKey:aKey consumerSecret:aSecret callbackURL:callbackURL];
 }
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];

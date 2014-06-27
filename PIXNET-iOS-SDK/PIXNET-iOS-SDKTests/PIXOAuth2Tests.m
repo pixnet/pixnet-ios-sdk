@@ -32,16 +32,23 @@
 }
 
 - (void)testMain{
-    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
+    if ([PIXNETSDK isAuthed]) {
+        [PIXNETSDK logout];
+    }
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     UIView *rootView = appDelegate.window.rootViewController.view;
     UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
     [rootView addSubview:webView];
 
     __block BOOL done = NO;
-    [PIXAPIHandler loginByOAuth2WithCallbackURL:@"pixnetsdk://www.com.tw" loginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+    [PIXAPIHandler authByOAuth2WithCallbackURL:@"pixnetsdk://www.com.tw" loginView:webView completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            NSLog(@"login token: %@", result);
+            if ([PIXAPIHandler isAuthed]) {
+                NSLog(@"login token: %@", result);
+            } else {
+                XCTFail(@"login not succeed");
+            }
         } else {
             XCTFail(@"login failed: %@", error);
         }
@@ -49,7 +56,6 @@
     }];
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-//        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate distantFuture]];
     }
     return;
 }

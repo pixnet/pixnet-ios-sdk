@@ -7,7 +7,7 @@
 //
 static const NSString *kConsumerKey;
 static const NSString *kConsumerSecret;
-
+static const NSString *kCallbackURL;
 
 #import "PIXAPIHandler.h"
 #import <GCOAuth.h>
@@ -24,6 +24,8 @@ static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";
 static const NSString *kUserPasswordIdentifier = @"kUserPasswordIdentifier";
 static const NSString *kOauthTokenIdentifier = @"kOauthTokenIdentifier";
 static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifier";
+static NSString *kAuthTypeKey = @"kAuthTypeKey";
+//static PIXAuthType authType;
 
 @interface PIXAPIHandler ()
 @property (nonatomic, strong) NSDictionary *paramForXAuthRequest;
@@ -39,6 +41,11 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[PIXAPIHandler alloc] init];
+        sharedInstance.oauth2Client = [[LROAuth2Client alloc] initWithClientID:[kConsumerKey copy]
+                                                                        secret:[kConsumerSecret copy]
+                                                                   redirectURL:[NSURL URLWithString:[kCallbackURL copy]]];
+        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
+        sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
     });
     return sharedInstance;
 }
@@ -46,6 +53,11 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
     kConsumerKey = [aKey copy];
     kConsumerSecret = [aSecret copy];
+}
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL{
+    kConsumerKey = [aKey copy];
+    kConsumerSecret = [aSecret copy];
+    kCallbackURL = [callbackURL copy];
 }
 +(BOOL)isConsumerKeyAndSecrectAssigned{
     BOOL assigned = YES;
@@ -56,27 +68,33 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 }
 
 +(void)logout{
-    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
-    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
-    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
-    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+    PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
+    switch (authType) {
+        case PIXAuthTypeXAuth:{
+            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
+            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
+            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+            break;
+        }
+        case PIXAuthTypeOAuth2:{
+            [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
+            break;
+        }
+        default:
+            break;
+    }
 }
-+(void)loginByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
++(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     if (kConsumerSecret==nil || kConsumerKey==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret 尚未設定"]);
         return;
     }
     PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
-    if (!singleton.oauth2Client) {
-        singleton.oauth2Client = [[LROAuth2Client alloc] initWithClientID:[kConsumerKey copy]
-                                                                   secret:[kConsumerSecret copy]
-                                                              redirectURL:[NSURL URLWithString:url]];
-    }
-    singleton.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
-    singleton.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
     if (singleton.oauth2ClientDelegateHandler == nil) {
         singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
             if (succeed) {
+                [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
                 [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
                 completion(YES, accessToken.accessToken, nil);
                 return;
@@ -91,6 +109,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     //先檢查是否已有之前已存下來的 token
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
     if (storedToken) {
+        [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
         if ([storedToken hasExpired]) {
             [singleton.oauth2Client refreshAccessToken:storedToken];
             return;
@@ -157,6 +176,7 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
                             [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kOauthTokenSecretIdentifier copy] string:array0[1]];
                         }
                     }
+                    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
                     completion(YES, nil, nil);
                     return;
                 }
@@ -165,13 +185,28 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
     }];
 }
 +(BOOL)isAuthed{
-    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
-    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
-    if (token==nil || secret == nil) {
-        return NO;
-    } else {
-        return YES;
+    BOOL authed = NO;
+    PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
+    switch (authType) {
+        case PIXAuthTypeXAuth:{
+            NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
+            NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+            if (token && secret) {
+                authed = YES;
+            }
+            break;
+        }
+        case PIXAuthTypeOAuth2:{
+            LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+            if (storedToken) {
+                authed = YES;
+            }
+            break;
+        }
+        default:
+            break;
     }
+    return authed;
 }
 -(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:@"GET" parameters:parameters requestCompletion:completion];
@@ -243,11 +278,23 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 }
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
     NSMutableURLRequest *request = nil;
+    PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
     if (auth) {
-        if ([parameters isKindOfClass:[NSDictionary class]]) {
-            request = [PIXAPIHandler requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
-        } else {
-            request = [PIXAPIHandler requestForXAuthWithPath:path parameters:nil httpMethod:(NSString *)httpMethod];
+        switch (authType) {
+            case PIXAuthTypeXAuth:{
+                if ([parameters isKindOfClass:[NSDictionary class]]) {
+                    request = [PIXAPIHandler requestForXAuthWithPath:path parameters:parameters httpMethod:(NSString *)httpMethod];
+                } else {
+                    request = [PIXAPIHandler requestForXAuthWithPath:path parameters:nil httpMethod:(NSString *)httpMethod];
+                }
+                break;
+            }
+            case PIXAuthTypeOAuth2:{
+                request = [self requestForOAuth2WithPath:path parameters:parameters httpMethod:httpMethod];
+                break;
+            }
+            default:
+                break;
         }
     } else {
         request = [NSMutableURLRequest requestWithURL:url];
@@ -270,8 +317,15 @@ static const NSString *kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifi
 
     return parameterString;
 }
+-(NSMutableURLRequest *)requestForOAuth2WithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
+    return [NSMutableURLRequest new];
+//    PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
+//    
+//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:params];
+//    params[@"access_token"]
+}
 /**
- *  產生一個用來取得 token 的 URLQuest
+ *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
     NSString *user = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserNameIdentifier copy]];

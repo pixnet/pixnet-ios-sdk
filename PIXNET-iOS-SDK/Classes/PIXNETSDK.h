@@ -24,9 +24,17 @@
  *  呼叫任何 API 前，務必設定 consumer key 及 consumer secret
  *
  *  @param aKey     consum key
- *  @param aSecret consumer secret
+ *  @param aSecret  consumer secret
  */
-+(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret;
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret __attribute__((deprecated("請改用 '+setConsumerKey:consumerSecret:callbackURL:'")));
+/**
+ *  呼叫任何 API 前，務必設定 consumer key、consumer secret 及 callbackURL
+ *
+ *  @param aKey         consum key
+ *  @param aSecret      consumer secret
+ *  @param callBackURL  您在 PIXNET 開發者後台填入的 Registered Callback URL
+ */
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL;
 /**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
