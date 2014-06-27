@@ -37,14 +37,15 @@
         [PIXNETSDK logout];
     }
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    UIView *rootView = appDelegate.window.rootViewController.view;
-    UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
+    __block UIView *rootView = appDelegate.window.rootViewController.view;
+    __block UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
     [rootView addSubview:webView];
 
     __block BOOL done = NO;
-    [PIXAPIHandler authByOAuth2WithCallbackURL:@"pixnetsdk://www.com.tw" loginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+    [PIXAPIHandler authByOAuth2WithCallbackURL:_testUser.callbaclURL loginView:webView completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             if ([PIXAPIHandler isAuthed]) {
+                [webView removeFromSuperview];
                 NSLog(@"login token: %@", result);
             } else {
                 XCTFail(@"login not succeed");
@@ -57,7 +58,23 @@
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
+    [self getBlockList];
     return;
 }
-
+-(void)getBlockList{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getBlocksWithCompletion:^(BOOL succeed, id result, NSError *error) {
+        done = YES;
+        NSString *methodName = @"getBlocksWithCompletion";
+        if (succeed) {
+            NSLog(@"%@, succeed: %@", methodName, result);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 @end

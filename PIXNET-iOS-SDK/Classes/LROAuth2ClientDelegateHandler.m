@@ -11,6 +11,7 @@
 
 @interface LROAuth2ClientDelegateHandler()
 @property (nonatomic, copy) PIXGetOAuth2AccessTokenCompletion getTokenCompletion;
+
 @end
 
 @implementation LROAuth2ClientDelegateHandler

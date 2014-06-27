@@ -17,6 +17,7 @@ static const NSString *kCallbackURL;
 #import <LROAuth2Client.h>
 #import <LROAuth2AccessToken.h>
 #import "LROAuth2ClientDelegateHandler.h"
+#import <NSDictionary+QueryString.h>
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
@@ -93,15 +94,17 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
     if (singleton.oauth2ClientDelegateHandler == nil) {
         singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
-            if (succeed) {
-                [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
-                [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
-                completion(YES, accessToken.accessToken, nil);
-                return;
-            } else {
-                completion(NO, nil, error);
-                return;
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (succeed) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+                    [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+                    completion(YES, accessToken.accessToken, nil);
+                    return;
+                } else {
+                    completion(NO, nil, error);
+                    return;
+                }
+            });
         }];
         singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
     }
@@ -318,12 +321,58 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     return parameterString;
 }
 -(NSMutableURLRequest *)requestForOAuth2WithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    return [NSMutableURLRequest new];
-//    PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
-//    
-//    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:params];
-//    params[@"access_token"]
+    NSMutableURLRequest *request = [NSMutableURLRequest new];
+    [request setHTTPMethod:httpMethod];
+    NSMutableDictionary *tempParams = nil;
+    if (params!= nil && [params isKindOfClass:[NSDictionary class]]) {
+        tempParams = [NSMutableDictionary dictionaryWithDictionary:params];
+    } else {
+        tempParams = [NSMutableDictionary dictionary];
+    }
+    LROAuth2AccessToken *currentToken = [self accessTokenForCurrent];
+    tempParams[@"access_token"] = currentToken.accessToken;
+    NSString *urlString = nil;
+    NSString *paramString = [self parametersStringFromDictionary:tempParams];
+    if ([httpMethod isEqualToString:@"GET"]) {
+        urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, paramString];
+    } else {
+        urlString = [NSString stringWithFormat:@"%@/%@", kApiURLPrefix, path];
+        [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+    }
+    [request setURL:[NSURL URLWithString:urlString]];
+    return request;
 }
+/**
+ *  用來取得現在當下可用的 access token
+ */
+-(LROAuth2AccessToken *)accessTokenForCurrent{
+    LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+    if (storedToken) {
+        if ([storedToken hasExpired]) {
+            PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
+            __block BOOL done = NO;
+            singleton.oauth2Client.delegate = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
+                if (succeed) {
+                    done = YES;
+                    [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+                }
+            }];
+            [singleton.oauth2Client refreshAccessToken:storedToken];
+            while (!done) {
+                [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+            }
+            if (!done) {
+                [singleton.oauth2Client refreshAccessToken:storedToken];
+            }
+            return singleton.oauth2Client.accessToken;
+        } else {
+            return storedToken;
+        }
+    } else {
+        return storedToken;
+    }
+}
+
 /**
  *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */

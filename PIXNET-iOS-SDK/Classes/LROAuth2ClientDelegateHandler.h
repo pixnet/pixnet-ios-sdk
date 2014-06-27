@@ -10,6 +10,7 @@
 #import <LROAuth2Client.h>
 
 typedef void (^PIXGetOAuth2AccessTokenCompletion)(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error);
+typedef NSString *(^PIXRefreshOAuth2AccessTokenCompletion)(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error);
 
 @interface LROAuth2ClientDelegateHandler : NSObject<LROAuth2ClientDelegate>
 -(instancetype)initWithOAuth2Completion:(PIXGetOAuth2AccessTokenCompletion)completion;

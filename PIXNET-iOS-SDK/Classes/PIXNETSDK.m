@@ -20,6 +20,9 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
++(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
+    [PIXAPIHandler authByOAuth2WithCallbackURL:url loginView:loginView completion:completion];
+}
 +(BOOL)isAuthed{
     return [PIXAPIHandler isAuthed];
 }

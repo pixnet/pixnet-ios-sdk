@@ -43,6 +43,7 @@
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
++(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
  *  判斷目前是否可呼叫需要認證的 API
  *
