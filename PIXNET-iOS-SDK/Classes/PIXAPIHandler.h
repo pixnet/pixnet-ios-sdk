@@ -34,12 +34,19 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
 @interface PIXAPIHandler : NSObject
 #pragma mark class methods
 /**
- *  設定 consumer key 及 consumer secret
+ *  設定 consumer key 及 consumer secret；這個 method 未來會被捨棄，請盡量不要用這個 method。
  *
  *  @param aKey     consumer key
- *  @param aSecret consumer secret
+ *  @param aSecret  consumer secret
  */
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret __attribute__((deprecated("use '+setConsumerKey:consumerSecret:callbackURL:'.")));
+/**
+ *  設定 consumer key、consumer secret 及 callbackURL，當您要利用 OAuth2 做使用者登入時，請務必先使用這個 method。
+ *
+ *  @param aKey        consumer key
+ *  @param aSecret     consumer secret
+ *  @param callbackURL registered callback URL
+ */
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL;
 /**
  *  用來判斷 consumer key 及 secrect 是否已被設定
@@ -53,6 +60,13 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  *  @return 授權成功就回傳 YES
  */
 +(BOOL)isAuthed;
+/**
+ *  利用 oauth2 的方式讓使用者登入 PIXNET
+ *
+ *  @param url        您在 PIXNET 開發者後台為您的 app 設定的 callback URL
+ *  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
+ *  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
+ */
 +(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
  *  利用 XAuth 向 PIXNET 後台取得授權

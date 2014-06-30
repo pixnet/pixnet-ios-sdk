@@ -87,8 +87,8 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     }
 }
 +(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
-    if (kConsumerSecret==nil || kConsumerKey==nil) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key 或 consumer secret 尚未設定"]);
+    if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
         return;
     }
     PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
@@ -251,6 +251,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     
     if (backgroundExec) {
         //這裡要用 NSURLSession
+        
     } else {
         //這裡可以用 NSURLConnection
         [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
