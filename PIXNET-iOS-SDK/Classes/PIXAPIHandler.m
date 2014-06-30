@@ -336,7 +336,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     if ([httpMethod isEqualToString:@"GET"]) {
         urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, paramString];
     } else {
-        urlString = [NSString stringWithFormat:@"%@/%@", kApiURLPrefix, path];
+        urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
         [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
     }
     [request setURL:[NSURL URLWithString:urlString]];
