@@ -119,4 +119,16 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  *  @param completion     succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  用來呼叫 PIXNET 後台的 method
+ *
+ *  @param apiPath        emma.pixnet.cc/ 開始到 問號 前那一串
+ *  @param httpMethod     GET, POST, DELETE, etc...(這裡使用 DELETE 會失敗...，所以要 DELETE 東西請用POST，然後在 parameters裡加 _method=delete)
+ *  @param shouldAuth     該 API 是否需要 OAuth 認證
+ *  @param backgroundExec 當 app 被推入背景時，是否要繼續上傳檔案？如果要背景上傳檔案，僅限於 iOS7.0 以後的執行環境。
+ *  @param uploadData     要上傳給後台的檔案(only for 圖片)
+ *  @param parameters     value 的部份請給 NSString instance
+ *  @param completion     succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
+ */
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 @end

@@ -66,7 +66,9 @@ static NSString *kSetDescription = @"Unit test set description";
     //新增一張照片
     NSString *elementId = [self addElementInAlbum:albumSetId];
     //刪除相片
-    [self deleteElement:elementId];
+    if (elementId) {
+        [self deleteElement:elementId];
+    }
 
 
     //刪除相簿

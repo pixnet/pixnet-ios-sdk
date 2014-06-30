@@ -24,7 +24,7 @@ static const NSString *kBoundaryConstant = @"---------------------------14737809
 		if ([[self HTTPMethod] isEqualToString:@"GET"] || [[self HTTPMethod] isEqualToString:@"DELETE"]) {
 			encodedParameters = [[self URL] query];
 		} else {
-			encodedParameters = [[NSString alloc] initWithData:[self HTTPBody] encoding:NSASCIIStringEncoding];
+			encodedParameters = [[NSString alloc] initWithData:[self HTTPBody] encoding:NSUTF8StringEncoding];
 		}
 	}
     

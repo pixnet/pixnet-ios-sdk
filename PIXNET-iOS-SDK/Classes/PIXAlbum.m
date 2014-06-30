@@ -723,6 +723,13 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"add_watermark"] = [NSString stringWithFormat:@"%i", shouldAddWatermark];
     params[@"element_first"] = [NSString stringWithFormat:@"%i", isElementFirst];
 
+//    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:YES uploadData:elementData parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+//        if (succeed) {
+//            [self succeedHandleWithData:result completion:completion];
+//        } else {
+//            completion(NO, nil, error);
+//        }
+//    }];
     [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES uploadData:elementData parameters:params requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];

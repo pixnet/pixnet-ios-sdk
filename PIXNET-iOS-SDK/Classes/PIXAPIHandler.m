@@ -18,6 +18,7 @@ static const NSString *kCallbackURL;
 #import <LROAuth2AccessToken.h>
 #import "LROAuth2ClientDelegateHandler.h"
 #import <NSDictionary+QueryString.h>
+#import "PIXURLSessionDelegateHandler.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
@@ -233,6 +234,13 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:"]);
         return;
     }
+    if (backgroundExec) {
+        float osVersionValue = [[[UIDevice currentDevice] systemVersion] floatValue];
+        if (osVersionValue < 7.0) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"backgroundExec 為 YES 時，iOS 版本至少要 7.0 以上"]);
+            return;
+        }
+    }
     NSString *parameterString = nil;
     if (parameters != nil && [parameters isKindOfClass:[NSDictionary class]]) {
         parameterString = [self parametersStringFromDictionary:parameters];
@@ -246,12 +254,33 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     
     NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
     if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
-        [urlRequest PIXAttachData:uploadData];
+        if (!backgroundExec) {
+            [urlRequest PIXAttachData:uploadData];
+        }
     }
     
     if (backgroundExec) {
         //這裡要用 NSURLSession
-        
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"PIXBackgroundExec"];
+        PIXURLSessionDelegateHandler *delegateHandler = [[PIXURLSessionDelegateHandler alloc] initWithCompletionHandler:^(BOOL succeed, NSHTTPURLResponse *response, NSData *receivedData, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (succeed) {
+                    if (response.statusCode == 200) {
+                        completion(YES, receivedData, nil);
+                    } else {
+                        completion(NO, nil, [NSError PIXErrorWithHTTPStatusCode:response.statusCode]);
+                    }
+                } else {
+                    completion(NO, nil, error);
+                }
+            });
+        }];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:delegateHandler delegateQueue:[NSOperationQueue new]];
+        NSString *path = [NSHomeDirectory() stringByAppendingString:@"/PIXUploading.dat"];
+        NSString *filePath = [path stringByExpandingTildeInPath];
+        [uploadData writeToFile:filePath atomically:YES];
+        NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:urlRequest fromFile:[NSURL fileURLWithPath:filePath]];
+        [uploadTask resume];
     } else {
         //這裡可以用 NSURLConnection
         [NSURLConnection sendAsynchronousRequest:urlRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
