@@ -48,7 +48,7 @@ static const NSString *kBoundaryConstant = @"---------------------------14737809
     NSArray *parameters = [self parameters];
     [self setValue:[@"multipart/form-data; boundary=" stringByAppendingString:[kBoundaryConstant copy]] forHTTPHeaderField:@"Content-type"];
     
-    NSMutableData *bodyData = [NSMutableData new];
+    NSMutableData *bodyData = [NSMutableData data];
     for (OARequestParameter *parameter in parameters) {
         NSString *param = [NSString stringWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"\r\n\r\n%@\r\n",
                            kBoundaryConstant, [parameter URLEncodedName], [parameter value]];

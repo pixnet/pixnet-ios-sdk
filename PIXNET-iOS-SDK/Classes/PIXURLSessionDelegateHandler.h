@@ -8,7 +8,7 @@
 typedef void (^SessionDelegateComplete)(BOOL succeed, NSHTTPURLResponse *response, NSData *receivedData, NSError *error);
 #import <Foundation/Foundation.h>
 
-@interface PIXURLSessionDelegateHandler : NSObject<NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
+@interface PIXURLSessionDelegateHandler : NSObject<NSURLSessionDownloadDelegate>
 @property (nonatomic, copy, readonly) SessionDelegateComplete sessionDelegateComplete;
 
 -(instancetype)initWithCompletionHandler:(SessionDelegateComplete)completion;

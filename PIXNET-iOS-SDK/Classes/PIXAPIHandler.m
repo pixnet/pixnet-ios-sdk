@@ -254,9 +254,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     
     NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
     if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
-        if (!backgroundExec) {
-            [urlRequest PIXAttachData:uploadData];
-        }
+        [urlRequest PIXAttachData:uploadData];
     }
     
     if (backgroundExec) {
@@ -267,19 +265,19 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                 if (succeed) {
                     if (response.statusCode == 200) {
                         completion(YES, receivedData, nil);
+                        return;
                     } else {
                         completion(NO, nil, [NSError PIXErrorWithHTTPStatusCode:response.statusCode]);
+                        return;
                     }
                 } else {
                     completion(NO, nil, error);
+                    return;
                 }
             });
         }];
         NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:delegateHandler delegateQueue:[NSOperationQueue new]];
-        NSString *path = [NSHomeDirectory() stringByAppendingString:@"/PIXUploading.dat"];
-        NSString *filePath = [path stringByExpandingTildeInPath];
-        [uploadData writeToFile:filePath atomically:YES];
-        NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:urlRequest fromFile:[NSURL fileURLWithPath:filePath]];
+        NSURLSessionDownloadTask *uploadTask = [session downloadTaskWithRequest:urlRequest];
         [uploadTask resume];
     } else {
         //這裡可以用 NSURLConnection
@@ -368,6 +366,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     } else {
         urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
         [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+//        [request addValue:currentToken.accessToken forHTTPHeaderField:@"access_token"];
     }
     [request setURL:[NSURL URLWithString:urlString]];
     return request;
