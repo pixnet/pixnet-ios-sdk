@@ -79,6 +79,27 @@ static NSString *kSetDescription = @"Unit test set description";
     
     //取得 private user info
     [self getUserAccount];
+    
+    //更改使用者資訊
+    [self editUserAccount];
+    return;
+}
+-(void)editUserAccount{
+    __block BOOL done = NO;
+    UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
+    [[PIXUser new] editAccountWithPassword:_testUser.userPassword displayName:nil email:nil gender:PIXUserGenderNone address:nil phone:nil birth:nil education:PIXUserEducationNone avatar:image completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"editAccountWithPassword";
+        if (succeed) {
+            NSLog(@"%@, succeed: %@", methodName, result);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
     return;
 }
 -(void)getUserAccount{
