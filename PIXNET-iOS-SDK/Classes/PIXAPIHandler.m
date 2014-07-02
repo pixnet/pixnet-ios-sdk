@@ -14,10 +14,10 @@ static const NSString *kCallbackURL;
 #import "NSMutableURLRequest+PIXCategory.h"
 #import "PIXCredentialStorage.h"
 #import "NSError+PIXCategory.h"
-#import <LROAuth2Client.h>
-#import <LROAuth2AccessToken.h>
+#import "LROAuth2Client.h"
+#import "LROAuth2AccessToken.h"
 #import "LROAuth2ClientDelegateHandler.h"
-#import <NSDictionary+QueryString.h>
+#import "NSDictionary+QueryString.h"
 #import "PIXURLSessionDelegateHandler.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
@@ -87,7 +87,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
             break;
     }
 }
-+(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
++(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
         return;
@@ -107,6 +107,10 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                 }
             });
         }];
+        //如果外部開發者有承做 UIWebViewDelegate，就將該 webView delegate 丟給 oauth2Client.webViewDelegate 處理
+        if (loginView.delegate) {
+            singleton.oauth2Client.webViewDelegate = loginView.delegate;
+        }
         singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
     }
     
@@ -114,6 +118,9 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
     if (storedToken) {
         [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"已有使用者登入中，若要讓另一使用者登入，請先執行 +logout"]);
+        return;
+        /*
         if ([storedToken hasExpired]) {
             [singleton.oauth2Client refreshAccessToken:storedToken];
             return;
@@ -121,6 +128,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
             completion(YES, storedToken.accessToken, nil);
             return;
         }
+         */
     } else {
         [singleton.oauth2Client authorizeUsingWebView:loginView];
     }

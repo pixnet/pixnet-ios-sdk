@@ -32,7 +32,7 @@ static NSString *kMessageTitle = @"message title 5566";
 
 - (void)testMain
 {
-    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     __block BOOL done = NO;
     
     [PIXNETSDK logout];

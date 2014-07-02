@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  */
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret __attribute__((deprecated("use '+setConsumerKey:consumerSecret:callbackURL:'.")));
 /**
- *  設定 consumer key、consumer secret 及 callbackURL，當您要利用 OAuth2 做使用者登入時，請務必先使用這個 method。
+ *  設定 consumer key、consumer secret 及 callbackURL，當您要利用 OAuth2 做使用者登入時，請務必先呼叫這個 method。
  *
  *  @param aKey        consumer key
  *  @param aSecret     consumer secret
@@ -61,13 +61,12 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  */
 +(BOOL)isAuthed;
 /**
- *  利用 oauth2 的方式讓使用者登入 PIXNET
+ *  利用 oauth2 的方式讓使用者登入 PIXNET。跟 XAuth 的登入方式比起來，這個方法只要一個 UIWebView 即可，方便許多，請多多利用。
  *
- *  @param url        您在 PIXNET 開發者後台為您的 app 設定的 callback URL
  *  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
  *  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
  */
-+(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
++(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
@@ -75,7 +74,7 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  *  @param password   使用者密碼
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
-+(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion  __attribute__((deprecated("請改用 '+authByOauthLoginView:completion:'")));
 /**
  *  為目前的使用者做登出的動作
  */
@@ -84,9 +83,9 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
 /**
  *  用來呼叫 PIXNET 後台的 method, httpMethod為 GET, 不需 oAuth 認證
  *
- *  @param apiPath    emma.pixnet.cc/ 開始到 問號 前那一串
- *  @param parameters value 的部份請給 NSString instance
- *  @param requestCompletion succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
+ *  @param apiPath              emma.pixnet.cc/ 開始到 問號 前那一串
+ *  @param parameters           value 的部份請給 NSString instance
+ *  @param requestCompletion    succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
 -(void)callAPI:(NSString *)apiPath parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
 /**

@@ -14,7 +14,7 @@ static NSString *kSetDescription = @"Unit test set description";
 #import "AppDelegate.h"
 #import "UserForTest.h"
 
-@interface PIXOAuth2Tests : XCTestCase
+@interface PIXOAuth2Tests : XCTestCase<UIWebViewDelegate>
 @property (nonatomic, strong) UserForTest *testUser;
 
 @end
@@ -41,10 +41,12 @@ static NSString *kSetDescription = @"Unit test set description";
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     __block UIView *rootView = appDelegate.window.rootViewController.view;
     __block UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
+    webView.delegate = self;
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLoad:) name:PIXOAuth2WebViewDidFinishLoad object:nil];
     [rootView addSubview:webView];
 
     __block BOOL done = NO;
-    [PIXAPIHandler authByOAuth2WithCallbackURL:_testUser.callbaclURL loginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+    [PIXAPIHandler authByOAuth2WithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             if ([PIXAPIHandler isAuthed]) {
                 [webView removeFromSuperview];
@@ -60,6 +62,9 @@ static NSString *kSetDescription = @"Unit test set description";
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
+    if (![PIXNETSDK isAuthed]) {
+        return;
+    }
     [self getBlockList];
     //產生一個相簿
     NSString *albumSetId = [self createAlbumSet];
@@ -73,9 +78,11 @@ static NSString *kSetDescription = @"Unit test set description";
 
     //刪除相簿
     [self deleteAlbum:albumSetId];
-
     return;
 }
+//-(void)finishLoad:(NSNotification *)sender{
+//    NSLog(@"notification object: %@", sender.object);
+//}
 -(void)deleteAlbum:(NSString *)albumId{
     __block BOOL done = NO;
     
@@ -133,6 +140,8 @@ static NSString *kSetDescription = @"Unit test set description";
 -(NSString *)addElementInAlbum:(NSString *)albumId{
     __block BOOL done = NO;
     __block NSString *elementId = nil;
+//    NSURL *movieURL = [[NSBundle mainBundle] URLForResource:@"SHLCutted" withExtension:@"mpg"];
+//    NSData *data = [NSData dataWithContentsOfURL:movieURL];
     UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
     NSData *data = UIImageJPEGRepresentation(image, 0.7);
     [[PIXNETSDK new] createElementWithElementData:data setID:albumId elementTitle:@"unit test photo title" elementDescription:@"unit test photo description" tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
@@ -168,5 +177,14 @@ static NSString *kSetDescription = @"Unit test set description";
     }
     return;
 }
-
+#pragma webView delegate
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    NSLog(@"webView:didFailLoadWithError:%@", error);
+}
+-(void)webViewDidFinishLoad:(UIWebView *)webView{
+    NSLog(@"webViewDidFinishLoad:");
+}
+-(void)webViewDidStartLoad:(UIWebView *)webView{
+    NSLog(@"webViewDidStartLoad:");
+}
 @end

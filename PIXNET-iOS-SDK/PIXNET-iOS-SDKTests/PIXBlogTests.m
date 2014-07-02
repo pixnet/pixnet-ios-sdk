@@ -30,10 +30,8 @@
 }
 
 
-- (void)testFlow
-{
-//    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
-    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
+- (void)testFlow{
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     
     //取得部落格全站分類
     [self getBlogSiteCategories];

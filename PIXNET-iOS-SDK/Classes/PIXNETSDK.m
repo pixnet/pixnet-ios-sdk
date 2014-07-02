@@ -20,8 +20,8 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
-+(void)authByOAuth2WithCallbackURL:(NSString *)url loginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
-    [PIXAPIHandler authByOAuth2WithCallbackURL:url loginView:loginView completion:completion];
++(void)authByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
+    [PIXAPIHandler authByOAuth2WithLoginView:loginView completion:completion];
 }
 +(BOOL)isAuthed{
     return [PIXAPIHandler isAuthed];
@@ -54,7 +54,8 @@
 }
 
 -(void)getAccountWithCompletion:(PIXHandlerCompletion)completion{
-    [[PIXUser new] getAccountWithCompletion:completion];
+//    [[PIXUser new] getAccountWithCompletion:completion];
+    [[PIXUser new] getAccountWithNotification:YES notificationType:PIXUserNotificationTypeAll withBlogInfo:YES withMib:YES withAnalytics:YES completion:completion];
 }
 
 #pragma mark - Blog Method
@@ -423,7 +424,7 @@
     [[PIXAlbum new] deleteCommentWithCommentID:commentId completion:completion];
 }
 -(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
-    [[PIXAlbum new] createElementWithElementData:elementData setID:setId elementTitle:elementTitle elementDescription:elementDescription tags:tags location:location videoThumbType:PIXVideoThumbTypeEnd picShouldRotateByExif:YES videoShouldRotateByMeta:YES shouldUseQuadrate:YES shouldAddWatermark:YES isElementFirst:YES completion:completion];
+    [[PIXAlbum new] createElementWithElementData:elementData setID:setId elementTitle:elementTitle elementDescription:elementDescription tags:tags location:location videoThumbType:PIXVideoThumbTypeEnd picShouldRotateByExif:YES videoShouldRotateByMeta:YES shouldUseQuadrate:YES shouldAddWatermark:YES isElementFirst:YES wouldUploadInBackground:NO completion:completion];
 }
 -(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame completion:(PIXHandlerCompletion)completion{
     [[PIXAlbum new] tagFriendWithElementID:elementId beTaggedUser:beTaggedUser tagFrame:tagFrame recommendID:nil completion:completion];

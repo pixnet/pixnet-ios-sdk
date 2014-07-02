@@ -99,7 +99,7 @@
             NSLog(@"categoryes: %@", [categories componentsJoinedByString:@","]);
             NSLog(@"%@, succeed, categoryIds count: %li, albumType: %li, lastObject: %@", methodName, categories.count, type, [result[@"sets"] lastObject][@"id"]);
         } else {
-            XCTFail(@"%@ failed: %@", methodName, error);
+            XCTFail(@"%@ failed, categories: %@, type: %li, error: %@", methodName, categories, type, error);
         }
     }];
     while (!done) {

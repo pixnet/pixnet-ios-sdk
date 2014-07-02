@@ -24,7 +24,7 @@
     completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust]);
 }
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend{
-    NSLog(@"totalBytesSent: %lli, totalBytesExpectedToSend: %lli", totalBytesSent, totalBytesExpectedToSend);
+//    NSLog(@"totalBytesSent: %lli, totalBytesExpectedToSend: %lli", totalBytesSent, totalBytesExpectedToSend);
 }
 -(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
     if (error) {

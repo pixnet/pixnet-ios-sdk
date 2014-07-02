@@ -471,10 +471,27 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  *  @param videoShouldRotateByMeta 影片是否按照 header 旋轉
  *  @param shouldUseQuadrate       是否使用方形縮圖
  *  @param shouldAddWatermark      是否加浮水印
+ *  @param uploadInBackground      當 app 被送入背景時是否繼續上傳單一檔案？背景上傳只能在 iOS 7.0 以後版本執行。
  *  @param isElementFirst          新上傳照片(或影片)的放相簿前面
  */
--(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion;
-
+-(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst wouldUploadInBackground:(BOOL)uploadInBackground completion:(PIXHandlerCompletion)completion;
+/**
+ *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
+ *
+ *  @param elementData             必要參數，圖片的 NSData instance，如果有使用 base64 加密，在 dataIsBase64Encoded 需為 YES
+ *  @param setId                   必要參數，上傳進哪本相簿的相簿 ID
+ *  @param elementTitle            照片(或影片)標題
+ *  @param elementDescription      照片(或影片)描述
+ *  @param tags                    由 NSString instance 組成的 array
+ *  @param location                照片(或影片)的經緯度，如不需要此參數，可使用 kCLLocationCoordinate2DInvalid
+ *  @param videoThumbType          如果上傳的檔案是影音檔, 可以選擇影片縮圖方式
+ *  @param picShouldRotateByExif   照片是否按照 exif 旋轉
+ *  @param videoShouldRotateByMeta 影片是否按照 header 旋轉
+ *  @param shouldUseQuadrate       是否使用方形縮圖
+ *  @param shouldAddWatermark      是否加浮水印
+ *  @param isElementFirst          新上傳照片(或影片)的放相簿前面
+ */
+-(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion __attribute__((deprecated));
 #pragma mark faces
 /**
  *  新增人臉標記
