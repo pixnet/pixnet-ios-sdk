@@ -42,7 +42,6 @@ static NSString *kSetDescription = @"Unit test set description";
     __block UIView *rootView = appDelegate.window.rootViewController.view;
     __block UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
     webView.delegate = self;
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(finishLoad:) name:PIXOAuth2WebViewDidFinishLoad object:nil];
     [rootView addSubview:webView];
 
     __block BOOL done = NO;
@@ -75,9 +74,30 @@ static NSString *kSetDescription = @"Unit test set description";
         [self deleteElement:elementId];
     }
 
-
     //刪除相簿
     [self deleteAlbum:albumSetId];
+    
+    //取得 private user info
+    [self getUserAccount];
+    return;
+}
+-(void)getUserAccount{
+    for (PIXUserNotificationType type=PIXUserNotificationTypeAll; type<=PIXUserNotificationTypeAppMarket; type++) {
+        __block BOOL done = NO;
+        [[PIXUser new] getAccountWithNotification:YES notificationType:type withBlogInfo:YES withMib:YES withAnalytics:YES completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"getAccountWithNotification";
+            if (succeed) {
+                NSLog(@"%@, succeed: %li", methodName, type);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
     return;
 }
 //-(void)finishLoad:(NSNotification *)sender{
