@@ -70,4 +70,17 @@
     }
     [invocation performSelector:@selector(invoke) withObject:nil];
 }
+-(NSData *)PIXEncodedImageData:(UIImage *)image{
+    NSData *data = UIImagePNGRepresentation(image);
+    NSData *encodedData = nil;
+    if ([data respondsToSelector:@selector(base64EncodedDataWithOptions:)]) {
+        encodedData = [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    } else {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        encodedData = [[data base64Encoding] dataUsingEncoding:NSUTF8StringEncoding];
+#pragma GCC diagnostic pop
+    }
+    return encodedData;
+}
 @end

@@ -87,8 +87,31 @@ static NSString *kSetDescription = @"Unit test set description";
     
     //取得 MIB 資訊
     NSDictionary *mibInfos = [self getUserMib];
-    NSArray *mibPositions = [self fetchPositions:mibInfos];
-    [self getMibPositionsInfo:mibPositions];
+    BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
+    if (isAppliedMIB) {
+        NSArray *mibPositions = [self fetchPositions:mibInfos];
+        [self getMibPositionsInfo:mibPositions];
+    } else {
+        [self createMIB];
+    }
+    
+    return;
+}
+-(void)createMIB{
+    __block BOOL done = NO;
+    [[PIXUser new] createAccountMIBWithRealName:@"123" idNumber:@"A123456789" idImageFront:[UIImage imageNamed:@"pixFox.jpg"] idImageBack:[UIImage imageNamed:@"pixFox.jpg"] email:@"xxx@pixnet.tw" cellPhone:@"09110123456" mailAddress:@"台北市" domicile:@"台北市" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"createAccountMIBWithRealName";
+        if (succeed) {
+            NSLog(@"%@, succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
     return;
 }
 -(void)getMibPositionsInfo:(NSArray *)positions{
@@ -111,9 +134,6 @@ static NSString *kSetDescription = @"Unit test set description";
     return;
 }
 -(NSArray *)fetchPositions:(NSDictionary *)mibInfos{
-    if ([mibInfos[@"applied"] intValue] == 0) {
-        return nil;
-    }
     NSMutableArray *array = [NSMutableArray array];
     NSArray *positionsInArticle = mibInfos[@"blog"][@"positions"][@"article"];
     for (NSDictionary *position in positionsInArticle) {

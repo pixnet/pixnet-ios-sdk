@@ -77,6 +77,7 @@
     }
 #warning 大頭照的更新還沒完成，待後台修正
     if (avatar) {
+        /*
         NSData *data = UIImageJPEGRepresentation(avatar, 1.0);
         NSData *encodedData = nil;
         if ([data respondsToSelector:@selector(base64EncodedDataWithOptions:)]) {
@@ -87,7 +88,10 @@
             encodedData = [[data base64Encoding] dataUsingEncoding:NSUTF8StringEncoding];
             #pragma GCC diagnostic pop
         }
+         
         params[@"avatar"] = encodedData;
+         */
+        params[@"avatar"] = [self PIXEncodedImageData:avatar];
         params[@"upload_method"] = @"base64";
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/info", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
@@ -144,6 +148,25 @@
     
     NSDictionary *param = @{@"history_days":[NSString stringWithFormat:@"%lu", historyDays]};
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mib", @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion{
+    if (!realName || realName.length==0 || !idNumber || idNumber.length==0 || !idImageFront || !idImageBack || !email || email.length==0 || !cellPhone || cellPhone.length==0 || !mailAddress || mailAddress.length==0 || !domicile || domicile.length==0) {
+        completion(NO, nil , [NSError PIXErrorWithParameterName:@"缺乏必要參數"]);
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:10];
+    params[@"id_number"] = idNumber;
+    params[@"upload_method"] = @"base64";
+    params[@"idimagefront"] = [self PIXEncodedImageData:idImageFront];
+    params[@"idimageback"] = [self PIXEncodedImageData:idImageBack];
+    params[@"email"] = email;
+    params[@"cellphone"] = cellPhone;
+    params[@"mail_address"] = mailAddress;
+    params[@"domicile"] = domicile;
+    params[@"enablevideoad"] = [NSString stringWithFormat:@"%i", enableVideoAd];
+    params[@"name"] = realName;
+    
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {
