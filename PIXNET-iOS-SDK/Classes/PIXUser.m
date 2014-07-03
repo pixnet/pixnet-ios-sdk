@@ -191,4 +191,25 @@
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)askAccountMIBPayWithCompletion:(PIXHandlerCompletion)completion{
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mibpay", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+}
+-(void)getAccountAnalyticsWithStaticDays:(NSNumber *)staticDays referDays:(NSNumber *)referDays completion:(PIXHandlerCompletion)completion{
+    if (staticDays && [staticDays intValue] < 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"staticDays 不可小於0"]);
+        return;
+    }
+    if (referDays && [referDays intValue] < 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"referDays 不可小於0"]);
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (staticDays) {
+        params[@"statics_days"] = [staticDays stringValue];
+    }
+    if (referDays) {
+        params[@"refer_days"] = [referDays stringValue];
+    }
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/analytics", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
 @end

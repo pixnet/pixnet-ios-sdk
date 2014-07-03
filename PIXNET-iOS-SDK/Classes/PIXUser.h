@@ -154,4 +154,18 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param completion PIXHandlerCompletion
  */
 -(void)updateAccountMIBPositionWithPositionID:(NSString *)positionId enabled:(NSNumber *)enabled fixedAdBox:(NSNumber *)fixedAdBox completion:(PIXHandlerCompletion)completion;
+/**
+ *  MIB 請款 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPay
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)askAccountMIBPayWithCompletion:(PIXHandlerCompletion)completion;
+/**
+ *  取得使用者被拜訪紀錄分析資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountAnalytics
+ *
+ *  @param staticDays 指定天數的歷史拜訪資訊，最少 0 天，最多 45 天
+ *  @param referDays  指定天數的誰連結我資訊，最少 0 天，最多 7 天
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getAccountAnalyticsWithStaticDays:(NSNumber *)staticDays referDays:(NSNumber *)referDays completion:(PIXHandlerCompletion)completion;
 @end

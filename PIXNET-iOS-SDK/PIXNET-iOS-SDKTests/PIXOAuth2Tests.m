@@ -91,11 +91,30 @@ static NSString *kSetDescription = @"Unit test set description";
     if (isAppliedMIB) {
         NSArray *mibPositions = [self fetchPositions:mibInfos];
         [self getMibPositionsInfo:mibPositions];
-        [self updateMibPositionsInfo:mibPositions];
+        //好像後台還沒完成這個 api
+//        [self updateMibPositionsInfo:mibPositions];
+        [self getAnalytics];
     } else {
         [self createMIB];
     }
     
+    return;
+}
+-(void)getAnalytics{
+    __block BOOL done = NO;
+    [[PIXUser new] getAccountAnalyticsWithStaticDays:@(45) referDays:@(7) completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getAccountAnalyticsWithStaticDays";
+        if (succeed) {
+            NSLog(@"%@, succeed: %@", methodName, result);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
     return;
 }
 -(void)updateMibPositionsInfo:(NSArray *)positions{
