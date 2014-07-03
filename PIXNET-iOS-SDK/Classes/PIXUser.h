@@ -116,5 +116,18 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param completion  PIXHandlerCompletion
  */
 -(void)editAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
-
+/**
+ *  讀取 MIB 資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMib
+ *
+ *  @param historyDays 列出指定天數的歷史收益資訊，最少 1 天，最多 45 天，必要參數。(在 SDK 裡不做最大天數的檢查，因為這個後台改天數限制很快，但 SDK 若是跟著改，外部開發者 app 就要重上架)
+ *  @param completion  PIXHandlerCompletion
+ */
+-(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion;
+/**
+ *  取得 MIB 某個版位的資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositions
+ *
+ *  @param positionId 該版位的 ID
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion;
 @end

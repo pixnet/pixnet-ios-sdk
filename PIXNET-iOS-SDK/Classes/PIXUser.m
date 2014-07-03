@@ -17,7 +17,7 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing password"]);
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:11];
     params[@"password"] = password;
     if (displayName) {
         params[@"display_name"] = displayName;
@@ -88,6 +88,7 @@
             #pragma GCC diagnostic pop
         }
         params[@"avatar"] = encodedData;
+        params[@"upload_method"] = @"base64";
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/info", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
@@ -135,6 +136,21 @@
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account", @"GET", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
 }
 
-
-
+-(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion{
+    if (historyDays<1) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"historyDays 不可小於1"]);
+        return;
+    }
+    
+    NSDictionary *param = @{@"history_days":[NSString stringWithFormat:@"%lu", historyDays]};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mib", @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
+    if (!positionId || positionId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"positionId 有誤"]);
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"account/mib/positions/%@", positionId];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+}
 @end

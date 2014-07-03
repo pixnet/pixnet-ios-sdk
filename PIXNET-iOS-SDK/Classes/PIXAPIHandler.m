@@ -388,12 +388,13 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         if ([storedToken hasExpired]) {
             PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
             __block BOOL done = NO;
-            singleton.oauth2Client.delegate = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
+            LROAuth2ClientDelegateHandler *handler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
                 if (succeed) {
                     done = YES;
                     [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
                 }
             }];
+            singleton.oauth2Client.delegate = handler;
             [singleton.oauth2Client refreshAccessToken:storedToken];
             while (!done) {
                 [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];

@@ -36,30 +36,32 @@ static NSString *kSetDescription = @"Unit test set description";
 - (void)testMain{
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     if ([PIXNETSDK isAuthed]) {
-        [PIXNETSDK logout];
+//        [PIXNETSDK logout];
     }
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    __block UIView *rootView = appDelegate.window.rootViewController.view;
-    __block UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
-    webView.delegate = self;
-    [rootView addSubview:webView];
-
-    __block BOOL done = NO;
-    [PIXAPIHandler authByOAuth2WithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            if ([PIXAPIHandler isAuthed]) {
-                [webView removeFromSuperview];
-                NSLog(@"login token: %@", result);
+    if (![PIXNETSDK isAuthed]) {
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        __block UIView *rootView = appDelegate.window.rootViewController.view;
+        __block UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
+        webView.delegate = self;
+        [rootView addSubview:webView];
+        
+        __block BOOL done = NO;
+        [PIXAPIHandler authByOAuth2WithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+            if (succeed) {
+                if ([PIXAPIHandler isAuthed]) {
+                    [webView removeFromSuperview];
+                    NSLog(@"login token: %@", result);
+                } else {
+                    XCTFail(@"login not succeed");
+                }
             } else {
-                XCTFail(@"login not succeed");
+                XCTFail(@"login failed: %@", error);
             }
-        } else {
-            XCTFail(@"login failed: %@", error);
+            done = YES;
+        }];
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
         }
-        done = YES;
-    }];
-    while (!done) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     if (![PIXNETSDK isAuthed]) {
         return;
@@ -82,7 +84,65 @@ static NSString *kSetDescription = @"Unit test set description";
     
     //更改使用者資訊
     [self editUserAccount];
+    
+    //取得 MIB 資訊
+    NSDictionary *mibInfos = [self getUserMib];
+    NSArray *mibPositions = [self fetchPositions:mibInfos];
+    [self getMibPositionsInfo:mibPositions];
     return;
+}
+-(void)getMibPositionsInfo:(NSArray *)positions{
+    for (NSString *positionId in positions) {
+        __block BOOL done = NO;
+        [[PIXUser new] getAccountMIBPositionWithPositionID:positionId completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"getAccountMIBPositionWithPositionID";
+            if (succeed) {
+                NSLog(@"%@, succeed, positionId: %@", methodName, positionId);
+            } else {
+                XCTFail(@"%@ failed: %@", methodName, error);
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
+    return;
+}
+-(NSArray *)fetchPositions:(NSDictionary *)mibInfos{
+    if ([mibInfos[@"applied"] intValue] == 0) {
+        return nil;
+    }
+    NSMutableArray *array = [NSMutableArray array];
+    NSArray *positionsInArticle = mibInfos[@"blog"][@"positions"][@"article"];
+    for (NSDictionary *position in positionsInArticle) {
+        [array addObject:position[@"id"]];
+    }
+    NSArray *positionInBlog = mibInfos[@"blog"][@"positions"][@"blog"];
+    for (NSDictionary *position in positionInBlog) {
+        [array addObject:position[@"id"]];
+    }
+    return array;
+}
+-(NSDictionary *)getUserMib{
+    __block BOOL done = NO;
+    __block NSDictionary *infos = nil;
+    [[PIXUser new] getAccountMIBWithHistoryDays:1 completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getAccountMibWithHistoryDays";
+        if (succeed) {
+            NSLog(@"%@, succeed: %li", methodName, [result count]);
+            infos = result[@"mib"];
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return infos;
 }
 -(void)editUserAccount{
     __block BOOL done = NO;
