@@ -91,10 +91,31 @@ static NSString *kSetDescription = @"Unit test set description";
     if (isAppliedMIB) {
         NSArray *mibPositions = [self fetchPositions:mibInfos];
         [self getMibPositionsInfo:mibPositions];
+        [self updateMibPositionsInfo:mibPositions];
     } else {
         [self createMIB];
     }
     
+    return;
+}
+-(void)updateMibPositionsInfo:(NSArray *)positions{
+    for (NSString *positionId in positions) {
+        __block BOOL done = NO;
+        int randomValue = arc4random()%2;
+        [[PIXUser new] updateAccountMIBPositionWithPositionID:positionId enabled:[NSNumber numberWithBool:randomValue] fixedAdBox:[NSNumber numberWithBool:randomValue] completion:^(BOOL succeed, id result, NSError *error) {
+            NSString *methodName = @"updateAccountMIBPositionWithPositionID";
+            if (succeed) {
+                NSLog(@"%@, succeed, positionId: %@", methodName, positionId);
+            } else {
+                XCTFail(@"%@ failed: %@, positionId: %@", methodName, error, positionId);
+            }
+            done = YES;
+        }];
+        
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
     return;
 }
 -(void)createMIB{
@@ -167,7 +188,7 @@ static NSString *kSetDescription = @"Unit test set description";
 -(void)editUserAccount{
     __block BOOL done = NO;
     UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
-    [[PIXUser new] editAccountWithPassword:_testUser.userPassword displayName:nil email:nil gender:PIXUserGenderNone address:nil phone:nil birth:nil education:PIXUserEducationNone avatar:image completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXUser new] updateAccountWithPassword:_testUser.userPassword displayName:nil email:nil gender:PIXUserGenderNone address:nil phone:nil birth:nil education:PIXUserEducationNone avatar:image completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"editAccountWithPassword";
         if (succeed) {
             NSLog(@"%@, succeed: %@", methodName, result);

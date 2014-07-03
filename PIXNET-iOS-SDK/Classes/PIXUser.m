@@ -12,7 +12,7 @@
 
 @implementation PIXUser
 
--(void)editAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
+-(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
     if (password == nil || password.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing password"]);
         return;
@@ -175,5 +175,20 @@
     }
     NSString *path = [NSString stringWithFormat:@"account/mib/positions/%@", positionId];
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+}
+-(void)updateAccountMIBPositionWithPositionID:(NSString *)positionId enabled:(NSNumber *)enabled fixedAdBox:(NSNumber *)fixedAdBox completion:(PIXHandlerCompletion)completion{
+    if (!positionId || positionId.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"positionId 是必要欄位"]);
+        return;
+    }
+    NSString *path = [NSString stringWithFormat:@"account/mib/positions/%@", positionId];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
+    if (enabled) {
+        params[@"enabled"] = [enabled stringValue];
+    }
+    if (fixedAdBox) {
+        params[@"fixedadbox"] = [fixedAdBox stringValue];
+    }
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 @end

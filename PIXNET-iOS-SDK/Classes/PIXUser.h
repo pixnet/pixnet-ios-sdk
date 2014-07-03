@@ -115,7 +115,7 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param avatar      大頭照
  *  @param completion  PIXHandlerCompletion
  */
--(void)editAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
+-(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
 /**
  *  讀取 MIB 資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMib
  *
@@ -145,4 +145,13 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param completion PIXHandlerCompletion
  */
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改 MIB 某個版位的資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositionsUpdate
+ *
+ *  @param positionId 版位 ID，必要欄位
+ *  @param enabled    是否要啟用，請利用 NSNumber +numberWithBool: 的方法給值。
+ *  @param fixedAdBox 此廣告框是否為固定型式，請利用 NSNumber +numberWithBool: 的方法給值。
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)updateAccountMIBPositionWithPositionID:(NSString *)positionId enabled:(NSNumber *)enabled fixedAdBox:(NSNumber *)fixedAdBox completion:(PIXHandlerCompletion)completion;
 @end
