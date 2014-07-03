@@ -167,5 +167,13 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param referDays  指定天數的誰連結我資訊，最少 0 天，最多 7 天
  *  @param completion PIXHandlerCompletion
  */
--(void)getAccountAnalyticsWithStaticDays:(NSNumber *)staticDays referDays:(NSNumber *)referDays completion:(PIXHandlerCompletion)completion;
+-(void)getAccountAnalyticsWithStaticDays:(NSUInteger)staticDays referDays:(NSUInteger)referDays completion:(PIXHandlerCompletion)completion;
+/**
+ *  修改密碼 http://developer.pixnet.pro/#!/doc/pixnetApi/accountPassword
+ *
+ *  @param originalPassword 原本的使用者密碼，需要檢查與系統內儲存資訊相符後才能執行修改。必要參數
+ *  @param newPassword      新密碼，密碼需至少4個字元，區分大小寫。必要參數
+ *  @param completion       PIXHandlerCompletion
+ */
+-(void)updateAccountPasswordWithOriginalPassword:(NSString *)originalPassword newPassword:(NSString *)newPassword completion:(PIXHandlerCompletion)completion;
 @end

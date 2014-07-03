@@ -194,22 +194,26 @@
 -(void)askAccountMIBPayWithCompletion:(PIXHandlerCompletion)completion{
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mibpay", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
--(void)getAccountAnalyticsWithStaticDays:(NSNumber *)staticDays referDays:(NSNumber *)referDays completion:(PIXHandlerCompletion)completion{
-    if (staticDays && [staticDays intValue] < 0) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"staticDays 不可小於0"]);
-        return;
-    }
-    if (referDays && [referDays intValue] < 0) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"referDays 不可小於0"]);
-        return;
-    }
+-(void)getAccountAnalyticsWithStaticDays:(NSUInteger)staticDays referDays:(NSUInteger)referDays completion:(PIXHandlerCompletion)completion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     if (staticDays) {
-        params[@"statics_days"] = [staticDays stringValue];
+        params[@"statics_days"] = [NSString stringWithFormat:@"%lu", staticDays];
     }
     if (referDays) {
-        params[@"refer_days"] = [referDays stringValue];
+        params[@"refer_days"] = [NSString stringWithFormat:@"%lu", referDays];
     }
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/analytics", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+}
+-(void)updateAccountPasswordWithOriginalPassword:(NSString *)originalPassword newPassword:(NSString *)newPassword completion:(PIXHandlerCompletion)completion{
+    if (!originalPassword || originalPassword.length==0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"原始密碼有誤"]);
+        return;
+    }
+    if (!newPassword || newPassword.length<4) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"新密碼格式有誤"]);
+        return;
+    }
+    NSDictionary *params = @{@"password":originalPassword, @"new_password": newPassword};
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/password", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 @end

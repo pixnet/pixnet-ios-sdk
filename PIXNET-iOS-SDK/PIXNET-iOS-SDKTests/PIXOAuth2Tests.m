@@ -97,12 +97,30 @@ static NSString *kSetDescription = @"Unit test set description";
     } else {
         [self createMIB];
     }
+    [self updatePassword];
     
+    return;
+}
+-(void)updatePassword{
+    __block BOOL done = NO;
+    [[PIXUser new] updateAccountPasswordWithOriginalPassword:_testUser.userPassword newPassword:_testUser.userPassword completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"updateAccountPasswordWithOriginalPassword";
+        if (succeed) {
+            NSLog(@"%@, succeed: %@", methodName, result);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
     return;
 }
 -(void)getAnalytics{
     __block BOOL done = NO;
-    [[PIXUser new] getAccountAnalyticsWithStaticDays:@(45) referDays:@(7) completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXUser new] getAccountAnalyticsWithStaticDays:45 referDays:7 completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"getAccountAnalyticsWithStaticDays";
         if (succeed) {
             NSLog(@"%@, succeed: %@", methodName, result);
