@@ -39,7 +39,6 @@ typedef NS_ENUM(NSInteger, PIXMainpageType) {
  *  @param completion  PIXHandlerCompletion
  */
 -(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
-#warning 這個 category_id 分別出現在兩個地方，已開票處理
 /**
  *  取得某些類別底下的相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/mainpageAlbumCategories
  *

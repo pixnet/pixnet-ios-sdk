@@ -43,10 +43,10 @@
     params[@"count"] = [NSString stringWithFormat:@"%li", perPage];
     params[@"strict_filter"] = [NSString stringWithFormat:@"%i", strictFilter];
     params[@"api_version"] = @"2";
-    params[@"category_id"] = [categoryIds componentsJoinedByString:@","];
+//    params[@"category_id"] = [categoryIds componentsJoinedByString:@","];
     
     NSString *typeString = [self maintypeStringWithType:albumType];
-    NSString *path = [NSString stringWithFormat:@"mainpage/album/categories/%@", typeString];
+    NSString *path = [NSString stringWithFormat:@"mainpage/album/categories/%@/%@", typeString, [categoryIds componentsJoinedByString:@","]];
     [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getMainpageVideosWithVideoType:(PIXMainpageType)videoType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
