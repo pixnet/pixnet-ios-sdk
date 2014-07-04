@@ -71,7 +71,8 @@
     [invocation performSelector:@selector(invoke) withObject:nil];
 }
 -(NSData *)PIXEncodedImageData:(UIImage *)image{
-    NSData *data = UIImagePNGRepresentation(image);
+//    NSData *data = UIImagePNGRepresentation(image);
+    NSData *data = UIImageJPEGRepresentation(image, 1.0);
     NSData *encodedData = nil;
     if ([data respondsToSelector:@selector(base64EncodedDataWithOptions:)]) {
         encodedData = [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];

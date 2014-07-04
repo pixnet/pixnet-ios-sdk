@@ -80,13 +80,13 @@ static const NSString *kBoundaryConstant = @"---------------------------14737809
         NSString *keyString = [[data allKeys] lastObject];
         NSData *content = data[keyString];
         NSString *filePrefix = [NSString stringWithFormat:@"--%@\r\nContent-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\nContent-Type: %@\r\n\r\n",
-                                kBoundaryConstant, @"upload_file", keyString, @"application/x-octetstream"];
+                                kBoundaryConstant, keyString, keyString, @"application/x-octetstream"];
         [bodyData appendData:[filePrefix dataUsingEncoding:NSUTF8StringEncoding]];
         [bodyData appendData:content];
         [bodyData appendData:[[[@"\r\n--" stringByAppendingString:[kBoundaryConstant copy]] stringByAppendingString:@"--"] dataUsingEncoding:NSUTF8StringEncoding]];
         totalLength += [content length];
     }
-    [self setValue:[NSString stringWithFormat:@"%i", totalLength] forHTTPHeaderField:@"Content-Length"];
+    [self setValue:[NSString stringWithFormat:@"%lu", [bodyData length]] forHTTPHeaderField:@"Content-Length"];
     [self setHTTPBody:bodyData];;
 }
 @end

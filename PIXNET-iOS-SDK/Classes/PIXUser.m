@@ -156,17 +156,23 @@
     }
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:10];
     params[@"id_number"] = idNumber;
+
     params[@"upload_method"] = @"base64";
-    params[@"idimagefront"] = [self PIXEncodedImageData:idImageFront];
-    params[@"idimageback"] = [self PIXEncodedImageData:idImageBack];
+    params[@"id_image_front"] = [self PIXEncodedImageData:idImageFront];
+    params[@"id_image_back"] = [self PIXEncodedImageData:idImageBack];
+
     params[@"email"] = email;
     params[@"cellphone"] = cellPhone;
     params[@"mail_address"] = mailAddress;
     params[@"domicile"] = domicile;
-    params[@"enablevideoad"] = [NSString stringWithFormat:@"%i", enableVideoAd];
+    params[@"enable_video_ad"] = [NSString stringWithFormat:@"%i", enableVideoAd];
     params[@"name"] = realName;
-    
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    
+//    NSDictionary *upload1 = @{@"id_image_front": UIImageJPEGRepresentation(idImageFront, 1.0)};
+//    NSDictionary *upload2 = @{@"id_image_back": UIImageJPEGRepresentation(idImageBack, 1.0)};
+//    NSArray *uploads = @[upload1, upload2];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, uploads, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {

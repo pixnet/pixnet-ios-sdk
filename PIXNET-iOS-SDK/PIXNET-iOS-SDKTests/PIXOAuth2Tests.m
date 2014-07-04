@@ -70,11 +70,11 @@ static NSString *kSetDescription = @"Unit test set description";
     //產生一個相簿
     NSString *albumSetId = [self createAlbumSet];
     //新增一張照片
-    NSString *elementId = [self addElementInAlbum:albumSetId];
+//    NSString *elementId = [self addElementInAlbum:albumSetId];
     //刪除相片
-    if (elementId) {
-        [self deleteElement:elementId];
-    }
+//    if (elementId) {
+//        [self deleteElement:elementId];
+//    }
 
     //刪除相簿
     [self deleteAlbum:albumSetId];
