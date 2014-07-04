@@ -94,11 +94,35 @@ static NSString *kSetDescription = @"Unit test set description";
         //好像後台還沒完成這個 api
 //        [self updateMibPositionsInfo:mibPositions];
         [self getAnalytics];
+        BOOL isPayable = [mibInfos[@"payable"] boolValue];
+        if (isPayable) {
+            [self askPayRevenue];
+        } else {
+            NSLog(@"This account is not payable, so askAccountMIBPayWithCompletion not tested.");
+        }
     } else {
+        NSLog(@"This account is MIB ready, so createMIB not tested.");
         [self createMIB];
     }
     [self updatePassword];
     
+    return;
+}
+-(void)askPayRevenue{
+    __block BOOL done = NO;
+    [[PIXUser new] askAccountMIBPayWithCompletion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"askAccountMIBPayWithCompletion";
+        if (succeed) {
+            NSLog(@"%@, succeed: %@", methodName, result);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
     return;
 }
 -(void)updatePassword{
@@ -210,6 +234,7 @@ static NSString *kSetDescription = @"Unit test set description";
         NSString *methodName = @"getAccountMibWithHistoryDays";
         if (succeed) {
             NSLog(@"%@, succeed: %li", methodName, [result count]);
+            NSLog(@"MIB content: %@", result);
             infos = result[@"mib"];
         } else {
             XCTFail(@"%@ failed: %@", methodName, error);
