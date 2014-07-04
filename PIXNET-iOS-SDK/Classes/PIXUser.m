@@ -166,7 +166,7 @@
     params[@"enablevideoad"] = [NSString stringWithFormat:@"%i", enableVideoAd];
     params[@"name"] = realName;
     
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
+    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {

@@ -20,7 +20,10 @@ static const NSString *kCallbackURL;
 #import "NSDictionary+QueryString.h"
 #import "PIXURLSessionDelegateHandler.h"
 
-static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
+//static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
+#warning temp address
+static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
+
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
 static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";
 static const NSString *kUserPasswordIdentifier = @"kUserPasswordIdentifier";
@@ -297,6 +300,9 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                         completion(YES, data, nil);
                         return;
                     } else {
+                        id receivedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                        NSLog(@"error object: %@", receivedObject);
+
                         completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
                         return;
                     }

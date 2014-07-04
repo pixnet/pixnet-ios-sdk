@@ -84,6 +84,8 @@ static NSString *kSetDescription = @"Unit test set description";
     
     //更改使用者資訊
     [self editUserAccount];
+    //改密碼
+    [self updatePassword];
     
     //取得 MIB 資訊
     NSDictionary *mibInfos = [self getUserMib];
@@ -101,10 +103,8 @@ static NSString *kSetDescription = @"Unit test set description";
             NSLog(@"This account is not payable, so askAccountMIBPayWithCompletion not tested.");
         }
     } else {
-        NSLog(@"This account is MIB ready, so createMIB not tested.");
         [self createMIB];
     }
-    [self updatePassword];
     
     return;
 }
@@ -181,7 +181,7 @@ static NSString *kSetDescription = @"Unit test set description";
 }
 -(void)createMIB{
     __block BOOL done = NO;
-    [[PIXUser new] createAccountMIBWithRealName:@"123" idNumber:@"A123456789" idImageFront:[UIImage imageNamed:@"pixFox.jpg"] idImageBack:[UIImage imageNamed:@"pixFox.jpg"] email:@"xxx@pixnet.tw" cellPhone:@"09110123456" mailAddress:@"台北市" domicile:@"台北市" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXUser new] createAccountMIBWithRealName:@"蘇聖傑" idNumber:@"A123456789" idImageFront:[UIImage imageNamed:@"pixFox.jpg"] idImageBack:[UIImage imageNamed:@"pixFox.jpg"] email:@"xxx@pixnet.tw" cellPhone:@"09110123456" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createAccountMIBWithRealName";
         if (succeed) {
             NSLog(@"%@, succeed", methodName);
