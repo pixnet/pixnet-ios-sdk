@@ -21,6 +21,14 @@
     self.window.rootViewController = vc;
     [self.window makeKeyAndVisible];
     
+    [PIXNETSDK setConsumerKey:@"0ef5425eaa54c7d5bb6956b97471cde5" consumerSecret:@"09558d31bfc9763e3f4f7f3e27f3afff" callbackURL:@"pixnetsdk://www.com.tw"];
+    [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"1" articleType:PIXMainpageTypeHot page:1 perPage:3 completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            
+        } else {
+        
+        }
+    }];
     return YES;
 }
 
