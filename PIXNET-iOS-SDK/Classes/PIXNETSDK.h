@@ -845,7 +845,7 @@
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
  *
- *  @param elementData             必要參數，圖片的 NSData instance，如果有使用 base64 加密，在 dataIsBase64Encoded 需為 YES
+ *  @param elementData             必要參數，圖片的 NSData instance。
  *  @param setId                   必要參數，上傳進哪本相簿的相簿 ID
  *  @param elementTitle            照片(或影片)標題
  *  @param elementDescription      照片(或影片)描述

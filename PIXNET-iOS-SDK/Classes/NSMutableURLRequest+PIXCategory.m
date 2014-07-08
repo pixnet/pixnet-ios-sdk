@@ -44,6 +44,7 @@ static const NSString *kBoundaryConstant = @"---------------------------14737809
     
     return requestParameters;
 }
+//單一檔案，未用 base64
 -(void)PIXAttachData:(NSData *)data{
     NSArray *parameters = [self parameters];
     [self setValue:[@"multipart/form-data; boundary=" stringByAppendingString:[kBoundaryConstant copy]] forHTTPHeaderField:@"Content-type"];

@@ -14,4 +14,5 @@
 +(BOOL)PIXCheckNSUIntegerValid:(NSUInteger)integer;
 -(void)invokeMethod:(SEL)method parameters:(NSArray *)parameters receiver:(id)receiver;
 -(NSData *)PIXEncodedImageData:(UIImage *)image;
+-(NSString *)PIXEncodedStringWithImage:(UIImage *)image;
 @end

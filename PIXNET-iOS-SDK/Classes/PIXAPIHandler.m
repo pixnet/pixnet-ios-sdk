@@ -20,9 +20,9 @@ static const NSString *kCallbackURL;
 #import "NSDictionary+QueryString.h"
 #import "PIXURLSessionDelegateHandler.h"
 
-//static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
-#warning temp address
-static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
+static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
+//#warning temp address
+//static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
 
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
 static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";
@@ -240,8 +240,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuthObj:(NSNumber *)shouldAuth uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:[shouldAuth boolValue] shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
 }
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSArray *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
-//-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth && kConsumerKey == nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:"]);
         return;
@@ -265,10 +264,13 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     NSURL *requestUrl = [NSURL URLWithString:urlString];
     
     NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
-    if (uploadData && [uploadData isKindOfClass:[NSArray class]]) {
-//    if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
-        [urlRequest PIXAttachDatas:uploadData];
+    if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
+        [urlRequest PIXAttachData:uploadData];
     }
+//    if (uploadData && [uploadData isKindOfClass:[NSArray class]]) {
+//        [urlRequest PIXAttachDatas:uploadData];
+//    }
+
     
     if (backgroundExec) {
         //這裡要用 NSURLSession
@@ -303,9 +305,13 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                         return;
                     } else {
                         id receivedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                        NSLog(@"error object: %@", receivedObject);
-
-                        completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
+                        NSString *message = receivedObject[@"message"];
+                        if (message) {
+                            completion(NO, data, [NSError PIXErrorWithParameterName:receivedObject[@"message"]]);
+                        } else {
+                            completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
+                        }
+                        
                         return;
                     }
                 } else {
@@ -373,6 +379,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     } else {
         tempParams = [NSMutableDictionary dictionary];
     }
+    //將 access token 加到 query 的參數裡
     LROAuth2AccessToken *currentToken = [self accessTokenForCurrent];
     tempParams[@"access_token"] = currentToken.accessToken;
     NSString *urlString = nil;

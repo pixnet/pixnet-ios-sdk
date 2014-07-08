@@ -158,8 +158,8 @@
     params[@"id_number"] = idNumber;
 
     params[@"upload_method"] = @"base64";
-    params[@"id_image_front"] = [self PIXEncodedImageData:idImageFront];
-    params[@"id_image_back"] = [self PIXEncodedImageData:idImageBack];
+    params[@"id_image_front"] = [self PIXEncodedStringWithImage:idImageFront];
+    params[@"id_image_back"] = [self PIXEncodedStringWithImage:idImageBack];
 
     params[@"email"] = email;
     params[@"cellphone"] = cellPhone;
