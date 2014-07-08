@@ -42,13 +42,13 @@
 		CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CED5FB9419610C2B0037D268 /* PIXURLSessionDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5FB9319610C2B0037D268 /* PIXURLSessionDelegateHandler.m */; };
 		CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */ = {isa = PBXBuildFile; fileRef = CED60D8919624BFB0080A7D1 /* SHLCutted.mpg */; };
-		CED60DAD1962920E0080A7D1 /* LROAuth2AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CED60DA11962920E0080A7D1 /* LROAuth2AccessToken.m */; };
-		CED60DAE1962920E0080A7D1 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = CED60DA31962920E0080A7D1 /* LROAuth2Client.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CED60DAF1962920E0080A7D1 /* LRURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CED60DA61962920E0080A7D1 /* LRURLRequestOperation.m */; };
-		CED60DB01962920E0080A7D1 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED60DA81962920E0080A7D1 /* NSDictionary+QueryString.m */; };
-		CED60DB11962920E0080A7D1 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED60DAA1962920E0080A7D1 /* NSString+QueryString.m */; };
-		CED60DB21962920E0080A7D1 /* NSURL+QueryInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = CED60DAC1962920E0080A7D1 /* NSURL+QueryInspector.m */; };
 		CED7894E19590B0600E29037 /* LROAuth2ClientDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7894D19590B0600E29037 /* LROAuth2ClientDelegateHandler.m */; };
+		CED79660196B91020025AA97 /* NSURL+QueryInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7965F196B91020025AA97 /* NSURL+QueryInspector.m */; };
+		CED79663196B91230025AA97 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79662196B91230025AA97 /* NSString+QueryString.m */; };
+		CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79665196B91350025AA97 /* NSDictionary+QueryString.m */; };
+		CED7966E196B91790025AA97 /* LROAuth2AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79668196B91790025AA97 /* LROAuth2AccessToken.m */; };
+		CED7966F196B91790025AA97 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7966A196B91790025AA97 /* LROAuth2Client.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CED79670196B91790025AA97 /* LRURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7966D196B91790025AA97 /* LRURLRequestOperation.m */; };
 		CED9C3A019484C2200D522CD /* PIXFriendTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED9C39F19484C2200D522CD /* PIXFriendTests.m */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
@@ -121,21 +121,21 @@
 		CED5FB9219610C2B0037D268 /* PIXURLSessionDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXURLSessionDelegateHandler.h; path = Classes/PIXURLSessionDelegateHandler.h; sourceTree = "<group>"; };
 		CED5FB9319610C2B0037D268 /* PIXURLSessionDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXURLSessionDelegateHandler.m; path = Classes/PIXURLSessionDelegateHandler.m; sourceTree = "<group>"; };
 		CED60D8919624BFB0080A7D1 /* SHLCutted.mpg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = SHLCutted.mpg; sourceTree = "<group>"; };
-		CED60DA01962920E0080A7D1 /* LROAuth2AccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuth2AccessToken.h; sourceTree = "<group>"; };
-		CED60DA11962920E0080A7D1 /* LROAuth2AccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LROAuth2AccessToken.m; sourceTree = "<group>"; };
-		CED60DA21962920E0080A7D1 /* LROAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuth2Client.h; sourceTree = "<group>"; };
-		CED60DA31962920E0080A7D1 /* LROAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LROAuth2Client.m; sourceTree = "<group>"; };
-		CED60DA41962920E0080A7D1 /* LROAuth2ClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LROAuth2ClientDelegate.h; sourceTree = "<group>"; };
-		CED60DA51962920E0080A7D1 /* LRURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRURLRequestOperation.h; sourceTree = "<group>"; };
-		CED60DA61962920E0080A7D1 /* LRURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRURLRequestOperation.m; sourceTree = "<group>"; };
-		CED60DA71962920E0080A7D1 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
-		CED60DA81962920E0080A7D1 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
-		CED60DA91962920E0080A7D1 /* NSString+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+QueryString.h"; sourceTree = "<group>"; };
-		CED60DAA1962920E0080A7D1 /* NSString+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+QueryString.m"; sourceTree = "<group>"; };
-		CED60DAB1962920E0080A7D1 /* NSURL+QueryInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryInspector.h"; sourceTree = "<group>"; };
-		CED60DAC1962920E0080A7D1 /* NSURL+QueryInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryInspector.m"; sourceTree = "<group>"; };
 		CED7894C19590B0600E29037 /* LROAuth2ClientDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LROAuth2ClientDelegateHandler.h; path = Classes/LROAuth2ClientDelegateHandler.h; sourceTree = "<group>"; };
 		CED7894D19590B0600E29037 /* LROAuth2ClientDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LROAuth2ClientDelegateHandler.m; path = Classes/LROAuth2ClientDelegateHandler.m; sourceTree = "<group>"; };
+		CED7965E196B91020025AA97 /* NSURL+QueryInspector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSURL+QueryInspector.h"; path = "Classes/NSURL+QueryInspector.h"; sourceTree = SOURCE_ROOT; };
+		CED7965F196B91020025AA97 /* NSURL+QueryInspector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSURL+QueryInspector.m"; path = "Classes/NSURL+QueryInspector.m"; sourceTree = SOURCE_ROOT; };
+		CED79661196B91230025AA97 /* NSString+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+QueryString.h"; path = "Classes/NSString+QueryString.h"; sourceTree = SOURCE_ROOT; };
+		CED79662196B91230025AA97 /* NSString+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+QueryString.m"; path = "Classes/NSString+QueryString.m"; sourceTree = SOURCE_ROOT; };
+		CED79664196B91350025AA97 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+QueryString.h"; path = "Classes/NSDictionary+QueryString.h"; sourceTree = SOURCE_ROOT; };
+		CED79665196B91350025AA97 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+QueryString.m"; path = "Classes/NSDictionary+QueryString.m"; sourceTree = SOURCE_ROOT; };
+		CED79667196B91790025AA97 /* LROAuth2AccessToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LROAuth2AccessToken.h; path = Classes/LROAuth2AccessToken.h; sourceTree = SOURCE_ROOT; };
+		CED79668196B91790025AA97 /* LROAuth2AccessToken.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LROAuth2AccessToken.m; path = Classes/LROAuth2AccessToken.m; sourceTree = SOURCE_ROOT; };
+		CED79669196B91790025AA97 /* LROAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LROAuth2Client.h; path = Classes/LROAuth2Client.h; sourceTree = SOURCE_ROOT; };
+		CED7966A196B91790025AA97 /* LROAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LROAuth2Client.m; path = Classes/LROAuth2Client.m; sourceTree = SOURCE_ROOT; };
+		CED7966B196B91790025AA97 /* LROAuth2ClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LROAuth2ClientDelegate.h; path = Classes/LROAuth2ClientDelegate.h; sourceTree = SOURCE_ROOT; };
+		CED7966C196B91790025AA97 /* LRURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRURLRequestOperation.h; path = Classes/LRURLRequestOperation.h; sourceTree = SOURCE_ROOT; };
+		CED7966D196B91790025AA97 /* LRURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRURLRequestOperation.m; path = Classes/LRURLRequestOperation.m; sourceTree = SOURCE_ROOT; };
 		CED9C39F19484C2200D522CD /* PIXFriendTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXFriendTests.m; sourceTree = "<group>"; };
 		CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PIXNET-iOS-SDK.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,19 +203,19 @@
 		CED60D9F1962920E0080A7D1 /* LROAuth2Client */ = {
 			isa = PBXGroup;
 			children = (
-				CED60DA01962920E0080A7D1 /* LROAuth2AccessToken.h */,
-				CED60DA11962920E0080A7D1 /* LROAuth2AccessToken.m */,
-				CED60DA21962920E0080A7D1 /* LROAuth2Client.h */,
-				CED60DA31962920E0080A7D1 /* LROAuth2Client.m */,
-				CED60DA41962920E0080A7D1 /* LROAuth2ClientDelegate.h */,
-				CED60DA51962920E0080A7D1 /* LRURLRequestOperation.h */,
-				CED60DA61962920E0080A7D1 /* LRURLRequestOperation.m */,
-				CED60DA71962920E0080A7D1 /* NSDictionary+QueryString.h */,
-				CED60DA81962920E0080A7D1 /* NSDictionary+QueryString.m */,
-				CED60DA91962920E0080A7D1 /* NSString+QueryString.h */,
-				CED60DAA1962920E0080A7D1 /* NSString+QueryString.m */,
-				CED60DAB1962920E0080A7D1 /* NSURL+QueryInspector.h */,
-				CED60DAC1962920E0080A7D1 /* NSURL+QueryInspector.m */,
+				CED79667196B91790025AA97 /* LROAuth2AccessToken.h */,
+				CED79668196B91790025AA97 /* LROAuth2AccessToken.m */,
+				CED79669196B91790025AA97 /* LROAuth2Client.h */,
+				CED7966A196B91790025AA97 /* LROAuth2Client.m */,
+				CED7966B196B91790025AA97 /* LROAuth2ClientDelegate.h */,
+				CED7966C196B91790025AA97 /* LRURLRequestOperation.h */,
+				CED7966D196B91790025AA97 /* LRURLRequestOperation.m */,
+				CED79664196B91350025AA97 /* NSDictionary+QueryString.h */,
+				CED79665196B91350025AA97 /* NSDictionary+QueryString.m */,
+				CED79661196B91230025AA97 /* NSString+QueryString.h */,
+				CED79662196B91230025AA97 /* NSString+QueryString.m */,
+				CED7965E196B91020025AA97 /* NSURL+QueryInspector.h */,
+				CED7965F196B91020025AA97 /* NSURL+QueryInspector.m */,
 			);
 			name = LROAuth2Client;
 			path = Classes/LROAuth2Client;
@@ -520,25 +520,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */,
-				CED60DB21962920E0080A7D1 /* NSURL+QueryInspector.m in Sources */,
-				CED60DAE1962920E0080A7D1 /* LROAuth2Client.m in Sources */,
 				CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */,
-				CED60DAD1962920E0080A7D1 /* LROAuth2AccessToken.m in Sources */,
+				CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */,
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
-				CED60DAF1962920E0080A7D1 /* LRURLRequestOperation.m in Sources */,
 				CEDCD0EF18F3AC5400B32ACC /* PIXBlog.m in Sources */,
-				CED60DB11962920E0080A7D1 /* NSString+QueryString.m in Sources */,
 				CEDCD0E918F3ABF700B32ACC /* PIXNETSDK.m in Sources */,
 				619C09E018FD237400325991 /* PIXMainpage.m in Sources */,
 				CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */,
+				CED7966F196B91790025AA97 /* LROAuth2Client.m in Sources */,
 				CED461A21910D4A0003A96C2 /* NSDictionary+PIXCategory.m in Sources */,
+				CED79660196B91020025AA97 /* NSURL+QueryInspector.m in Sources */,
 				CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */,
 				CEDCD0FB18F3AD6800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */,
 				619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */,
+				CED7966E196B91790025AA97 /* LROAuth2AccessToken.m in Sources */,
 				CED7894E19590B0600E29037 /* LROAuth2ClientDelegateHandler.m in Sources */,
+				CED79663196B91230025AA97 /* NSString+QueryString.m in Sources */,
 				4A81A744194FF1E7004DE00E /* PIXBlock.m in Sources */,
 				CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */,
-				CED60DB01962920E0080A7D1 /* NSDictionary+QueryString.m in Sources */,
 				CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */,
 				CEDCD0EE18F3AC5400B32ACC /* PIXAlbum.m in Sources */,
 				CEDCD0FC18F3AD6800B32ACC /* OARequestParameter.m in Sources */,
@@ -546,6 +545,7 @@
 				619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */,
 				CEDCD0FD18F3AD6800B32ACC /* PIXAPIHandler.m in Sources */,
 				CEDB7C8618D2ECF700D14D0C /* main.m in Sources */,
+				CED79670196B91790025AA97 /* LRURLRequestOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
