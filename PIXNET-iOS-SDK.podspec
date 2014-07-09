@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   
 # Pod Dependencies
   s.dependency 'cocoa-oauth', '~> 0.0.1'
-  s.dependency 'RPJSONValidator', '~> 0.1.2'
+  #s.dependency 'RPJSONValidator', '~> 0.1.2'
 end
