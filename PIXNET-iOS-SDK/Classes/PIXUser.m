@@ -75,7 +75,7 @@
     if (educationString) {
         params[@"education"] = educationString;
     }
-#warning 大頭照的更新還沒完成，待後台修正
+//TODO: 大頭照的更新還沒完成，待後台修正
     if (avatar) {
         /*
         NSData *data = UIImageJPEGRepresentation(avatar, 1.0);
