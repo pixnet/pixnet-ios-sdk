@@ -89,6 +89,8 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         default:
             break;
     }
+    //將目前的登入狀態改為 undefined
+    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeUndefined forKey:kAuthTypeKey];
 }
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {

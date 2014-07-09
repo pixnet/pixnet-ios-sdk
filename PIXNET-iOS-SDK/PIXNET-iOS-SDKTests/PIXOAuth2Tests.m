@@ -36,7 +36,7 @@ static NSString *kSetDescription = @"Unit test set description";
 - (void)testMain{
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     if ([PIXNETSDK isAuthed]) {
-//        [PIXNETSDK logout];
+        [PIXNETSDK logout];
     }
     if (![PIXNETSDK isAuthed]) {
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];

@@ -19,6 +19,10 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
  */
 typedef NS_ENUM(NSInteger, PIXAuthType) {
     /**
+     *  未登入
+     */
+    PIXAuthTypeUndefined,
+    /**
      *  XAuth
      */
     PIXAuthTypeXAuth,
