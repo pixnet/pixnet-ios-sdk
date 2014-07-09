@@ -1,0 +1,6 @@
+language: objective-c
+before_install:
+  - "brew update; brew upgrade xctool"
+  - "gem install cocoapods --no-rdoc --no-ri"
+  - "cd PIXNET-iOS-SDK"
+script: "xctool -workspace PIXNET-iOS-SDK.xcworkspace -scheme PIXNET-iOS-SDK -sdk iphonesimulator test"
