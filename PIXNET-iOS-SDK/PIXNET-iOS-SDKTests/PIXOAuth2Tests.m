@@ -46,7 +46,7 @@ static NSString *kSetDescription = @"Unit test set description";
         [rootView addSubview:webView];
         
         __block BOOL done = NO;
-        [PIXAPIHandler authByOAuth2WithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+        [PIXAPIHandler loginByOAuth2WithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
             if (succeed) {
                 if ([PIXAPIHandler isAuthed]) {
                     [webView removeFromSuperview];

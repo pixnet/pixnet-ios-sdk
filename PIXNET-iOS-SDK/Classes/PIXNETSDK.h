@@ -42,14 +42,14 @@
  *  @param password   使用者密碼，必要參數
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
-+(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion __attribute__((deprecated("請改用 '+authByOauthLoginView:completion:'")));
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion __attribute__((deprecated("請改用 '+loginByOauthLoginView:completion:'")));
 /**
  *  利用 oauth2 的方式讓使用者登入 PIXNET。跟 XAuth 的登入方式比起來，這個方法只要一個 UIWebView 即可，方便許多，請多多利用。
  *
  *  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
  *  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
  */
-+(void)authByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
++(void)loginByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
  *  判斷目前是否可呼叫需要認證的 API
  *
