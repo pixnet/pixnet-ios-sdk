@@ -70,4 +70,35 @@
     }
     [invocation performSelector:@selector(invoke) withObject:nil];
 }
+-(NSData *)PIXEncodedImageData:(UIImage *)image{
+//    NSData *data = UIImagePNGRepresentation(image);
+//    NSData *data = UIImageJPEGRepresentation(image, 1.0);
+    CGDataProviderRef provider = CGImageGetDataProvider(image.CGImage);
+    NSData *data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+    NSData *encodedData = nil;
+    if ([data respondsToSelector:@selector(base64EncodedDataWithOptions:)]) {
+        encodedData = [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength|NSDataBase64EncodingEndLineWithLineFeed];
+    } else {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        encodedData = [[data base64Encoding] dataUsingEncoding:NSUTF8StringEncoding];
+#pragma GCC diagnostic pop
+    }
+    return encodedData;
+}
+-(NSString *)PIXEncodedStringWithImage:(UIImage *)image{
+    CGDataProviderRef provider = CGImageGetDataProvider(image.CGImage);
+    NSData *data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+    NSString *string = nil;
+    if ([data respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
+        string = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    } else {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+        string = [data base64Encoding];
+#pragma GCC diagnostic pop
+    }
+    
+    return string;
+}
 @end

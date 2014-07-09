@@ -20,8 +20,8 @@
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }
-+(void)authByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
-    [PIXAPIHandler authByOAuth2WithLoginView:loginView completion:completion];
++(void)loginByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
+    [PIXAPIHandler loginByOAuth2WithLoginView:loginView completion:completion];
 }
 +(BOOL)isAuthed{
     return [PIXAPIHandler isAuthed];
@@ -57,7 +57,30 @@
 //    [[PIXUser new] getAccountWithCompletion:completion];
     [[PIXUser new] getAccountWithNotification:YES notificationType:PIXUserNotificationTypeAll withBlogInfo:YES withMib:YES withAnalytics:YES completion:completion];
 }
-
+-(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] updateAccountWithPassword:password displayName:displayName email:email gender:gender address:address phone:phone birth:birth education:education avatar:avatar completion:completion];
+}
+-(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] getAccountMIBWithHistoryDays:historyDays completion:completion];
+}
+-(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] createAccountMIBWithRealName:realName idNumber:idNumber idImageFront:idImageFront idImageBack:idImageBack email:email cellPhone:cellPhone mailAddress:mailAddress domicile:domicile enableVideoAd:enableVideoAd completion:completion];
+}
+-(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] getAccountMIBPositionWithPositionID:positionId completion:completion];
+}
+-(void)updateAccountMIBPositionWithPositionID:(NSString *)positionId enabled:(NSNumber *)enabled fixedAdBox:(NSNumber *)fixedAdBox completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] updateAccountMIBPositionWithPositionID:positionId enabled:enabled fixedAdBox:fixedAdBox completion:completion];
+}
+-(void)askAccountMIBPayWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] askAccountMIBPayWithCompletion:completion];
+}
+-(void)getAccountAnalyticsWithStaticDays:(NSUInteger)staticDays referDays:(NSUInteger)referDays completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] getAccountAnalyticsWithStaticDays:staticDays referDays:referDays completion:completion];
+}
+-(void)updateAccountPasswordWithOriginalPassword:(NSString *)originalPassword newPassword:(NSString *)newPassword completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] updateAccountPasswordWithOriginalPassword:originalPassword newPassword:newPassword completion:completion];
+}
 #pragma mark - Blog Method
 #pragma mark - Blog Imformation
 
@@ -424,7 +447,7 @@
     [[PIXAlbum new] deleteCommentWithCommentID:commentId completion:completion];
 }
 -(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location completion:(PIXHandlerCompletion)completion{
-    [[PIXAlbum new] createElementWithElementData:elementData setID:setId elementTitle:elementTitle elementDescription:elementDescription tags:tags location:location videoThumbType:PIXVideoThumbTypeEnd picShouldRotateByExif:YES videoShouldRotateByMeta:YES shouldUseQuadrate:YES shouldAddWatermark:YES isElementFirst:YES wouldUploadInBackground:NO completion:completion];
+    [[PIXAlbum new] createElementWithElementData:elementData setID:setId elementTitle:elementTitle elementDescription:elementDescription tags:tags location:location videoThumbType:PIXVideoThumbTypeEnd picShouldRotateByExif:YES videoShouldRotateByMeta:YES shouldUseQuadrate:YES shouldAddWatermark:YES isElementFirst:YES wouldUploadInBackground:YES completion:completion];
 }
 -(void)tagFriendWithElementID:(NSString *)elementId beTaggedUser:(NSString *)beTaggedUser tagFrame:(CGRect)tagFrame completion:(PIXHandlerCompletion)completion{
     [[PIXAlbum new] tagFriendWithElementID:elementId beTaggedUser:beTaggedUser tagFrame:tagFrame recommendID:nil completion:completion];

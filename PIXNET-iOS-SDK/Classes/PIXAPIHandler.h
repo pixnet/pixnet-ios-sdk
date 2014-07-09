@@ -19,6 +19,10 @@ typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
  */
 typedef NS_ENUM(NSInteger, PIXAuthType) {
     /**
+     *  未登入
+     */
+    PIXAuthTypeUndefined,
+    /**
      *  XAuth
      */
     PIXAuthTypeXAuth,
@@ -61,20 +65,29 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  */
 +(BOOL)isAuthed;
 /**
+ *  此方法即將被棄用！
  *  利用 oauth2 的方式讓使用者登入 PIXNET。跟 XAuth 的登入方式比起來，這個方法只要一個 UIWebView 即可，方便許多，請多多利用。
  *
  *  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
  *  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
  */
-+(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
+//+(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion __attribute__((deprecated("use '+loginByOAuth2WithLoginView:completion:'.")));
 /**
+ *  利用 oauth2 的方式讓使用者登入 PIXNET。跟 XAuth 的登入方式比起來，這個方法只要一個 UIWebView 即可，方便許多，請多多利用。
+ *
+ *  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
+ *  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
+ */
++(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
+/**
+ *  此方法即將被棄用！
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
  *  @param userName   使用者名稱(帳號)
  *  @param password   使用者密碼
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
-+(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion  __attribute__((deprecated("請改用 '+authByOauthLoginView:completion:'")));
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion  __attribute__((deprecated("請改用 '+loginByOauthLoginView:completion:'")));
 /**
  *  為目前的使用者做登出的動作
  */

@@ -125,7 +125,10 @@
     }
     for (NSDictionary *category in categories) {
         for (PIXMainpageType type=0; type<=2 ; type++) {
-            [self getArticlesWithCategoryId:category[@"id"] articleType:type];
+            //還是隨機測幾個就好，不然太浪費資源了
+            if (arc4random()%4==0) {
+                [self getArticlesWithCategoryId:category[@"id"] articleType:type];
+            }
         }
     }
     return;

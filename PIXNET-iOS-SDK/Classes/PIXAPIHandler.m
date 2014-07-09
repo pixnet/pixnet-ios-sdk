@@ -21,6 +21,9 @@ static const NSString *kCallbackURL;
 #import "PIXURLSessionDelegateHandler.h"
 
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
+//#warning temp address
+//static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
+
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
 static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";
 static const NSString *kUserPasswordIdentifier = @"kUserPasswordIdentifier";
@@ -86,8 +89,14 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         default:
             break;
     }
+    //將目前的登入狀態改為 undefined
+    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeUndefined forKey:kAuthTypeKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
+    [self loginByOAuth2WithLoginView:loginView completion:completion];
+}
++(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
         return;
@@ -98,6 +107,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (succeed) {
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
                     completion(YES, accessToken.accessToken, nil);
                     return;
@@ -118,16 +128,17 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
     if (storedToken) {
         [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"已有使用者登入中，若要讓另一使用者登入，請先執行 +logout"]);
         return;
         /*
-        if ([storedToken hasExpired]) {
-            [singleton.oauth2Client refreshAccessToken:storedToken];
-            return;
-        } else {
-            completion(YES, storedToken.accessToken, nil);
-            return;
-        }
+         if ([storedToken hasExpired]) {
+         [singleton.oauth2Client refreshAccessToken:storedToken];
+         return;
+         } else {
+         completion(YES, storedToken.accessToken, nil);
+         return;
+         }
          */
     } else {
         [singleton.oauth2Client authorizeUsingWebView:loginView];
@@ -160,6 +171,8 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
 
     if (token && secret) {
+        [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         completion(YES, token, nil);
         return;
     }
@@ -189,6 +202,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                         }
                     }
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     completion(YES, nil, nil);
                     return;
                 }
@@ -264,6 +278,10 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
         [urlRequest PIXAttachData:uploadData];
     }
+//    if (uploadData && [uploadData isKindOfClass:[NSArray class]]) {
+//        [urlRequest PIXAttachDatas:uploadData];
+//    }
+
     
     if (backgroundExec) {
         //這裡要用 NSURLSession
@@ -297,7 +315,14 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                         completion(YES, data, nil);
                         return;
                     } else {
-                        completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
+                        id receivedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                        NSString *message = receivedObject[@"message"];
+                        if (message) {
+                            completion(NO, data, [NSError PIXErrorWithParameterName:receivedObject[@"message"]]);
+                        } else {
+                            completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
+                        }
+                        
                         return;
                     }
                 } else {
@@ -365,6 +390,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     } else {
         tempParams = [NSMutableDictionary dictionary];
     }
+    //將 access token 加到 query 的參數裡
     LROAuth2AccessToken *currentToken = [self accessTokenForCurrent];
     tempParams[@"access_token"] = currentToken.accessToken;
     NSString *urlString = nil;
@@ -388,12 +414,13 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         if ([storedToken hasExpired]) {
             PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
             __block BOOL done = NO;
-            singleton.oauth2Client.delegate = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
+            LROAuth2ClientDelegateHandler *handler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
                 if (succeed) {
                     done = YES;
                     [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
                 }
             }];
+            singleton.oauth2Client.delegate = handler;
             [singleton.oauth2Client refreshAccessToken:storedToken];
             while (!done) {
                 [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
