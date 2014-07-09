@@ -1,6 +1,8 @@
 PIXNET SDK for iOS
 ==============
 
+[![Build Status](https://travis-ci.org/pixnet/pixnet-ios-sdk.svg?branch=travis-ci)](https://travis-ci.org/pixnet/pixnet-ios-sdk)
+
 這個 SDK 可以讓你將 PIXNET 的相關資料快速整合進你的 iOS 專案中。
 詳細 API 資訊請參考 [http://developer.pixnet.pro/](http://developer.pixnet.pro/)
  
