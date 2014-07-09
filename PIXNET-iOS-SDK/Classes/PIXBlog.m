@@ -895,7 +895,7 @@
         return;
     }
     
-    NSString *isSpamString = [NSString new];
+    NSString *isSpamString = nil;
     
     if (isSpam) {
         isSpamString = @"mark_spam";

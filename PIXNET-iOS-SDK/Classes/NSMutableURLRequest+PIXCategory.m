@@ -76,7 +76,7 @@ static const NSString *kBoundaryConstant = @"---------------------------14737809
         [bodyData appendData:[param dataUsingEncoding:NSUTF8StringEncoding]];
     }
     //@"upload_file" 這個參數是 PIXNET 後台 API 指定的參數
-    int totalLength;
+    int totalLength = 0;
     for (NSDictionary *data in datas) {
         NSString *keyString = [[data allKeys] lastObject];
         NSData *content = data[keyString];
