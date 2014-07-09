@@ -91,8 +91,12 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     }
     //將目前的登入狀態改為 undefined
     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeUndefined forKey:kAuthTypeKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
+    [self loginByOAuth2WithLoginView:loginView completion:completion];
+}
++(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
         return;
@@ -103,6 +107,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (succeed) {
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
                     completion(YES, accessToken.accessToken, nil);
                     return;
@@ -123,16 +128,17 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
     if (storedToken) {
         [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"已有使用者登入中，若要讓另一使用者登入，請先執行 +logout"]);
         return;
         /*
-        if ([storedToken hasExpired]) {
-            [singleton.oauth2Client refreshAccessToken:storedToken];
-            return;
-        } else {
-            completion(YES, storedToken.accessToken, nil);
-            return;
-        }
+         if ([storedToken hasExpired]) {
+         [singleton.oauth2Client refreshAccessToken:storedToken];
+         return;
+         } else {
+         completion(YES, storedToken.accessToken, nil);
+         return;
+         }
          */
     } else {
         [singleton.oauth2Client authorizeUsingWebView:loginView];
@@ -165,6 +171,8 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
 
     if (token && secret) {
+        [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         completion(YES, token, nil);
         return;
     }
@@ -194,6 +202,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                         }
                     }
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     completion(YES, nil, nil);
                     return;
                 }
