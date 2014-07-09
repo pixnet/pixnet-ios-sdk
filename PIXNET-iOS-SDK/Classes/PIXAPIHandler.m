@@ -36,6 +36,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
 @property (nonatomic, strong) NSDictionary *paramForXAuthRequest;
 @property (nonatomic, strong) LROAuth2Client *oauth2Client;
 @property (nonatomic, strong) LROAuth2ClientDelegateHandler *oauth2ClientDelegateHandler;
+@property (nonatomic, copy) PIXHandlerCompletion getOAuth2AccessTokenCompletion;
 
 @end
 
@@ -51,6 +52,20 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                                                                    redirectURL:[NSURL URLWithString:[kCallbackURL copy]]];
         sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
         sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
+        sharedInstance.oauth2Client.delegate = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (succeed) {
+                    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                    [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+                    sharedInstance.getOAuth2AccessTokenCompletion(YES, accessToken.accessToken, nil);
+                    return;
+                } else {
+                    sharedInstance.getOAuth2AccessTokenCompletion(NO, nil, error);
+                    return;
+                }
+            });
+        }];
     });
     return sharedInstance;
 }
@@ -102,27 +117,28 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         return;
     }
     PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
-    if (singleton.oauth2ClientDelegateHandler == nil) {
-        singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (succeed) {
-                    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
-                    completion(YES, accessToken.accessToken, nil);
-                    return;
-                } else {
-                    completion(NO, nil, error);
-                    return;
-                }
-            });
-        }];
-        //如果外部開發者有承做 UIWebViewDelegate，就將該 webView delegate 丟給 oauth2Client.webViewDelegate 處理
-        if (loginView.delegate) {
-            singleton.oauth2Client.webViewDelegate = loginView.delegate;
-        }
-        singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
-    }
+    singleton.getOAuth2AccessTokenCompletion = completion;
+//    if (singleton.oauth2ClientDelegateHandler == nil) {
+//        singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                if (succeed) {
+//                    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                    [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+//                    completion(YES, accessToken.accessToken, nil);
+//                    return;
+//                } else {
+//                    completion(NO, nil, error);
+//                    return;
+//                }
+//            });
+//        }];
+//        //如果外部開發者有承做 UIWebViewDelegate，就將該 webView delegate 丟給 oauth2Client.webViewDelegate 處理
+//        if (loginView.delegate) {
+//            singleton.oauth2Client.webViewDelegate = loginView.delegate;
+//        }
+//        singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
+//    }
     
     //先檢查是否已有之前已存下來的 token
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
