@@ -41,6 +41,22 @@
         [self getVideosWithType:type];
     }
 }
+-(void)testGetMainpageBestSelected{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] getMainpageAlbumsBestSelectedWithCompletion:^(BOOL succeed, id result, NSError *error) {
+        done = YES;
+        NSString *methodName = @"getMainpageAlbumsBestSelectedWithCompletion";
+        if (succeed) {
+            NSLog(@"%@, succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(void)getVideosWithType:(PIXMainpageType)type{
     __block BOOL done = NO;
     [[PIXNETSDK new] getMainpageVideosWithVideoType:type page:1 perPage:3 completion:^(BOOL succeed, id result, NSError *error) {

@@ -1217,6 +1217,12 @@
  */
 -(void)getMainpageAlbumsWithCategoryIDs:(NSArray *)categoryIds albumType:(PIXMainpageType)albumType page:(NSUInteger)page perPage:(NSUInteger)perPage strictFilter:(BOOL)strictFilter completion:(PIXHandlerCompletion)completion;
 /**
+ *  取得精選相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/mainpageAlbumBestSelected
+ *
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getMainpageAlbumsBestSelectedWithCompletion:(PIXHandlerCompletion)completion;
+/**
  *  取得某種類型的影音 http://developer.pixnet.pro/#!/doc/pixnetApi/mainpageAlbumVideo
  *
  *  @param videoType  有 熱門/最新/近期熱門 三種選項。

@@ -562,6 +562,9 @@
 -(void)getMainpageAlbumsWithCategoryIDs:(NSArray *)categoryIds albumType:(PIXMainpageType)albumType page:(NSUInteger)page perPage:(NSUInteger)perPage strictFilter:(BOOL)strictFilter completion:(PIXHandlerCompletion)completion{
     [[PIXMainpage new] getMainpageAlbumsWithCategoryIDs:categoryIds albumType:albumType page:page perPage:perPage strictFilter:strictFilter completion:completion];
 }
+-(void)getMainpageAlbumsBestSelectedWithCompletion:(PIXHandlerCompletion)completion{
+    [[PIXMainpage new] getMainpageAlbumsBestSelectedWithCompletion:completion];
+}
 -(void)getMainpageVideosWithVideoType:(PIXMainpageType)videoType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
     [[PIXMainpage new] getMainpageVideosWithVideoType:videoType page:page perPage:perPage completion:completion];
 }

@@ -63,6 +63,10 @@
                              @"count": [NSString stringWithFormat:@"%li", perPage]};
     [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
+-(void)getMainpageAlbumsBestSelectedWithCompletion:(PIXHandlerCompletion)completion{
+    NSString *path = @"mainpage/album/best_selected";
+    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+}
 
 -(NSString *)maintypeStringWithType:(PIXMainpageType)type{
     NSString *typeString = nil;
