@@ -10,6 +10,7 @@
 #import "PIXAPIHandler.h"
 
 @interface NSObject (PIXCategory)
+-(void)resultHandleWithIsSucceed:(BOOL)isSucceed result:(NSData *)result error:(NSError *)error completion:(PIXHandlerCompletion)completion;
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion;
 +(BOOL)PIXCheckNSUIntegerValid:(NSUInteger)integer;
 -(void)invokeMethod:(SEL)method parameters:(NSArray *)parameters receiver:(id)receiver;

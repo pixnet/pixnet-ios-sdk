@@ -10,6 +10,13 @@
 #import "NSDictionary+PIXCategory.h"
 
 @implementation NSObject (PIXCategory)
+-(void)resultHandleWithIsSucceed:(BOOL)isSucceed result:(NSData *)result error:(NSError *)error completion:(PIXHandlerCompletion)completion{
+    if (isSucceed) {
+        [self succeedHandleWithData:result completion:completion];
+    } else {
+        completion(NO, nil, error);
+    }
+}
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError = nil;
     id dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];

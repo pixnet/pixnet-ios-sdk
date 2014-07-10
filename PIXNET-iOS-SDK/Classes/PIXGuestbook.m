@@ -39,7 +39,10 @@
         perPage=20;
     }
     [params setObject:@(perPage) forKey:@"per_page"];
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"guestbook", params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"guestbook" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"guestbook", params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)createGuestbookMessageWithUserName:(NSString *)userName body:(NSString *)body author:(NSString *)author title:(NSString *)title url:(NSString *)url email:(NSString *)email isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion{
     if (userName==nil || userName.length==0) {
@@ -66,7 +69,11 @@
         [params setObject:email forKey:@"email"];
     }
     [params setObject:[NSString stringWithFormat:@"%i", isOpen] forKey:@"is_open"];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"guestbook", @"POST", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:@"guestbook" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"guestbook", @"POST", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)deleteGuestbookMessageWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
     if (messageId==nil || messageId.length==0) {
@@ -86,7 +93,11 @@
     }
     NSString *path = [NSString stringWithFormat:@"guestbook/%@", messageId];
     NSDictionary *param = @{@"user": userName};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:param requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)replyGuestbookMessageWithMessageID:(NSString *)messageId body:(NSString *)body completion:(PIXHandlerCompletion)completion{
     if (messageId==nil || messageId.length==0) {
@@ -100,7 +111,10 @@
 
     NSString *path = [NSString stringWithFormat:@"guestbook/%@/reply", messageId];
     NSDictionary *param = @{@"reply": body};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:param requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)markGuestbookMessageAsOpenWithMessageID:(NSString *)messageId completion:(PIXHandlerCompletion)completion{
     [self operateGuestbookMessageWithAction:@"open" messageId:messageId completion:completion];
@@ -124,6 +138,9 @@
     }
 
     NSString *path = [NSString stringWithFormat:@"guestbook/%@/%@", messageId, action];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 @end
