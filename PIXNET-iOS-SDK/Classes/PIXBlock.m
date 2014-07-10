@@ -12,25 +12,34 @@
 
 @implementation PIXBlock
 -(void)getBlocksWithCompletion:(PIXHandlerCompletion)completion{
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-            parameters:@[@"blocks", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blocks" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
+//            parameters:@[@"blocks", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)createBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     if (!userName || userName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"userName 參數有誤"]);
         return;
     }
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-            parameters:@[@"blocks/create", @"POST", @YES, @{@"user":userName}, completion]
-              receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blocks/create" httpMethod:@"POST" shouldAuth:YES parameters:@{@"user":userName} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
+//            parameters:@[@"blocks/create", @"POST", @YES, @{@"user":userName}, completion]
+//              receiver:[PIXAPIHandler new]];
 }
 -(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     if (!userName || userName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"userName 參數有誤"]);
         return;
     }
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-            parameters:@[@"blocks/delete", @"POST", @YES, @{@"user":userName, @"_method":@"delete"}, completion]
-              receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blocks/delete" httpMethod:@"POST" shouldAuth:YES parameters:@{@"user":userName, @"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
+//            parameters:@[@"blocks/delete", @"POST", @YES, @{@"user":userName, @"_method":@"delete"}, completion]
+//              receiver:[PIXAPIHandler new]];
 }
 @end

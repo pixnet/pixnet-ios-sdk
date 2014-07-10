@@ -19,7 +19,10 @@
         perPage = 20;
     }
     NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/groups", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friend/groups" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/groups", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 - (void)createFriendGroupsWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion{
     if (groupName==nil || groupName.length==0) {
@@ -27,7 +30,10 @@
         return;
     }
     NSDictionary *params = @{@"name":groupName};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/groups", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friend/groups" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/groups", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 - (void)updateFriendGroupWithGroupID:(NSString *)groupId newGroupName:(NSString *)newGroupName completion:(PIXHandlerCompletion)completion{
     if (groupId==nil || groupId.length==0) {
@@ -40,6 +46,9 @@
     }
     NSDictionary *params = @{@"name":newGroupName};
     NSString *path = [NSString stringWithFormat:@"friend/groups/%@", groupId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
     [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 - (void)deleteFriendGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
@@ -48,7 +57,10 @@
         return;
     }
     NSString *path = [NSString stringWithFormat:@"friend/groups/%@", groupId];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, @{@"_method":@"delete"}, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:@{@"_method":@"delete"} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, @{@"_method":@"delete"}, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getFriendshipsWithSortType:(PIXFriendshipsSortType)sortType cursor:(NSString *)cursor bidirectional:(BOOL)bidirectional completion:(PIXHandlerCompletion)completion{
     NSString *sortTypeString = nil;
@@ -69,8 +81,11 @@
         [params setObject:cursor forKey:@"cursor"];
     }
     [params setObject:[NSString stringWithFormat:@"%i", bidirectional] forKey:@"bidirectonal"];
-    
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+
+    [[PIXAPIHandler new] callAPI:@"friendships" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)createFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
     if (friendName==nil || friendName.length==0) {
@@ -78,7 +93,10 @@
         return;
     }
     NSDictionary *params = @{@"user_name":friendName};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friendships" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)appendFriendGroupWithFriendName:(NSString *)friendName groupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     [self operateFriendGroupWithAction:@"append_group" friendName:friendName groupID:groupId completion:completion];
@@ -100,7 +118,10 @@
     }
     NSDictionary *params = @{@"user_name":friendName, @"group_id":groupId};
     NSString *path = [NSString stringWithFormat:@"friendships/%@", action];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)deleteFriendshipWithFriendName:(NSString *)friendName completion:(PIXHandlerCompletion)completion{
     if (friendName==nil || friendName.length==0) {
@@ -108,7 +129,10 @@
         return;
     }
     NSDictionary *param = @{@"user_name":friendName};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships/delete", @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friendships/delete" httpMethod:@"POST" shouldAuth:YES parameters:param requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friendships/delete", @"POST", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
 
 -(void)getFriendSubscriptionsWithPage:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
@@ -119,7 +143,10 @@
         perPage = 20;
     }
     NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friend/subscriptions" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)createFriendSubscriptionWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
     if (userName==nil || userName.length==0) {
@@ -139,7 +166,10 @@
     if (groupIds) {
         [params setObject:[groupIds componentsJoinedByString:@","] forKey:@"group_ids"];
     }
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friend/subscriptions" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscriptions", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)joinFriendSubscriptionGroupsWithUserName:(NSString *)userName groupIDs:(NSArray *)groupIds completion:(PIXHandlerCompletion)completion{
     [self joinOrLeaveFriendSubscriptionGroupsWithAction:@"join_subscription_group" UserName:userName groupIDs:groupIds completion:completion];
@@ -169,7 +199,10 @@
     
     NSDictionary *params = @{@"user": userName, @"group_ids":[groupIds componentsJoinedByString:@","]};
     NSString *path = [NSString stringWithFormat:@"friend/subscriptions/%@/%@", userName, action];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)deleteFriendSubscriptionWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     if (userName==nil || userName.length==0) {
@@ -178,11 +211,17 @@
     }
     NSDictionary *params = @{@"_method":@"delete"};
     NSString *path = [NSString stringWithFormat:@"friend/subscriptions/%@", userName];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 \
 }
 -(void)getFriendSubscriptionGroupsWithCompletion:(PIXHandlerCompletion)completion{
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friend/subscription_groups" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)createFriendSubscriptionGroupWithGroupName:(NSString *)groupName completion:(PIXHandlerCompletion)completion{
     if (groupName==nil || groupName.length==0) {
@@ -190,7 +229,10 @@
         return;
     }
     NSDictionary *params = @{@"name": groupName};
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"friend/subscription_groups" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"friend/subscription_groups", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)updateFriendSubscriptionGroupWithGroupID:(NSString *)groupId newGroupName:(NSString *)newGroupName completion:(PIXHandlerCompletion)completion{
     if (groupId==nil || groupId.length==0) {
@@ -203,7 +245,10 @@
     }
     NSDictionary *params = @{@"name": newGroupName};
     NSString *path = [NSString stringWithFormat:@"friend/subscription_groups/%@", groupId];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)positionFriendSubscriptionGroupsWithSortedGroups:(NSArray *)sortedGroups completion:(PIXHandlerCompletion)completion{
     if (!sortedGroups || sortedGroups.count==0) {
@@ -218,7 +263,10 @@
     }
     NSDictionary *params = @{@"ids": [sortedGroups componentsJoinedByString:@","]};
     NSString *path = @"friend/subscription_groups/position";
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)deleteFriendSubscriptionGroupWithGroupID:(NSString *)groupId completion:(PIXHandlerCompletion)completion{
     if (groupId==nil || groupId.length==0) {
@@ -227,7 +275,10 @@
     }
     NSDictionary *params = @{@"_method":@"delete"};
     NSString *path = [NSString stringWithFormat:@"friend/subscription_groups/%@", groupId];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getFriendNewsWithNewsType:(PIXFriendNewsType)newsType groupID:(NSString *)groupId beforeTime:(NSDate *)beforeTime completion:(PIXHandlerCompletion)completion{
     NSString *typeString = nil;
@@ -250,7 +301,10 @@
         params[@"before_time"] = [NSString stringWithFormat:@"%f", [beforeTime timeIntervalSince1970]];
     }
     NSString *path = [NSString stringWithFormat:@"friend/news"];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 
 }
 @end

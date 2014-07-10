@@ -21,7 +21,10 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
-    [self invokeMethod:@selector(callAPI:httpMethod:parameters:requestCompletion:) parameters:@[@"blog", @"GET", @{@"user":userName}, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blog" httpMethod:@"GET" parameters:@{@"user":userName} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:parameters:requestCompletion:) parameters:@[@"blog", @"GET", @{@"user":userName}, completion] receiver:[PIXAPIHandler new]];
 }
 
 #pragma mark - Blog Categories
@@ -39,7 +42,10 @@
     if (passwd != nil) {
         params[@"blog_password"] = passwd;
     }
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"blog/categories", params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blog/categories" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"blog/categories", params, completion] receiver:[PIXAPIHandler new]];
 }
 #pragma mark Categories need access token
 - (void)createBlogCategoriesWithName:(NSString *)name
@@ -69,7 +75,10 @@
     if (description != nil && description.length != 0) {
         params[@"description"] = description;
     }
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"blog/categories", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blog/categories" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"blog/categories", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)updateBlogCategoryFromID:(NSString *)categoryID
@@ -104,9 +113,12 @@
     }
     
     NSString *path = [NSString stringWithFormat:@"blog/categories/%@", categoryID];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-            parameters:@[path, @"POST", @YES, params, completion]
-              receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
+//            parameters:@[path, @"POST", @YES, params, completion]
+//              receiver:[PIXAPIHandler new]];
 }
 
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID
@@ -132,17 +144,23 @@
     params[@"_method"] = @"delete";
     
     NSString *path = [NSString stringWithFormat:@"blog/categories/%@", categoriesID];
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-            parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
+//            parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
                   completion:(PIXHandlerCompletion)completion{
     NSString *idsString = [categoriesIDArray componentsJoinedByString:@"-"];
     NSDictionary *params = @{@"ids": idsString};
-
-    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-            parameters:@[@"blog/categories/position", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:@"blog/categories/position" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
+//            parameters:@[@"blog/categories/position", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 
@@ -196,8 +214,11 @@
     params[@"is_top"] = [NSString stringWithFormat:@"%i", isTop];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
-            parameters:@[@"blog/articles", params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:@"blog/articles" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
+//            parameters:@[@"blog/articles", params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName
@@ -226,8 +247,11 @@
     }
     
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@", articleID];
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
-            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
+//            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
@@ -252,8 +276,11 @@
     params[@"with_body"] = [NSString stringWithFormat:@"%i", withBody];
 
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@/related", articleID];
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
-            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
+    [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
+//            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)getBlogArticleCommentsWithUserName:(NSString *)userName
