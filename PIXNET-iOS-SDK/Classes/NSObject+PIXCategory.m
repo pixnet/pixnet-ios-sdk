@@ -11,7 +11,7 @@
 
 @implementation NSObject (PIXCategory)
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
-    NSError *jsonError;
+    NSError *jsonError = nil;
     id dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
     if (jsonError == nil) {
         if ([dict isKindOfClass:[NSDictionary class]]) {

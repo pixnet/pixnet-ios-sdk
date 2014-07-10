@@ -25,7 +25,16 @@
     }
     params[@"count"] = [NSString stringWithFormat:@"%li", perPage];
     NSString *path = [NSString stringWithFormat:@"mainpage/blog/categories/%@/%@", typeString, categoryId];
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getMainpageAlbumsWithCategoryIDs:(NSArray *)categoryIds albumType:(PIXMainpageType)albumType page:(NSUInteger)page perPage:(NSUInteger)perPage strictFilter:(BOOL)strictFilter completion:(PIXHandlerCompletion)completion{
     if (!categoryIds || categoryIds.count==0) {
@@ -47,7 +56,16 @@
     
     NSString *typeString = [self maintypeStringWithType:albumType];
     NSString *path = [NSString stringWithFormat:@"mainpage/album/categories/%@/%@", typeString, [categoryIds componentsJoinedByString:@","]];
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getMainpageVideosWithVideoType:(PIXMainpageType)videoType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
     if (page < 1) {
@@ -61,11 +79,27 @@
     NSString *path = [NSString stringWithFormat:@"mainpage/album/video/%@", typeString];
     NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page],
                              @"count": [NSString stringWithFormat:@"%li", perPage]};
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getMainpageAlbumsBestSelectedWithCompletion:(PIXHandlerCompletion)completion{
     NSString *path = @"mainpage/album/best_selected";
-    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, [NSNull null], completion] receiver:[PIXAPIHandler new]];
+    
+    [[PIXAPIHandler new] callAPI:path parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[path, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 
 -(NSString *)maintypeStringWithType:(PIXMainpageType)type{
