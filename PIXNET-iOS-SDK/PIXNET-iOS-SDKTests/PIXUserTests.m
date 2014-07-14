@@ -58,6 +58,7 @@
     //取得 MIB 資訊
     NSDictionary *mibInfos = [self getUserMib];
     BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
+    [self createMIB];
     if (isAppliedMIB) {
         NSArray *mibPositions = [self fetchPositions:mibInfos];
         [self getMibPositionsInfo:mibPositions];
@@ -86,6 +87,23 @@
     }
 
 //    return;
+}
+-(void)createMIB{
+    __block BOOL done = NO;
+    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"pixFox.jpg"] idImageBack:[UIImage imageNamed:@"pixFox.jpg"] email:@"test@pixnet.tw" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"createAccountMIBWithRealName";
+        if (succeed) {
+            NSLog(@"%@, succeed", methodName);
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
 }
 -(NSDictionary *)getPublicUserInfos{
     __block BOOL done = NO;
