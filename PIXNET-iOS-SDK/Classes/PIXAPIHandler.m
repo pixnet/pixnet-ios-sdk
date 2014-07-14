@@ -20,9 +20,9 @@ static const NSString *kCallbackURL;
 #import "NSDictionary+QueryString.h"
 #import "PIXURLSessionDelegateHandler.h"
 
-static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
-//#warning temp address
-//static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
+//static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
+#warning temp address
+static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
 
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
 static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";

@@ -86,7 +86,8 @@ static NSString *kSetDescription = @"Unit test set description";
     [self editUserAccount];
     //改密碼
     [self updatePassword];
-    
+    /*以下 MIB test 移回 PIXUserTests
+
     //取得 MIB 資訊
     NSDictionary *mibInfos = [self getUserMib];
     BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
@@ -106,7 +107,7 @@ static NSString *kSetDescription = @"Unit test set description";
         //TODO: 新建 MIB 仍然有問題，用 Postman 測是可以的，但用這個 SDK 就是測不過....
 //        [self createMIB];
     }
-    
+   */
     return;
 }
 -(void)askPayRevenue{

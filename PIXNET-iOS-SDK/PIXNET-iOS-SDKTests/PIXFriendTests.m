@@ -70,6 +70,7 @@ static NSString *kSubscriptionGroupName = @"test subscription group";
     [self removeFriendInGroup:groupId];
     
     NSString *subscriptionId = [self createSubscriptionGroup];
+//    NSString *subscriptionId2 = [self createSubscriptionGroup];
     [self updateSubscriptionGroup:subscriptionId];
     NSArray *subscriptionGroups = [self getSubscriptionGroups];
     [self createSubscriptionsWithUser:_testUser.subscriptionUser inGroups:subscriptionGroups];

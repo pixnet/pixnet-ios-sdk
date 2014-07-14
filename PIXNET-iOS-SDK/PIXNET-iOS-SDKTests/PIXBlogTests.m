@@ -472,7 +472,7 @@
     }
     [[PIXNETSDK new] updateBlogCategoryFromID:categoryId newName:newName type:categoryType description:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            NSLog(@"update blog categories succeed");
+            NSLog(@"update blog categories succeed, categoryType: %i", categoryType);
         } else {
             //總是在修改 categoryType 為 category 的時候死掉
             XCTFail(@"update blog categories failed: %@, category name: %@, categoryId: %@", error, newName, categoryId);
