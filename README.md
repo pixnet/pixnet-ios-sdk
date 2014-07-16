@@ -95,6 +95,12 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 7.0 及之後的版本，且只支援[
 ####詳細說明文件
 請參考 [CocoaDocs PIXNET-iOS-SDK](http://cocoadocs.org/docsets/PIXNET-iOS-SDK/0.2/index.html) 說明文件
 
+## 聯絡我們
+
+Email: pixnetapi@pixnet.tw
+Twitter: @pixnetapi
+
+
 ## License
 PIXNET SDK is BSD-licensed. We also provide an additional patent grant.
 
