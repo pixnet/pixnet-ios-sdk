@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "PIXNETSDK.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UIWebViewDelegate>
 @property (nonatomic, strong) UIWebView *webView;
 
 @end
@@ -21,18 +21,18 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+//        _webView.delegate = self;
     }
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor redColor];
     [self.view addSubview:_webView];
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    登不進去
     [PIXNETSDK loginByOAuthLoginView:_webView completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"succeed: %@", result);
