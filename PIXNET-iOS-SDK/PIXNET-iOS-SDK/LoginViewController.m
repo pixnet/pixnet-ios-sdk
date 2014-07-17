@@ -21,6 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+
 //        _webView.delegate = self;
     }
     return self;
@@ -33,6 +34,7 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    NSLog(@"webView frame: %@", NSStringFromCGRect(_webView.frame));
     [PIXNETSDK loginByOAuthLoginView:_webView completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"succeed: %@", result);

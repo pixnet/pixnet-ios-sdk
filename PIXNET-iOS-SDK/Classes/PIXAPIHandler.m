@@ -272,9 +272,17 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:[shouldAuth boolValue] shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
-    if (shouldAuth && kConsumerKey == nil) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未取得授權，請先呼叫 +authByXauthWithUserName:userPassword:requestCompletion:"]);
-        return;
+    if (shouldAuth) {
+        if (kConsumerKey == nil) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未設定必要參數，請先呼叫 +setConsumerKey:consumerSecret:callbackURL:"]);
+            return;
+        }
+
+        PIXAuthType authType = (PIXAuthType) [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
+        if (authType == PIXAuthTypeUndefined) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未取得授權，請先呼叫 +loginByOAuth2WithLoginView:Completion:"]);
+            return;
+        }
     }
     if (backgroundExec) {
         float osVersionValue = [[[UIDevice currentDevice] systemVersion] floatValue];
