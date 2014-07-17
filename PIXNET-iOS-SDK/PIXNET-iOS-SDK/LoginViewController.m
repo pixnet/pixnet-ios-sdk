@@ -40,6 +40,13 @@
             NSLog(@"failed: %@", error);
         }
     }];
+    [[PIXNETSDK new] getAlbumMainWithCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            NSLog(@"succeed: %@", result);
+        } else {
+            NSLog(@"failed: %@", error);
+        }
+    }];
 }
 - (void)didReceiveMemoryWarning
 {

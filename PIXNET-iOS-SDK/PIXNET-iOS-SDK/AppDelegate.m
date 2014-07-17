@@ -17,7 +17,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    [PIXNETSDK setConsumerKey:@"0ef5425eaa54c7d5bb6956b97471cde5" consumerSecret:@"09558d31bfc9763e3f4f7f3e27f3afff" callbackURL:@"pixnetsdk://www.com.tw"];
     LoginViewController *vc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
 //    vc.view.backgroundColor = [UIColor lightGrayColor];
     self.window.rootViewController = vc;
