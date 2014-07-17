@@ -15,7 +15,7 @@
 #pragma mark -
 
 @implementation LROAuth2Client {
-  NSOperationQueue *_networkQueue;
+    NSOperationQueue *_networkQueue;
 }
 
 @synthesize clientID;
@@ -28,98 +28,93 @@
 @synthesize accessToken;
 @synthesize debug;
 
-- (id)initWithClientID:(NSString *)_clientID 
-                secret:(NSString *)_secret 
-           redirectURL:(NSURL *)url;
-{
-  if (self = [super init]) {
-    clientID = [_clientID copy];
-    clientSecret = [_secret copy];
-    redirectURL = [url copy];
-    requests = [[NSMutableArray alloc] init];
-    debug = NO;
-    _networkQueue = [[NSOperationQueue alloc] init];
-  }
-  return self;
+- (id)initWithClientID:(NSString *)_clientID
+                secret:(NSString *)_secret
+           redirectURL:(NSURL *)url; {
+    if (self = [super init]) {
+        clientID = [_clientID copy];
+        clientSecret = [_secret copy];
+        redirectURL = [url copy];
+        requests = [[NSMutableArray alloc] init];
+        debug = NO;
+        _networkQueue = [[NSOperationQueue alloc] init];
+    }
+    return self;
 }
 
-- (void)dealloc;
-{
-  [_networkQueue cancelAllOperations];
+- (void)dealloc; {
+    [_networkQueue cancelAllOperations];
     [super dealloc];
 }
 
 #pragma mark -
 #pragma mark Authorization
 
-- (NSURLRequest *)userAuthorizationRequestWithParameters:(NSDictionary *)additionalParameters;
-{
-  NSDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
-  [params setValue:@"web_server" forKey:@"type"];
-  [params setValue:clientID forKey:@"client_id"];
-  [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
+- (NSURLRequest *)userAuthorizationRequestWithParameters:(NSDictionary *)additionalParameters; {
+    NSDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    [params setValue:@"web_server" forKey:@"type"];
+    [params setValue:clientID forKey:@"client_id"];
+    [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
     //updated by dolphinSu
     [params setValue:@"code" forKey:@"response_type"];
-  
-  if (additionalParameters) {
-    for (NSString *key in additionalParameters) {
-      [params setValue:[additionalParameters valueForKey:key] forKey:key];
+
+    if (additionalParameters) {
+        for (NSString *key in additionalParameters) {
+            [params setValue:[additionalParameters valueForKey:key] forKey:key];
+        }
     }
-  }  
-  NSURL *fullURL = [NSURL URLWithString:[[self.userURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
-  NSMutableURLRequest *authRequest = [NSMutableURLRequest requestWithURL:fullURL];
-  [authRequest setHTTPMethod:@"GET"];
+    NSURL *fullURL = [NSURL URLWithString:[[self.userURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
+    NSMutableURLRequest *authRequest = [NSMutableURLRequest requestWithURL:fullURL];
+    [authRequest setHTTPMethod:@"GET"];
 
 //  return [authRequest copy];
     return authRequest;
 }
 
-- (void)verifyAuthorizationWithAccessCode:(NSString *)accessCode;
-{
-  @synchronized(self) {
-    if (isVerifying) return; // don't allow more than one auth request
-    
-    isVerifying = YES;
-    
-    NSDictionary *params = [NSMutableDictionary dictionary];
-    [params setValue:@"authorization_code" forKey:@"grant_type"];
-    [params setValue:clientID forKey:@"client_id"];
-    [params setValue:clientSecret forKey:@"client_secret"];
-    [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
-    [params setValue:accessCode forKey:@"code"];
-    
-      //updated by dolphinSu
-      NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
-      NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:fullURL] autorelease];
-      [request setHTTPMethod:@"GET"];
+- (void)verifyAuthorizationWithAccessCode:(NSString *)accessCode; {
+    @synchronized (self) {
+        if (isVerifying) return; // don't allow more than one auth request
+
+        isVerifying = YES;
+
+        NSDictionary *params = [NSMutableDictionary dictionary];
+        [params setValue:@"authorization_code" forKey:@"grant_type"];
+        [params setValue:clientID forKey:@"client_id"];
+        [params setValue:clientSecret forKey:@"client_secret"];
+        [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
+        [params setValue:accessCode forKey:@"code"];
+
+        //updated by dolphinSu
+        NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:fullURL] autorelease];
+        [request setHTTPMethod:@"GET"];
 
 //    [request setHTTPMethod:@"POST"];
 //    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 //    [request setHTTPBody:[[params stringWithFormEncodedComponents] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
 
-    __unsafe_unretained id blockOperation = operation;
+        LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
 
-    [operation setCompletionBlock:^{
-      [self handleCompletionForAuthorizationRequestOperation:blockOperation];
-    }];
-      
-    [_networkQueue addOperation:operation];
-  }
+        __unsafe_unretained id blockOperation = operation;
+
+        [operation setCompletionBlock:^{
+            [self handleCompletionForAuthorizationRequestOperation:blockOperation];
+        }];
+
+        [_networkQueue addOperation:operation];
+    }
 }
 
-- (void)refreshAccessToken:(LROAuth2AccessToken *)_accessToken;
-{
-  self.accessToken = _accessToken;
-  
-  NSDictionary *params = [NSMutableDictionary dictionary];
-  [params setValue:@"refresh_token" forKey:@"grant_type"];
-  [params setValue:clientID forKey:@"client_id"];
-  [params setValue:clientSecret forKey:@"client_secret"];
+- (void)refreshAccessToken:(LROAuth2AccessToken *)_accessToken; {
+    self.accessToken = _accessToken;
+
+    NSDictionary *params = [NSMutableDictionary dictionary];
+    [params setValue:@"refresh_token" forKey:@"grant_type"];
+    [params setValue:clientID forKey:@"client_id"];
+    [params setValue:clientSecret forKey:@"client_secret"];
 //  [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
-  [params setValue:_accessToken.refreshToken forKey:@"refresh_token"];
-  
+    [params setValue:_accessToken.refreshToken forKey:@"refresh_token"];
+
     //updated by dolphinSu
     NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
     NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:fullURL] autorelease];
@@ -127,70 +122,66 @@
 //  [request setHTTPMethod:@"POST"];
 //  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
 //  [request setHTTPBody:[[params stringWithFormEncodedComponents] dataUsingEncoding:NSUTF8StringEncoding]];
-  
-  LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
-  
-  __unsafe_unretained id blockOperation = operation;
-  
-  [operation setCompletionBlock:^{
-    [self handleCompletionForAuthorizationRequestOperation:blockOperation];
-  }];
-  
-  [_networkQueue addOperation:operation];
+
+    LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
+
+    __unsafe_unretained id blockOperation = operation;
+
+    [operation setCompletionBlock:^{
+        [self handleCompletionForAuthorizationRequestOperation:blockOperation];
+    }];
+
+    [_networkQueue addOperation:operation];
 }
 
-- (void)handleCompletionForAuthorizationRequestOperation:(LRURLRequestOperation *)operation
-{
-  NSHTTPURLResponse *response = (NSHTTPURLResponse *)operation.URLResponse;
-  
-  if (response.statusCode == 200) {
-    NSError *parserError;
-    NSDictionary *authData = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&parserError];
-    
-    if (authData == nil) {
-      // try and decode the response body as a query string instead
-      NSString *responseString = [[[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding] autorelease];
-      authData = [NSDictionary dictionaryWithFormEncodedString:responseString];
+- (void)handleCompletionForAuthorizationRequestOperation:(LRURLRequestOperation *)operation {
+    NSHTTPURLResponse *response = (NSHTTPURLResponse *) operation.URLResponse;
+
+    if (response.statusCode == 200) {
+        NSError *parserError;
+        NSDictionary *authData = [NSJSONSerialization JSONObjectWithData:operation.responseData options:0 error:&parserError];
+
+        if (authData == nil) {
+            // try and decode the response body as a query string instead
+            NSString *responseString = [[[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding] autorelease];
+            authData = [NSDictionary dictionaryWithFormEncodedString:responseString];
+        }
+        if ([authData objectForKey:@"access_token"] == nil) {
+            NSAssert(NO, @"Unhandled parsing failure");
+        }
+        if (accessToken == nil) {
+            accessToken = [[LROAuth2AccessToken alloc] initWithAuthorizationResponse:authData];
+            if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessToken:)]) {
+                [self.delegate oauthClientDidReceiveAccessToken:self];
+            }
+        } else {
+            [accessToken refreshFromAuthorizationResponse:authData];
+            if ([self.delegate respondsToSelector:@selector(oauthClientDidRefreshAccessToken:)]) {
+                [self.delegate oauthClientDidRefreshAccessToken:self];
+            }
+        }
     }
-    if ([authData objectForKey:@"access_token"] == nil) {
-      NSAssert(NO, @"Unhandled parsing failure");
+    else {
+        if (operation.connectionError) {
+            NSLog(@"Connection error: %@", operation.connectionError);
+        }
     }
-    if (accessToken == nil) {
-      accessToken = [[LROAuth2AccessToken alloc] initWithAuthorizationResponse:authData];
-      if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessToken:)]) {
-        [self.delegate oauthClientDidReceiveAccessToken:self];
-      } 
-    } else {
-      [accessToken refreshFromAuthorizationResponse:authData];
-      if ([self.delegate respondsToSelector:@selector(oauthClientDidRefreshAccessToken:)]) {
-        [self.delegate oauthClientDidRefreshAccessToken:self];
-      }
-    }
-  }
-  else {
-    if (operation.connectionError) {
-      NSLog(@"Connection error: %@", operation.connectionError);
-    }
-  }
 }
 
 @end
 
 @implementation LROAuth2Client (UIWebViewIntegration)
 
-- (void)authorizeUsingWebView:(UIWebView *)webView;
-{
-  [self authorizeUsingWebView:webView additionalParameters:nil];
+- (void)authorizeUsingWebView:(UIWebView *)webView; {
+    [self authorizeUsingWebView:webView additionalParameters:nil];
 }
 
-- (void)authorizeUsingWebView:(UIWebView *)webView additionalParameters:(NSDictionary *)additionalParameters;
-{
-  [webView setDelegate:self];
-  [webView loadRequest:[self userAuthorizationRequestWithParameters:additionalParameters]];
+- (void)authorizeUsingWebView:(UIWebView *)webView additionalParameters:(NSDictionary *)additionalParameters; {
+    [webView setDelegate:self];
+    [webView loadRequest:[self userAuthorizationRequestWithParameters:additionalParameters]];
 }
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
-{  
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType; {
     NSString *queryString = [request.URL query];
     if ([[request.URL absoluteString] hasPrefix:[self.redirectURL absoluteString]]) {
         if ([queryString hasPrefix:@"error"]) {
@@ -217,58 +208,54 @@
     if ([self.delegate respondsToSelector:@selector(webView:shouldStartLoadWithRequest:navigationType:)]) {
         return [self.delegate webView:webView shouldStartLoadWithRequest:request navigationType:navigationType];
     }
-    
+
     return YES;
 }
 
 /**
- * custom URL schemes will typically cause a failure so we should handle those here
- */
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
+* custom URL schemes will typically cause a failure so we should handle those here
+*/
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
 #if __IPHONE_OS_VERSION_MAX_ALLOWED <= __IPHONE_3_2
   NSString *failingURLString = [error.userInfo objectForKey:NSErrorFailingURLStringKey];
 #else
-  NSString *failingURLString = [error.userInfo objectForKey:NSURLErrorFailingURLStringErrorKey];
+    NSString *failingURLString = [error.userInfo objectForKey:NSURLErrorFailingURLStringErrorKey];
 #endif
-  
-  if ([failingURLString hasPrefix:[self.redirectURL absoluteString]]) {
-    [webView stopLoading];
-    [self extractAccessCodeFromCallbackURL:[NSURL URLWithString:failingURLString]];
-  } else if (self.cancelURL && [failingURLString hasPrefix:[self.cancelURL absoluteString]]) {
-    [webView stopLoading];
-    if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:request:)]) {
-      [self.delegate oauthClientDidCancel:self request:webView.request];
+
+    if ([failingURLString hasPrefix:[self.redirectURL absoluteString]]) {
+        [webView stopLoading];
+        [self extractAccessCodeFromCallbackURL:[NSURL URLWithString:failingURLString]];
+    } else if (self.cancelURL && [failingURLString hasPrefix:[self.cancelURL absoluteString]]) {
+        [webView stopLoading];
+        if ([self.delegate respondsToSelector:@selector(oauthClientDidCancel:request:)]) {
+            [self.delegate oauthClientDidCancel:self request:webView.request];
+        }
     }
-  }
-  
-  if ([self.webViewDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
-    [self.webViewDelegate webView:webView didFailLoadWithError:error];
-  }
+
+    if ([self.webViewDelegate respondsToSelector:@selector(webView:didFailLoadWithError:)]) {
+        [self.webViewDelegate webView:webView didFailLoadWithError:error];
+    }
 }
 
-- (void)webViewDidStartLoad:(UIWebView *)webView
-{
-  if ([self.webViewDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
-    [self.webViewDelegate webViewDidStartLoad:webView];
-  }
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    if ([self.webViewDelegate respondsToSelector:@selector(webViewDidStartLoad:)]) {
+        [self.webViewDelegate webViewDidStartLoad:webView];
+    }
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-  if ([self.webViewDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
-    [self.webViewDelegate webViewDidFinishLoad:webView];
-  }
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    if ([self.webViewDelegate respondsToSelector:@selector(webViewDidFinishLoad:)]) {
+        [self.webViewDelegate webViewDidFinishLoad:webView];
+    }
 }
 
-- (void)extractAccessCodeFromCallbackURL:(NSURL *)callbackURL;
-{
-  NSString *accessCode = [[callbackURL queryDictionary] valueForKey:@"code"];
-  
-  if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessCode:)]) {
-    [self.delegate oauthClientDidReceiveAccessCode:self];
-  }
-  [self verifyAuthorizationWithAccessCode:accessCode];
+- (void)extractAccessCodeFromCallbackURL:(NSURL *)callbackURL; {
+    NSString *accessCode = [[callbackURL queryDictionary] valueForKey:@"code"];
+
+    if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessCode:)]) {
+        [self.delegate oauthClientDidReceiveAccessCode:self];
+    }
+    [self verifyAuthorizationWithAccessCode:accessCode];
 }
 
 @end

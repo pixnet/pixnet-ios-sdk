@@ -20,11 +20,14 @@ static const NSString *kCallbackURL;
 #import "NSDictionary+QueryString.h"
 #import "PIXURLSessionDelegateHandler.h"
 
-//static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
-#warning temp address
-static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
-
+static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
+
+//#warning temp address
+//static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
+//static const NSString *kApiURLHost = @"emma.pixnet.cc.33219.alpha.pixnet";
+
+
 static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";
 static const NSString *kUserPasswordIdentifier = @"kUserPasswordIdentifier";
 static const NSString *kOauthTokenIdentifier = @"kOauthTokenIdentifier";
@@ -52,7 +55,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                                                                    redirectURL:[NSURL URLWithString:[kCallbackURL copy]]];
         sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
         sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
-        sharedInstance.oauth2Client.delegate = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
+        sharedInstance.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (succeed) {
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
@@ -66,6 +69,7 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                 }
             });
         }];
+        sharedInstance.oauth2Client.delegate = sharedInstance.oauth2ClientDelegateHandler;
     });
     return sharedInstance;
 }

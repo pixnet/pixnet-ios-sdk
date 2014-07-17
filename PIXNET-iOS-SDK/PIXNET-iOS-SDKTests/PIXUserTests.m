@@ -34,7 +34,7 @@
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     __block BOOL done = NO;
 
-    [PIXNETSDK logout];
+//    [PIXNETSDK logout];
 
     __block BOOL authed = NO;
     //登入
@@ -58,7 +58,7 @@
     //取得 MIB 資訊
     NSDictionary *mibInfos = [self getUserMib];
     BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
-    [self createMIB];
+//    [self createMIB];
     if (isAppliedMIB) {
         NSArray *mibPositions = [self fetchPositions:mibInfos];
         [self getMibPositionsInfo:mibPositions];
@@ -82,15 +82,14 @@
         }
 
     } else {
-        //TODO: 新建 MIB 仍然有問題，用 Postman 測是可以的，但用這個 SDK 就是測不過....
-//        [self createMIB];
+        [self createMIB];
     }
 
 //    return;
 }
 -(void)createMIB{
     __block BOOL done = NO;
-    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"pixFox.jpg"] idImageBack:[UIImage imageNamed:@"pixFox.jpg"] email:@"test@pixnet.tw" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"ROC_ID_front.jpg"] idImageBack:[UIImage imageNamed:@"ROC_ID_back.jpg"] email:@"test@pixnet.tw" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createAccountMIBWithRealName";
         if (succeed) {
             NSLog(@"%@, succeed", methodName);
@@ -107,18 +106,21 @@
 }
 -(NSDictionary *)getPublicUserInfos{
     __block BOOL done = NO;
+//    __block dispatch_semaphore_t sem = dispatch_semaphore_create(0);
     __block NSDictionary *infos = nil;
     [[PIXUser new] getUserWithUserName:_testUser.userName completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"getUserWithUserName";
         if (succeed) {
-            NSLog(@"%@, succeed: %li", methodName, [result count]);
+            NSLog(@"%@, succeed: %u", methodName, [result count]);
             NSLog(@"user infos: %@", result);
             infos = result[@"user"];
         } else {
             XCTFail(@"%@ failed: %@", methodName, error);
         }
+//        dispatch_semaphore_signal(sem);
         done = YES;
     }];
+//    dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER);
 
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
@@ -131,7 +133,7 @@
     [[PIXUser new] getAccountMIBWithHistoryDays:1 completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"getAccountMibWithHistoryDays";
         if (succeed) {
-            NSLog(@"%@, succeed: %li", methodName, [result count]);
+            NSLog(@"%@, succeed: %u", methodName, [result count]);
             NSLog(@"MIB content: %@", result);
             infos = result[@"mib"];
         } else {

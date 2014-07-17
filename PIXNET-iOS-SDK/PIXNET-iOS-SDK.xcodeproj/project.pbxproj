@@ -29,12 +29,16 @@
 		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
 		619C09E018FD237400325991 /* PIXMainpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DF18FD237400325991 /* PIXMainpage.m */; };
 		82FAA59D51D7A3B33B16877E /* PIXOAuth2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */; };
+		82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */; };
+		82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */; };
 		CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */; };
 		CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */; };
 		CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */; };
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */; };
 		CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */; };
+		CE85EEF0197680C6006A2AC5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85EEEE197680C6006A2AC5 /* LoginViewController.m */; };
+		CE85EEF1197680C6006A2AC5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE85EEEF197680C6006A2AC5 /* LoginViewController.xib */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */; };
@@ -100,6 +104,8 @@
 		619C09DE18FD237400325991 /* PIXMainpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXMainpage.h; path = Classes/PIXMainpage.h; sourceTree = "<group>"; };
 		619C09DF18FD237400325991 /* PIXMainpage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXMainpage.m; path = Classes/PIXMainpage.m; sourceTree = "<group>"; };
 		82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXOAuth2Tests.m; sourceTree = "<group>"; };
+		82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_back.jpg; sourceTree = "<group>"; };
+		82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_front.jpg; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXCategoryTests.m; sourceTree = "<group>"; };
 		CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXTestObjectGenerator.h; sourceTree = "<group>"; };
@@ -111,6 +117,9 @@
 		CE7BDD3E193EEF53008C8A32 /* PIXIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXIndex.h; path = Classes/PIXIndex.h; sourceTree = "<group>"; };
 		CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXIndex.m; path = Classes/PIXIndex.m; sourceTree = "<group>"; };
 		CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXIndexTest.m; sourceTree = "<group>"; };
+		CE85EEED197680C6006A2AC5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		CE85EEEE197680C6006A2AC5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		CE85EEEF197680C6006A2AC5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		CED461591910C1CD003A96C2 /* pixFox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pixFox.jpg; sourceTree = "<group>"; };
 		CED4619D1910D4A0003A96C2 /* NSArray+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PIXCategory.h"; path = "Classes/NSArray+PIXCategory.h"; sourceTree = "<group>"; };
 		CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+PIXCategory.m"; path = "Classes/NSArray+PIXCategory.m"; sourceTree = "<group>"; };
@@ -260,6 +269,9 @@
 			children = (
 				CEDB7C8818D2ECF700D14D0C /* AppDelegate.h */,
 				CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */,
+				CE85EEED197680C6006A2AC5 /* LoginViewController.h */,
+				CE85EEEE197680C6006A2AC5 /* LoginViewController.m */,
+				CE85EEEF197680C6006A2AC5 /* LoginViewController.xib */,
 				CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */,
 				CEDB7C8018D2ECF700D14D0C /* Supporting Files */,
 			);
@@ -273,6 +285,8 @@
 				CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */,
 				CEDB7C8518D2ECF700D14D0C /* main.m */,
 				CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */,
+				82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */,
+				82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -454,6 +468,9 @@
 				CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */,
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
 				CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */,
+				82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */,
+				CE85EEF1197680C6006A2AC5 /* LoginViewController.xib in Resources */,
+				82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,6 +540,7 @@
 				CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */,
 				CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */,
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
+				CE85EEF0197680C6006A2AC5 /* LoginViewController.m in Sources */,
 				CEDCD0EF18F3AC5400B32ACC /* PIXBlog.m in Sources */,
 				CEDCD0E918F3ABF700B32ACC /* PIXNETSDK.m in Sources */,
 				619C09E018FD237400325991 /* PIXMainpage.m in Sources */,
