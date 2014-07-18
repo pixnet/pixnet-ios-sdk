@@ -28,17 +28,21 @@
 		619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09D918FD1DF900325991 /* PIXFriend.m */; };
 		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
 		619C09E018FD237400325991 /* PIXMainpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DF18FD237400325991 /* PIXMainpage.m */; };
+		6F862D0DCDBD4E01B210D795 /* libPods-KiwiTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC36C5DA27D42EDB5703007 /* libPods-KiwiTests.a */; };
 		82FAA59D51D7A3B33B16877E /* PIXOAuth2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */; };
 		82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */; };
 		82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */; };
+		CE2588901977D59500CE3604 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C9218D2ECF700D14D0C /* XCTest.framework */; };
+		CE2588911977D59500CE3604 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
+		CE2588921977D59500CE3604 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
+		CE2588981977D59500CE3604 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE2588961977D59500CE3604 /* InfoPlist.strings */; };
+		CE25889A1977D59500CE3604 /* KiwiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2588991977D59500CE3604 /* KiwiTests.m */; };
 		CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */; };
 		CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */; };
 		CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */; };
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */; };
 		CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */; };
-		CE85EEF0197680C6006A2AC5 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE85EEEE197680C6006A2AC5 /* LoginViewController.m */; };
-		CE85EEF1197680C6006A2AC5 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE85EEEF197680C6006A2AC5 /* LoginViewController.xib */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */; };
@@ -81,6 +85,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE25889C1977D59500CE3604 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEDB7C7518D2ECF700D14D0C;
+			remoteInfo = "PIXNET-iOS-SDK";
+		};
 		CEDB7C9618D2ECF700D14D0C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
@@ -96,6 +107,8 @@
 		4A81A745195014C0004DE00E /* PIXBlockTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlockTests.m; sourceTree = "<group>"; };
 		4A81A74719503FBF004DE00E /* PIXMainpageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXMainpageTests.m; sourceTree = "<group>"; };
 		4B01D00FE656426F9CE16160 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4EC36C5DA27D42EDB5703007 /* libPods-KiwiTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F0A86BA7B4441009FFCE32E /* Pods-KiwiTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiTests.xcconfig"; path = "Pods/Pods-KiwiTests.xcconfig"; sourceTree = "<group>"; };
 		50845DAA18F4F1B3000813AF /* PIXUserTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXUserTests.m; sourceTree = "<group>"; };
 		619C09D818FD1DF900325991 /* PIXFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXFriend.h; path = Classes/PIXFriend.h; sourceTree = "<group>"; };
 		619C09D918FD1DF900325991 /* PIXFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXFriend.m; path = Classes/PIXFriend.m; sourceTree = "<group>"; };
@@ -107,6 +120,11 @@
 		82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_back.jpg; sourceTree = "<group>"; };
 		82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_front.jpg; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE25888F1977D59500CE3604 /* KiwiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE2588951977D59500CE3604 /* KiwiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KiwiTests-Info.plist"; sourceTree = "<group>"; };
+		CE2588971977D59500CE3604 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE2588991977D59500CE3604 /* KiwiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KiwiTests.m; sourceTree = "<group>"; };
+		CE25889B1977D59500CE3604 /* KiwiTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KiwiTests-Prefix.pch"; sourceTree = "<group>"; };
 		CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXCategoryTests.m; sourceTree = "<group>"; };
 		CE3A34E118FE56760039A1BC /* PIXTestObjectGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PIXTestObjectGenerator.h; sourceTree = "<group>"; };
 		CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXTestObjectGenerator.m; sourceTree = "<group>"; };
@@ -117,9 +135,6 @@
 		CE7BDD3E193EEF53008C8A32 /* PIXIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXIndex.h; path = Classes/PIXIndex.h; sourceTree = "<group>"; };
 		CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXIndex.m; path = Classes/PIXIndex.m; sourceTree = "<group>"; };
 		CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXIndexTest.m; sourceTree = "<group>"; };
-		CE85EEED197680C6006A2AC5 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		CE85EEEE197680C6006A2AC5 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		CE85EEEF197680C6006A2AC5 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		CED461591910C1CD003A96C2 /* pixFox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pixFox.jpg; sourceTree = "<group>"; };
 		CED4619D1910D4A0003A96C2 /* NSArray+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PIXCategory.h"; path = "Classes/NSArray+PIXCategory.h"; sourceTree = "<group>"; };
 		CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+PIXCategory.m"; path = "Classes/NSArray+PIXCategory.m"; sourceTree = "<group>"; };
@@ -184,6 +199,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE25888C1977D59500CE3604 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2588901977D59500CE3604 /* XCTest.framework in Frameworks */,
+				CE2588921977D59500CE3604 /* UIKit.framework in Frameworks */,
+				CE2588911977D59500CE3604 /* Foundation.framework in Frameworks */,
+				6F862D0DCDBD4E01B210D795 /* libPods-KiwiTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEDB7C7318D2ECF700D14D0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -209,6 +235,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE2588931977D59500CE3604 /* KiwiTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE2588991977D59500CE3604 /* KiwiTests.m */,
+				CE2588941977D59500CE3604 /* Supporting Files */,
+			);
+			path = KiwiTests;
+			sourceTree = "<group>";
+		};
+		CE2588941977D59500CE3604 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE2588951977D59500CE3604 /* KiwiTests-Info.plist */,
+				CE2588961977D59500CE3604 /* InfoPlist.strings */,
+				CE25889B1977D59500CE3604 /* KiwiTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CED60D9F1962920E0080A7D1 /* LROAuth2Client */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,9 +281,11 @@
 				CEDB7CA818D2F7A600D14D0C /* Classes */,
 				CEDB7C7F18D2ECF700D14D0C /* PIXNET-iOS-SDK */,
 				CEDB7C9818D2ECF700D14D0C /* PIXNET-iOS-SDKTests */,
+				CE2588931977D59500CE3604 /* KiwiTests */,
 				CEDB7C7818D2ECF700D14D0C /* Frameworks */,
 				CEDB7C7718D2ECF700D14D0C /* Products */,
 				4B01D00FE656426F9CE16160 /* Pods.xcconfig */,
+				4F0A86BA7B4441009FFCE32E /* Pods-KiwiTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -247,6 +294,7 @@
 			children = (
 				CEDB7C7618D2ECF700D14D0C /* PIXNET-iOS-SDK.app */,
 				CEDB7C9118D2ECF700D14D0C /* PIXNET-iOS-SDKTests.xctest */,
+				CE25888F1977D59500CE3604 /* KiwiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -260,6 +308,7 @@
 				CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */,
 				CEDB7C9218D2ECF700D14D0C /* XCTest.framework */,
 				9CDB24BB1BB342F89ED09330 /* libPods.a */,
+				4EC36C5DA27D42EDB5703007 /* libPods-KiwiTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -269,9 +318,6 @@
 			children = (
 				CEDB7C8818D2ECF700D14D0C /* AppDelegate.h */,
 				CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */,
-				CE85EEED197680C6006A2AC5 /* LoginViewController.h */,
-				CE85EEEE197680C6006A2AC5 /* LoginViewController.m */,
-				CE85EEEF197680C6006A2AC5 /* LoginViewController.xib */,
 				CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */,
 				CEDB7C8018D2ECF700D14D0C /* Supporting Files */,
 			);
@@ -389,6 +435,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE25888E1977D59500CE3604 /* KiwiTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE2588A01977D59500CE3604 /* Build configuration list for PBXNativeTarget "KiwiTests" */;
+			buildPhases = (
+				B202F381CB0C46B092D36BC3 /* Check Pods Manifest.lock */,
+				CE25888B1977D59500CE3604 /* Sources */,
+				CE25888C1977D59500CE3604 /* Frameworks */,
+				CE25888D1977D59500CE3604 /* Resources */,
+				8E0FF9C80B294F17841CA19E /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE25889D1977D59500CE3604 /* PBXTargetDependency */,
+			);
+			name = KiwiTests;
+			productName = KiwiTests;
+			productReference = CE25888F1977D59500CE3604 /* KiwiTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEDB7CA218D2ECF700D14D0C /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDK" */;
@@ -435,6 +501,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Dolphin Su";
 				TargetAttributes = {
+					CE25888E1977D59500CE3604 = {
+						TestTargetID = CEDB7C7518D2ECF700D14D0C;
+					};
 					CEDB7C9018D2ECF700D14D0C = {
 						TestTargetID = CEDB7C7518D2ECF700D14D0C;
 					};
@@ -455,11 +524,20 @@
 				CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */,
 				CEDB7C9018D2ECF700D14D0C /* PIXNET-iOS-SDKTests */,
 				CEDF6BD418F51DB7001750D3 /* Documentation */,
+				CE25888E1977D59500CE3604 /* KiwiTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE25888D1977D59500CE3604 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE2588981977D59500CE3604 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEDB7C7418D2ECF700D14D0C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -469,7 +547,6 @@
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
 				CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */,
 				82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */,
-				CE85EEF1197680C6006A2AC5 /* LoginViewController.xib in Resources */,
 				82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,6 +593,36 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		8E0FF9C80B294F17841CA19E /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-KiwiTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B202F381CB0C46B092D36BC3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		CEDF6BD818F51E92001750D3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -532,6 +639,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE25888B1977D59500CE3604 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE25889A1977D59500CE3604 /* KiwiTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CEDB7C7218D2ECF700D14D0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -540,7 +655,6 @@
 				CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */,
 				CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */,
 				CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */,
-				CE85EEF0197680C6006A2AC5 /* LoginViewController.m in Sources */,
 				CEDCD0EF18F3AC5400B32ACC /* PIXBlog.m in Sources */,
 				CEDCD0E918F3ABF700B32ACC /* PIXNETSDK.m in Sources */,
 				619C09E018FD237400325991 /* PIXMainpage.m in Sources */,
@@ -589,6 +703,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CE25889D1977D59500CE3604 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
+			targetProxy = CE25889C1977D59500CE3604 /* PBXContainerItemProxy */;
+		};
 		CEDB7C9718D2ECF700D14D0C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
@@ -597,6 +716,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		CE2588961977D59500CE3604 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE2588971977D59500CE3604 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -616,6 +743,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CE25889E1977D59500CE3604 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F0A86BA7B4441009FFCE32E /* Pods-KiwiTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KiwiTests/KiwiTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "KiwiTests/KiwiTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CE25889F1977D59500CE3604 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4F0A86BA7B4441009FFCE32E /* Pods-KiwiTests.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KiwiTests/KiwiTests-Prefix.pch";
+				INFOPLIST_FILE = "KiwiTests/KiwiTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		CEDB7CA018D2ECF700D14D0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -771,6 +940,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE2588A01977D59500CE3604 /* Build configuration list for PBXNativeTarget "KiwiTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE25889E1977D59500CE3604 /* Debug */,
+				CE25889F1977D59500CE3604 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CEDB7C7118D2ECF700D14D0C /* Build configuration list for PBXProject "PIXNET-iOS-SDK" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

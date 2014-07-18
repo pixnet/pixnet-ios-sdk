@@ -38,6 +38,16 @@
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE25888E1977D59500CE3604"
+               BuildableName = "KiwiTests.xctest"
+               BlueprintName = "KiwiTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
