@@ -37,9 +37,38 @@
                BlueprintName = "PIXNET-iOS-SDKTests"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "PIXAlbumTests">
+               </Test>
+               <Test
+                  Identifier = "PIXBlockTests">
+               </Test>
+               <Test
+                  Identifier = "PIXBlogTests">
+               </Test>
+               <Test
+                  Identifier = "PIXCategoryTests">
+               </Test>
+               <Test
+                  Identifier = "PIXFriendTests">
+               </Test>
+               <Test
+                  Identifier = "PIXGuestbookTests">
+               </Test>
+               <Test
+                  Identifier = "PIXIndexTest">
+               </Test>
+               <Test
+                  Identifier = "PIXMainpageTests">
+               </Test>
+               <Test
+                  Identifier = "PIXOAuth2Tests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE25888E1977D59500CE3604"

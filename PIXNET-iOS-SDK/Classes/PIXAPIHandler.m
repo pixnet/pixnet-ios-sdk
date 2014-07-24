@@ -23,11 +23,6 @@ static const NSString *kCallbackURL;
 static const NSString *kApiURLPrefix = @"https://emma.pixnet.cc/";
 static const NSString *kApiURLHost = @"emma.pixnet.cc";
 
-//#warning temp address
-//static const NSString *kApiURLPrefix = @"http://emma.pixnet.cc.33219.alpha.pixnet/";
-//static const NSString *kApiURLHost = @"emma.pixnet.cc.33219.alpha.pixnet";
-
-
 static const NSString *kUserNameIdentifier = @"kUserNameIdentifier";
 static const NSString *kUserPasswordIdentifier = @"kUserPasswordIdentifier";
 static const NSString *kOauthTokenIdentifier = @"kOauthTokenIdentifier";

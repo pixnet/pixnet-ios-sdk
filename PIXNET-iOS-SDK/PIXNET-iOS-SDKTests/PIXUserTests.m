@@ -33,8 +33,8 @@
 - (void)testMain{
     [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
     __block BOOL done = NO;
-
-//    [PIXNETSDK logout];
+#warning temp mark
+    [PIXNETSDK logout];
 
     __block BOOL authed = NO;
     //登入
