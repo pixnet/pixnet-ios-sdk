@@ -72,11 +72,14 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
     kConsumerKey = [aKey copy];
     kConsumerSecret = [aSecret copy];
+    kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", kConsumerKey];
 }
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL{
     kConsumerKey = [aKey copy];
     kConsumerSecret = [aSecret copy];
-    kCallbackURL = [callbackURL copy];
+    kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", kConsumerKey];
+
+//    kCallbackURL = [callbackURL copy];
 }
 +(BOOL)isConsumerKeyAndSecrectAssigned{
     BOOL assigned = YES;

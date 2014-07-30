@@ -38,20 +38,20 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
 @interface PIXAPIHandler : NSObject
 #pragma mark class methods
 /**
- *  設定 consumer key 及 consumer secret；這個 method 未來會被捨棄，請盡量不要用這個 method。
+ *  設定 consumer key 及 consumer secret。
  *
  *  @param aKey     consumer key
  *  @param aSecret  consumer secret
  */
-+(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret __attribute__((deprecated("use '+setConsumerKey:consumerSecret:callbackURL:'.")));
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret;
 /**
- *  設定 consumer key、consumer secret 及 callbackURL，當您要利用 OAuth2 做使用者登入時，請務必先呼叫這個 method。
+ *  設定 consumer key、consumer secret 及 callbackURL。後來痞客邦決定 callback URL 由站方指定，所以這個方法未來會被棄用。
  *
  *  @param aKey        consumer key
  *  @param aSecret     consumer secret
  *  @param callbackURL registered callback URL
  */
-+(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL;
++(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL __attribute__((deprecated("use '+setConsumerKey:consumerSecret'.")));
 /**
  *  用來判斷 consumer key 及 secrect 是否已被設定
  *
@@ -80,14 +80,13 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  */
 +(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
- *  此方法即將被棄用！
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
  *  @param userName   使用者名稱(帳號)
  *  @param password   使用者密碼
  *  @param completion succeed == YES 時，回傳 token; succeed == NO 時，則會回傳 errorMessage
  */
-+(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion  __attribute__((deprecated("請改用 '+loginByOauthLoginView:completion:'")));
++(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion;
 /**
  *  為目前的使用者做登出的動作
  */

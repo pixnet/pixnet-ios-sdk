@@ -238,7 +238,6 @@
 		CE2588931977D59500CE3604 /* KiwiTests */ = {
 			isa = PBXGroup;
 			children = (
-				CE2588991977D59500CE3604 /* KiwiTests.m */,
 				CE2588941977D59500CE3604 /* Supporting Files */,
 			);
 			path = KiwiTests;
@@ -247,6 +246,7 @@
 		CE2588941977D59500CE3604 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CE2588991977D59500CE3604 /* KiwiTests.m */,
 				CE2588951977D59500CE3604 /* KiwiTests-Info.plist */,
 				CE2588961977D59500CE3604 /* InfoPlist.strings */,
 				CE25889B1977D59500CE3604 /* KiwiTests-Prefix.pch */,
