@@ -227,10 +227,10 @@
 -(void)getAccountAnalyticsWithStaticDays:(NSUInteger)staticDays referDays:(NSUInteger)referDays completion:(PIXHandlerCompletion)completion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     if (staticDays) {
-        params[@"statics_days"] = [NSString stringWithFormat:@"%lu", staticDays];
+        params[@"statistics_days"] = [NSString stringWithFormat:@"%lu", staticDays];
     }
     if (referDays) {
-        params[@"refer_days"] = [NSString stringWithFormat:@"%lu", referDays];
+        params[@"referer_days"] = [NSString stringWithFormat:@"%lu", referDays];
     }
     [[PIXAPIHandler new] callAPI:@"account/analytics" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
