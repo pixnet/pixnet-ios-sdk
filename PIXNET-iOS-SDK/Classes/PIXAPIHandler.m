@@ -181,6 +181,8 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"前一個使用者尚未登出，請先執行 +logout"]);
         return;
     }
+    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserNameIdentifier copy] string:userName];
+    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserPasswordIdentifier copy] string:password];
 
     //如果 local 端已有 token 就不再去跟後台要
     NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
@@ -217,9 +219,6 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
                             [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kOauthTokenSecretIdentifier copy] string:array0[1]];
                         }
                     }
-                    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserNameIdentifier copy] string:userName];
-                    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserPasswordIdentifier copy] string:password];
-
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     completion(YES, nil, nil);
