@@ -200,11 +200,17 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (connectionError) {
+                [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
+                [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+                
                 completion(NO, nil, connectionError);
                 return;
             } else {
                 NSHTTPURLResponse *hur = (NSHTTPURLResponse *)response;
                 if (hur.statusCode != 200) {
+                    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
+                    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+
                     completion(NO, nil, [NSError PIXErrorWithHTTPStatusCode:hur.statusCode]);
                     return;
                 } else {
