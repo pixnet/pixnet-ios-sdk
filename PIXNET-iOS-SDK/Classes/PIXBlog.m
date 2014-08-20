@@ -26,6 +26,30 @@
     }];
 //    [self invokeMethod:@selector(callAPI:httpMethod:parameters:requestCompletion:) parameters:@[@"blog", @"GET", @{@"user":userName}, completion] receiver:[PIXAPIHandler new]];
 }
+- (void)updateBlogInformationWithBlogName:(NSString *)blogName blogDescription:(NSString *)blogDescription keywords:(NSArray *)keywords siteCategoryId:(NSString *)siteCategoryId completion:(PIXHandlerCompletion)completion{
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
+    if (blogName && blogName.length>0) {
+        params[@"name"] = blogName;
+    }
+    if (blogDescription && blogDescription.length>0) {
+        params[@"description"] = blogDescription;
+    }
+    if (keywords) {
+        for (id keyword in keywords) {
+            if (![keyword isKindOfClass:[NSString class]]) {
+                completion(NO, nil, [NSError PIXErrorWithParameterName:@"Every value in keywords should be string"]);
+                return;
+            }
+        }
+        params[@"keyword"] = [keywords componentsJoinedByString:@","];
+    }
+    if (siteCategoryId && siteCategoryId.length>0) {
+        params[@"site_category_id"] = siteCategoryId;
+    }
+    [[PIXAPIHandler new] callAPI:@"blog" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
 
 #pragma mark - Blog Categories
 - (void)getBlogCategoriesWithUserName:(NSString *)userName

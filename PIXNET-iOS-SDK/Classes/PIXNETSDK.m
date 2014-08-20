@@ -87,7 +87,9 @@
 - (void)getBlogInformationWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] getBlogInformationWithUserName:userName completion:completion];
 }
-
+- (void)updateBlogInformationWithBlogName:(NSString *)blogName blogDescription:(NSString *)blogDescription keywords:(NSArray *)keywords siteCategoryId:(NSString *)siteCategoryId completion:(PIXHandlerCompletion)completion{
+    [[PIXBlog new] updateBlogInformationWithBlogName:blogName blogDescription:blogDescription keywords:keywords siteCategoryId:siteCategoryId completion:completion];
+}
 #pragma mark - Blog Categories
 
 - (void)getBlogCategoriesWithUserName:(NSString *)userName

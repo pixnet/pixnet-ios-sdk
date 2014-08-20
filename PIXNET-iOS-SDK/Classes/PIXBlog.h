@@ -123,14 +123,23 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 
 #pragma mark - Blog information
 /**
- *  列出部落格資訊 http://emma.pixnet.cc/blog
+ *  列出部落格資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/blog
  *
  *  @param userName   ＊指定要回傳的使用者資訊
  *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogInformationWithUserName:(NSString *)userName
                           completion:(PIXHandlerCompletion)completion;
-
+/**
+ *  修改部落格資訊（需認證） http://developer.pixnet.pro/#!/doc/pixnetApi/blogUpdate
+ *
+ *  @param blogName        部落格名稱
+ *  @param blogDescription 部落格描述
+ *  @param keywords        部落格關鍵字，這個 array 裡的每個值都要是 NSString
+ *  @param siteCategoryId  全站的部落格分類 id。至於有哪些 id 可用可利用 -getBlogCategoriesListIncludeGroups:thumbs:completion: 得知
+ *  @param completion      PIXHandlerCompletion
+ */
+- (void)updateBlogInformationWithBlogName:(NSString *)blogName blogDescription:(NSString *)blogDescription keywords:(NSArray *)keywords siteCategoryId:(NSString *)siteCategoryId completion:(PIXHandlerCompletion)completion;
 #pragma mark - Blog Categories
 //dosen't need Access token
 /**
