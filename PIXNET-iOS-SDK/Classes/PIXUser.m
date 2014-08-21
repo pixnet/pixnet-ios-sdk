@@ -66,7 +66,7 @@
             educationString = @"大學";
             break;
         case PIXUserEducationGradurate:
-            educationString = @"研究所";
+            educationString = @"研究所以上";
             break;
         case PIXUserEducationNone:
         default:
