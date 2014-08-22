@@ -127,10 +127,12 @@
     
 }
 -(void)updateBlogInformation:(NSArray *)siteCategories{
-//    NSString *categoryID = siteCategories[0][@"id"];
+    int index = arc4random()%[siteCategories count];
+    NSString *categoryID = siteCategories[index][@"id"];
+    NSLog(@"new category name: %@, category ID: %@", siteCategories[index][@"name"], categoryID);
     __block BOOL done = NO;
     NSString *methodName = @"updateBlogInformationWithBlogName:";
-    [[PIXNETSDK new] updateBlogInformationWithBlogName:nil blogDescription:nil keywords:@[@""] siteCategoryId:nil completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] updateBlogInformationWithBlogName:nil blogDescription:nil keywords:@[@""] siteCategoryId:categoryID completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"%@ succeed", methodName);
         } else {
