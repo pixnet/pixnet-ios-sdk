@@ -91,7 +91,7 @@
          
         params[@"avatar"] = encodedData;
          */
-        params[@"avatar"] = [self PIXEncodedImageData:avatar];
+        params[@"avatar"] = [[NSString alloc] initWithData:[self PIXEncodedImageData:avatar] encoding:NSUTF8StringEncoding];
         params[@"upload_method"] = @"base64";
     }
     [[PIXAPIHandler new] callAPI:@"account/info" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
