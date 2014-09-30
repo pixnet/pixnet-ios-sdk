@@ -855,7 +855,7 @@
 /**
  *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
  *
- *  @param elementData             必要參數，圖片的 NSData instance。
+ *  @param elementData             必要參數，圖片的 NSData instance。圖片格式請先轉為 png 或 jpg 再轉成未 base64 加密的 NSData。
  *  @param setId                   必要參數，上傳進哪本相簿的相簿 ID
  *  @param elementTitle            照片(或影片)標題
  *  @param elementDescription      照片(或影片)描述
