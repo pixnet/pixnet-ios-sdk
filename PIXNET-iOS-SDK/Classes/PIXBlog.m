@@ -710,10 +710,10 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
-    if (articleID == nil || articleID.length == 0) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing articleId"]);
-        return;
-    }
+//    if (articleID == nil || articleID.length == 0) {
+//        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing articleId"]);
+//        return;
+//    }
     if (page<=0 || perPage<=0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"page 及 perPage 都一定要大於0"]);
         return;

@@ -423,7 +423,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
  *  列出部落格留言 http://developer.pixnet.pro/#!/doc/pixnetApi/blogComments
  *
  *  @param userName        部落客 id, 必要欄位
- *  @param articleID       文章 id, 必要欄位
+ *  @param articleID       文章 id
  *  @param blogPassword    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param articlePassword 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權
  *  @param filter          顯示特別屬性的留言
