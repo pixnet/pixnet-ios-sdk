@@ -75,29 +75,13 @@
     if (educationString) {
         params[@"education"] = educationString;
     }
-//TODO: 大頭照的更新還沒完成，待後台修正
     if (avatar) {
-        /*
-        NSData *data = UIImageJPEGRepresentation(avatar, 1.0);
-        NSData *encodedData = nil;
-        if ([data respondsToSelector:@selector(base64EncodedDataWithOptions:)]) {
-            encodedData = [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
-        } else {
-            #pragma GCC diagnostic push
-            #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-            encodedData = [[data base64Encoding] dataUsingEncoding:NSUTF8StringEncoding];
-            #pragma GCC diagnostic pop
-        }
-         
-        params[@"avatar"] = encodedData;
-         */
         params[@"avatar"] = [[NSString alloc] initWithData:[self PIXEncodedImageData:avatar] encoding:NSUTF8StringEncoding];
         params[@"upload_method"] = @"base64";
     }
     [[PIXAPIHandler new] callAPI:@"account/info" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/info", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 -(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
