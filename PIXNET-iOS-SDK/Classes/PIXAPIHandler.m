@@ -90,26 +90,38 @@ static NSString *kAuthTypeKey = @"kAuthTypeKey";
 }
 
 +(void)logout{
-    PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
-    switch (authType) {
-        case PIXAuthTypeXAuth:{
-            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
-            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
-            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
-            [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
-            break;
-        }
-        case PIXAuthTypeOAuth2:{
-            [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
-            break;
-        }
-        default:
-            break;
+    NSString *identifierForXAuth = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
+    if (identifierForXAuth) {
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+    } else {
+        [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
     }
+    /*
+     PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
+     switch (authType) {
+     case PIXAuthTypeXAuth:{
+     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
+     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
+     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+     break;
+     }
+     case PIXAuthTypeOAuth2:{
+     [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
+     break;
+     }
+     default:
+     break;
+     }
+     */
     //將目前的登入狀態改為 undefined
     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeUndefined forKey:kAuthTypeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     [self loginByOAuth2WithLoginView:loginView completion:completion];
 }
