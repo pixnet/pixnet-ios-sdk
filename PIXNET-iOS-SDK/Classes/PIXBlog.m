@@ -710,10 +710,10 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
-//    if (articleID == nil || articleID.length == 0) {
-//        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing articleId"]);
-//        return;
-//    }
+    //    if (articleID == nil || articleID.length == 0) {
+    //        completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing articleId"]);
+    //        return;
+    //    }
     if (page<=0 || perPage<=0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"page 及 perPage 都一定要大於0"]);
         return;
@@ -752,16 +752,20 @@
     params[@"page"] = [NSString stringWithFormat:@"%li", page];
     params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
     
-    [[PIXAPIHandler new] callAPI:@"blog/comments"
-                      parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   if (succeed) {
-                       [self succeedHandleWithData:result completion:completion];
-                   } else {
-                       completion(NO, nil, errorMessage);
-                   }
-               }];
-
+    BOOL isAuthed = [PIXAPIHandler isAuthed];
+    [[PIXAPIHandler new] callAPI:@"blog/comments" httpMethod:@"GET" shouldAuth:isAuthed parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+    //    [[PIXAPIHandler new] callAPI:@"blog/comments"
+    //                      parameters:params
+    //               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
+    //                   if (succeed) {
+    //                       [self succeedHandleWithData:result completion:completion];
+    //                   } else {
+    //                       completion(NO, nil, errorMessage);
+    //                   }
+    //               }];
+    
 }
 
 - (void)getBlogSingleCommentWithUserName:(NSString *)userName
