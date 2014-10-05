@@ -28,10 +28,10 @@
     NSString *genderString = nil;
     switch (gender) {
         case PIXUserGenderFemale:
-            genderString = @"0";
+            genderString = @"F";
             break;
         case PIXUserGenderMale:
-            genderString = @"1";
+            genderString = @"M";
             break;
         case PIXUserGenderNone:
         default:
