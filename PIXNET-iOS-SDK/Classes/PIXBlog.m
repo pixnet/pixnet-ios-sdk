@@ -736,7 +736,7 @@
             params[@"filter"] = @"noreply";
             break;
         case PIXBlogCommentFilterTypeWhisper:
-            params[@"filter"] = @"shisper";
+            params[@"filter"] = @"whisper";
             break;
         case PIXBlogCommentFilterTypeNoSpam:
             params[@"filter"] = @"nospam";
