@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'http://developer.pixnet.pro/#!/doc/pixnetApi/oauthApi'
   s.authors      =  {'PIXNET' => 'sdk@pixnet.tw'}
-  s.summary      = 'Intergration with PIXNET services.'
+  s.summary      = 'Integrate with PIXNET services.'
 
 # Source Info
   s.platform     =  :ios, '6.0'
