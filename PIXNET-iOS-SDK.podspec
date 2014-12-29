@@ -3,7 +3,7 @@ Pod::Spec.new do |s|
   s.version      = '1.2.6'
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'http://developer.pixnet.pro/#!/doc/pixnetApi/oauthApi'
-  s.authors      =  {'Cloud Sung' => 'cloud@pixnet.tw', 'Dolphin Su'=>'dolphinsu@pixnet.tw'}
+  s.authors      =  {'PIXNET' => 'sdk@pixnet.tw'}
   s.summary      = 'Intergration with PIXNET services.'
 
 # Source Info
