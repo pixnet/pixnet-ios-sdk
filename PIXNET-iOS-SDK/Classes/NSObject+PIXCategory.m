@@ -19,7 +19,10 @@
 }
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError = nil;
-    id dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+    id dict=nil;
+    if (![data isKindOfClass:[NSDictionary class]]) {
+        dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
+    }
     if (jsonError == nil) {
         if ([dict isKindOfClass:[NSDictionary class]]) {
             if ([dict[@"error"] intValue] == 0) {

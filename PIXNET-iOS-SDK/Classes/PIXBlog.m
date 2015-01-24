@@ -272,7 +272,16 @@
     
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@", articleID];
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:nil]];
+        NSMutableString *htmlString = [NSMutableString stringWithString:dictionary[@"article"][@"body"]];
+        [htmlString replaceOccurrencesOfString:@"<!-- more -->" withString:@"<img src='https://s.pixfs.net/app/more.png' alt='zss_editor_more'>" options:NSCaseInsensitiveSearch range:NSMakeRange(0, htmlString.length)];
+        NSMutableDictionary *articleDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary[@"article"]];
+        articleDictionary[@"body"] = htmlString;
+        dictionary[@"article"] = articleDictionary;
+//        dictionary[@"article"][@"body"] = htmlString;
+//        [dictionary[@"article"] removeObjectForKey:@"body"];
+//        [dictionary[@"article"] setObject:htmlString forKey:@"body"];
+        [self resultHandleWithIsSucceed:succeed result:(id) dictionary error:error completion:completion];
     }];
 //    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
 //            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
