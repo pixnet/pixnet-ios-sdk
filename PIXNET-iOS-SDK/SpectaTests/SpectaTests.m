@@ -14,12 +14,12 @@ SpecBegin(SomeBlogAPI)
             }];
         });
     });
-        describe(@"get site categories for blog", ^{
-            it(@"should get categories", ^AsyncBlock{
-                [[PIXBlog new] getSiteCategoriesForBlogWithGroups:YES isIncludeThumbs:YES completion:^(BOOL succeed, id result, NSError *error) {
-                    expect(succeed).to.beTruthy();
-                    done();
-                }];
-            });
+    describe(@"get site categories for blog", ^{
+        it(@"should get categories", ^AsyncBlock{
+            [[PIXBlog new] getSiteCategoriesForBlogWithGroups:YES isIncludeThumbs:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
         });
+    });
 SpecEnd
