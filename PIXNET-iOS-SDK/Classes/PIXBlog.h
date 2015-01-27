@@ -544,15 +544,20 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                                 completion:(PIXHandlerCompletion)completion;
 
 /**
- *  刪除部落格留言（需認證） http://emma.pixnet.cc/blog/comments/:id
+ *  刪除部落格留言（需認證） https://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsDelete
  *
  *  @param commentID  ＊要刪除的留言 ID
  *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
                             completion:(PIXHandlerCompletion)completion;
-
-
+/**
+*  刪除多則部落格留言（需認證） https://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsDelete
+*
+*  @param comments  ＊要刪除的留言 IDs, 由 string 所組成的 array。
+*  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
+*/
+-(void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion;
 #pragma mark - Site Blog Categories list
 
 /**

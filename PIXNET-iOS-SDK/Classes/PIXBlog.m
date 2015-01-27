@@ -1019,6 +1019,18 @@
                }];
 }
 
+- (void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion {
+    for (id o in comments) {
+        NSAssert([o isKindOfClass:[NSString class]], @"%@ should is not string", o);
+        return;
+    }
+    NSDictionary *params = @{@"_method" : @"delete"};
+    NSString *commentsString = [comments componentsJoinedByString:@","];
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentsString] httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
+
 
 #pragma mark - Site Blog Categories list
 
