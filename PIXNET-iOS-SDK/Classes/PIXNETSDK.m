@@ -81,7 +81,17 @@
 -(void)updateAccountPasswordWithOriginalPassword:(NSString *)originalPassword newPassword:(NSString *)newPassword completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] updateAccountPasswordWithOriginalPassword:originalPassword newPassword:newPassword completion:completion];
 }
+
+
 #pragma mark - Blog Method
+#pragma mark - Site Categories
+- (void)getSiteCategoriesForArticleWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] getSiteCategoriesForArticleWithGroups:isIncludeGroups isIncludeThumbs:isIncludeThumbs completion:completion];
+}
+
+- (void)getSiteCategoriesForBlogWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] getSiteCategoriesForBlogWithGroups:isIncludeGroups isIncludeThumbs:isIncludeThumbs completion:completion];
+}
 #pragma mark - Blog Imformation
 
 - (void)getBlogInformationWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
