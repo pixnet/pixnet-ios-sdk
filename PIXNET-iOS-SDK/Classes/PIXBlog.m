@@ -14,6 +14,21 @@
 @implementation PIXBlog
 
 #pragma mark - Blog information
+
+- (void)getSiteCategoriesForArticleWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion {
+    NSDictionary *params = @{@"include_groups":[NSString stringWithFormat:@"%i", isIncludeGroups], @"include_thumbs":[NSString stringWithFormat:@"%i", isIncludeThumbs]};
+    [[PIXAPIHandler new] callAPI:@"blog/site_categories/article" httpMethod:@"GET" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
+
+- (void)getSiteCategoriesForBlogWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion {
+    NSDictionary *params = @{@"include_groups":[NSString stringWithFormat:@"%i", isIncludeGroups], @"include_thumbs":[NSString stringWithFormat:@"%i", isIncludeThumbs]};
+    [[PIXAPIHandler new] callAPI:@"blog/site_categories/blog" httpMethod:@"GET" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+};
+
 - (void)getBlogInformationWithUserName:(NSString *)userName
                           completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數

@@ -20,6 +20,34 @@
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEDD93C61A77673900C7C34B"
+               BuildableName = "PIXNET-iOS-SDK SpectaTests.xctest"
+               BlueprintName = "PIXNET-iOS-SDK SpectaTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEDD93D51A7767B600C7C34B"
+               BuildableName = "SpectaTests.xctest"
+               BlueprintName = "SpectaTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -74,6 +102,26 @@
                BlueprintIdentifier = "CE25888E1977D59500CE3604"
                BuildableName = "KiwiTests.xctest"
                BlueprintName = "KiwiTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEDD93C61A77673900C7C34B"
+               BuildableName = "PIXNET-iOS-SDK SpectaTests.xctest"
+               BlueprintName = "PIXNET-iOS-SDK SpectaTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEDD93D51A7767B600C7C34B"
+               BuildableName = "SpectaTests.xctest"
+               BlueprintName = "SpectaTests"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </TestableReference>

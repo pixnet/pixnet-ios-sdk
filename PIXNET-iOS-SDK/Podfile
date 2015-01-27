@@ -8,3 +8,7 @@ target :KiwiTests, :exclusive => true do
   pod 'Kiwi', '~> 2.3.0'
   pod 'OCMock', '~> 3.0.2'
 end
+target :SpectaTests, :exclusive => true do
+  pod 'Expecta', '~>0.3.1'
+  pod 'Specta', '~> 0.2.1'
+end

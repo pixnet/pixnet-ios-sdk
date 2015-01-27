@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
     PIXAuthTypeOAuth2
 };
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 /**
  *  這個 class 主要用來處理跟後台連線上的事情
  */
