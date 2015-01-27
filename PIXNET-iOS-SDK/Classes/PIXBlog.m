@@ -1021,7 +1021,7 @@
 
 - (void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion {
     for (id o in comments) {
-        NSAssert([o isKindOfClass:[NSString class]], @"%@ should is not string", o);
+        NSAssert([o isKindOfClass:[NSString class]], @"%@ is not a string", o);
         return;
     }
     NSDictionary *params = @{@"_method" : @"delete"};
