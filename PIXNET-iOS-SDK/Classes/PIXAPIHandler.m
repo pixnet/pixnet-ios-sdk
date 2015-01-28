@@ -249,9 +249,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:[shouldAuth boolValue] shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
-    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:uploadData parameters:parameters willCacheResult:NO requestCompletion:completion];
-}
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters willCacheResult:(BOOL)willCacheResult requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth) {
         if (kConsumerKey == nil) {
             completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未設定必要參數，請先呼叫 +setConsumerKey:consumerSecret:callbackURL:"]);
@@ -279,9 +276,9 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     if ((httpMethod == nil || [httpMethod isEqualToString:@"GET"]) && parameterString) {
         [urlString appendString:[NSString stringWithFormat:@"?%@", [parameterString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     }
-
+    
     NSURL *requestUrl = [NSURL URLWithString:urlString];
-
+    
     NSMutableURLRequest *urlRequest = [self requestWithURL:requestUrl apiPath:apiPath shouldAuth:shouldAuth httpMethod:httpMethod parameters:parameters];
     if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
         [urlRequest PIXAttachData:uploadData];
@@ -326,7 +323,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                         } else {
                             completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
                         }
-
+                        
                         return;
                     }
                 } else {
@@ -341,7 +338,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 }
             });
         }];
-
+        
     }
 }
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters{
