@@ -542,15 +542,20 @@
                                 completion:(PIXHandlerCompletion)completion;
 
 /**
- *  刪除部落格留言 http://emma.pixnet.cc/blog/comments/:id
+ *  刪除部落格留言 https://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsDelete
  *
  *  @param commentID  *要刪除的留言 ID
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
-                            completion:(PIXHandlerCompletion)completion;
-
-
+                            completion:(PIXHandlerCompletion)completion __deprecated_msg(@"Please use -deleteBlogComments:completion instead.");
+/**
+*  刪除多則部落格留言（需認證） https://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsDelete
+*
+*  @param comments  ＊要刪除的留言 IDs, 由 string 所組成的 array。
+*  @param completion PIXHandlerCompletion
+*/
+-(void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion;
 #pragma mark - Site Blog Categories list
 
 /**

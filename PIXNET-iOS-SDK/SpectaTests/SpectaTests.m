@@ -21,7 +21,7 @@ SpecBegin(SomeBlogAPI)
                 done();
             }];
         });
-        it(@"", ^{
+        it(@"get ", ^{
             NSLog(@"here!");
         });
         afterAll(^{

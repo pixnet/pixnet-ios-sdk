@@ -352,6 +352,11 @@
     [[PIXBlog new] deleteBlogCommentWithCommentID:commentID completion:completion];
 }
 
+- (void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] deleteBlogComments:comments completion:completion];
+}
+
+
 #pragma mark - Site Blog Categories
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group
                                     thumbs:(BOOL)thumb
