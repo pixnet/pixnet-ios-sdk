@@ -38,6 +38,14 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  */
 @interface PIXAPIHandler : NSObject
 #pragma mark class methods
+
+/**
+*  設定這個 APIHandler 連線時間上限，預設為8秒
+*
+*  @param timeoutInterval 連線時間上限秒數
+*/
+- (void)setInternetConnectionTimeoutInterval:(NSTimeInterval)timeoutInterval;
+
 /**
  *  設定 consumer key 及 consumer secret。
  *

@@ -34,7 +34,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 @property (nonatomic, strong) LROAuth2Client *oauth2Client;
 @property (nonatomic, strong) LROAuth2ClientDelegateHandler *oauth2ClientDelegateHandler;
 @property (nonatomic, copy) PIXHandlerCompletion getOAuth2AccessTokenCompletion;
-
+@property (nonatomic, assign) NSTimeInterval timeoutInterval;
 @end
 
 @implementation PIXAPIHandler
@@ -68,6 +68,17 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     return sharedInstance;
 }
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _timeoutInterval = 8;
+    }
+
+    return self;
+}
+-(void)setInternetConnectionTimeoutInterval:(NSTimeInterval)timeoutInterval {
+    _timeoutInterval = timeoutInterval;
+}
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
     kConsumerKey = [aKey copy];
     kConsumerSecret = [aSecret copy];
