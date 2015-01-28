@@ -7,20 +7,26 @@
 
 SpecBegin(SomeBlogAPI)
     describe(@"Blog methods tests", ^{
-        beforeAll(^{
-            it(@"should be login",^AsyncBlock{
-                UserForTest *userForTest = [[UserForTest alloc] init];
-                [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
+        beforeAll(^AsyncBlock {
+            setAsyncSpecTimeout(60 * 60);
+            UserForTest *userForTest = [[UserForTest alloc] init];
+            [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
+            id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
+            UIView *rootView = appDelegate.window.rootViewController.view;
+            UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
+            [rootView addSubview:webView];
+            [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect([PIXNETSDK isAuthed]).to.beTruthy();
                 done();
-                id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
-                UIView *rootView = appDelegate.window.rootViewController.view;
-                UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
-                [rootView addSubview:webView];
-                [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
-
-                    done();
-                }];
-            });
+            }];
+        });
+        it(@"", ^{
+            NSLog(@"here!");
+        });
+        afterAll(^{
+           [PIXNETSDK logout];
+            expect([PIXNETSDK isAuthed]).toNot.beTruthy();
         });
     });
     describe(@"get site categories for article", ^{
