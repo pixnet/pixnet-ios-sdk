@@ -98,24 +98,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     } else {
         [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
     }
-    /*
-     PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
-     switch (authType) {
-     case PIXAuthTypeXAuth:{
-     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
-     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
-     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
-     [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
-     break;
-     }
-     case PIXAuthTypeOAuth2:{
-     [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
-     break;
-     }
-     default:
-     break;
-     }
-     */
+
     //將目前的登入狀態改為 undefined
     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeUndefined forKey:kAuthTypeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -131,28 +114,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     }
     PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
     singleton.getOAuth2AccessTokenCompletion = completion;
-//    if (singleton.oauth2ClientDelegateHandler == nil) {
-//        singleton.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                if (succeed) {
-//                    [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
-//                    [[NSUserDefaults standardUserDefaults] synchronize];
-//                    [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
-//                    completion(YES, accessToken.accessToken, nil);
-//                    return;
-//                } else {
-//                    completion(NO, nil, error);
-//                    return;
-//                }
-//            });
-//        }];
-//        //如果外部開發者有承做 UIWebViewDelegate，就將該 webView delegate 丟給 oauth2Client.webViewDelegate 處理
-//        if (loginView.delegate) {
-//            singleton.oauth2Client.webViewDelegate = loginView.delegate;
-//        }
-//        singleton.oauth2Client.delegate = singleton.oauth2ClientDelegateHandler;
-//    }
-    
     //先檢查是否已有之前已存下來的 token
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
     if (storedToken) {
@@ -160,22 +121,13 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         [[NSUserDefaults standardUserDefaults] synchronize];
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"已有使用者登入中，若要讓另一使用者登入，請先執行 +logout"]);
         return;
-        /*
-         if ([storedToken hasExpired]) {
-         [singleton.oauth2Client refreshAccessToken:storedToken];
-         return;
-         } else {
-         completion(YES, storedToken.accessToken, nil);
-         return;
-         }
-         */
     } else {
         [singleton.oauth2Client authorizeUsingWebView:loginView];
     }
 }
 +(NSString *)filePathForOAuth2AccessToken{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask ,YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
+    NSString *documentsDir = paths[0];
     NSString *path = [documentsDir stringByAppendingPathComponent:@"oauth2token"];
     return path;
 }
@@ -321,11 +273,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     if (uploadData && [uploadData isKindOfClass:[NSData class]]) {
         [urlRequest PIXAttachData:uploadData];
     }
-//    if (uploadData && [uploadData isKindOfClass:[NSArray class]]) {
-//        [urlRequest PIXAttachDatas:uploadData];
-//    }
 
-    
     if (backgroundExec) {
         //這裡要用 NSURLSession
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration backgroundSessionConfiguration:@"PIXBackgroundExec"];
