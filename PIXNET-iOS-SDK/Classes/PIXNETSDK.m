@@ -30,7 +30,7 @@
     [PIXAPIHandler logout];
 }
 +(instancetype)sharedInstance{
-    if (![PIXAPIHandler isConsumerKeyAndSecrectAssigned]) {
+    if (![PIXAPIHandler isConsumerKeyAndSecretAssigned]) {
         NSLog(@"您尚未設定 consumer key 或 consumer secrect");
         return nil;
     }

@@ -17,7 +17,6 @@ static NSString *kCallbackURL;
 #import "LROAuth2Client.h"
 #import "LROAuth2AccessToken.h"
 #import "LROAuth2ClientDelegateHandler.h"
-#import "NSDictionary+QueryString.h"
 #import "PIXURLSessionDelegateHandler.h"
 
 static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
@@ -81,7 +80,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 
 //    kCallbackURL = [callbackURL copy];
 }
-+(BOOL)isConsumerKeyAndSecrectAssigned{
++(BOOL)isConsumerKeyAndSecretAssigned {
     BOOL assigned = YES;
     if (kConsumerKey == nil || kConsumerSecret == nil) {
         assigned = NO;

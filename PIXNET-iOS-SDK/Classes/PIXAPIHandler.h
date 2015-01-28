@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  *
  *  @return consumer key 及 secrect 都已被設定即回傳 YES
  */
-+(BOOL)isConsumerKeyAndSecrectAssigned;
++(BOOL)isConsumerKeyAndSecretAssigned;
 /**
  *  用來判斷 oauth/xauth 是否已成功
  *
