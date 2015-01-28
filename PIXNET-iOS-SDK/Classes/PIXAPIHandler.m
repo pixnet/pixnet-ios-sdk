@@ -73,7 +73,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     if (self) {
         _timeoutInterval = 8;
     }
-
     return self;
 }
 -(void)setInternetConnectionTimeoutInterval:(NSTimeInterval)timeoutInterval {
@@ -405,6 +404,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 //        [request addValue:currentToken.accessToken forHTTPHeaderField:@"access_token"];
     }
     [request setURL:[NSURL URLWithString:urlString]];
+    request.timeoutInterval = _timeoutInterval;
     return request;
 }
 /**

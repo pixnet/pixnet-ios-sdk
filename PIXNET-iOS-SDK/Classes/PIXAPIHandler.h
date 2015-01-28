@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
 #pragma mark class methods
 
 /**
-*  設定這個 APIHandler 連線時間上限，預設為8秒
+*  設定這個 APIHandler 的連線時間上限，預設為8秒
 *
 *  @param timeoutInterval 連線時間上限秒數
 */
