@@ -548,7 +548,7 @@
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
-                            completion:(PIXHandlerCompletion)completion __deprecated_msg(@"Please use -deleteBlogComments:completion instead.");
+                            completion:(PIXHandlerCompletion)completion __deprecated_msg("Please use -deleteBlogComments:completion instead.");
 /**
 *  刪除多則部落格留言（需認證） https://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsDelete
 *
