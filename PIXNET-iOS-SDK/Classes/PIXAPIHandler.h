@@ -143,4 +143,6 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  *  @param completion     succeed = YES 時，表示網路傳輸沒問題，但回傳的資料可能不是你要的
  */
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion;
+
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters timeoutInterval:(NSTimeInterval)timeoutInterval willCacheResult:(BOOL)willCacheResult requestCompletion:(PIXHandlerCompletion)completion;
 @end
