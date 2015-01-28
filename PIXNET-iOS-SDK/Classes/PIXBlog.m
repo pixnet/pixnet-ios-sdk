@@ -1021,8 +1021,10 @@
 
 - (void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion {
     for (id o in comments) {
-        NSAssert([o isKindOfClass:[NSString class]], @"%@ is not a string", o);
-        return;
+        if (![o isKindOfClass:[NSString class]]) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:[NSString stringWithFormat:@"%@ should be string", o]]);
+            return;
+        }
     }
     NSDictionary *params = @{@"_method" : @"delete"};
     NSString *commentsString = [comments componentsJoinedByString:@","];
