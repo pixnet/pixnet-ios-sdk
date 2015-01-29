@@ -77,6 +77,18 @@ SpecBegin(SomeBlogAPI)
                 done();
             }];
         });
+        it(@"set comments as spam", ^AsyncBlock{
+            [[PIXBlog new] updateBlogCommentsSpamWithComments:comments isSpam:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        it(@"set comments as ham", ^AsyncBlock{
+            [[PIXNETSDK new] updateBlogCommentsSpamWithComments:comments isSpam:NO completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
         it(@"delete comments", ^AsyncBlock {
             [[PIXNETSDK new] deleteBlogComments:comments completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();

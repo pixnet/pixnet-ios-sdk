@@ -540,7 +540,7 @@
 */
 - (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
 /**
- *  將留言設為廣告留言/非廣告留言 http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
+ *  將一則留言設為廣告留言/非廣告留言 http://emma.pixnet.cc/blog/comments/:id/mark_spam http://emma.pixnet.cc/blog/comments/:id/mark_ham
  *
  *  @param commentID  *要公開/關閉的留言 ID
  *  @param isSpam     * YSE 為設成廣告留言， NO 為設成非廣告留言
@@ -548,8 +548,19 @@
  */
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
                                     isSpam:(BOOL)isSpam
-                                completion:(PIXHandlerCompletion)completion;
-
+                                completion:(PIXHandlerCompletion)completion __deprecated_msg("use -updateBlogCommentsSpamWithComments:isSpam:completion: instead of this.");;
+/**
+*  將多則留言設為廣告留言/非廣告留言（需認證）
+*  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkSpam
+*  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkHam
+*
+*  @param comments  ＊要公開/關閉的留言，由留言 ID string 組成的 array
+*  @param isSpam     ＊YES 為設成廣告留言， NO 為設成非廣告留言
+*  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
+*/
+- (void)updateBlogCommentsSpamWithComments:(NSArray *)comments
+                                   isSpam:(BOOL)isSpam
+                               completion:(PIXHandlerCompletion)completion;
 /**
  *  刪除部落格留言 https://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsDelete
  *

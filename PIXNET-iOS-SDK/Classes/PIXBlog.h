@@ -541,7 +541,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 */
 - (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
 /**
- *  將留言設為廣告留言/非廣告留言（需認證
+ *  將一則留言設為廣告留言/非廣告留言（需認證
  *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkSpam
  *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkHam
  *
@@ -551,7 +551,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
  */
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
                                     isSpam:(BOOL)isSpam
-                                completion:(PIXHandlerCompletion)completion;
+                                completion:(PIXHandlerCompletion)completion __deprecated_msg("use -updateBlogCommentsSpamWithComments:isSpam:completion: instead of this.");
 
 /**
 *  將多則留言設為廣告留言/非廣告留言（需認證）
@@ -562,7 +562,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param isSpam     ＊YES 為設成廣告留言， NO 為設成非廣告留言
 *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)updateBlogCommentsSpamWithCommens:(NSArray *)comments
+- (void)updateBlogCommentsSpamWithComments:(NSArray *)comments
                                     isSpam:(BOOL)isSpam
                                 completion:(PIXHandlerCompletion)completion;
 /**

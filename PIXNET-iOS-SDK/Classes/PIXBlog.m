@@ -1016,7 +1016,7 @@
     
 }
 
-- (void)updateBlogCommentsSpamWithCommens:(NSArray *)comments isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion {
+- (void)updateBlogCommentsSpamWithComments:(NSArray *)comments isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion {
     if (comments.count < 1 || !comments) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"There is nothing in comments"]);
         return;

@@ -351,12 +351,22 @@
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
                                     isSpam:(BOOL)isSpam
                                 completion:(PIXHandlerCompletion)completion{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[PIXBlog new] updateBlogCommentSpamWithCommentID:commentID isSpam:isSpam completion:completion];
+#pragma clang diagnostic pop
+}
+
+- (void)updateBlogCommentsSpamWithComments:(NSArray *)comments isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] updateBlogCommentsSpamWithComments:comments isSpam:isSpam completion:completion];
 }
 
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
                             completion:(PIXHandlerCompletion)completion{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[PIXBlog new] deleteBlogCommentWithCommentID:commentID completion:completion];
+#pragma clang diagnostic pop
 }
 
 - (void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion {
