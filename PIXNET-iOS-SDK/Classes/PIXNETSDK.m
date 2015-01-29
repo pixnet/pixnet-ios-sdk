@@ -338,7 +338,14 @@
 - (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
                                     isOpen:(BOOL)isOpen
                                 completion:(PIXHandlerCompletion)completion{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[PIXBlog new] updateBlogCommentOpenWithCommentID:commentID isOpen:isOpen completion:completion];
+#pragma clang diagnostic pop
+}
+
+- (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] updateBlogCommentsOpenWithComments:comments isOpen:isOpen completion:completion];
 }
 
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
