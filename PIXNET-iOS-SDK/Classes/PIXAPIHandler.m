@@ -239,9 +239,9 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:[shouldAuth boolValue] shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
-    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:uploadData parameters:parameters timeoutInterval:8 willCacheResult:NO requestCompletion:completion];
+    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:uploadData parameters:parameters timeoutInterval:8 requestCompletion:completion];
 }
--(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters timeoutInterval:(NSTimeInterval)timeoutInterval willCacheResult:(BOOL)willCacheResult requestCompletion:(PIXHandlerCompletion)completion{
+-(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters timeoutInterval:(NSTimeInterval)timeoutInterval requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth) {
         if (kConsumerKey == nil) {
             completion(NO, nil, [NSError PIXErrorWithParameterName:@"您尚未設定必要參數，請先呼叫 +setConsumerKey:consumerSecret:callbackURL:"]);
