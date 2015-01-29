@@ -48,10 +48,11 @@
             return;
         }
     }
-    NSString *path = @"delete";
-    if (isAddToBlock) {
-        path = @"create";
-    }
+    //TODO: emma 上還沒有整批刪除黑名單上人名的功能
+    NSString *path = @"create";
+//    if (!isAddToBlock) {
+//        path = @"delete";
+//    }
     NSDictionary *params = @{@"user":[users componentsJoinedByString:@","]};
     [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blocks/%@", path] httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];

@@ -120,23 +120,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
      */
     PIXArticleSearchTypeKeyword
 };
-#pragma mark - Site Categories
-/**
- *  取得文章全站分類 https://developer.pixnet.pro/#!/doc/pixnetApi/blogSiteCategoriesArticle
- *
- *  @param isIncludeGroups 當被設為 YES 時, 回傳資訊會以全站分類群組為分類
- *  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
- *  @param completion      PIXHandlerCompletion
- */
--(void)getSiteCategoriesForArticleWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
-/**
- *  取得部落格全站分類 https://developer.pixnet.pro/#!/doc/pixnetApi/blogSiteCategoriesBlog
- *
- *  @param isIncludeGroups 當被設為 YES 時, 回傳資訊會以全站分類群組為分類
- *  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
- *  @param completion      PIXHandlerCompletion
- */
--(void)getSiteCategoriesForBlogWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
+
 #pragma mark - Blog information
 /**
  *  列出部落格資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/blog
@@ -580,8 +564,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param completion PIXHandlerCompletion
 */
 -(void)deleteBlogComments:(NSArray *)comments completion:(PIXHandlerCompletion)completion;
-#pragma mark - Site Blog Categories list
-
+#pragma mark - Blog information
 /**
  *  列出部落格全站分類 http://developer.pixnet.pro/#!/doc/pixnetApi/blogSiteCategories
  *
@@ -592,6 +575,27 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 - (void)getBlogCategoriesListIncludeGroups:(BOOL)group
                                     thumbs:(BOOL)thumb
                                 completion:(PIXHandlerCompletion)completion;
-
-
+/**
+*  取得文章全站分類 https://developer.pixnet.pro/#!/doc/pixnetApi/blogSiteCategoriesArticle
+*
+*  @param isIncludeGroups 當被設為 YES 時, 回傳資訊會以全站分類群組為分類
+*  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
+*  @param completion      PIXHandlerCompletion
+*/
+-(void)getSiteCategoriesForArticleWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
+/**
+*  取得部落格全站分類 https://developer.pixnet.pro/#!/doc/pixnetApi/blogSiteCategoriesBlog
+*
+*  @param isIncludeGroups 當被設為 YES 時, 回傳資訊會以全站分類群組為分類
+*  @param isIncludeThumbs 當被設為 YES 時, 回傳分類資訊會包含縮圖
+*  @param completion      PIXHandlerCompletion
+*/
+-(void)getSiteCategoriesForBlogWithGroups:(BOOL)isIncludeGroups isIncludeThumbs:(BOOL)isIncludeThumbs completion:(PIXHandlerCompletion)completion;
+/**
+*  取得某位部落客熱門及相關標籤 https://developer.pixnet.pro/#!/doc/pixnetApi/blogSuggestedTags
+*
+*  @param user 該位部落格的名稱, 必要欄位。
+*  @param completion      PIXHandlerCompletion
+*/
+-(void)getSuggestedTagsWithUser:(NSString *)user completion:(PIXHandlerCompletion)completion;
 @end

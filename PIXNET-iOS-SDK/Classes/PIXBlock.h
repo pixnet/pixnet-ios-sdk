@@ -31,7 +31,7 @@
  */
 -(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
 /**
-*  一次將多個使用者加入黑名單，或自黑名單中移除 http://developer.pixnet.pro/#!/doc/pixnetApi/blocksCreate
+*  一次將多個使用者加入黑名單，http://developer.pixnet.pro/#!/doc/pixnetApi/blocksCreate
 *
 *  @param userName   要被加入黑名單的使用者名稱, 由 string 組成的 array。必要參數
 *  @param isAddToBlock YES 的話是將他們加入黑名單；NO 的話是將他們自黑名單移除。

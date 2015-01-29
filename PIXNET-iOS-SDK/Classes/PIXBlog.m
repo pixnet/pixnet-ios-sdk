@@ -27,6 +27,16 @@
     [[PIXAPIHandler new] callAPI:@"blog/site_categories/blog" httpMethod:@"GET" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
+}
+
+- (void)getSuggestedTagsWithUser:(NSString *)user completion:(PIXHandlerCompletion)completion {
+    if (!user || user.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"user 一定要有資料"]);
+        return;
+    }
+    [[PIXAPIHandler new] callAPI:@"blog/suggested_tags" parameters:@{@"user": user} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
 };
 
 - (void)getBlogInformationWithUserName:(NSString *)userName

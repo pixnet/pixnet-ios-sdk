@@ -10,7 +10,7 @@ SpecBegin(SomeBlogAPI)
     __block NSArray *articles = nil;
     __block NSDictionary *article = nil;
     __block NSMutableArray *comments = nil;
-    describe(@"Blog methods tests", ^{
+    describe(@"These methods are auth needed", ^{
         beforeAll(^AsyncBlock {
             [PIXNETSDK logout];
             setAsyncSpecTimeout(60 * 60);
@@ -95,23 +95,49 @@ SpecBegin(SomeBlogAPI)
                 done();
             }];
         });
+        it(@"set users as block", ^AsyncBlock{
+            [[PIXNETSDK new] updateBlockWithUsers:userForTest.blockUsers isAddToBlock:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        //TODO: 之後會有一支 API 可以一次刪掉黑名單上的使用者
+        it(@"set user1 as not block", ^AsyncBlock{
+            [[PIXNETSDK new] deleteBlockWithUserName:userForTest.blockUsers[0] completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        it(@"set user2 as not block", ^AsyncBlock{
+            [[PIXNETSDK new] deleteBlockWithUserName:userForTest.blockUsers[1] completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
         afterAll(^{
            [PIXNETSDK logout];
             expect([PIXNETSDK isAuthed]).toNot.beTruthy();
         });
     });
-    describe(@"get site categories for article", ^{
+    describe(@"these methods are login unnecessary", ^{
         it(@"should get categories", ^AsyncBlock {
             [[PIXBlog new] getSiteCategoriesForArticleWithGroups:YES isIncludeThumbs:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 done();
             }];
         });
-    });
-    describe(@"get site categories for blog", ^{
         it(@"should get categories", ^AsyncBlock{
             [[PIXBlog new] getSiteCategoriesForBlogWithGroups:YES isIncludeThumbs:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        it(@"get someone's suggested tags", ^AsyncBlock{
+            [[PIXBlog new] getSuggestedTagsWithUser:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    NSLog(@"error: %@", error);
+                }
                 done();
             }];
         });

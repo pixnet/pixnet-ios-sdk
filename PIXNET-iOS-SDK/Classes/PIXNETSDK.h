@@ -204,9 +204,14 @@
  *  @param completion      PIXHandlerCompletion
  */
 - (void)updateBlogInformationWithBlogName:(NSString *)blogName blogDescription:(NSString *)blogDescription keywords:(NSArray *)keywords siteCategoryId:(NSString *)siteCategoryId completion:(PIXHandlerCompletion)completion;
-
+/**
+*  取得某位部落客熱門及相關標籤 https://developer.pixnet.pro/#!/doc/pixnetApi/blogSuggestedTags
+*
+*  @param user 該位部落格的名稱, 必要欄位。
+*  @param completion      PIXHandlerCompletion
+*/
+-(void)getSuggestedTagsWithUser:(NSString *)user completion:(PIXHandlerCompletion)completion;
 #pragma mark - Blog Categories
-//dosen't need Access token
 /**
  *  讀取使用者部落格分類資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/blogCategories
  *
@@ -1239,7 +1244,7 @@
  *  @param userName   要被加入黑名單的 user name
  *  @param completion PIXHandlerCompletion
  */
--(void)createBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
+-(void)createBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion __deprecated_msg("use -updateBlockWithUsers:isAddToBlock:completion: instead of this.");
 /**
  *  移除黑名單 http://developer.pixnet.pro/#!/doc/pixnetApi/blocksDelete
  *
@@ -1247,6 +1252,14 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
+/**
+*  一次將多個使用者加入黑名單 http://developer.pixnet.pro/#!/doc/pixnetApi/blocksCreate
+*
+*  @param userName   要被加入黑名單的使用者名稱, 由 string 組成的 array。必要參數
+*  @param isAddToBlock YES 的話是將他們加入黑名單；NO 的話是將他們自黑名單移除。(目前只能填 YES)
+*  @param completion PIXHandlerCompletion
+*/
+-(void)updateBlockWithUsers:(NSArray *)users isAddToBlock:(BOOL)isAddToBlock completion:(PIXHandlerCompletion)completion;
 /**
  *  取得某個類別底下的文章 http://developer.pixnet.pro/#!/doc/pixnetApi/mainpageBlogCategories
  *

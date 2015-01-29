@@ -100,6 +100,11 @@
 - (void)updateBlogInformationWithBlogName:(NSString *)blogName blogDescription:(NSString *)blogDescription keywords:(NSArray *)keywords siteCategoryId:(NSString *)siteCategoryId completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] updateBlogInformationWithBlogName:blogName blogDescription:blogDescription keywords:keywords siteCategoryId:siteCategoryId completion:completion];
 }
+
+- (void)getSuggestedTagsWithUser:(NSString *)user completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] getSuggestedTagsWithUser:user completion:completion];
+}
+
 #pragma mark - Blog Categories
 
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
@@ -585,11 +590,19 @@
     [[PIXBlock new] getBlocksWithCompletion:completion];
 }
 -(void)createBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [[PIXBlock new] createBlockWithUserName:userName completion:completion];
+#pragma clang diagnostic pop
 }
 -(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     [[PIXBlock new] deleteBlockWithUserName:userName completion:completion];
 }
+
+- (void)updateBlockWithUsers:(NSArray *)users isAddToBlock:(BOOL)isAddToBlock completion:(PIXHandlerCompletion)completion {
+    [[PIXBlock new] updateBlockWithUsers:users isAddToBlock:isAddToBlock completion:completion];
+}
+
 -(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
     [[PIXMainpage new] getMainpageBlogCategoriesWithCategoryID:categoryId articleType:articleType page:page perPage:perPage completion:completion];
 }
