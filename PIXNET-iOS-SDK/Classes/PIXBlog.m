@@ -965,6 +965,20 @@
 }
 
 
+- (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion {
+    if (comments.count < 1) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"There is nothing in comments"]);
+        return;
+    }
+    for (id o in comments) {
+        if (![o isKindOfClass:[NSString class]]) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"elements in comments should be string."]);
+            return;
+        }
+    }
+
+}
+
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
                                     isSpam:(BOOL)isSpam
                                 completion:(PIXHandlerCompletion)completion{

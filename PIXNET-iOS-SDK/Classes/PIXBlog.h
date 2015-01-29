@@ -535,8 +535,8 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsOpen
 *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsClose
 *
-*  @param commentID  ＊要公開/關閉的留言 ID
-*  @param isOpen     ＊YES 為 公開， NO 為 關閉 該則留言
+*  @param commentID  ＊要公開/關閉的留言, 由 string 組成的 array
+*  @param isOpen     ＊YES 為 公開， NO 為 關閉這些留言
 *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
 - (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
