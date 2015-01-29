@@ -966,7 +966,7 @@
 
 
 - (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion {
-    if (comments.count < 1) {
+    if (comments.count < 1 || !comments) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"There is nothing in comments"]);
         return;
     }
@@ -1014,6 +1014,26 @@
                    }
                }];
     
+}
+
+- (void)updateBlogCommentsSpamWithCommens:(NSArray *)comments isSpam:(BOOL)isSpam completion:(PIXHandlerCompletion)completion {
+    if (comments.count < 1 || !comments) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"There is nothing in comments"]);
+        return;
+    }
+    for (id o in comments) {
+        if (![o isKindOfClass:[NSString class]]) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"elements in comments should be string."]);
+            return;
+        }
+    }
+    NSString *statusString = @"mark_ham";
+    if (isSpam) {
+        statusString = @"mark_spam";
+    }
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@/%@", [comments componentsJoinedByString:@","], statusString] httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
 }
 
 - (void)deleteBlogCommentWithCommentID:(NSString *)commentID
