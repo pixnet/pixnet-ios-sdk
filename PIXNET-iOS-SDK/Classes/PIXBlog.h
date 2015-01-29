@@ -518,7 +518,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                            completion:(PIXHandlerCompletion)completion;
 
 /**
- *  將留言設為公開/關閉（需認證） 
+ *  將一則留言設為公開/關閉（需認證）
  *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsOpen
  *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsClose
  *
@@ -528,8 +528,18 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
  */
 - (void)updateBlogCommentOpenWithCommentID:(NSString *)commentID
                                     isOpen:(BOOL)isOpen
-                                completion:(PIXHandlerCompletion)completion;
+                                completion:(PIXHandlerCompletion)completion __deprecated_msg("please use -updateBlogCommentsOpenWithComments:isOpen:completion: instead of this.");
 
+/**
+*  將多則留言設為公開/關閉（需認證）
+*  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsOpen
+*  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsClose
+*
+*  @param commentID  ＊要公開/關閉的留言 ID
+*  @param isOpen     ＊YES 為 公開， NO 為 關閉 該則留言
+*  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
+*/
+- (void)updateBlogCommentsOpenWithComments:(NSArray *)comments isOpen:(BOOL)isOpen completion:(PIXHandlerCompletion)completion;
 /**
  *  將留言設為廣告留言/非廣告留言（需認證
  *  http://developer.pixnet.pro/#!/doc/pixnetApi/blogCommentsMarkSpam
