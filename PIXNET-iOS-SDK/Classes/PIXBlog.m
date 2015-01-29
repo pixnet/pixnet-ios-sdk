@@ -976,7 +976,13 @@
             return;
         }
     }
-
+    NSString *statusString = @"close";
+    if (isOpen) {
+        statusString = @"open";
+    }
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@/%@", [comments componentsJoinedByString:@","], statusString] httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
 }
 
 - (void)updateBlogCommentSpamWithCommentID:(NSString *)commentID
