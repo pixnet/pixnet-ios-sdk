@@ -99,13 +99,12 @@
  *  @param email       email 信箱
  *  @param gender      姓別
  *  @param address     地址
- *  @param phone       電話
  *  @param birth       生日
  *  @param education   教育程度
  *  @param avatar      大頭照
  *  @param completion  PIXHandlerCompletion
  */
--(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
+-(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
 /**
  *  讀取 MIB 資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMib
  *

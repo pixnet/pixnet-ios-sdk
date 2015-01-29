@@ -12,7 +12,7 @@
 
 @implementation PIXUser
 
--(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
+-(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
     if (password == nil || password.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing password"]);
         return;
@@ -42,9 +42,6 @@
     }
     if (address) {
         params[@"address"] = address;
-    }
-    if (phone) {
-        params[@"phone"] = phone;
     }
     if (birth) {
         NSDateFormatter *formatter = [NSDateFormatter new];

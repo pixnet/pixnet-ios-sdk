@@ -57,8 +57,8 @@
 //    [[PIXUser new] getAccountWithCompletion:completion];
     [[PIXUser new] getAccountWithNotification:YES notificationType:PIXUserNotificationTypeAll withBlogInfo:YES withMib:YES withAnalytics:YES completion:completion];
 }
--(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address phone:(NSString *)phone birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
-    [[PIXUser new] updateAccountWithPassword:password displayName:displayName email:email gender:gender address:address phone:phone birth:birth education:education avatar:avatar completion:completion];
+-(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
+    [[PIXUser new] updateAccountWithPassword:password displayName:displayName email:email gender:gender address:address birth:birth education:education avatar:avatar completion:completion];
 }
 -(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getAccountMIBWithHistoryDays:historyDays completion:completion];
