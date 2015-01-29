@@ -685,10 +685,11 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
 }
 
 -(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst wouldUploadInBackground:(BOOL)uploadInBackground completion:(PIXHandlerCompletion)completion{
-    if (elementData==nil || elementData.length==0) {
+    if (elementData==nil || elementData.length==0 || elementData.length>1024*1024*3) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"elementData 參數有誤"]);
         return;
     }
+
     if (setId==nil || setId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"setId 參數有誤"]);
         return;
@@ -730,14 +731,20 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"quadrate"] = [NSString stringWithFormat:@"%i", shouldUseQuadrate];
     params[@"add_watermark"] = [NSString stringWithFormat:@"%i", shouldAddWatermark];
     params[@"element_first"] = [NSString stringWithFormat:@"%i", isElementFirst];
-
-    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:uploadInBackground uploadData:nil parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:uploadInBackground uploadData:nil parameters:params timeoutInterval:60 requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
             completion(NO, nil, error);
         }
     }];
+/*    [[PIXAPIHandler new] callAPI:@"album/elements" httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:uploadInBackground uploadData:nil parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];*/
 }
 -(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst completion:(PIXHandlerCompletion)completion{
     [self createElementWithElementData:elementData setID:setId elementTitle:elementTitle elementDescription:elementDescription tags:tags location:location videoThumbType:videoThumbType picShouldRotateByExif:picShouldRotateByExif videoShouldRotateByMeta:videoShouldRotateByMeta shouldUseQuadrate:shouldUseQuadrate shouldAddWatermark:shouldAddWatermark isElementFirst:isElementFirst wouldUploadInBackground:YES completion:completion];

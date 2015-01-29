@@ -476,9 +476,9 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
  */
 -(void)createElementWithElementData:(NSData *)elementData setID:(NSString *)setId elementTitle:(NSString *)elementTitle elementDescription:(NSString *)elementDescription tags:(NSArray *)tags location:(CLLocationCoordinate2D)location videoThumbType:(PIXVideoThumbType)videoThumbType picShouldRotateByExif:(BOOL)picShouldRotateByExif videoShouldRotateByMeta:(BOOL)videoShouldRotateByMeta shouldUseQuadrate:(BOOL)shouldUseQuadrate shouldAddWatermark:(BOOL)shouldAddWatermark isElementFirst:(BOOL)isElementFirst wouldUploadInBackground:(BOOL)uploadInBackground completion:(PIXHandlerCompletion)completion;
 /**
- *  新增相簿圖片影片 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
+ *  新增相簿圖片影片, 預設上傳時間為60秒 http://developer.pixnet.pro/#!/doc/pixnetApi/albumElementsCreate
  *
- *  @param elementData             必要參數，圖片的 NSData instance。
+ *  @param elementData             必要參數，圖片的 NSData instance。檔案大小不可超過 3MB
  *  @param setId                   必要參數，上傳進哪本相簿的相簿 ID
  *  @param elementTitle            照片(或影片)標題
  *  @param elementDescription      照片(或影片)描述
