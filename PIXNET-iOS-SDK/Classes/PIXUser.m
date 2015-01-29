@@ -143,21 +143,20 @@
     [[PIXAPIHandler new] callAPI:@"account/mib" httpMethod:@"GET" shouldAuth:YES parameters:param requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mib", @"GET", @YES, param, completion] receiver:[PIXAPIHandler new]];
 }
--(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion{
-    if (!realName || realName.length==0 || !idNumber || idNumber.length==0 || !idImageFront || !idImageBack || !email || email.length==0 || !cellPhone || cellPhone.length==0 || !mailAddress || mailAddress.length==0 || !domicile || domicile.length==0) {
+-(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion{
+    if (!realName || realName.length==0 || !idNumber || idNumber.length==0 || !idImageFront || !idImageBack || !email || email.length==0 || !telephone || telephone.length==0 || !cellPhone || cellPhone.length==0 || !mailAddress || mailAddress.length==0 || !domicile || domicile.length==0) {
         completion(NO, nil , [NSError PIXErrorWithParameterName:@"缺乏必要參數"]);
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:10];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:11];
     params[@"id_number"] = idNumber;
 
     params[@"upload_method"] = @"base64";
     params[@"id_image_front"] = [self PIXEncodedStringWithImage:idImageFront];
     params[@"id_image_back"] = [self PIXEncodedStringWithImage:idImageBack];
-
     params[@"email"] = email;
+    params[@"telephone"] = telephone;
     params[@"cellphone"] = cellPhone;
     params[@"mail_address"] = mailAddress;
     params[@"domicile"] = domicile;
@@ -166,12 +165,6 @@
     [[PIXAPIHandler new] callAPI:@"account/mib" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
-    
-//    NSDictionary *upload1 = @{@"id_image_front": UIImageJPEGRepresentation(idImageFront, 1.0)};
-//    NSDictionary *upload2 = @{@"id_image_back": UIImageJPEGRepresentation(idImageBack, 1.0)};
-//    NSArray *uploads = @[upload1, upload2];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account/mib", @"POST", @YES, uploads, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {
@@ -219,7 +212,6 @@
     [[PIXAPIHandler new] callAPI:@"account/analytics" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/analytics", @"GET", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 -(void)updateAccountPasswordWithOriginalPassword:(NSString *)originalPassword newPassword:(NSString *)newPassword completion:(PIXHandlerCompletion)completion{
     if (!originalPassword || originalPassword.length==0) {
@@ -234,6 +226,5 @@
     [[PIXAPIHandler new] callAPI:@"account/password" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"account/password", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 @end

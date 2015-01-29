@@ -131,13 +131,14 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param idImageFront  身份證正面，必要欄位。
  *  @param idImageBack   身份證反面，必要欄位。
  *  @param email         email address，必要欄位。
+ *  @param telephone     電話號碼，必要欄位
  *  @param cellPhone     手機號碼，必要欄位。
  *  @param mailAddress   支票寄送地址，必要欄位。
  *  @param domicile      戶籍地址，必要欄位。
  *  @param enableVideoAd 是否開啟影音廣告。
  *  @param completion    PIXHandlerCompletion
  */
--(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion;
+-(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion;
 /**
  *  取得 MIB 某個版位的資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositions
  *

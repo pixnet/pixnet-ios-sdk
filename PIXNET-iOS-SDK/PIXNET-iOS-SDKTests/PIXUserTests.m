@@ -89,7 +89,7 @@
 }
 -(void)createMIB{
     __block BOOL done = NO;
-    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"ROC_ID_front.jpg"] idImageBack:[UIImage imageNamed:@"ROC_ID_back.jpg"] email:@"test@pixnet.tw" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"ROC_ID_front.jpg"] idImageBack:[UIImage imageNamed:@"ROC_ID_back.jpg"] email:@"test@pixnet.tw" telephone:@"037778888" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createAccountMIBWithRealName";
         if (succeed) {
             NSLog(@"%@, succeed", methodName);
