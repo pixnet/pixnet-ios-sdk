@@ -102,6 +102,14 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  */
 -(void)getAccountWithNotification:(BOOL)withNotification notificationType:(PIXUserNotificationType)notificationType withBlogInfo:(BOOL)withBlogInfo withMib:(BOOL)withMib withAnalytics:(BOOL)withAnalytics completion:(PIXHandlerCompletion)completion;
 /**
+ *  向某個手機號碼送出認證碼 https://developer.pixnet.pro/#!/doc/pixnetApi/accountCellphoneVerification
+ *
+ *  @param cellphone   手機號碼，不需要加開頭的0，必要參數
+ *  @param countryCode 電話國碼，並要加上加號，例如台灣是 +886，美國是 +1。國碼請參照 http://countrycode.org/ 的 country code 欄位，必要參數。
+ *  @param completion  PIXHandlerCompletion
+ */
+-(void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion;
+/**
  *  修改使用者資訊,需認證 http://developer.pixnet.pro/#!/doc/pixnetApi/accountInfo
  *
  *  @param password    使用者密碼，必要欄位

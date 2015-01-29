@@ -12,6 +12,13 @@
 
 @implementation PIXUser
 
+- (void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion {
+    if (!cellphone || cellphone.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"cellphone 是必要參數"]);
+        return;
+    }
+}
+
 -(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
     if (password == nil || password.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing password"]);
