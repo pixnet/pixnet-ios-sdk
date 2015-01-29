@@ -64,8 +64,20 @@ SpecBegin(SomeBlogAPI)
                 done();
             }];
         });
-        it(@"delete comments", ^AsyncBlock {
+        it(@"set comments as close", ^AsyncBlock{
             expect(comments.count == 2).to.beTruthy();
+            [[PIXBlog new] updateBlogCommentsOpenWithComments:comments isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        it(@"set comments as open", ^AsyncBlock{
+            [[PIXNETSDK new] updateBlogCommentsOpenWithComments:comments isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        it(@"delete comments", ^AsyncBlock {
             [[PIXNETSDK new] deleteBlogComments:comments completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 done();
