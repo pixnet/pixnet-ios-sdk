@@ -61,6 +61,10 @@
     [[PIXUser new] updateAccountWithPassword:password displayName:displayName email:email gender:gender address:address birth:birth education:education avatar:avatar completion:completion];
 }
 
+-(void)getNotificationsWiothCompletion:(PIXHandlerCompletion)completion {
+    [[PIXUser new] getNotificationsWiothNotificationType:PIXUserNotificationTypeAll limit:10 isSkipSetRead:NO completion:completion];
+}
+
 - (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
     [[PIXUser new] getCellphoneVerificationStatus:completion];
 }

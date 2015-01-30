@@ -157,6 +157,38 @@
 //    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account", @"GET", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
 }
 
+-(void)getNotificationsWiothNotificationType:(PIXUserNotificationType)notificationType limit:(NSUInteger)limit isSkipSetRead:(BOOL)isSkipSetRead completion:(PIXHandlerCompletion)completion {
+    NSString *typeString = nil;
+    NSUInteger paramsCount = 3;
+    switch (notificationType) {
+        case PIXUserNotificationTypeFriend:
+            typeString = @"friend";
+            break;
+        case PIXUserNotificationTypeSystem:
+            typeString = @"system";
+            break;
+        case PIXUserNotificationTypeComment:
+            typeString = @"comments";
+            break;
+        case PIXUserNotificationTypeAppMarket:
+            typeString = @"appmarket";
+            break;
+        case PIXUserNotificationTypeAll:
+        default:
+            paramsCount = 2;
+            break;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:paramsCount];
+    params[@"limit"] = [NSString stringWithFormat:@"%u", limit];
+    params[@"skip_set_read"] = [NSString stringWithFormat:@"%i", isSkipSetRead];
+    if (typeString) {
+        params[@"notification_type"] = typeString;
+    }
+    [[PIXAPIHandler new] callAPI:@"account/notifications" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
+
 - (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
     [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];

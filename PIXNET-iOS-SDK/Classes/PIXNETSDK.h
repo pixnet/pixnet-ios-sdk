@@ -106,6 +106,12 @@
  */
 -(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
 /**
+* 讀取痞客邦給使用者的通知，需認證 https://developer.pixnet.pro/#!/doc/pixnetApi/accountNotifications
+*
+* @param notificationType   要讀取哪種類型的通知，預設為全部(PIXUserNotificationTypeAll)。
+* */
+-(void)getNotificationsWiothCompletion:(PIXHandlerCompletion)completion;
+/**
 * 取得使用者手機認證狀態
 *
 * @param completion       PIXHandlerCompletion

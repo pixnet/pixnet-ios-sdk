@@ -114,6 +114,18 @@ SpecBegin(SomeBlogAPI)
                 done();
             }];
         });
+        it(@"get notifications with default parameters", ^AsyncBlock{
+            [[PIXNETSDK new] getNotificationsWiothCompletion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
+        it(@"get notifications with custom parameters", ^AsyncBlock{
+            [[PIXUser new] getNotificationsWiothNotificationType:PIXUserNotificationTypeSystem limit:1 isSkipSetRead:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });
         afterAll(^{
            [PIXNETSDK logout];
             expect([PIXNETSDK isAuthed]).toNot.beTruthy();

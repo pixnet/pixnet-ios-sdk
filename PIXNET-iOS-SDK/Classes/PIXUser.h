@@ -102,6 +102,14 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  */
 -(void)getAccountWithNotification:(BOOL)withNotification notificationType:(PIXUserNotificationType)notificationType withBlogInfo:(BOOL)withBlogInfo withMib:(BOOL)withMib withAnalytics:(BOOL)withAnalytics completion:(PIXHandlerCompletion)completion;
 /**
+* 讀取痞客邦給使用者的通知，需認證 https://developer.pixnet.pro/#!/doc/pixnetApi/accountNotifications
+*
+* @param notificationType   要讀取哪種類型的通知，預設為全部(PIXUserNotificationTypeAll)。
+* @param limit              要傳回幾筆通知，預設為10筆。
+* @param isSkipSetRead      不要將收下來的通知設為已讀。如果 YES，該則通知將保持未讀取的狀態。
+* */
+-(void)getNotificationsWiothNotificationType:(PIXUserNotificationType)notificationType limit:(NSUInteger)limit isSkipSetRead:(BOOL)isSkipSetRead completion:(PIXHandlerCompletion)completion;
+/**
 * 取得使用者手機認證狀態
 *
 * @param completion       PIXHandlerCompletion
