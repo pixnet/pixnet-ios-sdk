@@ -11,7 +11,7 @@
 #import "NSObject+PIXCategory.h"
 
 @implementation PIXUser
-
+//TODO: 待後台修 bug
 - (void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion {
     if (!cellphone || cellphone.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"cellphone 是必要參數"]);
@@ -26,7 +26,7 @@
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
-
+//TODO: 待後台修 bug
 - (void)verifyCodeForCellphone:(NSString *)code completion:(PIXHandlerCompletion)completion {
     if (!code || code.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"code 為必要參數"]);
@@ -188,7 +188,7 @@
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
-
+//TODO:待後台修 bug
 - (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
     [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
