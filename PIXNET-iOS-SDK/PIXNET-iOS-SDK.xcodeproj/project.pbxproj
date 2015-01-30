@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1343C9ED7257BCE2BBB259C4 /* libPods-SpectaTestVerifyCellphone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C40B17329AE5DA95A9FEF05D /* libPods-SpectaTestVerifyCellphone.a */; };
 		4A81A744194FF1E7004DE00E /* PIXBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A743194FF1E7004DE00E /* PIXBlock.m */; };
 		4A81A746195014C0004DE00E /* PIXBlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A745195014C0004DE00E /* PIXBlockTests.m */; };
 		4A81A74819503FBF004DE00E /* PIXMainpageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A74719503FBF004DE00E /* PIXMainpageTests.m */; };
@@ -33,6 +34,8 @@
 		82FAA59D51D7A3B33B16877E /* PIXOAuth2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */; };
 		82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */; };
 		82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */; };
+		CE01963F1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */; };
+		CE0196451A7B3767000D0709 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CE2588901977D59500CE3604 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C9218D2ECF700D14D0C /* XCTest.framework */; };
 		CE2588911977D59500CE3604 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CE2588921977D59500CE3604 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
@@ -88,6 +91,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CE0196401A7B2DB4000D0709 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEDB7C7518D2ECF700D14D0C;
+			remoteInfo = "PIXNET-iOS-SDK";
+		};
 		CE25889C1977D59500CE3604 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
@@ -112,9 +122,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		21AA19AFDA5788B5025392E9 /* Pods-SpectaTestVerifyCellphone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestVerifyCellphone.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestVerifyCellphone/Pods-SpectaTestVerifyCellphone.release.xcconfig"; sourceTree = "<group>"; };
 		2A14F9AAF7BF5DE968244600 /* libPods-SpectaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		306AA7DFF3AD0190B4125D0D /* Pods-SpectaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTests/Pods-SpectaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3579548D2E7221A1D76A0CB5 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		396E62EC0EA67BC66FBF6897 /* Pods-SpectaTestVerifyCellphone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestVerifyCellphone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestVerifyCellphone/Pods-SpectaTestVerifyCellphone.debug.xcconfig"; sourceTree = "<group>"; };
 		4A18353F1D27682A155A8EDA /* Pods-SpectaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTests/Pods-SpectaTests.release.xcconfig"; sourceTree = "<group>"; };
 		4A81A742194FF1E7004DE00E /* PIXBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXBlock.h; path = Classes/PIXBlock.h; sourceTree = "<group>"; };
 		4A81A743194FF1E7004DE00E /* PIXBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXBlock.m; path = Classes/PIXBlock.m; sourceTree = "<group>"; };
@@ -133,6 +145,10 @@
 		82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_front.jpg; sourceTree = "<group>"; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A66BFFCA0CF5009B55A37BA4 /* Pods-KiwiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiTests/Pods-KiwiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C40B17329AE5DA95A9FEF05D /* libPods-SpectaTestVerifyCellphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTestVerifyCellphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE01963A1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectaTestVerifyCellphone.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE01963D1A7B2DB4000D0709 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpectaTestVerifyCellphone.m; sourceTree = "<group>"; };
 		CE25888F1977D59500CE3604 /* KiwiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE2588951977D59500CE3604 /* KiwiTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KiwiTests-Info.plist"; sourceTree = "<group>"; };
 		CE2588971977D59500CE3604 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -219,6 +235,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CE0196371A7B2DB4000D0709 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1343C9ED7257BCE2BBB259C4 /* libPods-SpectaTestVerifyCellphone.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE25888C1977D59500CE3604 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,8 +296,27 @@
 				F9304BADE0392AAC667400D5 /* Pods-KiwiTests.release.xcconfig */,
 				306AA7DFF3AD0190B4125D0D /* Pods-SpectaTests.debug.xcconfig */,
 				4A18353F1D27682A155A8EDA /* Pods-SpectaTests.release.xcconfig */,
+				396E62EC0EA67BC66FBF6897 /* Pods-SpectaTestVerifyCellphone.debug.xcconfig */,
+				21AA19AFDA5788B5025392E9 /* Pods-SpectaTestVerifyCellphone.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CE01963B1A7B2DB4000D0709 /* SpectaTestVerifyCellphone */ = {
+			isa = PBXGroup;
+			children = (
+				CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */,
+				CE01963C1A7B2DB4000D0709 /* Supporting Files */,
+			);
+			path = SpectaTestVerifyCellphone;
+			sourceTree = "<group>";
+		};
+		CE01963C1A7B2DB4000D0709 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE01963D1A7B2DB4000D0709 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		CE2588931977D59500CE3604 /* KiwiTests */ = {
@@ -325,6 +368,7 @@
 				CE2588931977D59500CE3604 /* KiwiTests */,
 				CEDD93C81A77673900C7C34B /* PIXNET-iOS-SDK SpectaTests */,
 				CEDD93D71A7767B600C7C34B /* SpectaTests */,
+				CE01963B1A7B2DB4000D0709 /* SpectaTestVerifyCellphone */,
 				CEDB7C7818D2ECF700D14D0C /* Frameworks */,
 				CEDB7C7718D2ECF700D14D0C /* Products */,
 				140ABE4DE58A12CC0BBA2B30 /* Pods */,
@@ -338,6 +382,7 @@
 				CEDB7C9118D2ECF700D14D0C /* PIXNET-iOS-SDKTests.xctest */,
 				CE25888F1977D59500CE3604 /* KiwiTests.xctest */,
 				CEDD93D61A7767B600C7C34B /* SpectaTests.xctest */,
+				CE01963A1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -353,6 +398,7 @@
 				9CDB24BB1BB342F89ED09330 /* libPods.a */,
 				4EC36C5DA27D42EDB5703007 /* libPods-KiwiTests.a */,
 				2A14F9AAF7BF5DE968244600 /* libPods-SpectaTests.a */,
+				C40B17329AE5DA95A9FEF05D /* libPods-SpectaTestVerifyCellphone.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -513,6 +559,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CE0196391A7B2DB4000D0709 /* SpectaTestVerifyCellphone */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE0196421A7B2DB4000D0709 /* Build configuration list for PBXNativeTarget "SpectaTestVerifyCellphone" */;
+			buildPhases = (
+				A5857FCB7B00824794D2661E /* Check Pods Manifest.lock */,
+				CE0196361A7B2DB4000D0709 /* Sources */,
+				CE0196371A7B2DB4000D0709 /* Frameworks */,
+				CE0196381A7B2DB4000D0709 /* Resources */,
+				0AB7763433776619CEEE426B /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE0196411A7B2DB4000D0709 /* PBXTargetDependency */,
+			);
+			name = SpectaTestVerifyCellphone;
+			productName = SpectaTestVerifyCellphone;
+			productReference = CE01963A1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE25888E1977D59500CE3604 /* KiwiTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE2588A01977D59500CE3604 /* Build configuration list for PBXNativeTarget "KiwiTests" */;
@@ -599,6 +665,10 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Dolphin Su";
 				TargetAttributes = {
+					CE0196391A7B2DB4000D0709 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = CEDB7C7518D2ECF700D14D0C;
+					};
 					CE25888E1977D59500CE3604 = {
 						TestTargetID = CEDB7C7518D2ECF700D14D0C;
 					};
@@ -628,11 +698,19 @@
 				CEDF6BD418F51DB7001750D3 /* Documentation */,
 				CE25888E1977D59500CE3604 /* KiwiTests */,
 				CEDD93D51A7767B600C7C34B /* SpectaTests */,
+				CE0196391A7B2DB4000D0709 /* SpectaTestVerifyCellphone */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CE0196381A7B2DB4000D0709 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE25888D1977D59500CE3604 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -673,6 +751,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0AB7763433776619CEEE426B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpectaTestVerifyCellphone/Pods-SpectaTestVerifyCellphone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		24C95BDB641BB7619492125E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -748,6 +841,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KiwiTests/Pods-KiwiTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		A5857FCB7B00824794D2661E /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		B202F381CB0C46B092D36BC3 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -779,6 +887,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CE0196361A7B2DB4000D0709 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE0196451A7B3767000D0709 /* UserForTest.m in Sources */,
+				CE01963F1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE25888B1977D59500CE3604 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -852,6 +969,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CE0196411A7B2DB4000D0709 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
+			targetProxy = CE0196401A7B2DB4000D0709 /* PBXContainerItemProxy */;
+		};
 		CE25889D1977D59500CE3604 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
@@ -897,6 +1019,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CE0196431A7B2DB4000D0709 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 396E62EC0EA67BC66FBF6897 /* Pods-SpectaTestVerifyCellphone.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpectaTestVerifyCellphone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+			};
+			name = Debug;
+		};
+		CE0196441A7B2DB4000D0709 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21AA19AFDA5788B5025392E9 /* Pods-SpectaTestVerifyCellphone.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SpectaTestVerifyCellphone/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+			};
+			name = Release;
+		};
 		CE25889E1977D59500CE3604 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A66BFFCA0CF5009B55A37BA4 /* Pods-KiwiTests.debug.xcconfig */;
@@ -1138,6 +1304,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CE0196421A7B2DB4000D0709 /* Build configuration list for PBXNativeTarget "SpectaTestVerifyCellphone" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE0196431A7B2DB4000D0709 /* Debug */,
+				CE0196441A7B2DB4000D0709 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE2588A01977D59500CE3604 /* Build configuration list for PBXNativeTarget "KiwiTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

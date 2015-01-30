@@ -16,5 +16,6 @@
 @property (nonatomic, copy) NSString *callbaclURL;
 @property (nonatomic, copy) NSArray *friendNames;
 @property (nonatomic, copy) NSString *subscriptionUser;
-@property (nonatomic, copy) NSArray *blockUsers;
+@property (nonatomic, strong) NSArray *blockUsers;
+@property (nonatomic, copy) NSString *cellphone;
 @end

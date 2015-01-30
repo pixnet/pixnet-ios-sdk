@@ -102,13 +102,26 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  */
 -(void)getAccountWithNotification:(BOOL)withNotification notificationType:(PIXUserNotificationType)notificationType withBlogInfo:(BOOL)withBlogInfo withMib:(BOOL)withMib withAnalytics:(BOOL)withAnalytics completion:(PIXHandlerCompletion)completion;
 /**
+* 取得使用者手機認證狀態
+*
+* @param completion       PIXHandlerCompletion
+* */
+-(void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion;
+/**
  *  向某個手機號碼送出認證碼 https://developer.pixnet.pro/#!/doc/pixnetApi/accountCellphoneVerification
  *
  *  @param cellphone   手機號碼，不需要加開頭的0，必要參數
- *  @param countryCode 電話國碼，並要加上加號，例如台灣是 +886，美國是 +1。國碼請參照 http://countrycode.org/ 的 country code 欄位，必要參數。
+ *  @param countryCode 電話國碼，並要在最前面加上 + ，例如台灣是 +886，美國是 +1。國碼請參照 https://gist.github.com/jnlin/0847cd6f5db2fe510270，必要參數。
  *  @param completion  PIXHandlerCompletion
  */
 -(void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion;
+/**
+* 手機收到認證碼之後，用這支 API 向後台傳送認證碼 https://developer.pixnet.pro/#!/doc/pixnetApi/accountCellphoneVerification
+*
+* @param code 簡訊上的認證碼，必要參數
+* @param completion PIXHandlerCompletion
+* */
+-(void)verifyCodeForCellphone:(NSString *)code completion:(PIXHandlerCompletion)completion;
 /**
  *  修改使用者資訊,需認證 http://developer.pixnet.pro/#!/doc/pixnetApi/accountInfo
  *

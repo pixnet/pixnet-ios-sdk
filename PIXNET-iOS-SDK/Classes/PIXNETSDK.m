@@ -60,6 +60,21 @@
 -(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] updateAccountWithPassword:password displayName:displayName email:email gender:gender address:address birth:birth education:education avatar:avatar completion:completion];
 }
+
+- (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
+    [[PIXUser new] getCellphoneVerificationStatus:completion];
+}
+
+
+- (void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion {
+    [[PIXUser new] verifyCellphone:cellphone countryCode:countryCode completion:completion];
+}
+
+- (void)verifyCodeForCellphone:(NSString *)code completion:(PIXHandlerCompletion)completion {
+    [[PIXUser new] verifyCodeForCellphone:code completion:completion];
+}
+
+
 -(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getAccountMIBWithHistoryDays:historyDays completion:completion];
 }

@@ -48,6 +48,20 @@
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE0196391A7B2DB4000D0709"
+               BuildableName = "SpectaTestVerifyCellphone.xctest"
+               BlueprintName = "SpectaTestVerifyCellphone"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -122,6 +136,16 @@
                BlueprintIdentifier = "CEDD93D51A7767B600C7C34B"
                BuildableName = "SpectaTests.xctest"
                BlueprintName = "SpectaTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE0196391A7B2DB4000D0709"
+               BuildableName = "SpectaTestVerifyCellphone.xctest"
+               BlueprintName = "SpectaTestVerifyCellphone"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -106,6 +106,26 @@
  */
 -(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion;
 /**
+* 取得使用者手機認證狀態
+*
+* @param completion       PIXHandlerCompletion
+* */
+-(void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion;
+/**
+*  向某個手機號碼送出認證碼 https://developer.pixnet.pro/#!/doc/pixnetApi/accountCellphoneVerification
+*
+*  @param cellphone   手機號碼，不需要加開頭的0，必要參數
+*  @param countryCode 電話國碼，並要在最前面加上 + ，例如台灣是 +886，美國是 +1。國碼請參照 https://gist.github.com/jnlin/0847cd6f5db2fe510270，必要參數。
+*  @param completion  PIXHandlerCompletion
+*/
+-(void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion;
+/**
+* 手機收到認證碼之後，用這支 API 向後台傳送認證碼 https://developer.pixnet.pro/#!/doc/pixnetApi/accountCellphoneVerification
+* @param code 簡訊上的認證碼，必要參數
+* @param completion PIXHandlerCompletion
+* */
+-(void)verifyCodeForCellphone:(NSString *)code completion:(PIXHandlerCompletion)completion;
+/**
  *  讀取 MIB 資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMib
  *
  *  @param historyDays 列出指定天數的歷史收益資訊，最少 1 天，最多 45 天，必要參數。(在 SDK 裡不做最大天數的檢查，因為這個後台改天數限制很快，但 SDK 若是跟著改，外部開發者 app 就要重上架)

@@ -17,7 +17,27 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"cellphone 是必要參數"]);
         return;
     }
+    if (!countryCode || countryCode.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"countryCode 是必要參數"]);
+        return;
+    }
+    NSDictionary *params = @{@"cellphone": cellphone, @"calling_code": countryCode};
+    [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
 }
+
+- (void)verifyCodeForCellphone:(NSString *)code completion:(PIXHandlerCompletion)completion {
+    if (!code || code.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"code 為必要參數"]);
+        return;
+    }
+    NSDictionary *params = @{@"code": code};
+    [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
+
 
 -(void)updateAccountWithPassword:(NSString *)password displayName:(NSString *)displayName email:(NSString *)email gender:(PIXUserGender)gender address:(NSString *)address birth:(NSDate *)birth education:(PIXUserEducation)education avatar:(UIImage *)avatar completion:(PIXHandlerCompletion)completion{
     if (password == nil || password.length == 0) {
@@ -136,6 +156,13 @@
     }];
 //    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:uploadData:parameters:requestCompletion:) parameters:@[@"account", @"GET", @YES, [NSNull null], params, completion] receiver:[PIXAPIHandler new]];
 }
+
+- (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
+    [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
+
 
 -(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion{
     if (historyDays<1) {
