@@ -9,6 +9,7 @@ SpecBegin(SomeBlogAPI)
     __block UserForTest *userForTest = nil;
     __block NSArray *articles = nil;
     __block NSDictionary *article = nil;
+    __block NSArray *notifications = nil;
     __block NSMutableArray *comments = nil;
     describe(@"These methods are auth needed", ^{
         beforeAll(^AsyncBlock {
@@ -117,6 +118,9 @@ SpecBegin(SomeBlogAPI)
         it(@"get notifications with default parameters", ^AsyncBlock{
             [[PIXNETSDK new] getNotificationsWiothCompletion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
+                if (succeed) {
+                    notifications = result[@"notifications"];
+                }
                 done();
             }];
         });
@@ -125,6 +129,12 @@ SpecBegin(SomeBlogAPI)
                 expect(succeed).to.beTruthy();
                 done();
             }];
+        });
+        it(@"set one notification as read", ^AsyncBlock{
+            [[PIXUser new] updateOneNotificationAsRead:notifications[0][@"id"] completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+            }];
+            done();
         });
         afterAll(^{
            [PIXNETSDK logout];

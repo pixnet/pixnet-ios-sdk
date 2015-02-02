@@ -110,6 +110,12 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
 * */
 -(void)getNotificationsWiothNotificationType:(PIXUserNotificationType)notificationType limit:(NSUInteger)limit isSkipSetRead:(BOOL)isSkipSetRead completion:(PIXHandlerCompletion)completion;
 /**
+* 將某則通知設為已讀
+*
+* @param notificationID 將設為已讀的那則通知的 ID
+* */
+-(void)updateOneNotificationAsRead:(NSString *)notificationID completion:(PIXHandlerCompletion)completion;
+/**
 * 取得使用者手機認證狀態
 *
 * @param completion       PIXHandlerCompletion

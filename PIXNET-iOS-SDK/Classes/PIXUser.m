@@ -188,6 +188,17 @@
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
+
+- (void)updateOneNotificationAsRead:(NSString *)notificationID completion:(PIXHandlerCompletion)completion {
+    if (!notificationID || notificationID.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"notificationID 參數有誤"]);
+        return;
+    }
+    [[PIXAPIHandler new] callAPI:@"account" httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
+}
+
 //TODO:待後台修 bug
 - (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
     [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
