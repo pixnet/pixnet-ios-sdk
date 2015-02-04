@@ -38,6 +38,7 @@ describe(@"These methods are auth needed", ^{
     it(@"get cellphone verification status", ^AsyncBlock{
         [[PIXNETSDK new] getCellphoneVerificationStatus:^(BOOL succeed, id result, NSError *error) {
             expect(succeed).to.beTruthy();
+
             isVerified = [result[@"cellphone_verified"] boolValue];
             done();
         }];
