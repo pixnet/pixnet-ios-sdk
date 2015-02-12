@@ -1277,12 +1277,14 @@
  *  @param userName   要從黑名單移除的 user name
  *  @param completion PIXHandlerCompletion
  */
--(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion;
+-(void)deleteBlockWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion __deprecated_msg("use -updateBlockWithUsers:isAddToBlock:completion: instead of this.");;
 /**
-*  一次將多個使用者加入黑名單 http://developer.pixnet.pro/#!/doc/pixnetApi/blocksCreate
+*  一次將多個使用者加入黑名單
+*  http://developer.pixnet.pro/#!/doc/pixnetApi/blocksCreate
+*  http://developer.pixnet.pro.34669.alpha.pixnet/#!/doc/pixnetApi/blocksDelete
 *
 *  @param userName   要被加入黑名單的使用者名稱, 由 string 組成的 array。必要參數
-*  @param isAddToBlock YES 的話是將他們加入黑名單；NO 的話是將他們自黑名單移除。(目前只能填 YES)
+*  @param isAddToBlock YES 的話是將他們加入黑名單；NO 的話是將他們自黑名單移除。
 *  @param completion PIXHandlerCompletion
 */
 -(void)updateBlockWithUsers:(NSArray *)users isAddToBlock:(BOOL)isAddToBlock completion:(PIXHandlerCompletion)completion;

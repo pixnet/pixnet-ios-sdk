@@ -102,8 +102,7 @@ SpecBegin(SomeBlogAPI)
                 done();
             }];
         });
-        //TODO: 之後會有一支 API 可以一次刪掉黑名單上的使用者
-        it(@"set user1 as not block", ^AsyncBlock{
+/*        it(@"set user1 as not block", ^AsyncBlock{
             [[PIXNETSDK new] deleteBlockWithUserName:userForTest.blockUsers[0] completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 done();
@@ -111,6 +110,12 @@ SpecBegin(SomeBlogAPI)
         });
         it(@"set user2 as not block", ^AsyncBlock{
             [[PIXNETSDK new] deleteBlockWithUserName:userForTest.blockUsers[1] completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                done();
+            }];
+        });*/
+        it(@"set users as not block", ^AsyncBlock{
+            [[PIXNETSDK new] updateBlockWithUsers:userForTest.blockUsers isAddToBlock:NO completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 done();
             }];

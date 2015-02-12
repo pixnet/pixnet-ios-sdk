@@ -11,7 +11,6 @@
 #import "NSObject+PIXCategory.h"
 
 @implementation PIXUser
-//TODO: 待後台修 bug
 - (void)verifyCellphone:(NSString *)cellphone countryCode:(NSString *)countryCode completion:(PIXHandlerCompletion)completion {
     if (!cellphone || cellphone.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"cellphone 是必要參數"]);
