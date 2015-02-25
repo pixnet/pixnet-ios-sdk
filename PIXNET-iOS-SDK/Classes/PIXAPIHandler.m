@@ -456,7 +456,9 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[PIXAPIHandler sharedInstance].userDictionaryForXAuth];
     if (params) {
-        [dict addEntriesFromDictionary:params];
+        [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
+            dict[key] = obj;
+        }];
     }
     NSMutableURLRequest *request = nil;
     NSString *oPath = [NSString stringWithFormat:@"/%@", path];
