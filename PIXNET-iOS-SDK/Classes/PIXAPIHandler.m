@@ -38,14 +38,16 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 @end
 
 @implementation PIXAPIHandler
+NSString *userID = nil;
+NSString *userPassword = nil;
 
 +(instancetype)sharedInstance{
     static PIXAPIHandler *sharedInstance;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[PIXAPIHandler alloc] init];
-        sharedInstance.oauth2Client = [[LROAuth2Client alloc] initWithClientID:[kConsumerKey copy]
-                                                                        secret:[kConsumerSecret copy]
+        sharedInstance.oauth2Client = [[LROAuth2Client alloc] initWithClientID:kConsumerKey
+                                                                        secret:kConsumerSecret
                                                                    redirectURL:[NSURL URLWithString:kCallbackURL]];
         sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
         sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
@@ -79,13 +81,13 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     _timeoutInterval = timeoutInterval;
 }
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
-    kConsumerKey = [aKey copy];
-    kConsumerSecret = [aSecret copy];
+    kConsumerKey = aKey;
+    kConsumerSecret = aSecret;
     kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", kConsumerKey];
 }
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL{
-    kConsumerKey = [aKey copy];
-    kConsumerSecret = [aSecret copy];
+    kConsumerKey = aKey;
+    kConsumerSecret = aSecret;
     kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", kConsumerKey];
 
 //    kCallbackURL = [callbackURL copy];
@@ -99,12 +101,12 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 }
 
 +(void)logout{
-    NSString *identifierForXAuth = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
+    NSString *identifierForXAuth = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
     if (identifierForXAuth) {
-        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenIdentifier copy]];
-        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kOauthTokenSecretIdentifier copy]];
-        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
-        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kOauthTokenIdentifier];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kOauthTokenSecretIdentifier];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserNameIdentifier];
+        [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserPasswordIdentifier];
     } else {
         [[NSFileManager defaultManager] removeItemAtPath:[PIXAPIHandler filePathForOAuth2AccessToken] error:nil];
     }
@@ -112,6 +114,14 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     //將目前的登入狀態改為 undefined
     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeUndefined forKey:kAuthTypeKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
+
+    //移除 user ID 及 password
+    if (userPassword) {
+        userPassword = nil;
+    }
+    if (userID) {
+        userID = nil;
+    }
 }
 
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
@@ -148,18 +158,18 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         return;
     }
 
-    NSString *localUser = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserNameIdentifier copy]];
-    NSString *localPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserPasswordIdentifier copy]];
+    NSString *localUser = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kUserNameIdentifier];
+    NSString *localPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kUserPasswordIdentifier];
     if ((localUser!=nil && ![localUser isEqualToString:userName]) || (localPassword!=nil && ![localPassword isEqualToString:password])) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"前一個使用者尚未登出，請先執行 +logout"]);
         return;
     }
-    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserNameIdentifier copy] string:userName];
-    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kUserPasswordIdentifier copy] string:password];
+    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kUserNameIdentifier string:userName];
+    [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kUserPasswordIdentifier string:password];
 
     //如果 local 端已有 token 就不再去跟後台要
-    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
-    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
+    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
 
     if (token && secret) {
         [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
@@ -173,16 +183,16 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (connectionError) {
-                [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
-                [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+                [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserNameIdentifier];
+                [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserPasswordIdentifier];
                 
                 completion(NO, nil, connectionError);
                 return;
             } else {
                 NSHTTPURLResponse *hur = (NSHTTPURLResponse *)response;
                 if (hur.statusCode != 200) {
-                    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserNameIdentifier copy]];
-                    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:[kUserPasswordIdentifier copy]];
+                    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserNameIdentifier];
+                    [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserPasswordIdentifier];
 
                     completion(NO, nil, [NSError PIXErrorWithHTTPStatusCode:hur.statusCode]);
                     return;
@@ -192,10 +202,10 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                     for (NSString *string in array) {
                         NSArray *array0 = [string componentsSeparatedByString:@"="];
                         if ([array0[0] isEqualToString:@"oauth_token"]) {
-                            [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kOauthTokenIdentifier copy] string:array0[1]];
+                            [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kOauthTokenIdentifier string:array0[1]];
                         }
                         if ([array0[0] isEqualToString:@"oauth_token_secret"]) {
-                            [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:[kOauthTokenSecretIdentifier copy] string:array0[1]];
+                            [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kOauthTokenSecretIdentifier string:array0[1]];
                         }
                     }
                     [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeXAuth forKey:kAuthTypeKey];
@@ -212,8 +222,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
     switch (authType) {
         case PIXAuthTypeXAuth:{
-            NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
-            NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+            NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
+            NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
             if (token && secret) {
                 authed = YES;
             }
@@ -443,30 +453,32 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     }
 }
 
-/**
+/**.
  *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    NSString *user = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserNameIdentifier copy]];
-    NSString *password = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kUserPasswordIdentifier copy]];
+    if (!userID || !userPassword) {
+        userID = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kUserNameIdentifier];
+        userPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kUserPasswordIdentifier];
+    }
 
-    NSDictionary *userDict = @{@"x_auth_username":user, @"x_auth_password":password, @"x_auth_mode":@"client_auth"};
+    NSDictionary *userDict = @{@"x_auth_username":userID, @"x_auth_password":userPassword, @"x_auth_mode":@"client_auth"};
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
     if (params) {
         [dict addEntriesFromDictionary:params];
     }
     NSMutableURLRequest *request = nil;
     NSString *oPath = [NSString stringWithFormat:@"/%@", path];
-    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenIdentifier copy]];
-    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:[kOauthTokenSecretIdentifier copy]];
+    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
+    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
     
     if ([httpMethod isEqualToString:@"GET"]) {
-        request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:token tokenSecret:secret];
+        request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
     } else {
         if ([httpMethod isEqualToString:@"POST"]) {
-            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:token tokenSecret:secret];
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
         } else {
-            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:@"https" host:[kApiURLHost copy] consumerKey:[kConsumerKey copy] consumerSecret:[kConsumerSecret copy] accessToken:token tokenSecret:secret];
+            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:@"https" host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
         }
     }
     return request;
