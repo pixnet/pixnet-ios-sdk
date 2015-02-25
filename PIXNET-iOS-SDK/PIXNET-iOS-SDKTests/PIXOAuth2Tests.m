@@ -181,7 +181,7 @@ static NSString *kSetDescription = @"Unit test set description";
     }
     return;
 }
--(void)createMIB{
+/*-(void)createMIB{
     __block BOOL done = NO;
     [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"pixFox.jpg"] idImageBack:[UIImage imageNamed:@"pixFox.jpg"] email:@"test@pixnet.tw" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createAccountMIBWithRealName";
@@ -197,7 +197,7 @@ static NSString *kSetDescription = @"Unit test set description";
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     return;
-}
+}*/
 -(void)getMibPositionsInfo:(NSArray *)positions{
     for (NSString *positionId in positions) {
         __block BOOL done = NO;
@@ -252,7 +252,8 @@ static NSString *kSetDescription = @"Unit test set description";
 -(void)editUserAccount{
     __block BOOL done = NO;
     UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
-    [[PIXUser new] updateAccountWithPassword:_testUser.userPassword displayName:nil email:nil gender:PIXUserGenderNone address:nil phone:nil birth:nil education:PIXUserEducationNone avatar:image completion:^(BOOL succeed, id result, NSError *error) {
+
+    [[PIXUser new] updateAccountWithPassword:_testUser.userPassword displayName:nil email:nil gender:PIXUserGenderNone address:nil birth:nil education:PIXUserEducationNone avatar:image completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"editAccountWithPassword";
         if (succeed) {
             NSLog(@"%@, succeed: %@", methodName, result);

@@ -46,7 +46,7 @@
 }
 -(void)deleteBlock{
     __block BOOL done = NO;
-    [[PIXNETSDK new] deleteBlockWithUserName:_testUser.blockUser completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] deleteBlockWithUserName:_testUser.blockUsers[0] completion:^(BOOL succeed, id result, NSError *error) {
         done = YES;
         NSString *methodName = @"deleteBlockWithUserName";
         if (succeed) {
@@ -62,7 +62,7 @@
 }
 -(void)addBlock{
     __block BOOL done = NO;
-    [[PIXNETSDK new] createBlockWithUserName:_testUser.blockUser completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] createBlockWithUserName:_testUser.blockUsers[0] completion:^(BOOL succeed, id result, NSError *error) {
         done = YES;
         NSString *methodName = @"createBlockWithUserName";
         if (succeed) {

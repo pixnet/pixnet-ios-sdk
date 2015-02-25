@@ -27,6 +27,8 @@ static NSString *const kUserPasswordIdentifier = @"kUserPasswordIdentifier";
 static NSString *const kOauthTokenIdentifier = @"kOauthTokenIdentifier";
 static NSString *const kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifier";
 static NSString *const kAuthTypeKey = @"kAuthTypeKey";
+static NSString *userID;
+static NSString *userPassword;
 //static PIXAuthType authType;
 
 @interface PIXAPIHandler ()
@@ -38,8 +40,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 @end
 
 @implementation PIXAPIHandler
-NSString *userID = nil;
-NSString *userPassword = nil;
+//NSString *userID = nil;
+//NSString *userPassword = nil;
 
 +(instancetype)sharedInstance{
     static PIXAPIHandler *sharedInstance;
@@ -166,6 +168,8 @@ NSString *userPassword = nil;
     }
     [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kUserNameIdentifier string:userName];
     [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kUserPasswordIdentifier string:password];
+    userID = userName;
+    userPassword = password;
 
     //如果 local 端已有 token 就不再去跟後台要
     NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
