@@ -27,8 +27,6 @@ static NSString *const kUserPasswordIdentifier = @"kUserPasswordIdentifier";
 static NSString *const kOauthTokenIdentifier = @"kOauthTokenIdentifier";
 static NSString *const kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifier";
 static NSString *const kAuthTypeKey = @"kAuthTypeKey";
-static NSString *userID;
-static NSString *userPassword;
 //static PIXAuthType authType;
 
 @interface PIXAPIHandler ()
@@ -37,6 +35,7 @@ static NSString *userPassword;
 @property (nonatomic, strong) LROAuth2ClientDelegateHandler *oauth2ClientDelegateHandler;
 @property (nonatomic, copy) PIXHandlerCompletion getOAuth2AccessTokenCompletion;
 @property (nonatomic, assign) NSTimeInterval timeoutInterval;
+@property (nonatomic, strong) NSDictionary *userDictionaryForXAuth;
 @end
 
 @implementation PIXAPIHandler
@@ -118,12 +117,7 @@ static NSString *userPassword;
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //移除 user ID 及 password
-    if (userPassword) {
-        userPassword = nil;
-    }
-    if (userID) {
-        userID = nil;
-    }
+    [PIXAPIHandler sharedInstance].userDictionaryForXAuth = nil;
 }
 
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
@@ -168,8 +162,7 @@ static NSString *userPassword;
     }
     [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kUserNameIdentifier string:userName];
     [[PIXCredentialStorage sharedInstance] storeStringForIdentifier:kUserPasswordIdentifier string:password];
-    userID = userName;
-    userPassword = password;
+    [PIXAPIHandler sharedInstance].userDictionaryForXAuth = @{@"x_auth_username":userName, @"x_auth_password":password, @"x_auth_mode":@"client_auth"};
 
     //如果 local 端已有 token 就不再去跟後台要
     NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
@@ -461,13 +454,7 @@ static NSString *userPassword;
  *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    if (!userID || !userPassword) {
-        userID = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kUserNameIdentifier];
-        userPassword = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kUserPasswordIdentifier];
-    }
-
-    NSDictionary *userDict = @{@"x_auth_username":userID, @"x_auth_password":userPassword, @"x_auth_mode":@"client_auth"};
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[PIXAPIHandler sharedInstance].userDictionaryForXAuth];
     if (params) {
         [dict addEntriesFromDictionary:params];
     }
