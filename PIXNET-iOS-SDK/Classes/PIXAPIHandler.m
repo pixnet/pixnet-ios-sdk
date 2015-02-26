@@ -39,8 +39,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 @end
 
 @implementation PIXAPIHandler
-//NSString *userID = nil;
-//NSString *userPassword = nil;
 
 +(instancetype)sharedInstance{
     static PIXAPIHandler *sharedInstance;
@@ -82,16 +80,14 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     _timeoutInterval = timeoutInterval;
 }
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
-    kConsumerKey = aKey;
-    kConsumerSecret = aSecret;
-    kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", kConsumerKey];
+    kConsumerKey = [aKey copy];
+    kConsumerSecret = [aSecret copy];
+    kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", [kConsumerKey copy]];
 }
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL{
-    kConsumerKey = aKey;
-    kConsumerSecret = aSecret;
-    kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", kConsumerKey];
-
-//    kCallbackURL = [callbackURL copy];
+    kConsumerKey = [aKey copy];
+    kConsumerSecret = [aSecret copy];
+    kCallbackURL = [NSString stringWithFormat:@"pixnetapi-%@://callback", [kConsumerKey copy]];
 }
 +(BOOL)isConsumerKeyAndSecretAssigned {
     BOOL assigned = YES;
