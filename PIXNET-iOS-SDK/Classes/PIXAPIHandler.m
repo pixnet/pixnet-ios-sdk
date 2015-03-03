@@ -113,7 +113,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //移除 user ID 及 password
-    [PIXAPIHandler sharedInstance].userDictionaryForXAuth = nil;
+    NSDictionary *dictionary = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
+    dictionary = nil;
 }
 
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
