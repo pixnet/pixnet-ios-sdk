@@ -12,9 +12,9 @@ Pod::Spec.new do |s|
   s.source_files =  'PIXNET-iOS-SDK/Classes/*.{h,m}'
   s.framework    =  'CoreLocation'
 
-  s.requires_arc = false
-  s.requires_arc = 'PIXNET-iOS-SDK/Classes/*.{h,m}'
+  s.requires_arc = true
+  #s.requires_arc = 'PIXNET-iOS-SDK/Classes/*.{h,m}'
   
 # Pod Dependencies
-  s.dependency 'cocoa-oauth', '~> 0.0.1'
+  s.dependency 'PIX-cocoa-oauth', :git => 'https://github.com/pixnet/cocoa-oauth.git', 'tag => 0.0.1'
 end
