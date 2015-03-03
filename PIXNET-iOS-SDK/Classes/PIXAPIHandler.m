@@ -451,7 +451,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
  *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:[PIXAPIHandler sharedInstance].userDictionaryForXAuth];
+    NSDictionary *userDict = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
+    NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
     if (params) {
         [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
             dict[key] = obj;
