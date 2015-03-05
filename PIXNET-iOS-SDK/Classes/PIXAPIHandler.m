@@ -173,13 +173,13 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     }
 
     NSURLRequest *request = [self requestForXAuthWithPath:@"oauth/access_token" parameters:nil httpMethod:@"POST"];
-
+    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue new] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         dispatch_sync(dispatch_get_main_queue(), ^{
             if (connectionError) {
                 [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserNameIdentifier];
                 [[PIXCredentialStorage sharedInstance] removeStringForIdentifier:kUserPasswordIdentifier];
-
+                
                 completion(NO, nil, connectionError);
                 return;
             } else {
@@ -416,8 +416,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     return request;
 }
 /**
-*  用來取得現在當下可用的 access token
-*/
+ *  用來取得現在當下可用的 access token
+ */
 -(LROAuth2AccessToken *)accessTokenForCurrent{
     LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
     if (storedToken) {
@@ -428,8 +428,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 if (succeed) {
                     done = YES;
                     [NSKeyedArchiver archiveRootObject:accessToken toFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
-                } else {
-                    [self accessTokenForCurrent];
                 }
             }];
             singleton.oauth2Client.delegate = handler;
@@ -445,16 +443,13 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
             return storedToken;
         }
     } else {
-        /*這不該發生，一但發生好像也只能將 user 先 logout，雖然會 crash 一次，但至少不會永遠無法進入 app.
-        * (因為這要讓使用者回到登入畫面重新執行登入才行)
-        * */
-        [PIXAPIHandler logout];
         return storedToken;
     }
 }
+
 /**.
-*  產生一個用來取得 token 的 URLQuest (for XAuth)
-*/
+ *  產生一個用來取得 token 的 URLQuest (for XAuth)
+ */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
     NSDictionary *userDict = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
@@ -467,7 +462,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     NSString *oPath = [NSString stringWithFormat:@"/%@", path];
     NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
     NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
-
+    
     if ([httpMethod isEqualToString:@"GET"]) {
         request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
     } else {
