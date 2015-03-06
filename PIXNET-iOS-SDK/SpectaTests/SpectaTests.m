@@ -13,20 +13,20 @@ SpecBegin(SomeBlogAPI)
     __block NSMutableArray *comments = nil;
     describe(@"These methods are auth needed", ^{
         beforeAll(^AsyncBlock {
+            userForTest = [[UserForTest alloc] init];
+            [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
             [PIXNETSDK logout];
             setAsyncSpecTimeout(60 * 60);
-            userForTest = [[UserForTest alloc] init];
             comments = [NSMutableArray new];
-            [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
             id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
             UIView *rootView = appDelegate.window.rootViewController.view;
             UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
             [rootView addSubview:webView];
             [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
-                expect([PIXNETSDK isAuthed]).to.beTruthy();
                 if (succeed) {
-                    setAsyncSpecTimeout(10);
+                    setAsyncSpecTimeout(60);
+                    expect([PIXNETSDK isAuthed]).to.beTruthy();
                     [webView removeFromSuperview];
                 } else {
                     [PIXNETSDK logout];
@@ -35,12 +35,13 @@ SpecBegin(SomeBlogAPI)
             }];
         });
         it(@"get blog articles", ^AsyncBlock {
-            expect([PIXNETSDK isAuthed]).to.beTruthy();
             [[PIXNETSDK new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:1 perpage:10 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 if (succeed) {
                     articles = result[@"articles"];
                     article = articles[1];
+                } else {
+                    NSLog(@"get blog articles failed: %@", error);
                 }
                 done();
             }];

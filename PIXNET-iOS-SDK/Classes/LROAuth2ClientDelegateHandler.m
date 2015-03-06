@@ -29,7 +29,7 @@
     _getTokenCompletion(YES, client.accessToken, nil);
 }
 - (void)oauthClientDidReceiveAccessCode:(LROAuth2Client *)client{
-    _getTokenCompletion(YES, client.accessToken, nil);
+//    _getTokenCompletion(YES, client.accessToken, nil);
 }
 
 - (void)oauthClientDidCancel:(LROAuth2Client *)client request:(NSURLRequest *)request{
