@@ -255,6 +255,7 @@
     if ([self.delegate respondsToSelector:@selector(oauthClientDidReceiveAccessCode:)]) {
         [self.delegate oauthClientDidReceiveAccessCode:self];
     }
+    isVerifying = NO;
     [self verifyAuthorizationWithAccessCode:accessCode];
 }
 
