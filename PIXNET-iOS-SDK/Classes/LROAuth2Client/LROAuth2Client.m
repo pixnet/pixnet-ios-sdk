@@ -51,12 +51,14 @@
 #pragma mark Authorization
 
 - (NSURLRequest *)userAuthorizationRequestWithParameters:(NSDictionary *)additionalParameters; {
-    NSDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
     [params setValue:@"web_server" forKey:@"type"];
     [params setValue:clientID forKey:@"client_id"];
     [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
     //updated by dolphinSu
     [params setValue:@"code" forKey:@"response_type"];
+    //here
+    params[@"theme"] = @"mobileapp";
 
     if (additionalParameters) {
         for (NSString *key in additionalParameters) {

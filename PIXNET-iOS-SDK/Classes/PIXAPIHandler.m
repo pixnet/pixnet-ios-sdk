@@ -19,8 +19,11 @@ static NSString *kCallbackURL;
 #import "LROAuth2ClientDelegateHandler.h"
 #import "PIXURLSessionDelegateHandler.h"
 
-static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
-static NSString *const kApiURLHost = @"emma.pixnet.cc";
+//static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
+//static NSString *const kApiURLHost = @"emma.pixnet.cc";
+//here
+static NSString *const kApiURLPrefix = @"http://login.pixnet.cc.33852.alpha.pixnet/";
+static NSString *const kApiURLHost = @"login.pixnet.cc.33852.alpha.pixnet";
 
 static NSString *const kUserNameIdentifier = @"kUserNameIdentifier";
 static NSString *const kUserPasswordIdentifier = @"kUserPasswordIdentifier";
@@ -48,7 +51,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         sharedInstance.oauth2Client = [[LROAuth2Client alloc] initWithClientID:kConsumerKey
                                                                         secret:kConsumerSecret
                                                                    redirectURL:[NSURL URLWithString:kCallbackURL]];
-        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
+//        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
+        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", kApiURLPrefix]];
         sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
         sharedInstance.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
