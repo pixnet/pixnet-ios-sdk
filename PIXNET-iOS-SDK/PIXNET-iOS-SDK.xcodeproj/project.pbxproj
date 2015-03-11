@@ -59,7 +59,7 @@
 		CED79663196B91230025AA97 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79662196B91230025AA97 /* NSString+QueryString.m */; };
 		CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79665196B91350025AA97 /* NSDictionary+QueryString.m */; };
 		CED7966E196B91790025AA97 /* LROAuth2AccessToken.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79668196B91790025AA97 /* LROAuth2AccessToken.m */; };
-		CED7966F196B91790025AA97 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7966A196B91790025AA97 /* LROAuth2Client.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CED7966F196B91790025AA97 /* LROAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7966A196B91790025AA97 /* LROAuth2Client.m */; };
 		CED79670196B91790025AA97 /* LRURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7966D196B91790025AA97 /* LRURLRequestOperation.m */; };
 		CED9C3A019484C2200D522CD /* PIXFriendTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CED9C39F19484C2200D522CD /* PIXFriendTests.m */; };
 		CED9CC7518DC379C00D37BA1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CED9CC7418DC379C00D37BA1 /* CoreLocation.framework */; };
@@ -1181,6 +1181,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch";
 				INFOPLIST_FILE = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Info.plist";
@@ -1195,6 +1196,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Prefix.pch";
 				INFOPLIST_FILE = "PIXNET-iOS-SDK/PIXNET-iOS-SDK-Info.plist";

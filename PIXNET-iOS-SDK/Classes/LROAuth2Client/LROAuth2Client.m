@@ -13,9 +13,11 @@
 #import "NSDictionary+QueryString.h"
 
 #pragma mark -
-
+@interface LROAuth2Client();
+@property (nonatomic, strong) NSOperationQueue *networkQueue;
+@end
 @implementation LROAuth2Client {
-    NSOperationQueue *_networkQueue;
+//    NSOperationQueue *_networkQueue;
 }
 
 @synthesize clientID;
@@ -32,19 +34,14 @@
                 secret:(NSString *)_secret
            redirectURL:(NSURL *)url; {
     if (self = [super init]) {
-        clientID = [_clientID copy];
-        clientSecret = [_secret copy];
-        redirectURL = [url copy];
-        requests = [[NSMutableArray alloc] init];
+        clientID = _clientID;
+        clientSecret = _secret;
+        redirectURL = url;
+        self.requests = [[NSMutableArray alloc] init];
         debug = NO;
         _networkQueue = [[NSOperationQueue alloc] init];
     }
     return self;
-}
-
-- (void)dealloc; {
-    [_networkQueue cancelAllOperations];
-    [super dealloc];
 }
 
 #pragma mark -
@@ -88,7 +85,7 @@
 
         //updated by dolphinSu
         NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
-        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:fullURL] autorelease];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:fullURL];
         [request setHTTPMethod:@"GET"];
 
 //    [request setHTTPMethod:@"POST"];
@@ -119,7 +116,7 @@
 
     //updated by dolphinSu
     NSURL *fullURL = [NSURL URLWithString:[[self.tokenURL absoluteString] stringByAppendingFormat:@"?%@", [params stringWithFormEncodedComponents]]];
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:fullURL] autorelease];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:fullURL];
     [request setHTTPMethod:@"GET"];
 //  [request setHTTPMethod:@"POST"];
 //  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -145,7 +142,7 @@
 
         if (authData == nil) {
             // try and decode the response body as a query string instead
-            NSString *responseString = [[[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding] autorelease];
+            NSString *responseString = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
             authData = [NSDictionary dictionaryWithFormEncodedString:responseString];
         }
         if ([authData objectForKey:@"access_token"] == nil) {

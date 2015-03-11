@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PIXNET-iOS-SDK'
-  s.version      = '1.6.0'
+  s.version      = '1.6.6'
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'http://developer.pixnet.pro/#!/doc/pixnetApi/oauthApi'
   s.authors      =  {'PIXNET' => 'sdk@pixnet.tw'}
@@ -8,12 +8,12 @@ Pod::Spec.new do |s|
 
 # Source Info
   s.platform     =  :ios, '6.0'
-  s.source       =  {:git => 'https://github.com/pixnet/pixnet-ios-sdk.git', :tag => '1.6.0'}
+  s.source       =  {:git => 'https://github.com/pixnet/pixnet-ios-sdk.git', :tag => '1.6.6'}
   s.source_files =  'PIXNET-iOS-SDK/Classes/*.{h,m}', 'PIXNET-iOS-SDK/Classes/LROAuth2Client/*.{h,m}'
   s.framework    =  'CoreLocation'
 
-  s.requires_arc = false
-  s.requires_arc = 'PIXNET-iOS-SDK/Classes/*.{h,m}'
+  s.requires_arc = true
+  #s.requires_arc = 'PIXNET-iOS-SDK/Classes/*.{h,m}'
   
 # Pod Dependencies
   s.dependency 'PIX-cocoa-oauth', '~>0.0.1'

@@ -13,13 +13,12 @@
 @interface LROAuth2Client : NSObject {
   NSString *clientID;
   NSString *clientSecret;
-  NSURL *redirectURL;
   NSURL *cancelURL;
   NSURL *userURL;
   NSURL *tokenURL;
   LROAuth2AccessToken *accessToken;
-  NSMutableArray *requests;
-  id<LROAuth2ClientDelegate> __unsafe_unretained delegate;
+//  NSMutableArray *requests;
+  
   BOOL debug;
   
  @private
@@ -27,13 +26,14 @@
 }
 @property (nonatomic, copy) NSString *clientID;
 @property (nonatomic, copy) NSString *clientSecret;
-@property (nonatomic, copy) NSURL *redirectURL;
+@property (nonatomic, weak) NSURL *redirectURL;
 @property (nonatomic, copy) NSURL *cancelURL;
 @property (nonatomic, copy) NSURL *userURL;
 @property (nonatomic, copy) NSURL *tokenURL;
+@property (nonatomic, strong) NSMutableArray *requests;
 @property (nonatomic, strong) LROAuth2AccessToken *accessToken;
-@property (nonatomic, unsafe_unretained) id<LROAuth2ClientDelegate> delegate;
-@property (nonatomic, unsafe_unretained) id<UIWebViewDelegate> webViewDelegate;
+@property (nonatomic, weak) id<LROAuth2ClientDelegate> delegate;
+@property (nonatomic, weak) id<UIWebViewDelegate> webViewDelegate;
 @property (nonatomic, assign) BOOL debug;
 
 - (id)initWithClientID:(NSString *)_clientID 
