@@ -22,7 +22,8 @@ SpecBegin(SomeBlogAPI)
             UIView *rootView = appDelegate.window.rootViewController.view;
             UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
             [rootView addSubview:webView];
-            [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+//            [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+            [PIXNETSDK loginByOAuth2OpenIDOnlyWithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 if (succeed) {
                     setAsyncSpecTimeout(60);

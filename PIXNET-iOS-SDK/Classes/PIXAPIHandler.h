@@ -89,6 +89,14 @@ typedef NS_ENUM(NSInteger, PIXAuthType) {
  */
 +(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
+*  利用 oauth2 及 Open ID(Facebook, Google+, etc...) only 的方式讓使用者登入 PIXNET。跟 XAuth 的登入方式比起來，這個方法只要一個 UIWebView 即可，方便許多，請多多利用。
+*
+*  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
+*  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
+*/
++ (void)loginByOAuth2OpenIDOnlyWithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
+
+/**
  *  利用 XAuth 向 PIXNET 後台取得授權
  *
  *  @param userName   使用者名稱(帳號)

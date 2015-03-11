@@ -51,6 +51,13 @@
  */
 +(void)loginByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
 /**
+*  只利用 Open ID(Facebook, Google+... 等) 的方式讓使用者登入 PIXNET。跟 XAuth 的登入方式比起來，這個方法只要一個 UIWebView 即可，方便許多，請多多利用。
+*
+*  @param loginView  一個空白的 UIWebView, PIXNET SDK 會利用這個 webView 開啟使用者登入畫面
+*  @param completion 使用者登入成功或失敗後的事情，就交給你處理了！
+*/
++ (void)loginByOAuth2OpenIDOnlyWithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion;
+/**
  *  判斷目前是否可呼叫需要認證的 API
  *
  *  @return 就 BOOL 值咩....可以就 YES，不行就 NO

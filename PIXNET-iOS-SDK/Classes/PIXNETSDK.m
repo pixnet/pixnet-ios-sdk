@@ -23,6 +23,11 @@
 +(void)loginByOAuthLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler loginByOAuth2WithLoginView:loginView completion:completion];
 }
+
++ (void)loginByOAuth2OpenIDOnlyWithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion {
+    [PIXAPIHandler loginByOAuth2OpenIDOnlyWithLoginView:loginView completion:completion];
+}
+
 +(BOOL)isAuthed{
     return [PIXAPIHandler isAuthed];
 }

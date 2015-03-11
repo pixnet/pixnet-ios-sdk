@@ -51,14 +51,14 @@
 #pragma mark Authorization
 
 - (NSURLRequest *)userAuthorizationRequestWithParameters:(NSDictionary *)additionalParameters; {
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:6];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:5];
     [params setValue:@"web_server" forKey:@"type"];
     [params setValue:clientID forKey:@"client_id"];
     [params setValue:[redirectURL absoluteString] forKey:@"redirect_uri"];
     //updated by dolphinSu
     [params setValue:@"code" forKey:@"response_type"];
     //here
-    params[@"theme"] = @"mobileapp";
+//    params[@"login_theme"] = @"mobileapp_openid";
 
     if (additionalParameters) {
         for (NSString *key in additionalParameters) {
@@ -174,7 +174,7 @@
 
 @implementation LROAuth2Client (UIWebViewIntegration)
 
-- (void)authorizeUsingWebView:(UIWebView *)webView; {
+- (void)authorizeUsingWebView:(UIWebView *)webView {
     [self authorizeUsingWebView:webView additionalParameters:nil];
 }
 

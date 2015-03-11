@@ -19,11 +19,11 @@ static NSString *kCallbackURL;
 #import "LROAuth2ClientDelegateHandler.h"
 #import "PIXURLSessionDelegateHandler.h"
 
-//static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
-//static NSString *const kApiURLHost = @"emma.pixnet.cc";
+static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
+static NSString *const kApiURLHost = @"emma.pixnet.cc";
 //here
-static NSString *const kApiURLPrefix = @"http://login.pixnet.cc.33852.alpha.pixnet/";
-static NSString *const kApiURLHost = @"login.pixnet.cc.33852.alpha.pixnet";
+//static NSString *const kApiURLPrefix = @"http://login.pixnet.cc.33852.alpha.pixnet/";
+//static NSString *const kApiURLHost = @"login.pixnet.cc.33852.alpha.pixnet";
 
 static NSString *const kUserNameIdentifier = @"kUserNameIdentifier";
 static NSString *const kUserPasswordIdentifier = @"kUserPasswordIdentifier";
@@ -51,8 +51,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         sharedInstance.oauth2Client = [[LROAuth2Client alloc] initWithClientID:kConsumerKey
                                                                         secret:kConsumerSecret
                                                                    redirectURL:[NSURL URLWithString:kCallbackURL]];
-//        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
-        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", kApiURLPrefix]];
+        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
+//        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", kApiURLPrefix]];
         sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
         sharedInstance.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -124,8 +124,10 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     [self loginByOAuth2WithLoginView:loginView completion:completion];
 }
+// 可以用 Open ID 或是輸入帳密登入 PIXNET
 +(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
-    if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
+    [self launchLoginByOAuth2:loginView additionalParameter:nil completion:completion];
+/*    if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
         return;
     }
@@ -140,8 +142,36 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         return;
     } else {
         [singleton.oauth2Client authorizeUsingWebView:loginView];
+    }*/
+}
+// 只用 Open ID 登入 PIXNET
++(void)loginByOAuth2OpenIDOnlyWithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion {
+    [self launchLoginByOAuth2:loginView additionalParameter:@{@"login_theme" : @"mobileapp_openid"} completion:completion];
+}
+
++ (void)launchLoginByOAuth2:(UIWebView *)loginView additionalParameter:(NSDictionary *)parameter completion:(PIXHandlerCompletion)completion {
+    if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
+        return;
+    }
+    PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
+    singleton.getOAuth2AccessTokenCompletion = completion;
+    //先檢查是否已有之前已存下來的 token
+    LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
+    if (storedToken) {
+        [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"已有使用者登入中，若要讓另一使用者登入，請先執行 +logout"]);
+        return;
+    } else {
+        if (parameter) {
+            [singleton.oauth2Client authorizeUsingWebView:loginView additionalParameters:parameter];
+        } else {
+            [singleton.oauth2Client authorizeUsingWebView:loginView];
+        }
     }
 }
+
 +(NSString *)filePathForOAuth2AccessToken{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask ,YES);
     NSString *documentsDir = paths[0];
