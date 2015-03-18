@@ -10,6 +10,7 @@
 #import "PIXAPIHandler.h"
 #import "NSObject+PIXCategory.h"
 #import "NSError+PIXCategory.h"
+#import "NSDictionary+PIXCategory.h"
 
 @implementation PIXBlog
 
@@ -275,7 +276,7 @@
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePasswd
                               completion:(PIXHandlerCompletion)completion{
-    
+
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
@@ -284,8 +285,8 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
         return;
     }
-    
-    
+
+
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     if (blogPasswd != nil) {
@@ -294,19 +295,25 @@
     if (articlePasswd != nil) {
         params[@"article_password"] = articlePasswd;
     }
-    
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@", articleID];
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:nil]];
-        NSMutableString *htmlString = [NSMutableString stringWithString:dictionary[@"article"][@"body"]];
-        [htmlString replaceOccurrencesOfString:@"<!-- more -->" withString:@"<img src='https://s.pixfs.net/app/more.png' alt='zss_editor_more'>" options:NSCaseInsensitiveSearch range:NSMakeRange(0, htmlString.length)];
-        NSMutableDictionary *articleDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary[@"article"]];
-        articleDictionary[@"body"] = htmlString;
-        dictionary[@"article"] = articleDictionary;
-//        dictionary[@"article"][@"body"] = htmlString;
-//        [dictionary[@"article"] removeObjectForKey:@"body"];
-//        [dictionary[@"article"] setObject:htmlString forKey:@"body"];
-        [self resultHandleWithIsSucceed:succeed result:(id) dictionary error:error completion:completion];
+        if (succeed) {
+            NSError *jsonError;
+            NSDictionary *dictionary1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
+            if (jsonError) {
+                completion(NO, nil, jsonError);
+                return;
+            }
+            NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[dictionary1 PIXDictionaryByReplacingNullsWithBlanks]];
+            NSMutableString *htmlString = [NSMutableString stringWithString:dictionary[@"article"][@"body"]];
+            [htmlString replaceOccurrencesOfString:@"<!-- more -->" withString:@"<img src='https://s.pixfs.net/app/more.png' alt='zss_editor_more'>" options:NSCaseInsensitiveSearch range:NSMakeRange(0, htmlString.length)];
+            NSMutableDictionary *articleDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary[@"article"]];
+            articleDictionary[@"body"] = htmlString;
+            dictionary[@"article"] = articleDictionary;
+            completion(succeed, dictionary, error);
+        } else {
+            completion(succeed, nil, error);
+        }
     }];
 //    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
 //            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
