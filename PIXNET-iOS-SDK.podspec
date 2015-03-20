@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
   
 # Pod Dependencies
   s.dependency 'PIX-cocoa-oauth', '~>0.0.1'
+  s.dependency 'OMGHTTPURLRQ', '~> 2.1'
 end
