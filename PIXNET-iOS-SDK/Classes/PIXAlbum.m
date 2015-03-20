@@ -697,7 +697,8 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"set_id"] = setId;
     params[@"upload_method"] = @"base64";
-    params[@"upload_file"] = [elementData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    params[@"upload_file"] = elementData;
+//    params[@"upload_file"] = [elementData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 //    params[@"upload_file"] = [elementData base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength];
     if (elementTitle) {
         params[@"title"] = elementTitle;

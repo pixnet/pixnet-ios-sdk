@@ -18,6 +18,8 @@ static NSString *kCallbackURL;
 #import "LROAuth2AccessToken.h"
 #import "LROAuth2ClientDelegateHandler.h"
 #import "PIXURLSessionDelegateHandler.h"
+#import "NSData+Base64.h"
+#import "OMGHTTPURLRQ.h"
 
 static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
 static NSString *const kApiURLHost = @"emma.pixnet.cc";
@@ -309,6 +311,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
             return;
         }
     }
+    _timeoutInterval = timeoutInterval;
     NSString *parameterString = nil;
     if (parameters != nil && [parameters isKindOfClass:[NSDictionary class]]) {
         parameterString = [self parametersStringFromDictionary:parameters];
@@ -413,8 +416,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     return request;
 }
 -(NSString *)parametersStringFromDictionary:(NSDictionary *)dictionary{
-    NSMutableString *parameterString = [NSMutableString new];
-
+    NSMutableString *parameterString = [NSMutableString string];
     NSArray *keys = [dictionary allKeys];
     for (NSString *key in keys) {
         [parameterString appendString:[NSString stringWithFormat:@"%@=%@&", key, dictionary[key]]];
@@ -424,29 +426,80 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 
     return parameterString;
 }
+// 不知為何，不能直接用 -parametersStringFromDictionary 不然 format=json 及 access_token 這兩個參數會消失，所以才另外做了這個 function
+-(NSString *)parametersStringForOauth2FromDictionary:(NSDictionary *)dictionary{
+    NSMutableString *parameterString = [NSMutableString string];
+    NSArray *keys = [dictionary allKeys];
+    for (NSString *key in keys) {
+        [parameterString appendString:[NSString stringWithFormat:@"%@=%@", key, dictionary[key]]];
+        if (![key isEqualToString:keys.lastObject]) {
+            [parameterString appendString:@"&"];
+        }
+    }
+    return parameterString;
+}
+// 用來生成一個 oauth2 的 request
 -(NSMutableURLRequest *)requestForOAuth2WithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
     NSMutableURLRequest *request = [NSMutableURLRequest new];
+    request.timeoutInterval = _timeoutInterval;
     [request setHTTPMethod:httpMethod];
-    NSMutableDictionary *tempParams = nil;
-    if (params!= nil && [params isKindOfClass:[NSDictionary class]]) {
-        tempParams = [NSMutableDictionary dictionaryWithDictionary:params];
-    } else {
-        tempParams = [NSMutableDictionary dictionary];
-    }
+    NSString *urlString = nil;
+    NSMutableDictionary *tempParams = [NSMutableDictionary dictionary];
     //將 access token 加到 query 的參數裡
     LROAuth2AccessToken *currentToken = [self accessTokenForCurrent];
     tempParams[@"access_token"] = currentToken.accessToken;
-    NSString *urlString = nil;
-    NSString *paramString = [self parametersStringFromDictionary:tempParams];
-    if ([httpMethod isEqualToString:@"GET"]) {
-        urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, paramString];
-    } else {
-        urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
-        [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
-//        [request addValue:currentToken.accessToken forHTTPHeaderField:@"access_token"];
+    tempParams[@"format"] = @"json";
+    if (params != nil && [params isKindOfClass:[NSDictionary class]]) {
+        if ([httpMethod isEqualToString:@"GET"]) {  // 有參數的 dictionary
+            [tempParams addEntriesFromDictionary:params];
+            urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
+            [request setURL:[NSURL URLWithString:urlString]];
+        } else {
+            BOOL isUploadFile = [params.allKeys containsObject:@"upload_file"];
+            if (isUploadFile) {
+                //上傳檔案時，URL 要包含 access_token，檔案要包在 form 裡
+                urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
+                [request setURL:[NSURL URLWithString:urlString]];
+                NSMutableData *body = [NSMutableData data];
+                NSString *boundary = @"pixnet-sdk-upload-boundary";
+                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+                [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+                [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+                    if ([key isEqualToString:@"upload_file"]) {
+                        //boundary
+                        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=%@\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"%@\r\n", @"Some Caption"] dataUsingEncoding:NSUTF8StringEncoding]];
+
+                        NSString *keyString = [NSString stringWithFormat:@"%@=", key];
+                        [body appendData:[keyString dataUsingEncoding:NSUTF8StringEncoding]];
+                        NSString *encodedString = [obj base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                        NSData *encodedStringData = [[NSData alloc] initWithBase64EncodedString:encodedString options:0];
+                        [body appendData:encodedStringData];
+                        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+                    } else {
+                        NSString *keyValue = [NSString stringWithFormat:@"%@=%@", key, obj];
+                        [body appendData:[keyValue dataUsingEncoding:NSUTF8StringEncoding]];
+                    }
+                    if (![key isEqualToString:params.allKeys.lastObject]) {
+                        [body appendData:[@"&" dataUsingEncoding:NSUTF8StringEncoding]];
+                    }
+                }];
+                [request setHTTPBody:body];
+            } else {
+                // POST，但沒有檔案要上傳
+                urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
+                [request setURL:[NSURL URLWithString:urlString]];
+                [tempParams addEntriesFromDictionary:params];
+                NSString *bodyString = [self parametersStringForOauth2FromDictionary:tempParams];
+                [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
+            }
+        }
+    } else {  // 沒有參數的 request
+        urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
+        [request setURL:[NSURL URLWithString:urlString]];
     }
-    [request setURL:[NSURL URLWithString:urlString]];
-    request.timeoutInterval = _timeoutInterval;
     return request;
 }
 /**
