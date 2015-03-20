@@ -457,36 +457,20 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         } else {
             BOOL isUploadFile = [params.allKeys containsObject:@"upload_file"];
             if (isUploadFile) {
-                //上傳檔案時，URL 要包含 access_token，檔案要包在 form 裡
-                urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
-                [request setURL:[NSURL URLWithString:urlString]];
-                NSMutableData *body = [NSMutableData data];
-                NSString *boundary = @"pixnet-sdk-upload-boundary";
-                NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-                [request setValue:contentType forHTTPHeaderField:@"Content-Type"];
+                //用 OAuth2 上傳檔案
+                urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
+                OMGMultipartFormData *formData = [OMGMultipartFormData new];
                 [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-                    if ([key isEqualToString:@"upload_file"]) {
-                        //boundary
-                        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=%@\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [body appendData:[[NSString stringWithFormat:@"%@\r\n", @"Some Caption"] dataUsingEncoding:NSUTF8StringEncoding]];
-
-                        NSString *keyString = [NSString stringWithFormat:@"%@=", key];
-                        [body appendData:[keyString dataUsingEncoding:NSUTF8StringEncoding]];
-                        NSString *encodedString = [obj base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-                        NSData *encodedStringData = [[NSData alloc] initWithBase64EncodedString:encodedString options:0];
-                        [body appendData:encodedStringData];
-                        [body appendData:[[NSString stringWithFormat:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-                    } else {
-                        NSString *keyValue = [NSString stringWithFormat:@"%@=%@", key, obj];
-                        [body appendData:[keyValue dataUsingEncoding:NSUTF8StringEncoding]];
-                    }
-                    if (![key isEqualToString:params.allKeys.lastObject]) {
-                        [body appendData:[@"&" dataUsingEncoding:NSUTF8StringEncoding]];
+                    if (![key isEqualToString:@"upload_file"]) {
+                        tempParams[key] = obj;
                     }
                 }];
-                [request setHTTPBody:body];
+                [formData addParameters:tempParams];
+                NSData *uploadingFile = params[@"upload_file"];
+                NSString *encodedString = [uploadingFile base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                [formData addText:encodedString parameterName:@"upload_file"];
+                NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
+                return mutableURLRequest;
             } else {
                 // POST，但沒有檔案要上傳
                 urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
