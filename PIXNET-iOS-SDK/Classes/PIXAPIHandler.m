@@ -473,15 +473,10 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 return mutableURLRequest;
             } else {
                 // POST，但沒有檔案要上傳
-                urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
-                [request setURL:[NSURL URLWithString:urlString]];
+                urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
 
                 OMGMultipartFormData *formData = [OMGMultipartFormData new];
-                [tempParams addEntriesFromDictionary:params];
-                [tempParams enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-                    [formData addText:[obj stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] parameterName:key];
-                }];
-
+                [formData addParameters:params];
                 NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                 return mutableURLRequest;
             }
