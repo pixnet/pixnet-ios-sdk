@@ -614,7 +614,7 @@
     }
     params[@"use_nl2br"] = [NSString stringWithFormat:@"%i", useNewLineToBR];
 
-    params[@"comment_perm"] = [NSString stringWithFormat:@"%li", commentPerm];
+    params[@"blogarticle_commentperm"] = [NSString stringWithFormat:@"%d", commentPerm];;
     
     params[@"comment_hidden"] = [NSString stringWithFormat:@"%i", commentHidden];
     

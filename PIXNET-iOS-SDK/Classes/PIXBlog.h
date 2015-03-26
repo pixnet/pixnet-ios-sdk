@@ -75,8 +75,9 @@ typedef NS_ENUM(NSInteger, PIXArticleCommentPerm){
     PIXArticleCommentPermPublic = 1,
     /**
      *  僅開放會員留言
+     *  2015/3/26 dolphin: 這個選項已被關閉
      */
-    PIXArticleCommentPermMember = 2,
+//    PIXArticleCommentPermMember = 2,
     /**
      *  開放好友留言
      */

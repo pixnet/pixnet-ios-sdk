@@ -476,6 +476,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
 
                 OMGMultipartFormData *formData = [OMGMultipartFormData new];
+                //OMGHTTPURLRQ 會對參數做 utf8 encode，所以這裡不做。
                 [formData addParameters:params];
                 NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                 return mutableURLRequest;
