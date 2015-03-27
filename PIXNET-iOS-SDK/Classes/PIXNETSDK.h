@@ -465,6 +465,7 @@
                          friendGroupID:(NSString *)friendGroupID
                          notifyTwitter:(BOOL)notifyTwitter
                         notifyFacebook:(BOOL)notifyFacebook
+                                 cover:(NSString *)cover
                             completion:(PIXHandlerCompletion)completion;
 
 /**
