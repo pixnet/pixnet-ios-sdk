@@ -345,6 +345,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
  *  @param friendGroupID  當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組, 預設不輸入代表所有好友
  *  @param notifyTwitter  動態發送至 Twitter. 必須先有同步關係才能發送, 預設為部落格全域設定。部落格全域設定可透過 -(void)getBlogInformationWithUserName:completion: 取得。
  *  @param notifyFacebook 動態發送至 Facebook. 必須先有同步關係才能發送, 預設為部落格全域設定。部落格全域設定可透過 -(void)getBlogInformationWithUserName:completion: 取得。
+ *  @param cover          文章封面圖片網址
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)createBlogArticleWithTitle:(NSString *)title
@@ -364,6 +365,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                      friendGroupID:(NSString *)friendGroupID
                      notifyTwitter:(BOOL)notifyTwitter
                     notifyFacebook:(BOOL)notifyFacebook
+                             cover:(NSString *)cover
                         completion:(PIXHandlerCompletion)completion;
 /**
  *  修改部落格個人文章(需認證) http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesUpdate
@@ -386,6 +388,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
  *  @param friendGroupID  當 status 被設定為 PIXArticleStatusFriend 時可以輸入這個參數以設定此文章可閱讀的好友群組
  *  @param notifyTwitter  是否動態發送至 Twitter. 必須先有同步關係才能發送
  *  @param notifyFacebook 動態發送至 Facebook. 必須先有同步關係才能發送
+ *  @param cover          文章封面圖片網址
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
@@ -406,6 +409,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                          friendGroupID:(NSString *)friendGroupID
                          notifyTwitter:(BOOL)notifyTwitter
                         notifyFacebook:(BOOL)notifyFacebook
+                                 cover:(NSString *)cover
                             completion:(PIXHandlerCompletion)completion;
 
 /**

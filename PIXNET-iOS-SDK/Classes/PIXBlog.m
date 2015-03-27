@@ -523,6 +523,7 @@
                      friendGroupID:(NSString *)friendGroupID
                      notifyTwitter:(BOOL)notifyTwitter
                     notifyFacebook:(BOOL)notifyFacebook
+                             cover:(NSString *)cover
                         completion:(PIXHandlerCompletion)completion{
     [self createOrUpdateBlogArticleWithAPIPath:@"blog/articles"
                                      articleID:nil
@@ -543,6 +544,7 @@
                                  friendGroupID:friendGroupID
                                  notifyTwitter:notifyTwitter
                                 notifyFacebook:notifyFacebook
+                                         cover:cover
                                     completion:completion];
 }
 /*
@@ -567,6 +569,7 @@
                                  friendGroupID:(NSString *)friendGroupID
                                  notifyTwitter:(BOOL)notifyTwitter
                                 notifyFacebook:(BOOL)notifyFacebook
+                                       cover:(NSString *)cover
                                     completion:(PIXHandlerCompletion)completion{
     BOOL isCreating = [path isEqualToString:@"blog/articles"];
 
@@ -683,6 +686,7 @@
                          friendGroupID:(NSString *)friendGroupID
                          notifyTwitter:(BOOL)notifyTwitter
                         notifyFacebook:(BOOL)notifyFacebook
+                                 cover:(NSString *)cover
                             completion:(PIXHandlerCompletion)completion{
     if (articleID==nil || articleID.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Article ID"]);
@@ -707,6 +711,7 @@
                                  friendGroupID:friendGroupID
                                  notifyTwitter:notifyTwitter
                                 notifyFacebook:notifyFacebook
+                                         cover:cover
                                     completion:completion];
 }
 
