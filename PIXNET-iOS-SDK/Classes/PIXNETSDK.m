@@ -261,7 +261,7 @@
                                 friendGroupID:nil
                                 notifyTwitter:-1
                                notifyFacebook:-1
-                                        cover:ni
+                                        cover:nil
                                    completion:completion];
     
 }
