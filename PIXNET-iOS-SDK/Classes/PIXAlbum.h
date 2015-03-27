@@ -321,7 +321,7 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
 *  @param perPage    每頁幾筆, 預設為20筆
 *  @param shouldAuth 是否需要認證
 *  @param parentId   可以藉此指定拿到特定相簿資料夾底下的相簿
-*  @param trimUser   是否要在每篇相簿裡回傳相簿擁有者的資訊，如果設為 NO 就不會回傳。
+*  @param trimUser   是否要在每篇相簿裡回傳相簿擁有者的資訊，如果設為 YES 就不會回傳。
 *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
 */
 -(void)getAlbumSetsInFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser parentId:(NSString *)parentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
