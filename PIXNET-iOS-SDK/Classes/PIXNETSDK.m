@@ -251,7 +251,7 @@
                                userCategoryID:nil
                                siteCategoryID:nil
                                useNewLineToBR:YES
-                                  commentPerm:PIXArticleCommentPermBlogConfig
+                                  commentPerm:PIXArticleCommentPermPublic
                                 commentHidden:NO
                                          tags:nil
                                      thumbURL:nil
