@@ -532,6 +532,38 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
         }];
     }
 }
+-(void)getAlbumSetsInFolderWithUserName:(NSString *)userName folderID:(NSString *)folderId page:(NSUInteger)page perPage:(NSUInteger)perPage trimUser:(BOOL)trimUser parentId:(NSString *)parentId shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
+    if (userName == nil || userName.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"UserName 參數有誤"]);
+        return;
+    }
+    if (folderId == nil || folderId.length == 0) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"folderID 參數有誤"]);
+        return;
+    }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"user"] = userName;
+    if (page < 1) {
+        page = 1;
+    }
+    params[@"page"] = [NSString stringWithFormat:@"%u", page];
+    if (perPage < 1) {
+        perPage = 20;
+    }
+    params[@"perPage"] = [NSString stringWithFormat:@"%u", perPage];
+    params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
+    if (parentId) {
+        params[@"parent_id"] = parentId;
+    }
+    NSString *path = [NSString stringWithFormat:@"album/folders/%@/sets", folderId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:shouldAuth parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+}
 -(void)createAlbumFolderWithTitle:(NSString *)folderTitle description:(NSString *)folderDescription completion:(PIXHandlerCompletion)completion{
     [self createOrUpdateAlbumFolderWithFolderID:nil title:folderTitle description:folderDescription completion:completion];
 }
