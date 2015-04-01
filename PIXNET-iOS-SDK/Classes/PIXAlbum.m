@@ -324,18 +324,15 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"with_detail"] = [NSString stringWithFormat:@"%i", withDetail];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
-    
-    if (shouldAuth) {
-        
-    } else {
-        [[PIXAPIHandler new] callAPI:@"album/elements" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-            if (succeed) {
-                [self succeedHandleWithData:result completion:completion];
-            } else {
-                completion(NO, nil, errorMessage);
-            }
-        }];
-    }
+
+    NSString *path = [NSString stringWithFormat:@"album/sets/%@/elements", setId];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:shouldAuth parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
 }
 -(void)getAlbumSetCommentsWithUserName:(NSString *)userName setID:(NSString *)setId password:(NSString *)password page:(NSUInteger)page perPage:(NSUInteger)perPage shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion{
     [self getAlbumCommentsWithUserName:userName elementID:nil setID:setId password:password page:page perPage:perPage shouldAuth:shouldAuth completion:completion];
