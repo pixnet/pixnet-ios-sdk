@@ -361,7 +361,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                      friendGroupID:(NSString *)friendGroupID
                      notifyTwitter:(BOOL)notifyTwitter
                     notifyFacebook:(BOOL)notifyFacebook
-                      notifiyPlurk:(BOOL)notifyPlurk
+                      notifyPlurk:(BOOL)notifyPlurk
                              cover:(NSString *)cover
                         completion:(PIXHandlerCompletion)completion;
 /**

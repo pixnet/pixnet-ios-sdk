@@ -261,7 +261,7 @@
                                 friendGroupID:nil
                                 notifyTwitter:-1
                                notifyFacebook:-1
-                                 notifiyPlurk:-1
+                                  notifyPlurk:-1
                                         cover:nil
                                    completion:completion];
     
