@@ -261,6 +261,7 @@
                                 friendGroupID:nil
                                 notifyTwitter:-1
                                notifyFacebook:-1
+                                 notifiyPlurk:-1
                                         cover:nil
                                    completion:completion];
     
@@ -283,6 +284,7 @@
                          friendGroupID:(NSString *)friendGroupID
                          notifyTwitter:(BOOL)notifyTwitter
                         notifyFacebook:(BOOL)notifyFacebook
+                           notifyPlurk:(BOOL)notifyPlurk
                                  cover:(NSString *)cover
                             completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] updateBlogArticleWithArticleID:articleID
@@ -303,6 +305,7 @@
                                     friendGroupID:friendGroupID
                                     notifyTwitter:notifyTwitter
                                    notifyFacebook:notifyFacebook
+                                      notifyPlurk:notifyPlurk
                                             cover:cover
                                        completion:completion];
 }
