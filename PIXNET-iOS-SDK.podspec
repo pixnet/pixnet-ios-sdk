@@ -16,6 +16,6 @@ Pod::Spec.new do |s|
   #s.requires_arc = 'PIXNET-iOS-SDK/Classes/*.{h,m}'
   
 # Pod Dependencies
-  s.dependency 'PIX-cocoa-oauth', '~>0.0.1'
+  s.dependency 'cocoa-oauth', '~> 0.0.1'
   s.dependency 'OMGHTTPURLRQ', '~> 2.1'
 end
