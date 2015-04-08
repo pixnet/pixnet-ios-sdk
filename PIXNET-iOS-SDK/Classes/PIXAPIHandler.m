@@ -537,12 +537,19 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     NSString *oPath = [NSString stringWithFormat:@"/%@", path];
     NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
     NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
-    
+
     if ([httpMethod isEqualToString:@"GET"]) {
         request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
     } else {
         if ([httpMethod isEqualToString:@"POST"]) {
-            request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
+            if ([dict.allKeys containsObject:@"upload_file"]) {
+                NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:dict];
+                NSData *uploadData = dictionary[@"upload_file"];
+                dictionary[@"upload_file"] = [uploadData base64EncodedStringWithOptions:0];
+                request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dictionary host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
+            } else {
+                request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath POSTParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
+            }
         } else {
             request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath HTTPMethod:httpMethod parameters:dict scheme:@"https" host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
         }
