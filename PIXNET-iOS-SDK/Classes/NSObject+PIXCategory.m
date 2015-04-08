@@ -20,7 +20,7 @@
 -(void)succeedHandleWithData:(id)data completion:(PIXHandlerCompletion)completion{
     NSError *jsonError = nil;
     id dict=nil;
-    if (![data isKindOfClass:[NSDictionary class]]) {
+    if (![data isKindOfClass:[NSDictionary class]] && data) {
         dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&jsonError];
     }
     if (jsonError == nil) {

@@ -76,6 +76,20 @@
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE165F191AD5135D0038FABB"
+               BuildableName = "SpectaTestInOAuth1.xctest"
+               BlueprintName = "SpectaTestInOAuth1"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -170,6 +184,16 @@
                BlueprintIdentifier = "CE3DF3D21ABBBD6100106D55"
                BuildableName = "SpectaTestAlbumClass.xctest"
                BlueprintName = "SpectaTestAlbumClass"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE165F191AD5135D0038FABB"
+               BuildableName = "SpectaTestInOAuth1.xctest"
+               BlueprintName = "SpectaTestInOAuth1"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
