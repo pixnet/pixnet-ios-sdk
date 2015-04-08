@@ -438,7 +438,7 @@ static NSString *kSetComment = @"Unit test comment in set";
             folder = result[@"folders"];
             [_testLog testLogWithFormat:@"get folders succeed, folders count: %lu\n", (unsigned long)[result[@"folders"] count]];
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"get album folders failed: %@", error);
         }
         done = YES;
     }];
@@ -454,7 +454,7 @@ static NSString *kSetComment = @"Unit test comment in set";
         if (succeed) {
             [_testLog testLogWithFormat:@"folder updated: %@\n", folderId];
         } else {
-            XCTFail(@"mark comment in set as ham failed: %@", error);
+            XCTFail(@"update album folder with folderID failed: %@", error);
         }
         done = YES;
     }];

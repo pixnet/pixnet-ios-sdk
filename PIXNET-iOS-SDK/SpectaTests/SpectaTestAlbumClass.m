@@ -3,7 +3,8 @@
 #import "Specta.h"
 #import "Expecta.h"
 #import "PIXNETSDK.h"
-#import "UserForTest.h"#import "KWValue.h"
+#import "UserForTest.h"
+#import "KWValue.h"
 
 SpecBegin(SomeBlogAPI)
 __block UserForTest *userForTest = nil;

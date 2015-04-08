@@ -399,6 +399,8 @@
                                       friendGroupID:nil
                                       notifyTwitter:NO
                                      notifyFacebook:NO
+                                        notifyPlurk:NO
+                                              cover:nil
                                          completion:^(BOOL succeed, id result, NSError *error) {
                                              if (succeed) {
                                                  

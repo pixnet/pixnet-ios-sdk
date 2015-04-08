@@ -37,6 +37,9 @@
 		82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */; };
 		CE01963F1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */; };
 		CE0196451A7B3767000D0709 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
+		CE165F131AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
+		CE165F141AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
+		CE165F151AD50DD00038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE2588901977D59500CE3604 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C9218D2ECF700D14D0C /* XCTest.framework */; };
 		CE2588911977D59500CE3604 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CE2588921977D59500CE3604 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
@@ -780,6 +783,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE165F151AD50DD00038FABB /* pixFox.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +792,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2588981977D59500CE3604 /* InfoPlist.strings in Resources */,
+				CE165F131AD50DCF0038FABB /* pixFox.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -825,6 +830,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE165F141AD50DCF0038FABB /* pixFox.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
