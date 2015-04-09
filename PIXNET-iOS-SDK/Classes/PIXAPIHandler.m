@@ -472,14 +472,12 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                 return mutableURLRequest;
             } else {
-                // POST，但沒有檔案要上傳
-                urlString = [NSString stringWithFormat:@"%@%@?%@", kApiURLPrefix, path, [self parametersStringForOauth2FromDictionary:tempParams]];
-
-                OMGMultipartFormData *formData = [OMGMultipartFormData new];
-                //OMGHTTPURLRQ 會對參數做 utf8 encode，所以這裡不做。
-                [formData addParameters:params];
-                NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
-                return mutableURLRequest;
+                // POST，但沒有檔案要上傳(心虛，其實也不一定會是 POST 啦)
+                urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
+                [request setURL:[NSURL URLWithString:urlString]];
+                NSString *bodyString = [self parametersStringForOauth2FromDictionary:tempParams];
+                [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
+                return request;
             }
         }
     } else {  // 沒有參數的 request
