@@ -476,6 +476,9 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 if ([params.allKeys containsObject:@"_method"]) {
                     urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
                     [request setURL:[NSURL URLWithString:urlString]];
+                    [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+                        tempParams[key] = obj;
+                    }];
                     NSString *bodyString = [self parametersStringForOauth2FromDictionary:tempParams];
                     [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
                     return request;
