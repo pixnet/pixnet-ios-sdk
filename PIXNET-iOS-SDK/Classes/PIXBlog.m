@@ -662,17 +662,13 @@
     if (notifyPlurk >= 0) {
         params[@"notify_plurk"] = [NSString stringWithFormat:@"%i", notifyPlurk];
     }
-    [[PIXAPIHandler new] callAPI:path
-                      httpMethod:@"POST"
-                      shouldAuth:YES
-                      parameters:params
-               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   if (succeed) {
-                       [self succeedHandleWithData:result completion:completion];
-                   } else {
-                       completion(NO, nil, errorMessage);
-                   }
-               }];
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:NO uploadData:nil parameters:params timeoutInterval:20 requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
 }
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
                                  title:(NSString *)title
