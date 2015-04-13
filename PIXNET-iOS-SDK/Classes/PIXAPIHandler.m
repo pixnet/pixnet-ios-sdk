@@ -473,7 +473,8 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 return mutableURLRequest;
             } else {
                 // POST，但沒有檔案要上傳(心虛，其實也不一定會是 POST 啦)
-                if ([params.allKeys containsObject:@"_method"]) {
+                BOOL isCreatOrUpdateArticle = ([params.allKeys containsObject:@"body"] && [path rangeOfString:@"blog/articles"].location != NSNotFound);
+                if ([params.allKeys containsObject:@"_method"] || isCreatOrUpdateArticle) {
                     urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
                     [request setURL:[NSURL URLWithString:urlString]];
                     [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
