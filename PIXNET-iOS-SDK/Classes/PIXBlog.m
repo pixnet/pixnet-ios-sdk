@@ -80,22 +80,29 @@
 #pragma mark - Blog Categories
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
                              password:(NSString *)passwd
+                                 type:(NSString *)type
                            completion:(PIXHandlerCompletion)completion{
     //檢查進來的參數
     if (userName == nil || userName.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary new];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"user"] = userName;
 
     if (passwd != nil) {
         params[@"blog_password"] = passwd;
     }
+    if (type) {
+        if ([type isEqualToString:@"folder"]) {
+            params[@"type"] = type;
+        } else {
+            params[@"type"] = @"category";
+        }
+    }
     [[PIXAPIHandler new] callAPI:@"blog/categories" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:) parameters:@[@"blog/categories", params, completion] receiver:[PIXAPIHandler new]];
 }
 #pragma mark Categories need access token
 - (void)createBlogCategoriesWithName:(NSString *)name
