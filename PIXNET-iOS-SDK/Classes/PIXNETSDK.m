@@ -134,7 +134,7 @@
 - (void)getBlogCategoriesWithUserName:(NSString *)userName
                              password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogCategoriesWithUserName:userName password:passwd completion:completion];
+    [[PIXBlog new] getBlogCategoriesWithUserName:userName password:passwd type:@"category" completion:completion];
     
 }
 #pragma mark Categories method need access token
