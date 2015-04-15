@@ -472,9 +472,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                 return mutableURLRequest;
             } else {
-                // POST，但沒有檔案要上傳(心虛，其實也不一定會是 POST 啦)
-                BOOL isCreatOrUpdateArticle = ([params.allKeys containsObject:@"body"] && [path rangeOfString:@"blog/articles"].location != NSNotFound);
-                if ([params.allKeys containsObject:@"_method"] || isCreatOrUpdateArticle) {
+                if ([params.allKeys containsObject:@"_method"]) {
                     urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
                     [request setURL:[NSURL URLWithString:urlString]];
                     [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
@@ -484,11 +482,13 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                     [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
                     return request;
                 } else {
-                    urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
+                    urlString = [NSString stringWithFormat:@"%@%@?access_token=%@", kApiURLPrefix, path, currentToken.accessToken];
                     OMGMultipartFormData *formData = [OMGMultipartFormData new];
                     [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
                         tempParams[key] = obj;
                     }];
+                    //不把這個 access_token 移除掉的話，call 新增文章的 API 時常會 timeout
+                    [tempParams removeObjectForKey:@"access_token"];
                     [formData addParameters:tempParams];
                     NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                     return mutableURLRequest;
