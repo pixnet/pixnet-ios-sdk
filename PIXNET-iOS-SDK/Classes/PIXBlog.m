@@ -669,6 +669,9 @@
     if (notifyPlurk >= 0) {
         params[@"notify_plurk"] = [NSString stringWithFormat:@"%i", notifyPlurk];
     }
+    if (cover) {
+        params[@"cover"] = cover;
+    }
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:NO uploadData:nil parameters:params timeoutInterval:20 requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
