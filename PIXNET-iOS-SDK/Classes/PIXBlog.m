@@ -222,15 +222,8 @@
 
 
 #pragma mark - Blog Articles
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName
-                              password:(NSString *)passwd
-                                  page:(NSUInteger)page
-                               perpage:(NSUInteger)articlePerPage
-                        userCategories:(NSArray *)userCategories
-                                status:(PIXArticleStatus)status
-                                 isTop:(BOOL)isTop
-                              trimUser:(BOOL)trimUser
-                            completion:(PIXHandlerCompletion)completion{
+
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page perpage:(NSUInteger)articlePerPage userCategories:(NSArray *)userCategories status:(PIXArticleStatus)status isTop:(BOOL)isTop trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion {
     //檢查進來的參數
     if (userName == nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
@@ -271,11 +264,13 @@
     params[@"is_top"] = [NSString stringWithFormat:@"%i", isTop];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
 
-    [[PIXAPIHandler new] callAPI:@"blog/articles" parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    [[PIXAPIHandler new] callAPI:@"blog/articles" httpMethod:@"GET" shouldAuth:shouldAuth parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
     }];
-//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
-//            parameters:@[@"blog/articles", params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName

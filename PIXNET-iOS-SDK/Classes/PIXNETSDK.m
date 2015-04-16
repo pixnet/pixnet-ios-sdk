@@ -177,15 +177,7 @@
                                   page:(NSUInteger)page
                                perpage:(NSUInteger)articlePerPage
                             completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogAllArticlesWithUserName:userName
-                                         password:passwd
-                                             page:page
-                                          perpage:20
-                                   userCategories:nil
-                                           status:PIXArticleStatusPublic
-                                            isTop:NO
-                                         trimUser:YES
-                                       completion:completion];
+    [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:nil status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:completion];
 }
 
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName

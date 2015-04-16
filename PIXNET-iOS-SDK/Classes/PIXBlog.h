@@ -213,17 +213,10 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param status         文章狀態，如不指定，請輸入-1
 *  @param isTop          是否回傳置頂文章
 *  @param trimUser       是否每篇文章都要回傳作者資訊，輸入 YES 就不回傳
+*  @param shouldAuth     是否要透過認證。當需要取得非公開文章時，必須為 YES
 *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName
-                              password:(NSString *)passwd
-                                  page:(NSUInteger)page
-                               perpage:(NSUInteger)articlePerPage
-                        userCategories:(NSArray *)userCategories
-                                status:(PIXArticleStatus)status
-                                 isTop:(BOOL)isTop
-                              trimUser:(BOOL)trimUser
-                            completion:(PIXHandlerCompletion)completion;
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page perpage:(NSUInteger)articlePerPage userCategories:(NSArray *)userCategories status:(PIXArticleStatus)status isTop:(BOOL)isTop trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
 
 /**
 *  讀取部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesId
