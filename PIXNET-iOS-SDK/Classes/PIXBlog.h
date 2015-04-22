@@ -7,7 +7,8 @@
 //
 //  這個 class 用來處理輸出入參數的規格正確性
 //  除了 ＊ 是 required 外，其餘參數為 optional
-
+static NSString *kReadMoreHTMLString = @"<img src=\"https://s.pixfs.net/app/more.png\" alt=\"zss_editor_more\">";
+static NSString *kReadMoreSymbolString = @"<!-- more -->";
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
 /**

@@ -308,7 +308,8 @@
             }
             NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[dictionary1 PIXDictionaryByReplacingNullsWithBlanks]];
             NSMutableString *htmlString = [NSMutableString stringWithString:dictionary[@"article"][@"body"]];
-            [htmlString replaceOccurrencesOfString:@"<!-- more -->" withString:@"<img src='https://s.pixfs.net/app/more.png' alt='zss_editor_more'>" options:NSCaseInsensitiveSearch range:NSMakeRange(0, htmlString.length)];
+            //將 read more 的註解轉成圖片
+            [htmlString replaceOccurrencesOfString:kReadMoreSymbolString withString:kReadMoreHTMLString options:NSCaseInsensitiveSearch range:NSMakeRange(0, htmlString.length)];
             NSMutableDictionary *articleDictionary = [NSMutableDictionary dictionaryWithDictionary:dictionary[@"article"]];
             articleDictionary[@"body"] = htmlString;
             dictionary[@"article"] = articleDictionary;
