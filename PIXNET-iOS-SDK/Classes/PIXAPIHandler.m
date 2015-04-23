@@ -119,8 +119,15 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     //移除 user ID 及 password
-    NSDictionary *dictionary = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
-    dictionary = nil;
+    [PIXAPIHandler sharedInstance].userDictionaryForXAuth = nil;
+
+    // 清除 cookies 及 cache，避免使用者無法切換 open id 帳號
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (NSHTTPCookie *httpCookie in [storage cookies]) {
+        [storage deleteCookie:httpCookie];
+    }
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 +(void)authByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
