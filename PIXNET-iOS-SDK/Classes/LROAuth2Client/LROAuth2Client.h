@@ -19,7 +19,7 @@
     //  LROAuth2AccessToken *accessToken;
     //  NSMutableArray *requests;
     
-    BOOL debug;
+//    BOOL debug;
     
 @private
     BOOL isVerifying;
