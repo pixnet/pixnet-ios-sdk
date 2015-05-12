@@ -1,4 +1,5 @@
 Pod::Spec.new do |s|
+
   s.name         = 'PIXNET-iOS-SDK'
   s.version      = '1.8.13'
   s.license      =  {:type => 'BSD'}
