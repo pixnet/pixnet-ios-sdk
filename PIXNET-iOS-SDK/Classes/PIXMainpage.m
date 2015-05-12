@@ -19,11 +19,11 @@
     if (page < 1) {
         page = 1;
     }
-    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"page"] = [NSString stringWithFormat:@"%u", page];
     if (perPage < 1) {
         perPage = 10;
     }
-    params[@"count"] = [NSString stringWithFormat:@"%li", perPage];
+    params[@"count"] = [NSString stringWithFormat:@"%u", perPage];
     NSString *path = [NSString stringWithFormat:@"mainpage/blog/categories/%@/%@", typeString, categoryId];
     
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
@@ -45,11 +45,11 @@
     if (page < 1) {
         page = 1;
     }
-    params[@"page"] = [NSString stringWithFormat:@"%li", page];
+    params[@"page"] = [NSString stringWithFormat:@"%u", page];
     if (perPage < 1) {
         perPage = 10;
     }
-    params[@"count"] = [NSString stringWithFormat:@"%li", perPage];
+    params[@"count"] = [NSString stringWithFormat:@"%u", perPage];
     params[@"strict_filter"] = [NSString stringWithFormat:@"%i", strictFilter];
     params[@"api_version"] = @"2";
 //    params[@"category_id"] = [categoryIds componentsJoinedByString:@","];
@@ -77,8 +77,8 @@
 
     NSString *typeString = [self maintypeStringWithType:videoType];
     NSString *path = [NSString stringWithFormat:@"mainpage/album/video/%@", typeString];
-    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page],
-                             @"count": [NSString stringWithFormat:@"%li", perPage]};
+    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%u", page],
+                             @"count": [NSString stringWithFormat:@"%u", perPage]};
     
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {

@@ -212,7 +212,7 @@
         return;
     }
     
-    NSDictionary *param = @{@"history_days":[NSString stringWithFormat:@"%lu", historyDays]};
+    NSDictionary *param = @{@"history_days":[NSString stringWithFormat:@"%u", historyDays]};
     [[PIXAPIHandler new] callAPI:@"account/mib" httpMethod:@"GET" shouldAuth:YES parameters:param requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
@@ -277,10 +277,10 @@
 -(void)getAccountAnalyticsWithStaticDays:(NSUInteger)staticDays referDays:(NSUInteger)referDays completion:(PIXHandlerCompletion)completion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:2];
     if (staticDays) {
-        params[@"statistics_days"] = [NSString stringWithFormat:@"%lu", staticDays];
+        params[@"statistics_days"] = [NSString stringWithFormat:@"%u", staticDays];
     }
     if (referDays) {
-        params[@"referer_days"] = [NSString stringWithFormat:@"%lu", referDays];
+        params[@"referer_days"] = [NSString stringWithFormat:@"%u", referDays];
     }
     [[PIXAPIHandler new] callAPI:@"account/analytics" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];

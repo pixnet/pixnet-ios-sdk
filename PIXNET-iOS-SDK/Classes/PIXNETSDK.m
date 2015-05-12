@@ -11,12 +11,19 @@
 #import "PIXBlock.h"
 
 @implementation PIXNETSDK
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret{
     [PIXAPIHandler setConsumerKey:aKey consumerSecret:aSecret callbackURL:nil];
 }
+#pragma clang diagnostic pop
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 +(void)setConsumerKey:(NSString *)aKey consumerSecret:(NSString *)aSecret callbackURL:(NSString *)callbackURL{
     [PIXAPIHandler setConsumerKey:aKey consumerSecret:aSecret callbackURL:callbackURL];
 }
+#pragma clang diagnostic pop
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     [PIXAPIHandler authByXauthWithUserName:userName userPassword:password requestCompletion:completion];
 }

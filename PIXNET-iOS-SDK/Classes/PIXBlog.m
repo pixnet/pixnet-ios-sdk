@@ -238,12 +238,12 @@
     if (page <= 0) {
         params[@"page"] = @"1";
     } else {
-        params[@"page"] = [NSString stringWithFormat:@"%li", page];
+        params[@"page"] = [NSString stringWithFormat:@"%u", page];
     }
     if (articlePerPage <= 0) {
         params[@"per_page"] = @"20";
     } else {
-        params[@"per_page"] = [NSString stringWithFormat:@"%li", articlePerPage];
+        params[@"per_page"] = [NSString stringWithFormat:@"%u", articlePerPage];
     }
     if (userCategories) {
         if (userCategories.count > 10) {
@@ -259,7 +259,7 @@
         params[@"category_id"] = [userCategories componentsJoinedByString:@","];
     }
     if (status >= 0) {
-        params[@"status"] = [NSString stringWithFormat:@"%li", status];
+        params[@"status"] = [NSString stringWithFormat:@"%i", status];
     }
     params[@"is_top"] = [NSString stringWithFormat:@"%i", isTop];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
@@ -339,7 +339,7 @@
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     if (limit > 0) {
-        params[@"limit"] = [NSString stringWithFormat:@"%li", limit];
+        params[@"limit"] = [NSString stringWithFormat:@"%u", limit];
     }
     params[@"with_body"] = [NSString stringWithFormat:@"%i", withBody];
 
@@ -411,7 +411,7 @@
     if (blogPassword && blogPassword.length>0) {
         params[@"blog_password"] = blogPassword;
     }
-    params[@"limit"] = [NSString stringWithFormat:@"%li", limit];
+    params[@"limit"] = [NSString stringWithFormat:@"%u", limit];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
 
     [[PIXAPIHandler new] callAPI:@"blog/articles/latest"
@@ -443,7 +443,7 @@
     if (passwd || passwd.length >>0 || passwd !=nil) {
         params[@"blog_password"] = passwd;
     }
-    params[@"limit"] = [NSString stringWithFormat:@"%li", limit];
+    params[@"limit"] = [NSString stringWithFormat:@"%u", limit];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
 
     [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
@@ -489,11 +489,11 @@
             break;
     }
     if (page) {
-        params[@"page"] = [NSString stringWithFormat:@"%li", page];
+        params[@"page"] = [NSString stringWithFormat:@"%u", page];
     }
 
     if (perPage) {
-        params[@"per_page"] = [NSString stringWithFormat:@"%li", perPage];
+        params[@"per_page"] = [NSString stringWithFormat:@"%u", perPage];
     }
 
 
@@ -609,7 +609,7 @@
         params[@"body"] = body;
     }
 
-    params[@"status"] = [NSString stringWithFormat:@"%li", status];
+    params[@"status"] = [NSString stringWithFormat:@"%i", status];
 
     if (date) {
         params[@"public_at"] = [NSString stringWithFormat:@"%g", [date timeIntervalSince1970]];
@@ -623,7 +623,7 @@
     }
     params[@"use_nl2br"] = [NSString stringWithFormat:@"%i", useNewLineToBR];
 
-    params[@"comment_perm"] = [NSString stringWithFormat:@"%d", commentPerm];;
+    params[@"comment_perm"] = [NSString stringWithFormat:@"%i", commentPerm];;
 
     params[@"comment_hidden"] = [NSString stringWithFormat:@"%i", commentHidden];
 
@@ -656,13 +656,13 @@
     if (status == PIXArticleStatusFriend && friendGroupID) {
         params[@"friend_group_ids"] = friendGroupID;
     }
-    if (notifyTwitter >= 0) {
+    if (notifyTwitter >= (BOOL)0) {
         params[@"notify_twitter"] = [NSString stringWithFormat:@"%i", notifyTwitter];
     }
-    if (notifyFacebook >= 0) {
+    if (notifyFacebook >= (BOOL)0) {
         params[@"notify_facebook"] = [NSString stringWithFormat:@"%i", notifyFacebook];
     }
-    if (notifyPlurk >= 0) {
+    if (notifyPlurk >= (BOOL)0) {
         params[@"notify_plurk"] = [NSString stringWithFormat:@"%i", notifyPlurk];
     }
     if (cover) {
@@ -805,8 +805,8 @@
     } else {
         params[@"sort"] = @"date-posted-desc";
     }
-    params[@"page"] = [NSString stringWithFormat:@"%li", page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%li", perPage];
+    params[@"page"] = [NSString stringWithFormat:@"%u", page];
+    params[@"perPage"] = [NSString stringWithFormat:@"%u", perPage];
 
     BOOL isAuthed = [PIXAPIHandler isAuthed];
     [[PIXAPIHandler new] callAPI:@"blog/comments" httpMethod:@"GET" shouldAuth:isAuthed parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {

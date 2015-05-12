@@ -18,7 +18,7 @@
     if (perPage < 1) {
         perPage = 20;
     }
-    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
+    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%u", page], @"per_page":[NSString stringWithFormat:@"%u", perPage]};
     [[PIXAPIHandler new] callAPI:@"friend/groups" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
@@ -142,7 +142,7 @@
     if (perPage<1) {
         perPage = 20;
     }
-    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%li", page], @"per_page":[NSString stringWithFormat:@"%li", perPage]};
+    NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%u", page], @"per_page":[NSString stringWithFormat:@"%u", perPage]};
     [[PIXAPIHandler new] callAPI:@"friend/subscriptions" httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
