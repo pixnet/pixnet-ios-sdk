@@ -87,7 +87,7 @@ static const NSString *kBoundaryConstant = @"---------------------------14737809
         [bodyData appendData:[[[@"\r\n--" stringByAppendingString:[kBoundaryConstant copy]] stringByAppendingString:@"--"] dataUsingEncoding:NSUTF8StringEncoding]];
         totalLength += [content length];
     }
-    [self setValue:[NSString stringWithFormat:@"%lu", [bodyData length]] forHTTPHeaderField:@"Content-Length"];
+    [self setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[bodyData length]] forHTTPHeaderField:@"Content-Length"];
     [self setHTTPBody:bodyData];;
 }
 @end
