@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name         = 'PIXNET-iOS-SDK'
   s.version      = '1.8.15'
   s.license      =  {:type => 'BSD'}
-  s.homepage     = 'http://developer.pixnet.pro/#!/doc/pixnetApi/oauthApi'
+  s.homepage     = 'https://github.com/pixnet/pixnet-ios-sdk'
   s.authors      =  {'PIXNET' => 'sdk@pixnet.tw'}
   s.summary      = 'Integrate with PIXNET services.'
 
