@@ -543,11 +543,11 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     if (page < 1) {
         page = 1;
     }
-    params[@"page"] = [NSString stringWithFormat:@"%u", page];
+    params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
     if (perPage < 1) {
         perPage = 20;
     }
-    params[@"perPage"] = [NSString stringWithFormat:@"%u", perPage];
+    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     if (parentId) {
         params[@"parent_id"] = parentId;
