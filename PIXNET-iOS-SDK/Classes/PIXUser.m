@@ -212,7 +212,7 @@
         return;
     }
     
-    NSDictionary *param = @{@"history_days":[NSString stringWithFormat:@"%lu", (unsigned long)historyDays]};
+    NSDictionary *param = @{@"history_days":[NSString stringWithFormat:@"%lu", (unsigned long)historyDays], @"api_version":@"2"};
     [[PIXAPIHandler new] callAPI:@"account/mib" httpMethod:@"GET" shouldAuth:YES parameters:param requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
