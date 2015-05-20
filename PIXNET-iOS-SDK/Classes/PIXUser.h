@@ -173,6 +173,10 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param completion    PIXHandlerCompletion
  */
 -(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion;
+/*
+* 啟用使用者的 MIB 帳戶，須認證才能使用這支 API。 https://developer.pixnet.pro/#!/doc/pixnetApi/accountMibEnable
+* */
+-(void)enableMIBAccount:(PIXHandlerCompletion)completion;
 /**
  *  取得 MIB 某個版位的資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositions
  *

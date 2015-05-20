@@ -161,6 +161,10 @@
 *  @param completion    PIXHandlerCompletion
 */
 -(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion;
+/*
+* 啟用使用者的 MIB 帳戶，須認證才能使用這支 API。 https://developer.pixnet.pro/#!/doc/pixnetApi/accountMibEnable
+* */
+-(void)enableMIBAccount:(PIXHandlerCompletion)completion;
 /**
  *  取得 MIB 某個版位的資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositions
  *
@@ -336,7 +340,7 @@
  *  讀取部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
  *
  *  @param userName      ＊指定要回傳的使用者資訊
- *  @param articleID     ＊指定要回傳的文章ID
+ *  @param articleID     ＊指定要回傳的文章Ier
  *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡

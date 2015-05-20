@@ -239,6 +239,17 @@
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
+
+- (void)enableMIBAccount:(PIXHandlerCompletion)completion {
+    [[PIXAPIHandler new] callAPI:@"account/enableMibAccount" httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+}
+
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"positionId 有誤"]);
