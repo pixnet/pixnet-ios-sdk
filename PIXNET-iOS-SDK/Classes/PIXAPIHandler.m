@@ -368,9 +368,10 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                         return;
                     } else {
                         id receivedObject = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                        NSString *message = receivedObject[@"message"];
-                        if (message) {
-                            completion(NO, data, [NSError PIXErrorWithParameterName:receivedObject[@"message"]]);
+                        NSString *errorCode = receivedObject[@"code"];
+                        if (errorCode) {
+//                            completion(NO, data, [NSError PIXErrorWithParameterName:receivedObject[@"message"]]);
+                            completion(NO, data, [NSError PIXErrorWithServerResponse:receivedObject]);
                         } else {
                             completion(NO, data, [NSError PIXErrorWithHTTPStatusCode:hr.statusCode]);
                         }
