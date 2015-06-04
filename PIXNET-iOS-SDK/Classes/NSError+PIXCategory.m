@@ -20,7 +20,7 @@
 }
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response{
     NSString *message = response[@"message"];
-    NSInteger code = [response[@"error"] integerValue];
+    NSInteger code = [response[@"code"] integerValue];
     NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;
 }
