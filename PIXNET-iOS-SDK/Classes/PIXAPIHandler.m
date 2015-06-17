@@ -135,7 +135,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 }
 // 可以用 Open ID 或是輸入帳密登入 PIXNET
 +(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
-    [self launchLoginByOAuth2:loginView additionalParameter:nil completion:completion];
+    [self launchLoginByOAuth2:loginView additionalParameter:@{@"login_theme" : @"mobileapp"} completion:completion];
 /*    if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
         return;
