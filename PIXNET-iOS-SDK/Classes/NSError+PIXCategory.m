@@ -19,7 +19,8 @@
     return error;
 }
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response{
-    NSString *message = response[@"message"];
+//    NSString *message = response[@"message"];
+    NSString *message = response[@"code"];  //直接用 code 字串透過 Localizable.strings 轉成中文或英文說明
     NSInteger code = [response[@"code"] integerValue];
     NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;

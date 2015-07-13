@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES"
+            buildForTesting = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEBD84661B53A44A003487E2"
+               BuildableName = "ErrorDescriptionTests.xctest"
+               BlueprintName = "ErrorDescriptionTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug">
+      <Testables>
+         <TestableReference>
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEBD84661B53A44A003487E2"
+               BuildableName = "ErrorDescriptionTests.xctest"
+               BlueprintName = "ErrorDescriptionTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO">
+   </LaunchAction>
+</Scheme>

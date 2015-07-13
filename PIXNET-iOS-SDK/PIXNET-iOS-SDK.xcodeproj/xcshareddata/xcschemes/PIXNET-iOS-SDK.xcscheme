@@ -90,6 +90,20 @@
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEBD84661B53A44A003487E2"
+               BuildableName = "ErrorDescriptionTests.xctest"
+               BlueprintName = "ErrorDescriptionTests"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -151,16 +165,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CEDD93C61A77673900C7C34B"
-               BuildableName = "PIXNET-iOS-SDK SpectaTests.xctest"
-               BlueprintName = "PIXNET-iOS-SDK SpectaTests"
-               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEDD93D51A7767B600C7C34B"
                BuildableName = "SpectaTests.xctest"
                BlueprintName = "SpectaTests"
@@ -194,6 +198,16 @@
                BlueprintIdentifier = "CE165F191AD5135D0038FABB"
                BuildableName = "SpectaTestInOAuth1.xctest"
                BlueprintName = "SpectaTestInOAuth1"
+               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CEBD84661B53A44A003487E2"
+               BuildableName = "ErrorDescriptionTests.xctest"
+               BlueprintName = "ErrorDescriptionTests"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
