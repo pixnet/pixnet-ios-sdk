@@ -57,6 +57,7 @@
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */; };
 		CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */; };
+		CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */; };
@@ -200,6 +201,11 @@
 		CE7BDD3E193EEF53008C8A32 /* PIXIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXIndex.h; path = Classes/PIXIndex.h; sourceTree = "<group>"; };
 		CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXIndex.m; path = Classes/PIXIndex.m; sourceTree = "<group>"; };
 		CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXIndexTest.m; sourceTree = "<group>"; };
+		CEBD845A1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEBD845B1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEBD845C1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CEBD84601B53907A003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CEBD84621B539082003487E2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CED461591910C1CD003A96C2 /* pixFox.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pixFox.jpg; sourceTree = "<group>"; };
 		CED4619D1910D4A0003A96C2 /* NSArray+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+PIXCategory.h"; path = "Classes/NSArray+PIXCategory.h"; sourceTree = "<group>"; };
 		CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+PIXCategory.m"; path = "Classes/NSArray+PIXCategory.m"; sourceTree = "<group>"; };
@@ -514,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */,
+				CEBD84611B53907A003487E2 /* Localizable.strings */,
 				CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */,
 				CEDB7C8518D2ECF700D14D0C /* main.m */,
 				CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */,
@@ -831,6 +838,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hant",
 			);
 			mainGroup = CEDB7C6D18D2ECF700D14D0C;
 			productRefGroup = CEDB7C7718D2ECF700D14D0C /* Products */;
@@ -889,6 +897,7 @@
 				CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */,
 				CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */,
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
+				CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */,
 				CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */,
 				82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */,
 				82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */,
@@ -1248,14 +1257,25 @@
 			isa = PBXVariantGroup;
 			children = (
 				CE2588971977D59500CE3604 /* en */,
+				CEBD845C1B538D56003487E2 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CEBD84611B53907A003487E2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CEBD84601B53907A003487E2 /* zh-Hant */,
+				CEBD84621B539082003487E2 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				CEDB7C8318D2ECF700D14D0C /* en */,
+				CEBD845A1B538D56003487E2 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -1264,6 +1284,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				CEDB7C9C18D2ECF700D14D0C /* en */,
+				CEBD845B1B538D56003487E2 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
