@@ -22,7 +22,7 @@ SpecBegin(ErrorDescription)
                 [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"0" articleType:PIXMainpageTypeHot page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
                     NSString *string = error.userInfo[@"NSLocalizedDescription"];
                     NSDictionary *errorDictionary = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
-                    NSError *transforedError = [NSError PIXErrorWithServerResponse:errorDictionary];
+                    NSError *transferedError = [NSError PIXErrorWithServerResponse:errorDictionary];
 
                     done();
                 }];

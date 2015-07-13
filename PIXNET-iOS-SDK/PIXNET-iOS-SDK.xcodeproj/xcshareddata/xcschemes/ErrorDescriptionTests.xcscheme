@@ -32,5 +32,15 @@
    </TestAction>
    <LaunchAction
       useCustomWorkingDirectory = "NO">
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-AppleLanguages"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "(zh_Hant_TW)"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
    </LaunchAction>
 </Scheme>
