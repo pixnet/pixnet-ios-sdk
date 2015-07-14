@@ -57,6 +57,7 @@
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */; };
 		CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */; };
+		CE98B5251B54B2AA00D4AAF5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
 		CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
 		CEBD846C1B53A44A003487E2 /* ErrorDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD846B1B53A44A003487E2 /* ErrorDescriptionTests.m */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
@@ -964,6 +965,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE98B5251B54B2AA00D4AAF5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
