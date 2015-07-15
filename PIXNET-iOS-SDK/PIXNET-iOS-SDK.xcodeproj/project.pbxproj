@@ -60,6 +60,7 @@
 		CE98B5251B54B2AA00D4AAF5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
 		CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
 		CEBD846C1B53A44A003487E2 /* ErrorDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD846B1B53A44A003487E2 /* ErrorDescriptionTests.m */; };
+		CEC39CB11B562C840082494F /* LROAuth2ClientDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7894D19590B0600E29037 /* LROAuth2ClientDelegateHandler.m */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */; };
@@ -67,7 +68,6 @@
 		CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CED5FB9419610C2B0037D268 /* PIXURLSessionDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5FB9319610C2B0037D268 /* PIXURLSessionDelegateHandler.m */; };
 		CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */ = {isa = PBXBuildFile; fileRef = CED60D8919624BFB0080A7D1 /* SHLCutted.mpg */; };
-		CED7894E19590B0600E29037 /* LROAuth2ClientDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7894D19590B0600E29037 /* LROAuth2ClientDelegateHandler.m */; };
 		CED79660196B91020025AA97 /* NSURL+QueryInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7965F196B91020025AA97 /* NSURL+QueryInspector.m */; };
 		CED79663196B91230025AA97 /* NSString+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79662196B91230025AA97 /* NSString+QueryString.m */; };
 		CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = CED79665196B91350025AA97 /* NSDictionary+QueryString.m */; };
@@ -1284,6 +1284,7 @@
 				CEDCD0E918F3ABF700B32ACC /* PIXNETSDK.m in Sources */,
 				619C09E018FD237400325991 /* PIXMainpage.m in Sources */,
 				CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */,
+				CEC39CB11B562C840082494F /* LROAuth2ClientDelegateHandler.m in Sources */,
 				CED7966F196B91790025AA97 /* LROAuth2Client.m in Sources */,
 				CED461A21910D4A0003A96C2 /* NSDictionary+PIXCategory.m in Sources */,
 				CED79660196B91020025AA97 /* NSURL+QueryInspector.m in Sources */,
@@ -1291,7 +1292,6 @@
 				CEDCD0FB18F3AD6800B32ACC /* NSMutableURLRequest+PIXCategory.m in Sources */,
 				619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */,
 				CED7966E196B91790025AA97 /* LROAuth2AccessToken.m in Sources */,
-				CED7894E19590B0600E29037 /* LROAuth2ClientDelegateHandler.m in Sources */,
 				CED79663196B91230025AA97 /* NSString+QueryString.m in Sources */,
 				4A81A744194FF1E7004DE00E /* PIXBlock.m in Sources */,
 				CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */,
