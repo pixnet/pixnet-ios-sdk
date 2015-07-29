@@ -298,7 +298,7 @@
         params[@"article_password"] = articlePasswd;
     }
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@", articleID];
-    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:NO parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSError *jsonError;
             NSDictionary *dictionary1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];
