@@ -5,6 +5,11 @@
 //  Created by Dolphin Su on 3/20/14.
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
+#import <Foundation/Foundation.h>
+#import "PIXAPIHandler.h"
+#import <CoreLocation/CoreLocation.h>
+
+@interface PIXAlbum : NSObject
 /**
 *  Album 裡的影音資料格式
 */
@@ -89,11 +94,6 @@ typedef NS_ENUM(NSInteger, PIXVideoThumbType) {
     */
             PIXVideoThumbTypeNone
 };
-#import <Foundation/Foundation.h>
-#import "PIXAPIHandler.h"
-#import <CoreLocation/CoreLocation.h>
-
-@interface PIXAlbum : NSObject
 #pragma mark site categories
 /**
 *  列出相簿全站分類 http://developer.pixnet.pro/#!/doc/pixnetApi/albumSiteCategories

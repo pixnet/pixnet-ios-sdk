@@ -25,6 +25,7 @@ SpecBegin(ErrorDescription)
                     NSString *bodyString = [NSString stringWithFormat:@"{\"code\":\"%@\"}", key];
                     stubRequest(@"GET", @"https://emma.pixnet.cc/mainpage/blog/categories/hot/0?page=1&count=10&format=json").
                             andReturn(401).
+                            // Do any additional setup after loading the view.
                             withBody(bodyString);
 
                     [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"0" articleType:PIXMainpageTypeHot page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
