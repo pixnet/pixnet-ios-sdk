@@ -50,7 +50,6 @@
     [[PIXAPIHandler new] callAPI:@"blog" httpMethod:@"GET" parameters:@{@"user":userName} requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:parameters:requestCompletion:) parameters:@[@"blog", @"GET", @{@"user":userName}, completion] receiver:[PIXAPIHandler new]];
 }
 - (void)updateBlogInformationWithBlogName:(NSString *)blogName blogDescription:(NSString *)blogDescription keywords:(NSArray *)keywords siteCategoryId:(NSString *)siteCategoryId completion:(PIXHandlerCompletion)completion{
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:4];
@@ -135,7 +134,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/categories" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[@"blog/categories", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)updateBlogCategoryFromID:(NSString *)categoryID
@@ -173,9 +171,6 @@
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-//            parameters:@[path, @"POST", @YES, params, completion]
-//              receiver:[PIXAPIHandler new]];
 }
 
 - (void)deleteBlogCategoriesByID:(NSString *)categoriesID
@@ -204,8 +199,6 @@
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-//            parameters:@[path, @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)sortBlogCategoriesTo:(NSArray *)categoriesIDArray
@@ -216,8 +209,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/categories/position" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:)
-//            parameters:@[@"blog/categories/position", @"POST", @YES, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 
@@ -318,8 +309,6 @@
             completion(succeed, nil, error);
         }
     }];
-//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
-//            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
@@ -347,8 +336,6 @@
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:parameters:requestCompletion:)
-//            parameters:@[path, params, completion] receiver:[PIXAPIHandler new]];
 }
 
 - (void)getBlogArticleCommentsWithUserName:(NSString *)userName
@@ -812,16 +799,6 @@
     [[PIXAPIHandler new] callAPI:@"blog/comments" httpMethod:@"GET" shouldAuth:isAuthed parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-    //    [[PIXAPIHandler new] callAPI:@"blog/comments"
-    //                      parameters:params
-    //               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-    //                   if (succeed) {
-    //                       [self succeedHandleWithData:result completion:completion];
-    //                   } else {
-    //                       completion(NO, nil, errorMessage);
-    //                   }
-    //               }];
-
 }
 
 - (void)getBlogSingleCommentWithUserName:(NSString *)userName
