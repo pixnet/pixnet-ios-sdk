@@ -6,39 +6,38 @@
 //  Copyright (c) 2014 PIXNET. All rights reserved.
 //
 //  這個 class 主要用來與後台 API 溝通, 跟後台要資料時一概都使用 json 格式
-/**
- *  用來回傳 API 呼叫後的結果
- *
- *  @param succeed      用來判斷成功與否
- *  @param result       呼叫成功的話，這個 instance 可以直接使用
- *  @param errorMessage 呼叫失敗的話，這裡會有錯誤的發生原因
- */
-typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
-/**
- *  用何種方式取得後台的 access token
- */
-typedef NS_ENUM(NSInteger, PIXAuthType) {
-    /**
-     *  未登入
-     */
-    PIXAuthTypeUndefined,
-    /**
-     *  XAuth
-     */
-    PIXAuthTypeXAuth,
-    /**
-     *  OAuth2
-     */
-    PIXAuthTypeOAuth2
-};
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 /**
  *  這個 class 主要用來處理跟後台連線上的事情
  */
 @interface PIXAPIHandler : NSObject
+/**
+*  用來回傳 API 呼叫後的結果
+*
+*  @param succeed      用來判斷成功與否
+*  @param result       呼叫成功的話，這個 instance 可以直接使用
+*  @param errorMessage 呼叫失敗的話，這裡會有錯誤的發生原因
+*/
+typedef void (^PIXHandlerCompletion)(BOOL succeed, id result,  NSError *error);
+/**
+*  用何種方式取得後台的 access token
+*/
+typedef NS_ENUM(NSInteger, PIXAuthType) {
+    /**
+    *  未登入
+    */
+            PIXAuthTypeUndefined,
+    /**
+    *  XAuth
+    */
+            PIXAuthTypeXAuth,
+    /**
+    *  OAuth2
+    */
+            PIXAuthTypeOAuth2
+};
 #pragma mark class methods
-
 /**
 *  設定這個 APIHandler 的連線時間上限，預設為8秒
 *
