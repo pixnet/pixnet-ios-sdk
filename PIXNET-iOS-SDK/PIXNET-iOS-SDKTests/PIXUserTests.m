@@ -55,6 +55,7 @@
         return;
     }
     [self getPublicUserInfos];
+    [self getCellPhoneVerificationStatus];
     //取得 MIB 資訊
     NSDictionary *mibInfos = [self getUserMib];
     BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
@@ -82,7 +83,8 @@
         }
 
     } else {
-        [self createMIB];
+        //沒事就不開 create MIB 的測試了
+//        [self createMIB];
     }
 
 //    return;
@@ -103,6 +105,25 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     return;
+}
+-(NSDictionary *)getCellPhoneVerificationStatus{
+    __block BOOL done = NO;
+    __block NSDictionary *infos = nil;
+    [[PIXUser new] getCellphoneVerificationStatus:^(BOOL succeed, id result, NSError *error) {
+        NSString *methodName = @"getCellphoneVerificationStatus";
+        if (succeed) {
+            NSLog(@"%@, succeed: %u", methodName, [result count]);
+            NSLog(@"cellphone verification status: %@", result);
+            infos = result;
+        } else {
+            XCTFail(@"%@ failed: %@", methodName, error);
+        }
+        done = YES;
+    }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return infos;
 }
 -(NSDictionary *)getPublicUserInfos{
     __block BOOL done = NO;

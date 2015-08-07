@@ -198,7 +198,6 @@
     }];
 }
 
-//TODO:待後台修 bug
 - (void)getCellphoneVerificationStatus:(PIXHandlerCompletion)completion {
     [[PIXAPIHandler new] callAPI:@"account/cellphone_verification" httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];

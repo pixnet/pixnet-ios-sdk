@@ -9,78 +9,78 @@
 #import <Foundation/Foundation.h>
 #import "PIXAPIHandler.h"
 
+@interface PIXUser : NSObject
 /**
- *  要接收何種類型的通知
- */
+*  要接收何種類型的通知
+*/
 typedef NS_ENUM(NSInteger, PIXUserNotificationType) {
     /**
-     *  所有通知
-     */
-    PIXUserNotificationTypeAll,
+    *  所有通知
+    */
+            PIXUserNotificationTypeAll,
     /**
-     *  好友互動通知
-     */
-    PIXUserNotificationTypeFriend,
+    *  好友互動通知
+    */
+            PIXUserNotificationTypeFriend,
     /**
-     *  系統通知
-     */
-    PIXUserNotificationTypeSystem,
+    *  系統通知
+    */
+            PIXUserNotificationTypeSystem,
     /**
-     *  留言通知
-     */
-    PIXUserNotificationTypeComment,
+    *  留言通知
+    */
+            PIXUserNotificationTypeComment,
     /**
-     *  應用市集通知
-     */
-    PIXUserNotificationTypeAppMarket
+    *  應用市集通知
+    */
+            PIXUserNotificationTypeAppMarket
 };
 /**
- *  使用者性別
- */
+*  使用者性別
+*/
 typedef NS_ENUM(NSInteger, PIXUserGender) {
     /**
-     *  不設定性別
-     */
-    PIXUserGenderNone,
+    *  不設定性別
+    */
+            PIXUserGenderNone,
     /**
-     *  女性
-     */
-    PIXUserGenderFemale,
+    *  女性
+    */
+            PIXUserGenderFemale,
     /**
-     *  男性
-     */
-    PIXUserGenderMale
+    *  男性
+    */
+            PIXUserGenderMale
 };
 /**
- *  教育程度
- */
+*  教育程度
+*/
 typedef NS_ENUM(NSInteger, PIXUserEducation) {
     /**
-     *  不設定教育程度
-     */
-    PIXUserEducationNone,
+    *  不設定教育程度
+    */
+            PIXUserEducationNone,
     /**
-     *  中學及以下
-     */
-    PIXUserEducationJuniorHigh,
+    *  中學及以下
+    */
+            PIXUserEducationJuniorHigh,
     /**
-     *  高中/高職
-     */
-    PIXUserEducationSeniorHigh,
+    *  高中/高職
+    */
+            PIXUserEducationSeniorHigh,
     /**
-     *  專科
-     */
-    PIXUserEducationJuniorCollege,
+    *  專科
+    */
+            PIXUserEducationJuniorCollege,
     /**
-     *  大學
-     */
-    PIXUserEducationCollege,
+    *  大學
+    */
+            PIXUserEducationCollege,
     /**
-     *  研究所
-     */
-    PIXUserEducationGradurate
+    *  研究所
+    */
+            PIXUserEducationGradurate
 };
-@interface PIXUser : NSObject
 
 /**
  *  讀取 User 公開資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/users
