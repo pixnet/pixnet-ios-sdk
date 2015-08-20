@@ -287,15 +287,13 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *
 *  @param userName   ＊指定要回傳的使用者資訊
 *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
+*  @param fromDate   從哪一天開始，與 toDate 為成對的參數
+*  @param toDate     到哪一天為止，如果有 fromDate, 這個參數就是必填
 *  @param limit      回傳筆數
 *  @param trimUser   是否每篇文章都省略作者資訊
 *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)getBlogHotArticleWithUserName:(NSString *)userName
-                             password:(NSString *)passwd
-                                limit:(NSUInteger)limit
-                             trimUser:(BOOL)trimUser
-                           completion:(PIXHandlerCompletion)completion;
+- (void)getBlogHotArticleWithUserName:(NSString *)userName password:(NSString *)passwd fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate limit:(NSUInteger)limit trimUser:(BOOL)trimUser completion:(PIXHandlerCompletion)completion;
 
 /**
 *  搜尋部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesSearch

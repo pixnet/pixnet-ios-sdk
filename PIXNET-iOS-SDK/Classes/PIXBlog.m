@@ -413,27 +413,36 @@
 
 }
 
-- (void)getBlogHotArticleWithUserName:(NSString *)userName
-                             password:(NSString *)passwd
-                                limit:(NSUInteger)limit
-                             trimUser:(BOOL)trimUser
-                           completion:(PIXHandlerCompletion)completion{
-
+- (void)getBlogHotArticleWithUserName:(NSString *)userName password:(NSString *)passwd fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate limit:(NSUInteger)limit trimUser:(BOOL)trimUser completion:(PIXHandlerCompletion)completion {
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
+        return;
+    }
+    if ((fromDate && !toDate) || (!fromDate && toDate)) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"fromDate 與 toDate 為成對參數，兩者必須同時有值或同時為 nil"]);
+        return;
+    }
+    if (([fromDate compare:toDate] != NSOrderedAscending) && (fromDate && toDate)) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"fromDate 一定要早於 toDate"]);
         return;
     }
     NSMutableDictionary *params = [NSMutableDictionary new];
 
     params[@"user"] = userName;
 
-    if (passwd || passwd.length >>0 || passwd !=nil) {
+    if (passwd || passwd.length >>0 || passwd !=nil ) {
         params[@"blog_password"] = passwd;
     }
     params[@"limit"] = [NSString stringWithFormat:@"%lu", (unsigned long)limit];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
 
-    [[PIXAPIHandler new] callAPI:@"blog/articles/hot"
+    NSMutableString *pathString = [NSMutableString stringWithString:@"blog/articles/hot"];
+    if (fromDate && toDate) {
+        NSDateFormatter *formatter = [NSDateFormatter new];
+        formatter.dateFormat = @"yyyymmdd";
+        [pathString appendFormat:@"/%@-%@", [formatter stringFromDate:fromDate], [formatter stringFromDate:toDate]];
+    }
+    [[PIXAPIHandler new] callAPI:pathString
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
                    if (succeed) {

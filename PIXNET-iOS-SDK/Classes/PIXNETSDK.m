@@ -234,7 +234,8 @@
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                              password:(NSString *)passwd
                            completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd limit:1 trimUser:YES completion:completion];
+    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd fromDate:nil toDate:nil limit:10 trimUser:YES completion:completion];
+//    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd fromDate:nil toDate:nil limit:1 trimUser:YES completion:completion];
 }
 
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
