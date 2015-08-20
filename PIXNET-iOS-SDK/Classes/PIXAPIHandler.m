@@ -10,7 +10,7 @@ static NSString *kConsumerSecret;
 static NSString *kCallbackURL;
 
 #import "PIXAPIHandler.h"
-#import <GCOAuth.h>
+#import "GCOAuth.h"
 #import "NSMutableURLRequest+PIXCategory.h"
 #import "PIXCredentialStorage.h"
 #import "NSError+PIXCategory.h"
