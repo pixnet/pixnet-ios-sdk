@@ -36,7 +36,7 @@ SpecBegin(SomeBlogAPI)
             }];
         });
         it(@"get blog articles", ^AsyncBlock {
-            [[PIXNETSDK new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:1 perpage:10 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXNETSDK new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:1 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 if (succeed) {
                     articles = result[@"articles"];

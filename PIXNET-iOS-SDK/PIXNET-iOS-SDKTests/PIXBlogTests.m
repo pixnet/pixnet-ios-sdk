@@ -363,18 +363,14 @@
 -(NSArray *)getBlogArticles{
     __block BOOL done = NO;
     __block NSArray *articles = nil;
-    [[PIXNETSDK new] getBlogAllArticlesWithUserName:_testUser.userName
-                                           password:nil
-                                               page:1
-                                            perpage:30
-                                         completion:^(BOOL succeed, id result, NSError *error) {
-                                             if (succeed) {
-                                                 articles = result[@"articles"];
-                                             } else {
-                                                 XCTFail(@"get blog articles failed: %@", error);
-                                             }
-                                             done = YES;
-                                         }];
+    [[PIXNETSDK new] getBlogAllArticlesWithUserName:_testUser.userName password:nil page:1 completion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            articles = result[@"articles"];
+        } else {
+            XCTFail(@"get blog articles failed: %@", error);
+        }
+        done = YES;
+    }];
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
