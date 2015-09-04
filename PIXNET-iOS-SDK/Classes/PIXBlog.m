@@ -439,7 +439,7 @@
     NSMutableString *pathString = [NSMutableString stringWithString:@"blog/articles/hot"];
     if (fromDate && toDate) {
         NSDateFormatter *formatter = [NSDateFormatter new];
-        formatter.dateFormat = @"yyyymmdd";
+        formatter.dateFormat = @"yyyyMMdd";
         [pathString appendFormat:@"/%@-%@", [formatter stringFromDate:fromDate], [formatter stringFromDate:toDate]];
     }
     [[PIXAPIHandler new] callAPI:pathString
