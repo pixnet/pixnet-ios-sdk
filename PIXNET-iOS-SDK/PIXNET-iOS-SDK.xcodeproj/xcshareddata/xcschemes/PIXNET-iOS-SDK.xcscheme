@@ -246,10 +246,10 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "BlogPostSpec">
+                  Identifier = "BlogAuthSpec">
                </Test>
                <Test
-                  Identifier = "BlogSpec">
+                  Identifier = "BlogPostSpec">
                </Test>
                <Test
                   Identifier = "NocillaSpec">

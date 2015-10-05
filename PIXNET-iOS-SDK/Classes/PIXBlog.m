@@ -804,8 +804,8 @@
     params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
     params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
 
-    BOOL isAuthed = [PIXAPIHandler isAuthed];
-    [[PIXAPIHandler new] callAPI:@"blog/comments" httpMethod:@"GET" shouldAuth:isAuthed parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    BOOL shouldAuthed = ([PIXAPIHandler isConsumerKeyAndSecretAssigned]&&[PIXAPIHandler isAuthed]);
+    [[PIXAPIHandler new] callAPI:@"blog/comments" httpMethod:@"GET" shouldAuth:shouldAuthed parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
