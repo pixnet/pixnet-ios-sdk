@@ -822,16 +822,12 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing Comment ID"]);
         return;
     }
-
-    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID]
-                      parameters:@{@"user": userName}
-               requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
-                   if (succeed) {
-                       [self succeedHandleWithData:result completion:completion];
-                   } else {
-                       completion(NO, nil, errorMessage);
-                   }
-               }];
+    
+    //已設定ConsumerKey且已取得token
+    BOOL shouldAuthed = ([PIXAPIHandler isConsumerKeyAndSecretAssigned]&&[PIXAPIHandler isAuthed]);
+    [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"blog/comments/%@", commentID] httpMethod:@"GET" shouldAuth:shouldAuthed parameters:@{@"user": userName} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
+    }];
 }
 
 - (void)getBlogLatestCommentWithUserName:(NSString *)userName
