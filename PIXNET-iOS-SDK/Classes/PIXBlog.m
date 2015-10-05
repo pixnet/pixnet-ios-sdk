@@ -430,7 +430,7 @@
 
     params[@"user"] = userName;
 
-    if (passwd || passwd.length >>0 || passwd !=nil ) {
+    if (passwd || passwd.length >0 || passwd !=nil ) {
         params[@"blog_password"] = passwd;
     }
     params[@"limit"] = [NSString stringWithFormat:@"%lu", (unsigned long)limit];
