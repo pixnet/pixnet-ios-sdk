@@ -194,7 +194,7 @@
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePasswd
                               completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogSingleArticleWithUserName:userName articleID:articleID blogPassword:blogPasswd articlePassword:articlePasswd completion:completion];
+    [[PIXBlog new] getBlogSingleArticleWithUserName:userName articleID:articleID needAuth:NO blogPassword:blogPasswd articlePassword:articlePasswd completion:completion];
 }
 
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID

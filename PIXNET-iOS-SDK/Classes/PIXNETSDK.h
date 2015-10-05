@@ -332,6 +332,7 @@
 
 /**
  *  讀取部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
+ *  這個 method 只能讓你取得公開文章，若需取得非公開文章，請用 PIXBlog 裡的 method.
  *
  *  @param userName      ＊指定要回傳的使用者資訊
  *  @param articleID     ＊指定要回傳的文章Ier

@@ -264,11 +264,7 @@
     }];
 }
 
-- (void)getBlogSingleArticleWithUserName:(NSString *)userName
-                               articleID:(NSString *)articleID
-                            blogPassword:(NSString *)blogPasswd
-                         articlePassword:(NSString *)articlePasswd
-                              completion:(PIXHandlerCompletion)completion{
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName articleID:(NSString *)articleID needAuth:(BOOL)needAuth blogPassword:(NSString *)blogPasswd articlePassword:(NSString *)articlePasswd completion:(PIXHandlerCompletion)completion {
 
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
@@ -289,7 +285,7 @@
         params[@"article_password"] = articlePasswd;
     }
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@", articleID];
-    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:NO parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:needAuth parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSError *jsonError;
             NSDictionary *dictionary1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingAllowFragments error:&jsonError];

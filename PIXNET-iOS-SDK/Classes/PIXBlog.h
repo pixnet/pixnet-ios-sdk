@@ -224,15 +224,12 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *
 *  @param userName      ＊指定要回傳的使用者資訊
 *  @param articleID     ＊指定要回傳的文章ID
+*  @param needAuth      非公開的文章會需要認證，預設是 NO
 *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
 *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
 *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)getBlogSingleArticleWithUserName:(NSString *)userName
-                               articleID:(NSString *)articleID
-                            blogPassword:(NSString *)blogPasswd
-                         articlePassword:(NSString *)articlePasswd
-                              completion:(PIXHandlerCompletion)completion;
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName articleID:(NSString *)articleID needAuth:(BOOL)needAuth blogPassword:(NSString *)blogPasswd articlePassword:(NSString *)articlePasswd completion:(PIXHandlerCompletion)completion;
 
 /**
 *  讀取指定 ID 文章的相關文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesIdRelated
