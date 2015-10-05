@@ -244,6 +244,17 @@
                BlueprintName = "SpectaTestBlogClass"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BlogPostSpec">
+               </Test>
+               <Test
+                  Identifier = "BlogSpec">
+               </Test>
+               <Test
+                  Identifier = "NocillaSpec">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
