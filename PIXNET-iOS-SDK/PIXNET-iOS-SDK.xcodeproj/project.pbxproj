@@ -27,6 +27,7 @@
 		4A81A746195014C0004DE00E /* PIXBlockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A745195014C0004DE00E /* PIXBlockTests.m */; };
 		4A81A74819503FBF004DE00E /* PIXMainpageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A81A74719503FBF004DE00E /* PIXMainpageTests.m */; };
 		50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 50845DAA18F4F1B3000813AF /* PIXUserTests.m */; };
+		5FAE361717BC96C15A689F1B /* libPods-SpectaTestBlogClass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96155665E2269D096A18347F /* libPods-SpectaTestBlogClass.a */; };
 		619C09DA18FD1DF900325991 /* PIXFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09D918FD1DF900325991 /* PIXFriend.m */; };
 		619C09DD18FD235300325991 /* PIXGuestbook.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DC18FD235300325991 /* PIXGuestbook.m */; };
 		619C09E018FD237400325991 /* PIXMainpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 619C09DF18FD237400325991 /* PIXMainpage.m */; };
@@ -36,13 +37,19 @@
 		82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */; };
 		82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */; };
 		940CFD71C8096F4D1B86A879 /* libPods-SpectaTestInOAuth1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63050EC31AA50A049F320284 /* libPods-SpectaTestInOAuth1.a */; };
-		CE01963F1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */; };
-		CE0196451A7B3767000D0709 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
+		951B3CB71BC2258F009DAE3D /* NocillaCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 951B3CB61BC2258F009DAE3D /* NocillaCase.m */; settings = {ASSET_TAGS = (); }; };
+		951B3CB91BC22983009DAE3D /* PostMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 951B3CB81BC22983009DAE3D /* PostMethod.m */; settings = {ASSET_TAGS = (); }; };
+		951CC8FC1BBE170E00D90347 /* GetMethodWithAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */; settings = {ASSET_TAGS = (); }; };
+		952482FF1BBCD24F00090FAB /* GetMethodNoAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 952482FE1BBCD24F00090FAB /* GetMethodNoAuth.m */; };
+		952483091BBCD71800090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; settings = {ASSET_TAGS = (); }; };
+		9524830A1BBCDA1F00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
+		9524830B1BBCDA4A00090FAB /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD10018F3AD7E00B32ACC /* PIXUser.m */; };
+		9524830C1BBCDA7700090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
+		9524830D1BBCDA8A00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
+		9524830E1BBCDA9B00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		CE165F131AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE165F141AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE165F151AD50DD00038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
-		CE165F1F1AD5135E0038FABB /* SpectaTestInOAuth1.m in Sources */ = {isa = PBXBuildFile; fileRef = CE165F1E1AD5135E0038FABB /* SpectaTestInOAuth1.m */; };
-		CE165F251AD518940038FABB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CE2588901977D59500CE3604 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C9218D2ECF700D14D0C /* XCTest.framework */; };
 		CE2588911977D59500CE3604 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CE2588921977D59500CE3604 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
@@ -50,22 +57,18 @@
 		CE25889A1977D59500CE3604 /* KiwiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2588991977D59500CE3604 /* KiwiTests.m */; };
 		CE3A34E018FE53770039A1BC /* PIXCategoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */; };
 		CE3A34E318FE56760039A1BC /* PIXTestObjectGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3A34E218FE56760039A1BC /* PIXTestObjectGenerator.m */; };
-		CE3DF3DE1ABBBD7B00106D55 /* SpectaTestAlbumClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF3CD1ABBB3DB00106D55 /* SpectaTestAlbumClass.m */; };
 		CE3DF3DF1ABBF08E00106D55 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
-		CE3DF3E01ABBF0FD00106D55 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CE46037F18F6766A00A3BF84 /* NSError+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46037E18F6766A00A3BF84 /* NSError+PIXCategory.m */; };
 		CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CE46038118F6767600A3BF84 /* NSObject+PIXCategory.m */; };
 		CE7BDD40193EEF53008C8A32 /* PIXIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */; };
 		CE7BDD42193EF61D008C8A32 /* PIXIndexTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */; };
 		CE98B5251B54B2AA00D4AAF5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
 		CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEBD84611B53907A003487E2 /* Localizable.strings */; };
-		CEBD846C1B53A44A003487E2 /* ErrorDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD846B1B53A44A003487E2 /* ErrorDescriptionTests.m */; };
 		CEC39CB11B562C840082494F /* LROAuth2ClientDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7894D19590B0600E29037 /* LROAuth2ClientDelegateHandler.m */; };
 		CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED4615B1910C1CD003A96C2 /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CED461A11910D4A0003A96C2 /* NSArray+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED4619E1910D4A0003A96C2 /* NSArray+PIXCategory.m */; };
 		CED461A21910D4A0003A96C2 /* NSDictionary+PIXCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A01910D4A0003A96C2 /* NSDictionary+PIXCategory.m */; };
-		CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CED5FB9419610C2B0037D268 /* PIXURLSessionDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5FB9319610C2B0037D268 /* PIXURLSessionDelegateHandler.m */; };
 		CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */ = {isa = PBXBuildFile; fileRef = CED60D8919624BFB0080A7D1 /* SHLCutted.mpg */; };
 		CED79660196B91020025AA97 /* NSURL+QueryInspector.m in Sources */ = {isa = PBXBuildFile; fileRef = CED7965F196B91020025AA97 /* NSURL+QueryInspector.m */; };
@@ -96,8 +99,6 @@
 		CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD0FA18F3AD6800B32ACC /* PIXCredentialStorage.m */; };
 		CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD10018F3AD7E00B32ACC /* PIXUser.m */; };
 		CEDD79FE194599EE00F0457A /* PIXGuestbookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD79FD194599EE00F0457A /* PIXGuestbookTests.m */; };
-		CEDD93DB1A7767B600C7C34B /* SpectaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD93DA1A7767B600C7C34B /* SpectaTests.m */; };
-		CEDD93E11A77990400C7C34B /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CED461A41910D4C7003A96C2 /* UserForTest.m */; };
 		CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */; };
 		CEE7834C1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7834B1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m */; };
 		CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */; };
@@ -106,6 +107,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		952483011BBCD24F00090FAB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CEDB7C7518D2ECF700D14D0C;
+			remoteInfo = "PIXNET-iOS-SDK";
+		};
 		CE0196401A7B2DB4000D0709 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
@@ -167,6 +175,7 @@
 /* Begin PBXFileReference section */
 		026FD9C2814F2DD8056582DF /* Pods-ErrorDescriptionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ErrorDescriptionTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ErrorDescriptionTests/Pods-ErrorDescriptionTests.release.xcconfig"; sourceTree = "<group>"; };
 		19503F249333FCBF6628EB3D /* Pods-SpectaTestAlbumClass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestAlbumClass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestAlbumClass/Pods-SpectaTestAlbumClass.debug.xcconfig"; sourceTree = "<group>"; };
+		1D59ACCA0E94CDF3A083B251 /* Pods-SpectaTestBlogClass.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestBlogClass.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestBlogClass/Pods-SpectaTestBlogClass.debug.xcconfig"; sourceTree = "<group>"; };
 		21AA19AFDA5788B5025392E9 /* Pods-SpectaTestVerifyCellphone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestVerifyCellphone.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestVerifyCellphone/Pods-SpectaTestVerifyCellphone.release.xcconfig"; sourceTree = "<group>"; };
 		2A14F9AAF7BF5DE968244600 /* libPods-SpectaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AE5B12A529BA556C409C508 /* Pods-ErrorDescriptionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ErrorDescriptionTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ErrorDescriptionTests/Pods-ErrorDescriptionTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -194,8 +203,17 @@
 		82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXOAuth2Tests.m; sourceTree = "<group>"; };
 		82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_back.jpg; sourceTree = "<group>"; };
 		82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_front.jpg; sourceTree = "<group>"; };
+		951B3CB61BC2258F009DAE3D /* NocillaCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NocillaCase.m; sourceTree = "<group>"; };
+		951B3CB81BC22983009DAE3D /* PostMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMethod.m; sourceTree = "<group>"; };
+		951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMethodWithAuth.m; sourceTree = "<group>"; };
+		952482FC1BBCD24F00090FAB /* SpectaTestBlogClass.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectaTestBlogClass.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		952482FE1BBCD24F00090FAB /* GetMethodNoAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMethodNoAuth.m; sourceTree = "<group>"; };
+		952483001BBCD24F00090FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		952483081BBCD71800090FAB /* UserForTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForTest.m; sourceTree = "<group>"; };
+		96155665E2269D096A18347F /* libPods-SpectaTestBlogClass.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTestBlogClass.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A66BFFCA0CF5009B55A37BA4 /* Pods-KiwiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiTests/Pods-KiwiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AA3F32A42DBF4C9FE310591D /* Pods-SpectaTestBlogClass.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestBlogClass.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestBlogClass/Pods-SpectaTestBlogClass.release.xcconfig"; sourceTree = "<group>"; };
 		C40B17329AE5DA95A9FEF05D /* libPods-SpectaTestVerifyCellphone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTestVerifyCellphone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE01963A1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpectaTestVerifyCellphone.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE01963D1A7B2DB4000D0709 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -235,7 +253,6 @@
 		CED4619F1910D4A0003A96C2 /* NSDictionary+PIXCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+PIXCategory.h"; path = "Classes/NSDictionary+PIXCategory.h"; sourceTree = "<group>"; };
 		CED461A01910D4A0003A96C2 /* NSDictionary+PIXCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+PIXCategory.m"; path = "Classes/NSDictionary+PIXCategory.m"; sourceTree = "<group>"; };
 		CED461A31910D4C7003A96C2 /* UserForTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserForTest.h; sourceTree = "<group>"; };
-		CED461A41910D4C7003A96C2 /* UserForTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForTest.m; sourceTree = "<group>"; };
 		CED5FB9219610C2B0037D268 /* PIXURLSessionDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXURLSessionDelegateHandler.h; path = Classes/PIXURLSessionDelegateHandler.h; sourceTree = "<group>"; };
 		CED5FB9319610C2B0037D268 /* PIXURLSessionDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXURLSessionDelegateHandler.m; path = Classes/PIXURLSessionDelegateHandler.m; sourceTree = "<group>"; };
 		CED60D8919624BFB0080A7D1 /* SHLCutted.mpg */ = {isa = PBXFileReference; lastKnownFileType = video.mpeg; path = SHLCutted.mpg; sourceTree = "<group>"; };
@@ -304,6 +321,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		952482F91BBCD24F00090FAB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5FAE361717BC96C15A689F1B /* libPods-SpectaTestBlogClass.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE0196371A7B2DB4000D0709 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -404,8 +429,22 @@
 				6B4A788C998FB82FE8DF9F2E /* Pods-SpectaTestInOAuth1.release.xcconfig */,
 				2AE5B12A529BA556C409C508 /* Pods-ErrorDescriptionTests.debug.xcconfig */,
 				026FD9C2814F2DD8056582DF /* Pods-ErrorDescriptionTests.release.xcconfig */,
+				1D59ACCA0E94CDF3A083B251 /* Pods-SpectaTestBlogClass.debug.xcconfig */,
+				AA3F32A42DBF4C9FE310591D /* Pods-SpectaTestBlogClass.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		952482FD1BBCD24F00090FAB /* SpectaTestBlogClass */ = {
+			isa = PBXGroup;
+			children = (
+				951B3CB61BC2258F009DAE3D /* NocillaCase.m */,
+				952482FE1BBCD24F00090FAB /* GetMethodNoAuth.m */,
+				951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */,
+				951B3CB81BC22983009DAE3D /* PostMethod.m */,
+				952483001BBCD24F00090FAB /* Info.plist */,
+			);
+			path = SpectaTestBlogClass;
 			sourceTree = "<group>";
 		};
 		CE01963B1A7B2DB4000D0709 /* SpectaTestVerifyCellphone */ = {
@@ -530,6 +569,7 @@
 				CE165F1B1AD5135E0038FABB /* SpectaTestInOAuth1 */,
 				CEBD84681B53A44A003487E2 /* ErrorDescriptionTests */,
 				CEE783481B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests */,
+				952482FD1BBCD24F00090FAB /* SpectaTestBlogClass */,
 				CEDB7C7818D2ECF700D14D0C /* Frameworks */,
 				CEDB7C7718D2ECF700D14D0C /* Products */,
 				140ABE4DE58A12CC0BBA2B30 /* Pods */,
@@ -548,6 +588,7 @@
 				CE165F1A1AD5135D0038FABB /* SpectaTestInOAuth1.xctest */,
 				CEBD84671B53A44A003487E2 /* ErrorDescriptionTests.xctest */,
 				CEE783471B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests.xctest */,
+				952482FC1BBCD24F00090FAB /* SpectaTestBlogClass.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -567,6 +608,7 @@
 				5D303E6035B5824575B684ED /* libPods-SpectaTestAlbumClass.a */,
 				63050EC31AA50A049F320284 /* libPods-SpectaTestInOAuth1.a */,
 				FB784A4C56C8534043E1E9AC /* libPods-ErrorDescriptionTests.a */,
+				96155665E2269D096A18347F /* libPods-SpectaTestBlogClass.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -602,7 +644,7 @@
 				CEDB7C9918D2ECF700D14D0C /* Supporting Files */,
 				50845DAA18F4F1B3000813AF /* PIXUserTests.m */,
 				CED461A31910D4C7003A96C2 /* UserForTest.h */,
-				CED461A41910D4C7003A96C2 /* UserForTest.m */,
+				952483081BBCD71800090FAB /* UserForTest.m */,
 				CE3A34DF18FE53770039A1BC /* PIXCategoryTests.m */,
 				CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */,
 				CEDD79FD194599EE00F0457A /* PIXGuestbookTests.m */,
@@ -745,6 +787,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		952482FB1BBCD24F00090FAB /* SpectaTestBlogClass */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 952483031BBCD24F00090FAB /* Build configuration list for PBXNativeTarget "SpectaTestBlogClass" */;
+			buildPhases = (
+				6DE0D4724A0EAC81AA7425DE /* Check Pods Manifest.lock */,
+				952482F81BBCD24F00090FAB /* Sources */,
+				952482F91BBCD24F00090FAB /* Frameworks */,
+				952482FA1BBCD24F00090FAB /* Resources */,
+				F18E5FF9855ED0529057C210 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				952483021BBCD24F00090FAB /* PBXTargetDependency */,
+			);
+			name = SpectaTestBlogClass;
+			productName = SpectaTestBlogClass;
+			productReference = 952482FC1BBCD24F00090FAB /* SpectaTestBlogClass.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CE0196391A7B2DB4000D0709 /* SpectaTestVerifyCellphone */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CE0196421A7B2DB4000D0709 /* Build configuration list for PBXNativeTarget "SpectaTestVerifyCellphone" */;
@@ -929,6 +991,10 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Dolphin Su";
 				TargetAttributes = {
+					952482FB1BBCD24F00090FAB = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = CEDB7C7518D2ECF700D14D0C;
+					};
 					CE0196391A7B2DB4000D0709 = {
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = CEDB7C7518D2ECF700D14D0C;
@@ -984,11 +1050,19 @@
 				CE165F191AD5135D0038FABB /* SpectaTestInOAuth1 */,
 				CEBD84661B53A44A003487E2 /* ErrorDescriptionTests */,
 				CEE783461B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests */,
+				952482FB1BBCD24F00090FAB /* SpectaTestBlogClass */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		952482FA1BBCD24F00090FAB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE0196381A7B2DB4000D0709 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1205,6 +1279,21 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		6DE0D4724A0EAC81AA7425DE /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		8E0FF9C80B294F17841CA19E /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1278,6 +1367,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ErrorDescriptionTests/Pods-ErrorDescriptionTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F18E5FF9855ED0529057C210 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SpectaTestBlogClass/Pods-SpectaTestBlogClass-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		FA95755E5A6BC39AAB605D32 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1296,12 +1400,22 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		952482F81BBCD24F00090FAB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				951B3CB71BC2258F009DAE3D /* NocillaCase.m in Sources */,
+				952482FF1BBCD24F00090FAB /* GetMethodNoAuth.m in Sources */,
+				951B3CB91BC22983009DAE3D /* PostMethod.m in Sources */,
+				951CC8FC1BBE170E00D90347 /* GetMethodWithAuth.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CE0196361A7B2DB4000D0709 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE0196451A7B3767000D0709 /* UserForTest.m in Sources */,
-				CE01963F1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m in Sources */,
+				9524830B1BBCDA4A00090FAB /* PIXUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1309,8 +1423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE165F251AD518940038FABB /* UserForTest.m in Sources */,
-				CE165F1F1AD5135E0038FABB /* SpectaTestInOAuth1.m in Sources */,
+				9524830E1BBCDA9B00090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1326,8 +1439,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE3DF3E01ABBF0FD00106D55 /* UserForTest.m in Sources */,
-				CE3DF3DE1ABBBD7B00106D55 /* SpectaTestAlbumClass.m in Sources */,
+				9524830C1BBCDA7700090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1335,7 +1447,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEBD846C1B53A44A003487E2 /* ErrorDescriptionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1343,6 +1454,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9524830A1BBCDA1F00090FAB /* UserForTest.m in Sources */,
 				CE46038218F6767600A3BF84 /* NSObject+PIXCategory.m in Sources */,
 				CEDCD0FE18F3AD6800B32ACC /* PIXCredentialStorage.m in Sources */,
 				CED79666196B91350025AA97 /* NSDictionary+QueryString.m in Sources */,
@@ -1377,7 +1489,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CED461A51910D4C7003A96C2 /* UserForTest.m in Sources */,
 				CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */,
 				50845DAB18F4F1B3000813AF /* PIXUserTests.m in Sources */,
 				4A81A74819503FBF004DE00E /* PIXMainpageTests.m in Sources */,
@@ -1389,6 +1500,7 @@
 				CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */,
 				4A81A746195014C0004DE00E /* PIXBlockTests.m in Sources */,
 				82FAA59D51D7A3B33B16877E /* PIXOAuth2Tests.m in Sources */,
+				952483091BBCD71800090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1396,8 +1508,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDD93E11A77990400C7C34B /* UserForTest.m in Sources */,
-				CEDD93DB1A7767B600C7C34B /* SpectaTests.m in Sources */,
+				9524830D1BBCDA8A00090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,6 +1523,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		952483021BBCD24F00090FAB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
+			targetProxy = 952483011BBCD24F00090FAB /* PBXContainerItemProxy */;
+		};
 		CE0196411A7B2DB4000D0709 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
@@ -1494,6 +1610,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		952483041BBCD24F00090FAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D59ACCA0E94CDF3A083B251 /* Pods-SpectaTestBlogClass.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SpectaTestBlogClass/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.pixnet.SpectaTestBlogClass;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+			};
+			name = Debug;
+		};
+		952483051BBCD24F00090FAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA3F32A42DBF4C9FE310591D /* Pods-SpectaTestBlogClass.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = SpectaTestBlogClass/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = tw.pixnet.SpectaTestBlogClass;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
+			};
+			name = Release;
+		};
 		CE0196431A7B2DB4000D0709 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 396E62EC0EA67BC66FBF6897 /* Pods-SpectaTestVerifyCellphone.debug.xcconfig */;
@@ -1969,6 +2125,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		952483031BBCD24F00090FAB /* Build configuration list for PBXNativeTarget "SpectaTestBlogClass" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				952483041BBCD24F00090FAB /* Debug */,
+				952483051BBCD24F00090FAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CE0196421A7B2DB4000D0709 /* Build configuration list for PBXNativeTarget "SpectaTestVerifyCellphone" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2066,6 +2231,7 @@
 				CEE783501B744E2900201D80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

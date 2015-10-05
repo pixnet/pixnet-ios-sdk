@@ -31,3 +31,8 @@ target :ErrorDescriptionTests, :exclusive => true do
   pod 'Expecta'
   pod 'Specta'
 end
+target :SpectaTestBlogClass, :exclusive => true do
+    pod 'Expecta'
+    pod 'Specta'
+    pod 'Nocilla'
+end

@@ -18,4 +18,8 @@
 @property (nonatomic, copy) NSString *subscriptionUser;
 @property (nonatomic, strong) NSArray *blockUsers;
 @property (nonatomic, copy) NSString *cellphone;
+@property (nonatomic, copy) NSString *privateArticle;
+@property (nonatomic, copy) NSString *publicArticle;
+@property (nonatomic, copy) NSString *privateComment;
+@property (nonatomic, copy) NSString *publicComment;
 @end
