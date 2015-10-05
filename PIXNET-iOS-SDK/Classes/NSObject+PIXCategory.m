@@ -25,7 +25,7 @@
     }
     if (jsonError == nil) {
         if ([dict isKindOfClass:[NSDictionary class]]) {
-            if (dict[@"error"] && [dict[@"error"] intValue] == 0) {
+            if (dict[@"error"] && [[NSString stringWithFormat:@"%@",dict[@"error"]] isEqualToString:@"0"]) {
                 completion(YES, [dict PIXDictionaryByReplacingNullsWithBlanks], nil);
                 return;
             } else {
