@@ -34,7 +34,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -48,7 +48,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -62,7 +62,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -76,7 +76,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -90,7 +90,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -104,7 +104,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -119,7 +119,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getSuggestedTagsWithUser:@"hank418" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getSuggestedTagsWithUser:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -194,6 +194,23 @@ describe(@"For not Auth", ^{
             }];
         });
     });
+    
+    //測試Error Codes
+    it(@"blog info return error=int0", ^{
+        stubRequest(@"GET", @"https://emma.pixnet.cc/blog/*".regex).andReturn(200).withBody(@"{\"error\":1,\"code\":\"3900\"}");
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).notTo.beTruthy();
+                expect(result).to.beNil();
+                done();
+                
+            }];
+            
+        });
+    });
+
 });
 
 SpecEnd
