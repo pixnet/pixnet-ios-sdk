@@ -252,7 +252,7 @@
                   Identifier = "BlogPostSpec">
                </Test>
                <Test
-                  Identifier = "NocillaSpec">
+                  Identifier = "BlogSpec">
                </Test>
             </SkippedTests>
          </TestableReference>

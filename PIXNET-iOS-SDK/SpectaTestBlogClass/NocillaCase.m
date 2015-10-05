@@ -135,8 +135,8 @@ describe(@"For not Auth", ^{
         waitUntil(^(DoneCallback done) {
             
             [[PIXBlog new] getSuggestedTagsWithUser:@"&%$^&#" completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
-                expect(result).notTo.beNil();
+                expect(succeed).notTo.beTruthy();
+                expect(result).to.beNil();
                 done();
                 
             }];

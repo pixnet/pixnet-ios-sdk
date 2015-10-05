@@ -173,9 +173,6 @@ describe(@"For not Auth", ^{
             [[PIXBlog new] getBlogCommentsWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].publicArticle blogPassword:nil articlePassword:nil filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
-                for(NSDictionary *tmpDic in result[@"comments"]){
-                    expect(tmpDic[@"body"]).notTo.beNil();
-                }
                 done();
                 
             }];
