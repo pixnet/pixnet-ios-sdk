@@ -57,7 +57,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:[[UserForTest alloc] init].userPassword completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:NO blogPassword:nil articlePassword:[[UserForTest alloc] init].userPassword completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -70,9 +70,22 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:NO blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
+                done();
+                
+            }];
+        });
+    });
+    it(@"blog articles need but login", ^{
+        setAsyncSpecTimeout(60);
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:YES blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect(result).notTo.beNil();
                 done();
                 
             }];

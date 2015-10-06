@@ -19,7 +19,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:@"949487" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:NO blogPassword:nil articlePassword:@"949487" completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -31,7 +31,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:NO blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();

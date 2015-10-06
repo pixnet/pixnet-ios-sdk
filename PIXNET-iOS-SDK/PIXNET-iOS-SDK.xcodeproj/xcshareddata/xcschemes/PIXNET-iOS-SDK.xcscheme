@@ -246,7 +246,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "BlogPostSpec">
+                  Identifier = "BlogAuthSpec">
                </Test>
                <Test
                   Identifier = "BlogSpec">
