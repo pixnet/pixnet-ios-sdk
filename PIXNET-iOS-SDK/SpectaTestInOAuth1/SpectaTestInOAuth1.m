@@ -10,74 +10,89 @@ SpecBegin(SomeBlogAPI)
 __block UserForTest *userForTest = nil;
 __block NSString *systemAlbum;
 __block NSArray *albumsAndFolders;
-        __block NSString *elementID;
+__block NSString *elementID;
 describe(@"These methods are auth needed", ^{
-    beforeAll(^AsyncBlock {
-        userForTest = [[UserForTest alloc] init];
-        [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
-//        [PIXNETSDK logout];
-        setAsyncSpecTimeout(60 * 60);
+    beforeAll( ^{
+        
+        waitUntil(^(DoneCallback done) {
+            userForTest = [[UserForTest alloc] init];
+            [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
+            //        [PIXNETSDK logout];
+            setAsyncSpecTimeout(60 * 60);
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        [PIXNETSDK authByXauthWithUserName:userForTest.userName userPassword:userForTest.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
-            expect(succeed).to.beTruthy();
-            if (!succeed) {
-                [PIXNETSDK logout];
-            } else {
-                setAsyncSpecTimeout(60);
-                expect([PIXNETSDK isAuthed]).to.beTruthy();
-            }
-            done();
-        }];
+            [PIXNETSDK authByXauthWithUserName:userForTest.userName userPassword:userForTest.userPassword requestCompletion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    [PIXNETSDK logout];
+                } else {
+                    setAsyncSpecTimeout(60);
+                    expect([PIXNETSDK isAuthed]).to.beTruthy();
+                }
+                done();
+            }];
 #pragma clang diagnostic pop
+        });
     });
     
     // 取得所有相簿
-    it(@"get all album sets", ^AsyncBlock {
-        [[PIXNETSDK new] getAlbumSetsWithUserName:userForTest.userName page:1 completion:^(BOOL succeed, id result, NSError *error) {
-            expect(succeed).to.beTruthy();
-            if (succeed) {
-                albumsAndFolders = result[@"setfolders"];
-            }
-            done();
-        }];
+    it(@"get all album sets",  ^{
+        
+        waitUntil(^(DoneCallback done) {
+            [[PIXNETSDK new] getAlbumSetsWithUserName:userForTest.userName page:1 completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                if (succeed) {
+                    albumsAndFolders = result[@"setfolders"];
+                }
+                done();
+            }];
+        });
     });
     // 取得主相簿及主系統相簿ID
-    it(@"get main album", ^AsyncBlock{
-        [[PIXNETSDK new] getAlbumMainWithCompletion:^(BOOL succeed, id result, NSError *error) {
-            expect(succeed).to.beTruthy();
-            if (succeed) {
-                systemAlbum = result[@"system_albumset_id"];
-            }
-            done();
-        }];
+    it(@"get main album",  ^{
+        
+        waitUntil(^(DoneCallback done) {
+            [[PIXNETSDK new] getAlbumMainWithCompletion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                if (succeed) {
+                    systemAlbum = result[@"system_albumset_id"];
+                }
+                done();
+            }];
+        });
     });
-    it(@"create element in system album", ^AsyncBlock{
-        expect(systemAlbum).notTo.beNil();
-        UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
-        NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-        [[PIXNETSDK new] createElementWithElementData:imageData setID:systemAlbum elementTitle:nil elementDescription:nil tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
-            expect(succeed).to.beTruthy();
-            if (succeed) {
-                elementID = result[@"element"][@"id"];
-                expect(elementID).toNot.beNil();
-            } else {
-                NSLog(@"create element failed: %@", error);
-            }
-            done();
-        }];
+    it(@"create element in system album",  ^{
+        
+        waitUntil(^(DoneCallback done) {
+            expect(systemAlbum).notTo.beNil();
+            UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
+            NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+            [[PIXNETSDK new] createElementWithElementData:imageData setID:systemAlbum elementTitle:nil elementDescription:nil tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                if (succeed) {
+                    elementID = result[@"element"][@"id"];
+                    expect(elementID).toNot.beNil();
+                } else {
+                    NSLog(@"create element failed: %@", error);
+                }
+                done();
+            }];
+        });
     });
-    it(@"delete element in system album", ^AsyncBlock {
-        if (!elementID) {
-            return;
-        }
-        [[PIXNETSDK new] deleteElementWithElementID:elementID completion:^(BOOL succeed, id result, NSError *error) {
-            expect(succeed).to.beTruthy();
-            if (!succeed) {
-                NSLog(@"delete element failed: %@", error);
+    it(@"delete element in system album",  ^{
+        
+        waitUntil(^(DoneCallback done) {
+            if (!elementID) {
+                return;
             }
-            done();
-        }];
+            [[PIXNETSDK new] deleteElementWithElementID:elementID completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    NSLog(@"delete element failed: %@", error);
+                }
+                done();
+            }];
+        });
     });
     afterAll(^{
         [PIXNETSDK logout];

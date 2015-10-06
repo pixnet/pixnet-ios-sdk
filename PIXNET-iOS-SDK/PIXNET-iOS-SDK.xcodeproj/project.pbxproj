@@ -48,6 +48,11 @@
 		9524830D1BBCDA8A00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830E1BBCDA9B00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		95FE35821BC3BDE500D0EEED /* DeleteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FE35811BC3BDE500D0EEED /* DeleteMethod.m */; settings = {ASSET_TAGS = (); }; };
+		95FE35831BC3C3B700D0EEED /* SpectaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD93DA1A7767B600C7C34B /* SpectaTests.m */; };
+		95FE35841BC3C3C900D0EEED /* SpectaTestVerifyCellphone.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */; };
+		95FE35851BC3C3D700D0EEED /* SpectaTestAlbumClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF3CD1ABBB3DB00106D55 /* SpectaTestAlbumClass.m */; };
+		95FE35861BC3C3E400D0EEED /* SpectaTestInOAuth1.m in Sources */ = {isa = PBXBuildFile; fileRef = CE165F1E1AD5135E0038FABB /* SpectaTestInOAuth1.m */; };
+		95FE35871BC3C3F700D0EEED /* ErrorDescriptionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBD846B1B53A44A003487E2 /* ErrorDescriptionTests.m */; };
 		CE165F131AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE165F141AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE165F151AD50DD00038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
@@ -1419,6 +1424,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FE35841BC3C3C900D0EEED /* SpectaTestVerifyCellphone.m in Sources */,
 				9524830B1BBCDA4A00090FAB /* PIXUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1427,6 +1433,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FE35861BC3C3E400D0EEED /* SpectaTestInOAuth1.m in Sources */,
 				9524830E1BBCDA9B00090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1443,6 +1450,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FE35851BC3C3D700D0EEED /* SpectaTestAlbumClass.m in Sources */,
 				9524830C1BBCDA7700090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1451,6 +1459,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FE35871BC3C3F700D0EEED /* ErrorDescriptionTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1512,6 +1521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FE35831BC3C3B700D0EEED /* SpectaTests.m in Sources */,
 				9524830D1BBCDA8A00090FAB /* UserForTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
