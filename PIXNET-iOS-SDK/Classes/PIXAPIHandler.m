@@ -182,11 +182,20 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 }
 
 +(NSString *)filePathForOAuth2AccessToken{
+    // http://stackoverflow.com/questions/12371321/where-should-i-save-data-files-i-want-to-keep-long-term-and-how-do-i-prevent
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask ,YES);
     NSString *documentsDir = paths[0];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL isDirectory = YES;
+    if (![fileManager fileExistsAtPath:documentsDir isDirectory:&isDirectory]) {
+        __autoreleasing NSError *error;
+        BOOL isCreated = [fileManager createDirectoryAtPath:documentsDir withIntermediateDirectories:YES attributes:nil error:&error];
+        NSAssert(isCreated, error.localizedDescription);
+    }
     NSString *path = [documentsDir stringByAppendingPathComponent:@"oauth2token"];
     return path;
 }
+
 +(void)authByXauthWithUserName:(NSString *)userName userPassword:(NSString *)password requestCompletion:(PIXHandlerCompletion)completion{
     //檢查是否已設定 consumer key 及 consumer secret
     if (kConsumerSecret==nil || kConsumerKey==nil) {
