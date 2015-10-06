@@ -604,7 +604,7 @@
     params[@"status"] = [NSString stringWithFormat:@"%li", (long)status];
 
     if (date) {
-        params[@"public_at"] = [NSString stringWithFormat:@"%g", [date timeIntervalSince1970]];
+        params[@"public_at"] = [NSString stringWithFormat:@"%.0f", [date timeIntervalSince1970]];
     }
 
     if (userCategoryId!=nil && userCategoryId.length>0) {
