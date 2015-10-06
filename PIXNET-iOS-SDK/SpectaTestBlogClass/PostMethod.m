@@ -105,8 +105,8 @@ describe(@"For Post Methed", ^{
         setAsyncSpecTimeout(60);
         
         waitUntil(^(DoneCallback done) {
-            
-            [[PIXBlog new] createBlogArticleWithTitle:@"抬頭" body:@"巴帝" status:PIXArticleStatusPassword publicAt:[NSDate date] userCategoryID:@"6494551" siteCategoryID:@"5" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:nil thumbURL:nil trackback:@[@"http://google.com",@"http://tw.yahoo.com"] password:[[UserForTest alloc] init].userPassword passwordHint:@"9487" friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
+            NSDate *now = [[NSDate alloc] init];
+            [[PIXBlog new] createBlogArticleWithTitle:@"抬頭1" body:@"巴帝2" status:PIXArticleStatusPassword publicAt:now userCategoryID:@"6494551" siteCategoryID:@"5" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"API",@"NEW"] thumbURL:nil trackback:@[@"http://google.com",@"http://tw.yahoo.com"] password:[[UserForTest alloc] init].userPassword passwordHint:@"9487" friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();

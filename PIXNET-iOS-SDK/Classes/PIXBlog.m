@@ -621,7 +621,7 @@
 
     if (tagArray) {
         for (id value in tagArray) {
-            if (![value isMemberOfClass:[NSString class]]) {
+            if (![value isKindOfClass:[NSString class]]) {
                 completion(NO, nil, [NSError PIXErrorWithParameterName:@"tagArray 裡的每個值都一定要是 NSString 物件"]);
                 return;
             }
@@ -633,7 +633,7 @@
     }
     if (trackback && trackback.count>0) {
         for (id value in trackback) {
-            if (![value isMemberOfClass:[NSString class]]) {
+            if (![value isKindOfClass:[NSString class]]) {
                 completion(NO, nil, [NSError PIXErrorWithParameterName:@"trackback 裡每一個值都一定要是 NSString 物件"]);
                 return;
             }
@@ -661,11 +661,7 @@
         params[@"cover"] = cover;
     }
     [[PIXAPIHandler new] callAPI:path httpMethod:@"POST" shouldAuth:YES shouldExecuteInBackground:NO uploadData:nil parameters:params timeoutInterval:20 requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            [self succeedHandleWithData:result completion:completion];
-        } else {
-            completion(NO, nil, error);
-        }
+        [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
 - (void)updateBlogArticleWithArticleID:(NSString *)articleID
