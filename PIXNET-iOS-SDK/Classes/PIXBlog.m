@@ -638,7 +638,7 @@
                 return;
             }
         }
-        params[@"trackback"] = trackback;
+        params[@"trackback"] = [trackback componentsJoinedByString:@" "];
     }
     if (status == PIXArticleStatusPassword) {
         params[@"password"] = passwd;
