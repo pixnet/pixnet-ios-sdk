@@ -182,7 +182,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 }
 
 +(NSString *)filePathForOAuth2AccessToken{
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask ,YES);
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask ,YES);
     NSString *documentsDir = paths[0];
     NSString *path = [documentsDir stringByAppendingPathComponent:@"oauth2token"];
     return path;
