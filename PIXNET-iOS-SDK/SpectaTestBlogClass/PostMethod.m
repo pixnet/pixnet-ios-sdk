@@ -8,7 +8,6 @@
 
 #import "Specta.h"
 #import "Expecta.h"
-#import "Nocilla.h"
 #import "PIXBlog.h"
 #import "UserForTest.h"
 #import "PIXNETSDK.h"
@@ -174,6 +173,38 @@ describe(@"For Post Methed", ^{
         });
     });
      */
+//將留言設為公開
+    it(@"Modify Blog Comment to Public", ^{
+        setAsyncSpecTimeout(60);
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] updateBlogCommentsOpenWithComments:@[@"40323253"] isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect(result).notTo.beNil();
+                done();
+                
+            }];
+            
+        });
+    });
+//將留言設為廣告留言
+    it(@"Modify Blog Comment to Spam", ^{
+        setAsyncSpecTimeout(60);
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] updateBlogCommentsSpamWithComments:@[@"40324111",@"40324099",@"40324096",@"40324087"] isSpam:YES completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect(result).notTo.beNil();
+                done();
+                
+            }];
+            
+        });
+    });
+
+    
     it(@"end", ^{
         
     });

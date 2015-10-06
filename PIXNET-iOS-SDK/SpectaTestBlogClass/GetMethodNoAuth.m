@@ -8,18 +8,21 @@
 
 #import "Specta.h"
 #import "Expecta.h"
-#import "Nocilla.h"
 #import "PIXBlog.h"
 #import "UserForTest.h"
 
 SpecBegin(Blog)
+__block UserForTest *userForTest = nil;
 describe(@"For not Auth", ^{
+    beforeAll(^{
+        userForTest = [[UserForTest alloc] init];
+    });
 //讀取部落格個人文章
     it(@"blog articles which need password", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:NO blogPassword:nil articlePassword:@"949487" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:NO blogPassword:nil articlePassword:@"949487" completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -31,7 +34,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle needAuth:NO blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:NO blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -44,7 +47,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogRelatedArticleByArticleID:[[UserForTest alloc] init].privateArticle userName:[[UserForTest alloc] init].userName withBody:YES relatedLimit:10000 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogRelatedArticleByArticleID:userForTest.privateArticle userName:userForTest.userName withBody:YES relatedLimit:10000 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -57,7 +60,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogArticleCommentsWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:[[UserForTest alloc] init].userPassword page:1 commentsPerPage:100 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogArticleCommentsWithUserName:userForTest.userName articleID:userForTest.privateArticle blogPassword:nil articlePassword:userForTest.userPassword page:1 commentsPerPage:100 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -70,7 +73,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogArticleCommentsWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:@"wrongPassword" page:1 commentsPerPage:100 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogArticleCommentsWithUserName:userForTest.userName articleID:userForTest.privateArticle blogPassword:nil articlePassword:@"wrongPassword" page:1 commentsPerPage:100 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -83,7 +86,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogLatestArticleWithUserName:[[UserForTest alloc] init].userName blogPassword:nil limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogLatestArticleWithUserName:userForTest.userName blogPassword:nil limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -96,7 +99,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogHotArticleWithUserName:[[UserForTest alloc] init].userName password:nil fromDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] toDate:[NSDate date] limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] toDate:[NSDate date] limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -108,7 +111,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogHotArticleWithUserName:[[UserForTest alloc] init].userName password:nil fromDate:nil toDate:nil limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:nil toDate:nil limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -120,7 +123,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogHotArticleWithUserName:[[UserForTest alloc] init].userName password:nil fromDate:[NSDate date] toDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:[NSDate date] toDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -133,7 +136,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getblogSearchArticleWithKeyword:@"@#$%^&*(" userName:[[UserForTest alloc] init].userName searchType:PIXArticleSearchTypeKeyword page:1000 perPage:1 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getblogSearchArticleWithKeyword:@"@#$%^&*(" userName:userForTest.userName searchType:PIXArticleSearchTypeKeyword page:1000 perPage:1 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -146,7 +149,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogCommentsWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:nil filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogCommentsWithUserName:userForTest.userName articleID:userForTest.privateArticle blogPassword:nil articlePassword:nil filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -158,7 +161,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogCommentsWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].privateArticle blogPassword:nil articlePassword:[[UserForTest alloc] init].userPassword filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogCommentsWithUserName:userForTest.userName articleID:userForTest.privateArticle blogPassword:nil articlePassword:userForTest.userPassword filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -170,7 +173,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogCommentsWithUserName:[[UserForTest alloc] init].userName articleID:[[UserForTest alloc] init].publicArticle blogPassword:nil articlePassword:nil filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogCommentsWithUserName:userForTest.userName articleID:userForTest.publicArticle blogPassword:nil articlePassword:nil filter:PIXBlogCommentFilterTypeAll isSortAscending:YES page:1 perPage:100 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -183,7 +186,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleCommentWithUserName:[[UserForTest alloc] init].userName commmentID:[[UserForTest alloc] init].publicComment completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleCommentWithUserName:userForTest.userName commmentID:userForTest.publicComment completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 expect(result[@"comment"][@"body"]).notTo.beNil();
@@ -197,7 +200,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogLatestCommentWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogLatestCommentWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 for(NSDictionary *tmpDic in result[@"latest_comments"]){

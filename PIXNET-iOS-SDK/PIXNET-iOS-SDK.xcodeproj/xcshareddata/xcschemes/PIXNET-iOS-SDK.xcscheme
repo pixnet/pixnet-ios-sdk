@@ -236,7 +236,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "952482FB1BBCD24F00090FAB"
@@ -247,6 +247,9 @@
             <SkippedTests>
                <Test
                   Identifier = "BlogAuthSpec">
+               </Test>
+               <Test
+                  Identifier = "BlogPostSpec">
                </Test>
                <Test
                   Identifier = "BlogSpec">

@@ -13,9 +13,11 @@
 #import "UserForTest.h"
 
 SpecBegin(Nocilla)
+__block UserForTest *userForTest = nil;
 describe(@"For not Auth", ^{
     
      beforeAll(^{
+         userForTest = [[UserForTest alloc] init];
          [[LSNocilla sharedInstance] start];
      });
      
@@ -34,7 +36,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -48,7 +50,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -62,7 +64,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -76,7 +78,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -90,7 +92,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -104,7 +106,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -119,7 +121,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getSuggestedTagsWithUser:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getSuggestedTagsWithUser:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -176,7 +178,7 @@ describe(@"For not Auth", ^{
         stubRequest(@"GET", @"https://emma.pixnet.cc/blog/*".regex).andReturn(200).withBody(@"{\"error\":\"0\"}");
         
         waitUntil(^(DoneCallback done) {
-            [[PIXBlog new] getBlogAllArticlesWithUserName:[[UserForTest alloc] init].userName password:[[UserForTest alloc] init].userPassword page:100 perpage:1 userCategories:@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11"] status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:100 perpage:1 userCategories:@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11"] status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -187,7 +189,7 @@ describe(@"For not Auth", ^{
         stubRequest(@"GET", @"https://emma.pixnet.cc/blog/*".regex).andReturn(200).withBody(@"{\"error\":\"0\"}");
         
         waitUntil(^(DoneCallback done) {
-            [[PIXBlog new] getBlogAllArticlesWithUserName:[[UserForTest alloc] init].userName password:[[UserForTest alloc] init].userPassword page:100 perpage:1 userCategories:@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @(10)] status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:100 perpage:1 userCategories:@[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @(10)] status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -201,7 +203,7 @@ describe(@"For not Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogInformationWithUserName:[[UserForTest alloc] init].userName completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogInformationWithUserName:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();

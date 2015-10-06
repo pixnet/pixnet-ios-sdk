@@ -47,6 +47,7 @@
 		9524830C1BBCDA7700090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830D1BBCDA8A00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830E1BBCDA9B00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
+		95FE35821BC3BDE500D0EEED /* DeleteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FE35811BC3BDE500D0EEED /* DeleteMethod.m */; settings = {ASSET_TAGS = (); }; };
 		CE165F131AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE165F141AD50DCF0038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
 		CE165F151AD50DD00038FABB /* pixFox.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CED461591910C1CD003A96C2 /* pixFox.jpg */; };
@@ -210,6 +211,7 @@
 		952482FE1BBCD24F00090FAB /* GetMethodNoAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMethodNoAuth.m; sourceTree = "<group>"; };
 		952483001BBCD24F00090FAB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		952483081BBCD71800090FAB /* UserForTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserForTest.m; sourceTree = "<group>"; };
+		95FE35811BC3BDE500D0EEED /* DeleteMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteMethod.m; sourceTree = "<group>"; };
 		96155665E2269D096A18347F /* libPods-SpectaTestBlogClass.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTestBlogClass.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CDB24BB1BB342F89ED09330 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A66BFFCA0CF5009B55A37BA4 /* Pods-KiwiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiTests/Pods-KiwiTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				952482FE1BBCD24F00090FAB /* GetMethodNoAuth.m */,
 				951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */,
 				951B3CB81BC22983009DAE3D /* PostMethod.m */,
+				95FE35811BC3BDE500D0EEED /* DeleteMethod.m */,
 				952483001BBCD24F00090FAB /* Info.plist */,
 			);
 			path = SpectaTestBlogClass;
@@ -1408,6 +1411,7 @@
 				952482FF1BBCD24F00090FAB /* GetMethodNoAuth.m in Sources */,
 				951B3CB91BC22983009DAE3D /* PostMethod.m in Sources */,
 				951CC8FC1BBE170E00D90347 /* GetMethodWithAuth.m in Sources */,
+				95FE35821BC3BDE500D0EEED /* DeleteMethod.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
