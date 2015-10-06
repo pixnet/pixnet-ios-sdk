@@ -14,11 +14,13 @@
 #import "PIXNETSDK.h"
 
 SpecBegin(BlogPost)
+__block UserForTest *userForTest = nil;
 describe(@"For Post Methed", ^{
     
     beforeAll(^{
         
-        [PIXNETSDK setConsumerKey:[[UserForTest alloc] init].consumerKey consumerSecret:[[UserForTest alloc] init].consumerSecret];
+        userForTest = [[UserForTest alloc] init];
+        [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
         [PIXNETSDK logout];
         
         id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
@@ -37,6 +39,7 @@ describe(@"For Post Methed", ^{
     });
     
 //修改部落格資訊
+    
     it(@"Modify Blog user info. ", ^{
         setAsyncSpecTimeout(60);
         
@@ -71,6 +74,7 @@ describe(@"For Post Methed", ^{
      */
     
 //修改部落格個人分類
+    
     it(@"Modify Blog Category", ^{
         setAsyncSpecTimeout(60);
         
@@ -85,7 +89,9 @@ describe(@"For Post Methed", ^{
             
         });
     });
+    
 //修改部落格個人分類排序
+    
     it(@"Modify Blog Category Sort", ^{
         setAsyncSpecTimeout(60);
         
@@ -100,13 +106,15 @@ describe(@"For Post Methed", ^{
             
         });
     });
+    
 //新增部落格個人文章createBlogArticleWithTitle
+    /*
     it(@"New Blog Article", ^{
         setAsyncSpecTimeout(60);
         
         waitUntil(^(DoneCallback done) {
             NSDate *now = [[NSDate alloc] init];
-            [[PIXBlog new] createBlogArticleWithTitle:@"抬頭1" body:@"巴帝2" status:PIXArticleStatusPassword publicAt:now userCategoryID:@"6494551" siteCategoryID:@"5" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"API",@"NEW"] thumbURL:nil trackback:@[@"http://google.com",@"http://tw.yahoo.com"] password:[[UserForTest alloc] init].userPassword passwordHint:@"9487" friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] createBlogArticleWithTitle:@"抬頭3" body:@"巴帝4" status:PIXArticleStatusPassword publicAt:now userCategoryID:@"6494551" siteCategoryID:@"5" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"API",@"NEW"] thumbURL:nil trackback:@[@"http://google.com",@"http://tw.yahoo.com"] password:userForTest.userPassword passwordHint:@"9487" friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -115,9 +123,57 @@ describe(@"For Post Methed", ^{
             
         });
     });
+    */
+//修改部落格個人文章
+    /*
+    it(@"Modify Blog Atricle", ^{
+        setAsyncSpecTimeout(60);
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] updateBlogArticleWithArticleID:@"373856665" title:@"修改部落格抬頭" body:@"修改部落格巴帝" status:PIXArticleStatusPublic publicAt:nil userCategoryID:nil siteCategoryID:nil useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"blah",@"and blah"] thumbURL:nil trackback:nil password:nil passwordHint:nil friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect(result).notTo.beNil();
+                done();
+                
+            }];
+        });
+    });
+    */
+//新增部落格留言
+    /*
+    it(@"New Blog Comment in Public Article", ^{
+        setAsyncSpecTimeout(60);
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] createBlogCommentWithArticleID:userForTest.publicArticle body:@"好棒" userName:userForTest.userName author:nil title:@"哇！" url:nil isOpen:YES email:nil blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect(result).notTo.beNil();
+                done();
 
-    
+            }];
+            
+        });
+    });
+     */
+//回覆部落格留言
+    /*
+    it(@"Reply Blog Comment in Public Article", ^{
+        setAsyncSpecTimeout(60);
+        
+        waitUntil(^(DoneCallback done) {
+            
+            [[PIXBlog new] replyBlogCommentWithCommnetID:@"40324126" body:@"喔！是喔！" completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).to.beTruthy();
+                expect(result).notTo.beNil();
+                done();
 
+            }];
+            
+        });
+    });
+     */
     it(@"end", ^{
         
     });
