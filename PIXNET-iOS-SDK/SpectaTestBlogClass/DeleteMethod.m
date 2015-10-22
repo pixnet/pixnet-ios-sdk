@@ -43,7 +43,7 @@ describe(@"For Delete Methed", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] deleteBlogCategoriesByID:@"6492877" type:PIXBlogCategoryTypeCategory completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] deleteBlogCategoriesByID:@"6494968" type:PIXBlogCategoryTypeCategory completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -59,7 +59,7 @@ describe(@"For Delete Methed", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] deleteBlogArticleByArticleID:@"373856665" completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] deleteBlogArticleByArticleID:@"373902157" completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -75,7 +75,7 @@ describe(@"For Delete Methed", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] deleteBlogComments:@[@"40321249",@"40320964"] completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] deleteBlogComments:@[@"40324270",@"40324282"] completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -83,6 +83,6 @@ describe(@"For Delete Methed", ^{
             }];
         });
     });
-     */
+    */
 });
 SpecEnd

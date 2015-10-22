@@ -70,10 +70,10 @@ describe(@"For Post Methed", ^{
             
         });
     });
-     */
+    */
     
 //修改部落格個人分類
-    
+    /*
     it(@"Modify Blog Category", ^{
         setAsyncSpecTimeout(60);
         
@@ -88,7 +88,7 @@ describe(@"For Post Methed", ^{
             
         });
     });
-    
+    */
 //修改部落格個人分類排序
     
     it(@"Modify Blog Category Sort", ^{
@@ -96,7 +96,7 @@ describe(@"For Post Methed", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] sortBlogCategoriesTo:@[@"6492877", @"6494551"] completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] sortBlogCategoriesTo:@[@"6494551"] completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -107,7 +107,7 @@ describe(@"For Post Methed", ^{
     });
     
 //新增部落格個人文章createBlogArticleWithTitle
-    /*
+    
     it(@"New Blog Article", ^{
         setAsyncSpecTimeout(60);
         
@@ -122,7 +122,7 @@ describe(@"For Post Methed", ^{
             
         });
     });
-    */
+    
 //修改部落格個人文章
     /*
     it(@"Modify Blog Atricle", ^{
@@ -140,7 +140,7 @@ describe(@"For Post Methed", ^{
     });
     */
 //新增部落格留言
-    /*
+    
     it(@"New Blog Comment in Public Article", ^{
         setAsyncSpecTimeout(60);
         
@@ -155,7 +155,7 @@ describe(@"For Post Methed", ^{
             
         });
     });
-     */
+     
 //回覆部落格留言
     /*
     it(@"Reply Blog Comment in Public Article", ^{
@@ -174,6 +174,7 @@ describe(@"For Post Methed", ^{
     });
      */
 //將留言設為公開
+    /*
     it(@"Modify Blog Comment to Public", ^{
         setAsyncSpecTimeout(60);
         
@@ -188,7 +189,9 @@ describe(@"For Post Methed", ^{
             
         });
     });
+     */
 //將留言設為廣告留言
+    /*
     it(@"Modify Blog Comment to Spam", ^{
         setAsyncSpecTimeout(60);
         
@@ -203,7 +206,7 @@ describe(@"For Post Methed", ^{
             
         });
     });
-
+     */
     
     it(@"end", ^{
         
