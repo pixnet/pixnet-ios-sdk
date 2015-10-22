@@ -140,7 +140,6 @@ describe(@"For Post Methed", ^{
     });
     */
 //新增部落格留言
-    /*
     it(@"New Blog Comment in Public Article", ^{
         setAsyncSpecTimeout(60);
         
@@ -155,7 +154,6 @@ describe(@"For Post Methed", ^{
             
         });
     });
-     */
 //回覆部落格留言
     /*
     it(@"Reply Blog Comment in Public Article", ^{
