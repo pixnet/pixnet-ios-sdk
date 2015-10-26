@@ -9,7 +9,10 @@ Pod::Spec.new do |s|
 # Source Info
   s.platform     =  :ios, '6.0'
   s.source       =  {:git => 'https://github.com/pixnet/pixnet-ios-sdk.git', :tag => '1.12.2'}
-  s.source_files =  'PIXNET-iOS-SDK/Classes/*.{h,m}', 'PIXNET-iOS-SDK/Classes/LROAuth2Client/*.{h,m}, 'PIXNET-iOS-SDK/SupportingFiles/**/*.*'
+  s.source_files =  'PIXNET-iOS-SDK/Classes/*.{h,m}', 'PIXNET-iOS-SDK/Classes/LROAuth2Client/*.{h,m}
+  s.resource_bundles = {
+    'LocalizedStrings' => ['PIXNET-iOS-SDK/SupportingFiles/**/*']
+  }
   s.framework    =  'CoreLocation'
 
   s.requires_arc = true
