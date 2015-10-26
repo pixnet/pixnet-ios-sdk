@@ -88,7 +88,6 @@
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
 		CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
-		CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */; };
 		CEDB7C8618D2ECF700D14D0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C8518D2ECF700D14D0C /* main.m */; };
 		CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */; };
 		CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */; };
@@ -246,7 +245,6 @@
 		CE7BDD3E193EEF53008C8A32 /* PIXIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXIndex.h; path = Classes/PIXIndex.h; sourceTree = "<group>"; };
 		CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXIndex.m; path = Classes/PIXIndex.m; sourceTree = "<group>"; };
 		CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXIndexTest.m; sourceTree = "<group>"; };
-		CEBD845A1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEBD845B1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEBD845C1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEBD84601B53907A003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -285,7 +283,6 @@
 		CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PIXNET-iOS-SDK-Info.plist"; sourceTree = "<group>"; };
-		CEDB7C8318D2ECF700D14D0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEDB7C8518D2ECF700D14D0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PIXNET-iOS-SDK-Prefix.pch"; sourceTree = "<group>"; };
 		CEDB7C8818D2ECF700D14D0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -637,7 +634,6 @@
 			children = (
 				CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */,
 				CEBD84611B53907A003487E2 /* Localizable.strings */,
-				CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */,
 				CEDB7C8518D2ECF700D14D0C /* main.m */,
 				CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */,
 				82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */,
@@ -1123,7 +1119,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */,
 				CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */,
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
 				CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */,
@@ -1729,15 +1724,7 @@
 				CEBD84621B539082003487E2 /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDB7C8318D2ECF700D14D0C /* en */,
-				CEBD845A1B538D56003487E2 /* zh-Hant */,
-			);
-			name = InfoPlist.strings;
+			path = ../SupportingFiles;
 			sourceTree = "<group>";
 		};
 		CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */ = {
