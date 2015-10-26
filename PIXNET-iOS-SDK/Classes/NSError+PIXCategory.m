@@ -19,7 +19,7 @@
     return error;
 }
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response{
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"pixnet-ios-sdk.pixnet.com"];
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"pixnetSDK.pixnet.com"];
     NSString *message = NSLocalizedStringFromTableInBundle(response[@"code"], @"Localizable", bundle, nil);
 //    NSString *message = NSLocalizedStringFromTable(response[@"code"], @"Localizable", nil);  //直接用 code 字串透過 Localizable.strings 轉成中文或英文說明
     NSInteger code = [response[@"code"] integerValue];

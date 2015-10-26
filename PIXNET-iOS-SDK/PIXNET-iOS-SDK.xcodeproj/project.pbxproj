@@ -1724,7 +1724,6 @@
 				CEBD84621B539082003487E2 /* en */,
 			);
 			name = Localizable.strings;
-			path = ../SupportingFiles;
 			sourceTree = "<group>";
 		};
 		CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */ = {
