@@ -19,8 +19,9 @@
     return error;
 }
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response{
-//    NSString *message = response[@"message"];
-    NSString *message = NSLocalizedStringFromTable(response[@"code"], @"Localizable", nil);  //直接用 code 字串透過 Localizable.strings 轉成中文或英文說明
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"pixnet-ios-sdk.pixnet.com"];
+    NSString *message = NSLocalizedStringFromTableInBundle(response[@"code"], @"Localizable", bundle, nil);
+//    NSString *message = NSLocalizedStringFromTable(response[@"code"], @"Localizable", nil);  //直接用 code 字串透過 Localizable.strings 轉成中文或英文說明
     NSInteger code = [response[@"code"] integerValue];
     NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;
