@@ -34,20 +34,18 @@
 		6F862D0DCDBD4E01B210D795 /* libPods-KiwiTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EC36C5DA27D42EDB5703007 /* libPods-KiwiTests.a */; };
 		8255907BF4A050F46A1C470D /* libPods-SpectaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A14F9AAF7BF5DE968244600 /* libPods-SpectaTests.a */; };
 		82FAA59D51D7A3B33B16877E /* PIXOAuth2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */; };
-		82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */; };
-		82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */; };
 		940CFD71C8096F4D1B86A879 /* libPods-SpectaTestInOAuth1.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63050EC31AA50A049F320284 /* libPods-SpectaTestInOAuth1.a */; };
-		951B3CB71BC2258F009DAE3D /* NocillaCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 951B3CB61BC2258F009DAE3D /* NocillaCase.m */; settings = {ASSET_TAGS = (); }; };
-		951B3CB91BC22983009DAE3D /* PostMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 951B3CB81BC22983009DAE3D /* PostMethod.m */; settings = {ASSET_TAGS = (); }; };
-		951CC8FC1BBE170E00D90347 /* GetMethodWithAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */; settings = {ASSET_TAGS = (); }; };
+		951B3CB71BC2258F009DAE3D /* NocillaCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 951B3CB61BC2258F009DAE3D /* NocillaCase.m */; };
+		951B3CB91BC22983009DAE3D /* PostMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 951B3CB81BC22983009DAE3D /* PostMethod.m */; };
+		951CC8FC1BBE170E00D90347 /* GetMethodWithAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */; };
 		952482FF1BBCD24F00090FAB /* GetMethodNoAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 952482FE1BBCD24F00090FAB /* GetMethodNoAuth.m */; };
-		952483091BBCD71800090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; settings = {ASSET_TAGS = (); }; };
+		952483091BBCD71800090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830A1BBCDA1F00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830B1BBCDA4A00090FAB /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD10018F3AD7E00B32ACC /* PIXUser.m */; };
 		9524830C1BBCDA7700090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830D1BBCDA8A00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
 		9524830E1BBCDA9B00090FAB /* UserForTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 952483081BBCD71800090FAB /* UserForTest.m */; };
-		95FE35821BC3BDE500D0EEED /* DeleteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FE35811BC3BDE500D0EEED /* DeleteMethod.m */; settings = {ASSET_TAGS = (); }; };
+		95FE35821BC3BDE500D0EEED /* DeleteMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FE35811BC3BDE500D0EEED /* DeleteMethod.m */; };
 		95FE35831BC3C3B700D0EEED /* SpectaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD93DA1A7767B600C7C34B /* SpectaTests.m */; };
 		95FE35841BC3C3C900D0EEED /* SpectaTestVerifyCellphone.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01963E1A7B2DB4000D0709 /* SpectaTestVerifyCellphone.m */; };
 		95FE35851BC3C3D700D0EEED /* SpectaTestAlbumClass.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DF3CD1ABBB3DB00106D55 /* SpectaTestAlbumClass.m */; };
@@ -88,7 +86,6 @@
 		CEDB7C7A18D2ECF700D14D0C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7918D2ECF700D14D0C /* Foundation.framework */; };
 		CEDB7C7C18D2ECF700D14D0C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */; };
 		CEDB7C7E18D2ECF700D14D0C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */; };
-		CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */; };
 		CEDB7C8618D2ECF700D14D0C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C8518D2ECF700D14D0C /* main.m */; };
 		CEDB7C8A18D2ECF700D14D0C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB7C8918D2ECF700D14D0C /* AppDelegate.m */; };
 		CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEDB7C8B18D2ECF700D14D0C /* Images.xcassets */; };
@@ -207,8 +204,6 @@
 		63050EC31AA50A049F320284 /* libPods-SpectaTestInOAuth1.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SpectaTestInOAuth1.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B4A788C998FB82FE8DF9F2E /* Pods-SpectaTestInOAuth1.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpectaTestInOAuth1.release.xcconfig"; path = "Pods/Target Support Files/Pods-SpectaTestInOAuth1/Pods-SpectaTestInOAuth1.release.xcconfig"; sourceTree = "<group>"; };
 		82FAA07C4307688FAC5E4848 /* PIXOAuth2Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXOAuth2Tests.m; sourceTree = "<group>"; };
-		82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_back.jpg; sourceTree = "<group>"; };
-		82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ROC_ID_front.jpg; sourceTree = "<group>"; };
 		951B3CB61BC2258F009DAE3D /* NocillaCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NocillaCase.m; sourceTree = "<group>"; };
 		951B3CB81BC22983009DAE3D /* PostMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostMethod.m; sourceTree = "<group>"; };
 		951CC8FB1BBE170E00D90347 /* GetMethodWithAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetMethodWithAuth.m; sourceTree = "<group>"; };
@@ -246,7 +241,6 @@
 		CE7BDD3E193EEF53008C8A32 /* PIXIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PIXIndex.h; path = Classes/PIXIndex.h; sourceTree = "<group>"; };
 		CE7BDD3F193EEF53008C8A32 /* PIXIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PIXIndex.m; path = Classes/PIXIndex.m; sourceTree = "<group>"; };
 		CE7BDD41193EF61D008C8A32 /* PIXIndexTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXIndexTest.m; sourceTree = "<group>"; };
-		CEBD845A1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEBD845B1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEBD845C1B538D56003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		CEBD84601B53907A003487E2 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -285,7 +279,6 @@
 		CEDB7C7B18D2ECF700D14D0C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		CEDB7C7D18D2ECF700D14D0C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PIXNET-iOS-SDK-Info.plist"; sourceTree = "<group>"; };
-		CEDB7C8318D2ECF700D14D0C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CEDB7C8518D2ECF700D14D0C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PIXNET-iOS-SDK-Prefix.pch"; sourceTree = "<group>"; };
 		CEDB7C8818D2ECF700D14D0C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -637,11 +630,8 @@
 			children = (
 				CEDB7C8118D2ECF700D14D0C /* PIXNET-iOS-SDK-Info.plist */,
 				CEBD84611B53907A003487E2 /* Localizable.strings */,
-				CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */,
 				CEDB7C8518D2ECF700D14D0C /* main.m */,
 				CEDB7C8718D2ECF700D14D0C /* PIXNET-iOS-SDK-Prefix.pch */,
-				82FAA8FD917CD71F2BC556F5 /* ROC_ID_back.jpg */,
-				82FAAC172614AA700C99BEE4 /* ROC_ID_front.jpg */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1123,13 +1113,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEDB7C8418D2ECF700D14D0C /* InfoPlist.strings in Resources */,
 				CED4615A1910C1CD003A96C2 /* pixFox.jpg in Resources */,
 				CEDB7C8C18D2ECF700D14D0C /* Images.xcassets in Resources */,
 				CEBD845F1B53907A003487E2 /* Localizable.strings in Resources */,
 				CED60D8B19624F710080A7D1 /* SHLCutted.mpg in Resources */,
-				82FAA74692404DBF4B53EDA2 /* ROC_ID_back.jpg in Resources */,
-				82FAAEB302560B2B34790048 /* ROC_ID_front.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1729,15 +1716,7 @@
 				CEBD84621B539082003487E2 /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		CEDB7C8218D2ECF700D14D0C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEDB7C8318D2ECF700D14D0C /* en */,
-				CEBD845A1B538D56003487E2 /* zh-Hant */,
-			);
-			name = InfoPlist.strings;
+			path = ../LocalizableStrings;
 			sourceTree = "<group>";
 		};
 		CEDB7C9B18D2ECF700D14D0C /* InfoPlist.strings */ = {
