@@ -19,9 +19,11 @@
     return error;
 }
 +(instancetype)PIXErrorWithServerResponse:(NSDictionary *)response{
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"pixnetSDK.pixnet.com"];
+    //這個 bundle 的取得法超機歪！
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"PIXNET-iOS-SDK" ofType:@"bundle"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    //直接用 code 字串透過 Localizable.strings 轉成中文或英文說明
     NSString *message = NSLocalizedStringFromTableInBundle(response[@"code"], @"Localizable", bundle, nil);
-//    NSString *message = NSLocalizedStringFromTable(response[@"code"], @"Localizable", nil);  //直接用 code 字串透過 Localizable.strings 轉成中文或英文說明
     NSInteger code = [response[@"code"] integerValue];
     NSError *error = [NSError errorWithDomain:kPIXErrorDomain code:code userInfo:@{NSLocalizedDescriptionKey: message}];
     return error;
