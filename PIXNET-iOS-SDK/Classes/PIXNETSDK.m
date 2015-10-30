@@ -60,6 +60,10 @@
 -(void)getIndexNowWithcompletion:(PIXHandlerCompletion)completion{
     [[PIXIndex new] getIndexNowWithCompletion:completion];
 }
+#pragma mark - Glossary Method
+-(void)getTWZipCodeWithVersioin:(NSString *)version isFetch:(BOOL)isFetch completion:(PIXHandlerCompletion)completion{
+    [[PIXGlossary new] getTWZipCodeWithVersioin:version isFetch:isFetch completion:completion];
+}
 #pragma mark - User Method
 -(void)getUserWithUserName:(NSString *)userName completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getUserWithUserName:userName completion:completion];
