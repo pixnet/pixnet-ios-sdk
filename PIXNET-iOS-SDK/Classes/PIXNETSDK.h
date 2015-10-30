@@ -17,6 +17,7 @@
 #import "PIXGuestbook.h"
 #import "PIXFriend.h"
 #import "PIXMainpage.h"
+#import "PIXGlossary.h"
 
 @interface PIXNETSDK : NSObject
 
@@ -82,6 +83,15 @@
  *  @param completion PIXHandlerCompletion
  */
 -(void)getIndexNowWithcompletion:(PIXHandlerCompletion)completion;
+#pragma mark - Glossary Method
+/**
+ *  讀取台灣郵遞區號資訊 https://developer.pixnet.pro/#!/doc/pixnetApi/glossaryTwzipcode
+ *
+ *  @param version    目前local端區碼版本號
+ *  @param isFetch    是否回傳區碼資料,填NO則單純確認版號
+ *  @param completion succeed=YES 時 result 可以用(errorMessage為 nil)，succeed=NO 時 result會是 nil，錯誤原因會在 errorMessage 裡
+ */
+-(void)getTWZipCodeWithVersioin:(NSString *)version isFetch:(BOOL)isFetch completion:(PIXHandlerCompletion)completion;
 #pragma mark - User Method
 /**
  *  讀取 User 公開資訊 http://developer.pixnet.pro/#!/doc/pixnetApi/users
