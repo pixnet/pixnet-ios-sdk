@@ -254,7 +254,7 @@
                   Identifier = "BlogAuthSpec">
                </Test>
                <Test
-                  Identifier = "BlogPostSpec">
+                  Identifier = "BlogDeleteSpec">
                </Test>
                <Test
                   Identifier = "BlogSpec">
