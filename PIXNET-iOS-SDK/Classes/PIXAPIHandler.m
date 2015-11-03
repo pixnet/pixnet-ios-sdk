@@ -486,7 +486,9 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 NSData *uploadingFile = params[@"upload_file"];
                 NSString *encodedString = [uploadingFile base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
                 [formData addText:encodedString parameterName:@"upload_file"];
-                NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
+//                NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
+                NSError *error;
+                NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData error:&error];
                 return mutableURLRequest;
             } else {
                 if ([params.allKeys containsObject:@"_method"]) {
@@ -507,7 +509,9 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                     //不把這個 access_token 移除掉的話，call 新增文章的 API 時常會 timeout
                     [tempParams removeObjectForKey:@"access_token"];
                     [formData addParameters:tempParams];
-                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
+                    NSError *error;
+                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData error:&error];
+//                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                     return mutableURLRequest;
                 }
             }

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PIXNET-iOS-SDK'
-  s.version      = '1.13.1'
+  s.version      = '1.13.2'
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'https://github.com/pixnet/pixnet-ios-sdk'
   s.authors      =  {'PIXNET' => 'sdk@pixnet.tw'}
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 
 # Source Info
   s.platform     =  :ios, '6.0'
-  s.source       =  {:git => 'https://github.com/pixnet/pixnet-ios-sdk.git', :tag => '1.13.1'}
+  s.source       =  {:git => 'https://github.com/pixnet/pixnet-ios-sdk.git', :tag => '1.13.2'}
   s.source_files =  'PIXNET-iOS-SDK/Classes/*.{h,m}', 'PIXNET-iOS-SDK/Classes/LROAuth2Client/*.{h,m}'
   s.framework    =  'CoreLocation'
   s.resource_bundles = { 'PIXNET-iOS-SDK' => 'PIXNET-iOS-SDK/LocalizableStrings/**' }
@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   
 # Pod Dependencies
   s.dependency 'PIX-cocoa-oauth', '~> 0.0.1'
-  s.dependency 'OMGHTTPURLRQ', '~> 2.1'
+  s.dependency 'OMGHTTPURLRQ', :git=>'https://github.com/pixnet/OMGHTTPURLRQ.git'
 end

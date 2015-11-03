@@ -1,7 +1,7 @@
 platform :ios, "6.0"
 
 pod 'cocoa-oauth', '~> 0.0.1'
-pod 'OMGHTTPURLRQ', '~> 2.1'
+pod 'OMGHTTPURLRQ', :git=>'https://github.com/pixnet/OMGHTTPURLRQ.git'
 #pod 'LROAuth2Client-PIXNET', :git => 'https://github.com/dolphinSuPixnet/LROAuth2Client.git', :tag => '0.2'
 #pod 'RPJSONValidator', '~> 0.1.2'
 

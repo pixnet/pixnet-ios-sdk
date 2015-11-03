@@ -143,9 +143,6 @@
                   Identifier = "PIXBlockTests">
                </Test>
                <Test
-                  Identifier = "PIXBlogTests">
-               </Test>
-               <Test
                   Identifier = "PIXCategoryTests">
                </Test>
                <Test
@@ -162,6 +159,9 @@
                </Test>
                <Test
                   Identifier = "PIXOAuth2Tests">
+               </Test>
+               <Test
+                  Identifier = "PIXUserTests">
                </Test>
             </SkippedTests>
          </TestableReference>
@@ -186,7 +186,7 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "SomeBlogAPISpec">
+                  Identifier = "GlossarySpec">
                </Test>
             </SkippedTests>
          </TestableReference>

@@ -13,12 +13,12 @@ __block NSArray *notifications = nil;
 __block NSMutableArray *comments = nil;
 describe(@"These methods are auth needed", ^{
     beforeAll(^{
-        
+        setAsyncSpecTimeout(60 * 60 * 60);
         waitUntil(^(DoneCallback done) {
             userForTest = [[UserForTest alloc] init];
             [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
             [PIXNETSDK logout];
-            setAsyncSpecTimeout(60 * 60);
+            
             comments = [NSMutableArray new];
             id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
             UIView *rootView = appDelegate.window.rootViewController.view;
@@ -26,7 +26,9 @@ describe(@"These methods are auth needed", ^{
             [rootView addSubview:webView];
             //            [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
             [PIXNETSDK loginByOAuth2OpenIDOnlyWithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 if (succeed) {
                     setAsyncSpecTimeout(60);
                     expect([PIXNETSDK isAuthed]).to.beTruthy();
@@ -43,7 +45,9 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:1 completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 if (succeed) {
                     articles = result[@"articles"];
                     article = articles[1];
@@ -56,11 +60,12 @@ describe(@"These methods are auth needed", ^{
         });
     });
     it(@"leave comment 1", ^{
-        
         waitUntil(^(DoneCallback done) {
             expect(comments).toNot.beNil();
             [[PIXNETSDK new] createBlogCommentWithArticleID:article[@"id"] body:@"unit test message" userName:userForTest.userName author:userForTest.userPassword title:@"unit test title" url:nil isOpen:YES email:nil blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 if (succeed) {
                     [comments addObject:result[@"comment"][@"id"]];
                 }
@@ -71,10 +76,11 @@ describe(@"These methods are auth needed", ^{
         
     });
     it(@"leave comment 2",  ^{
-        
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] createBlogCommentWithArticleID:article[@"id"] body:@"unit test message" userName:userForTest.userName author:nil title:@"unit test title" url:nil isOpen:NO email:nil blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 if (succeed) {
                     [comments addObject:result[@"comment"][@"id"]];
                 }
@@ -84,11 +90,12 @@ describe(@"These methods are auth needed", ^{
         });
     });
     it(@"set comments as close",  ^{
-        
         waitUntil(^(DoneCallback done) {
             expect(comments.count == 2).to.beTruthy();
             [[PIXBlog new] updateBlogCommentsOpenWithComments:comments isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
@@ -98,7 +105,9 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] updateBlogCommentsOpenWithComments:comments isOpen:YES completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
@@ -108,7 +117,9 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXBlog new] updateBlogCommentsSpamWithComments:comments isSpam:YES completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
@@ -118,7 +129,9 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] updateBlogCommentsSpamWithComments:comments isSpam:NO completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
@@ -128,7 +141,9 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] deleteBlogComments:comments completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
@@ -138,7 +153,9 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] updateBlockWithUsers:userForTest.blockUsers isAddToBlock:YES completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
@@ -168,17 +185,19 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] updateBlockWithUsers:userForTest.blockUsers isAddToBlock:NO completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %i, description: %@", error.code, error.localizedDescription]);
+                }
                 done();
-                
             }];
         });
     });
     it(@"get notifications with default parameters",  ^{
-        
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] getNotificationsWiothCompletion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 if (succeed) {
                     notifications = result[@"notifications"];
                 }
@@ -191,33 +210,40 @@ describe(@"These methods are auth needed", ^{
         
         waitUntil(^(DoneCallback done) {
             [[PIXUser new] getNotificationsWiothNotificationType:PIXUserNotificationTypeSystem limit:1 isSkipSetRead:YES completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                 done();
                 
             }];
         });
     });
     it(@"set one notification as read",  ^{
-        
+        if (notifications.count == 0) {
+            return;
+        }
         waitUntil(^(DoneCallback done) {
             [[PIXUser new] updateOneNotificationAsRead:notifications[0][@"id"] completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
+                done();
             }];
-            done();
         });
         afterAll(^{
             [PIXNETSDK logout];
             expect([PIXNETSDK isAuthed]).toNot.beTruthy();
         });
     });
-    // 以下的 testing 是不需要 auth 的
+#pragma mark 以下的 testing 是不需要 auth 的
     describe(@"these methods are login unnecessary", ^{
-        //在 isIncludeThumbs=YES 時常會 time out，正在等人查問題所在
         it(@"should get categories", ^{
             
             waitUntil(^(DoneCallback done) {
                 [[PIXBlog new] getSiteCategoriesForArticleWithGroups:YES isIncludeThumbs:NO completion:^(BOOL succeed, id result, NSError *error) {
-                    expect(succeed).to.beTruthy();
+                    if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                     done();
                     
                 }];
@@ -227,7 +253,9 @@ describe(@"These methods are auth needed", ^{
             
             waitUntil(^(DoneCallback done) {
                 [[PIXBlog new] getSiteCategoriesForBlogWithGroups:YES isIncludeThumbs:YES completion:^(BOOL succeed, id result, NSError *error) {
-                    expect(succeed).to.beTruthy();
+                    if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                     done();
                     
                 }];
@@ -237,7 +265,9 @@ describe(@"These methods are auth needed", ^{
             
             waitUntil(^(DoneCallback done) {
                 [[PIXBlog new] getSuggestedTagsWithUser:userForTest.userName completion:^(BOOL succeed, id result, NSError *error) {
-                    expect(succeed).to.beTruthy();
+                    if (!succeed) {
+                    failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
+                }
                     if (!succeed) {
                         NSLog(@"error: %@", error);
                     }
