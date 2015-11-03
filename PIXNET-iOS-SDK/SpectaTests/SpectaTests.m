@@ -13,12 +13,12 @@ __block NSArray *notifications = nil;
 __block NSMutableArray *comments = nil;
 describe(@"These methods are auth needed", ^{
     beforeAll(^{
-        
+        setAsyncSpecTimeout(60 * 60 * 60);
         waitUntil(^(DoneCallback done) {
             userForTest = [[UserForTest alloc] init];
             [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
             [PIXNETSDK logout];
-            setAsyncSpecTimeout(60 * 60);
+            
             comments = [NSMutableArray new];
             id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
             UIView *rootView = appDelegate.window.rootViewController.view;
@@ -139,6 +139,9 @@ describe(@"These methods are auth needed", ^{
         waitUntil(^(DoneCallback done) {
             [[PIXNETSDK new] updateBlockWithUsers:userForTest.blockUsers isAddToBlock:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
+                if (!succeed) {
+                    
+                }
                 done();
                 
             }];
@@ -198,12 +201,14 @@ describe(@"These methods are auth needed", ^{
         });
     });
     it(@"set one notification as read",  ^{
-        
+        if (notifications.count == 0) {
+            return;
+        }
         waitUntil(^(DoneCallback done) {
             [[PIXUser new] updateOneNotificationAsRead:notifications[0][@"id"] completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
+                done();
             }];
-            done();
         });
         afterAll(^{
             [PIXNETSDK logout];
