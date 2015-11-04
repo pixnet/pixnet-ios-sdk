@@ -24,7 +24,6 @@ describe(@"These methods are auth needed", ^{
             UIView *rootView = appDelegate.window.rootViewController.view;
             UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
             [rootView addSubview:webView];
-            //            [PIXNETSDK loginByOAuthLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
             [PIXNETSDK loginByOAuth2OpenIDOnlyWithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
                 if (!succeed) {
                     failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);

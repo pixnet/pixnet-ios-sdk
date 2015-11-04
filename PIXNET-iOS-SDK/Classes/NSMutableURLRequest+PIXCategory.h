@@ -16,4 +16,5 @@
  *  @param datas 由數個 NSDictionary 組成的 array, Dictionary 的 key 是檔名，value 是 NSData
  */
 -(void)PIXAttachDatas:(NSArray *)datas;
++(instancetype)PIXURLRequestForOauth2POST:(NSString *)urlString parameters:(NSDictionary *)parameters;
 @end

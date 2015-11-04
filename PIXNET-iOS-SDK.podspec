@@ -16,5 +16,5 @@ Pod::Spec.new do |s|
   
 # Pod Dependencies
   s.dependency 'PIX-cocoa-oauth', '~> 0.0.1'
-  s.dependency 'OMGHTTPURLRQ', :git=>'https://github.com/pixnet/OMGHTTPURLRQ.git'
+  s.dependency 'OMGHTTPURLRQ', '~> 3.0.2'
 end

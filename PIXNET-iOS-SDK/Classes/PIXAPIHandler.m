@@ -502,17 +502,22 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                     return request;
                 } else {
                     urlString = [NSString stringWithFormat:@"%@%@?access_token=%@", kApiURLPrefix, path, currentToken.accessToken];
-                    OMGMultipartFormData *formData = [OMGMultipartFormData new];
                     [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
                         tempParams[key] = obj;
                     }];
-                    //不把這個 access_token 移除掉的話，call 新增文章的 API 時常會 timeout
                     [tempParams removeObjectForKey:@"access_token"];
-                    [formData addParameters:tempParams];
-                    NSError *error;
-                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData error:&error];
-//                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
-                    return mutableURLRequest;
+                    NSMutableURLRequest *request = [NSMutableURLRequest PIXURLRequestForOauth2POST:urlString parameters:tempParams];
+                    return request;
+//                    OMGMultipartFormData *formData = [OMGMultipartFormData new];
+//                    [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
+//                        tempParams[key] = obj;
+//                    }];
+//                    //不把這個 access_token 移除掉的話，call 新增文章的 API 時常會 timeout
+//                    [tempParams removeObjectForKey:@"access_token"];
+//                    [formData addParameters:tempParams];
+//                    NSError *error;
+//                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData error:&error];
+//                    return mutableURLRequest;
                 }
             }
         }
