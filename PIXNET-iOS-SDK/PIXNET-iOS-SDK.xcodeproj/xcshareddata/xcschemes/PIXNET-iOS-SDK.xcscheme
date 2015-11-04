@@ -184,11 +184,6 @@
                BlueprintName = "SpectaTests"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "GlossarySpec">
-               </Test>
-            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "YES">

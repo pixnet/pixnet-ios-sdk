@@ -136,22 +136,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 // 可以用 Open ID 或是輸入帳密登入 PIXNET
 +(void)loginByOAuth2WithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion{
     [self launchLoginByOAuth2:loginView additionalParameter:@{@"login_theme" : @"mobileapp"} completion:completion];
-/*    if (kConsumerSecret==nil || kConsumerKey==nil || kCallbackURL==nil) {
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"consumer key、consumer secret 或 callbackURL 尚未設定"]);
-        return;
-    }
-    PIXAPIHandler *singleton = [PIXAPIHandler sharedInstance];
-    singleton.getOAuth2AccessTokenCompletion = completion;
-    //先檢查是否已有之前已存下來的 token
-    LROAuth2AccessToken *storedToken = [NSKeyedUnarchiver unarchiveObjectWithFile:[PIXAPIHandler filePathForOAuth2AccessToken]];
-    if (storedToken) {
-        [[NSUserDefaults standardUserDefaults] setInteger:PIXAuthTypeOAuth2 forKey:kAuthTypeKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        completion(NO, nil, [NSError PIXErrorWithParameterName:@"已有使用者登入中，若要讓另一使用者登入，請先執行 +logout"]);
-        return;
-    } else {
-        [singleton.oauth2Client authorizeUsingWebView:loginView];
-    }*/
 }
 // 只用 Open ID 登入 PIXNET
 +(void)loginByOAuth2OpenIDOnlyWithLoginView:(UIWebView *)loginView completion:(PIXHandlerCompletion)completion {
@@ -501,23 +485,12 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                     [request setHTTPBody:[bodyString dataUsingEncoding:NSUTF8StringEncoding]];
                     return request;
                 } else {
-                    urlString = [NSString stringWithFormat:@"%@%@?access_token=%@", kApiURLPrefix, path, currentToken.accessToken];
+                    urlString = [NSString stringWithFormat:@"%@%@", kApiURLPrefix, path];
                     [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
                         tempParams[key] = obj;
                     }];
-                    [tempParams removeObjectForKey:@"access_token"];
                     NSMutableURLRequest *request = [NSMutableURLRequest PIXURLRequestForOauth2POST:urlString parameters:tempParams];
                     return request;
-//                    OMGMultipartFormData *formData = [OMGMultipartFormData new];
-//                    [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
-//                        tempParams[key] = obj;
-//                    }];
-//                    //不把這個 access_token 移除掉的話，call 新增文章的 API 時常會 timeout
-//                    [tempParams removeObjectForKey:@"access_token"];
-//                    [formData addParameters:tempParams];
-//                    NSError *error;
-//                    NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData error:&error];
-//                    return mutableURLRequest;
                 }
             }
         }

@@ -4,6 +4,7 @@
 #import "Expecta.h"
 #import "PIXNETSDK.h"
 #import "UserForTest.h"
+#import "Nocilla.h"
 
 SpecBegin(SomeBlogAPI)
 __block UserForTest *userForTest = nil;
