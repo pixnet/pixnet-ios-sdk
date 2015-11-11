@@ -538,8 +538,16 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
  *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    NSDictionary *userDict = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
+    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
+    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
+    
+    NSDictionary *userDict = nil;
+    //判斷是否登入，如無登入才需要帶帳號密碼去驗證，登入過後應該用token及secret去驗證才對
+    if (token.length == 0 || secret.length == 0) {
+        userDict = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
+    
     if (params) {
         [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
             dict[key] = obj;
