@@ -25,7 +25,7 @@ describe(@"test1", ^{
             
             waitUntil(^(DoneCallback done) {
                 NSString *bodyString = [NSString stringWithFormat:@"{\"code\":\"%@\"}", key];
-                stubRequest(@"GET", @"https://emma.pixnet.cc/mainpage/blog/categories/hot/0?page=1&count=10&format=json").andReturn(401).withBody(bodyString);
+                stubRequest(@"GET", @"https://emma.pixnet.cc/mainpage/blog/categories/hot/0?count=10&page=1&format=json").andReturn(401).withBody(bodyString);
                 [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"0" articleType:PIXMainpageTypeHot page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
                     NSString *string = error.userInfo[@"NSLocalizedDescription"];
                     NSDictionary *errorDictionary = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
