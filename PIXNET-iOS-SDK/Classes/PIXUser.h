@@ -33,7 +33,11 @@ typedef NS_ENUM(NSInteger, PIXUserNotificationType) {
     /**
     *  應用市集通知
     */
-            PIXUserNotificationTypeAppMarket
+            PIXUserNotificationTypeAppMarket,
+    /**
+     *  站方公告
+     */
+            PIXUserNotificationTypeAnnounce
 };
 /**
 *  使用者性別

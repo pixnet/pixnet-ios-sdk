@@ -172,6 +172,9 @@
         case PIXUserNotificationTypeAppMarket:
             typeString = @"appmarket";
             break;
+        case PIXUserNotificationTypeAnnounce:
+            typeString = @"announce";
+            break;
         case PIXUserNotificationTypeAll:
         default:
             paramsCount = 2;
