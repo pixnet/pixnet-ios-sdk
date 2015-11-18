@@ -122,8 +122,21 @@
     //刪除部落格個人文章
     [self deleteBlogArticle:articleId];
     //刪除部落格個人分類
-    [self deleteBlogCategory:categoryId];
-    [self deleteBlogFoler:folderId];
+    
+    [[PIXB
+      new] getSiteCate
+     NO
+        NO
+     
+    if
+     succ
+    [self dataIm
+     [resu
+    [@"cateories"]]]];[selfdeleteBlogCategory:categoryId]*;
+    [self delete else {
+        
+                                                           }BlogFoler:folderId];
+    
     
 }
 -(void)updateBlogInformation:(NSArray *)siteCategories{
@@ -131,7 +144,7 @@
     NSString *categoryID = siteCategories[index][@"id"];
     NSLog(@"new category name: %@, category ID: %@", siteCategories[index][@"name"], categoryID);
     __block BOOL done = NO;
-    NSString *methodName = @"updateBlogInformationWithBlogName:";
+*/    NSString *methodName = @"updateBlogInformationWithBlogName:";
     [[PIXNETSDK new] updateBlogInformationWithBlogName:nil blogDescription:nil keywords:@[@""] siteCategoryId:categoryID completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             NSLog(@"%@ succeed", methodName);
