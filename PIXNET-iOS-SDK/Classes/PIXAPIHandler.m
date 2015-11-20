@@ -20,6 +20,7 @@ static NSString *kCallbackURL;
 #import "PIXURLSessionDelegateHandler.h"
 #import "NSData+Base64.h"
 #import "OMGHTTPURLRQ.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
 static NSString *const kApiURLHost = @"emma.pixnet.cc";
@@ -311,6 +312,10 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
             return;
         }
     }
+    if (![self isReachability]) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"目前沒有網路連線"]);
+        return;
+    }
     _timeoutInterval = timeoutInterval;
     NSString *parameterString = nil;
     if (parameters != nil && [parameters isKindOfClass:[NSDictionary class]]) {
@@ -573,5 +578,22 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         }
     }
     return request;
+}
+#define testcase (kSCNetworkReachabilityFlagsConnectionRequired | kSCNetworkReachabilityFlagsTransientConnection)
+-(BOOL)isReachability{
+    SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, [kApiURLHost UTF8String]);
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityGetFlags(ref, &flags);
+    if (!flags) {
+        return NO;
+    }
+    BOOL connectionUP = YES;
+    if(!(flags & kSCNetworkReachabilityFlagsReachable)){
+        connectionUP = NO;
+    }
+    if( (flags & testcase) == testcase ){
+        connectionUP = NO;
+    }
+    return connectionUP;
 }
 @end
