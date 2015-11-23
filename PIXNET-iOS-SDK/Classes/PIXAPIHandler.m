@@ -580,6 +580,11 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     return request;
 }
 #define testcase (kSCNetworkReachabilityFlagsConnectionRequired | kSCNetworkReachabilityFlagsTransientConnection)
+/**
+ *  用來確認是否有網路連線
+ *
+ *  @return 有網路連線時回會回傳 YES，但不一定是代表 emma 是活著的，但 PIXNET 的伺服器很少掛點的。
+ */
 -(BOOL)isReachability{
     SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, [kApiURLHost UTF8String]);
     SCNetworkReachabilityFlags flags;
