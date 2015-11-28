@@ -340,6 +340,8 @@
  */
 - (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
 
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray *)userCategories completion:(PIXHandlerCompletion)completion;
+
 /**
  *  讀取部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
  *  這個 method 只能讓你取得公開文章，若需取得非公開文章，請用 PIXBlog 裡的 method.
