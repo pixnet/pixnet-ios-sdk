@@ -317,6 +317,12 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         return;
     }
     _timeoutInterval = timeoutInterval;
+    
+    NSMutableDictionary *newParam = [[NSMutableDictionary alloc] initWithDictionary:parameters];
+    
+    [newParam setObject:kConsumerKey forKey:@"client_id"];
+    parameters = newParam;
+    
     NSString *parameterString = nil;
     if (parameters != nil && [parameters isKindOfClass:[NSDictionary class]]) {
         parameterString = [self parametersStringFromDictionary:parameters];
