@@ -385,6 +385,7 @@
                                            publicAt:nil
                                      userCategoryID:nil
                                      siteCategoryID:nil
+                                  subSiteCategoryID:nil
                                         commentPerm:PIXArticleCommentPermClose
                                       commentHidden:NO
                                                tags:nil
