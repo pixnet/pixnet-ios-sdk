@@ -507,6 +507,7 @@
                           publicAt:(NSDate *)date
                     userCategoryID:(NSString *)userCategoryId
                     siteCategoryID:(NSString *)cateID
+                 subSiteCategoryID:(NSString *)subCateID
                     useNewLineToBR:(BOOL)useNewLineToBR
                        commentPerm:(PIXArticleCommentPerm)commentPerm
                      commentHidden:(BOOL)commentHidden
@@ -529,6 +530,7 @@
                                       publicAt:date
                                 userCategoryID:userCategoryId
                                 siteCategoryID:cateID
+                             subSiteCategoryID:subCateID
                                 useNewLineToBR:useNewLineToBR
                                    commentPerm:commentPerm
                                  commentHidden:commentHidden
@@ -555,6 +557,7 @@
                                     publicAt:(NSDate *)date
                               userCategoryID:(NSString *)userCategoryId
                               siteCategoryID:(NSString *)cateID
+                           subSiteCategoryID:(NSString *)subCateID
                               useNewLineToBR:(BOOL)useNewLineToBR
                                  commentPerm:(PIXArticleCommentPerm)commentPerm
                                commentHidden:(BOOL)commentHidden
@@ -612,6 +615,13 @@
     }
     if (cateID!=nil && cateID.length>0) {
         params[@"site_category_id"] = cateID;
+    }
+    if (subCateID!=nil && subCateID.length>0) {
+        if ([subCateID isEqualToString:cateID]) {
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"subCateID 不可與 cateID 相同"]);
+            return;
+        }
+        params[@"sub_site_category_id"] = subCateID;
     }
     params[@"use_nl2br"] = [NSString stringWithFormat:@"%i", useNewLineToBR];
 
@@ -671,6 +681,7 @@
                               publicAt:(NSDate *)date
                         userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
+                     subSiteCategoryID:(NSString *)subCateID
                         useNewLineToBR:(BOOL)useNewLineToBR
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
@@ -697,6 +708,7 @@
                                       publicAt:date
                                 userCategoryID:userCategoryId
                                 siteCategoryID:cateID
+                             subSiteCategoryID:subCateID
                                 useNewLineToBR:useNewLineToBR
                                    commentPerm:commentPerm
                                  commentHidden:commentHidden

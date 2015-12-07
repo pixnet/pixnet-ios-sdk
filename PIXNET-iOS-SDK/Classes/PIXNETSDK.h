@@ -445,6 +445,7 @@
  *  @param date           文章的發表時間
  *  @param userCategoryId 使用者自訂的類別 id。使用者自訂的類別，可透過 -(void)getBlogCategoriesWithUserName:password:completion: 取得
  *  @param cateID         全站分類 id
+ *  @param subCateID      全站次分類 id
  *  @param commentPerm    全站分類的該類別 id，全站的部落格類別，可透過 -(void)getBlogCategoriesListIncludeGroups:thumbs:completion: 取得
  *  @param commentHidden  是否將留言公開
  *  @param tagArray       標籤
@@ -465,6 +466,7 @@
                               publicAt:(NSDate *)date
                         userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
+                     subSiteCategoryID:(NSString *)subCateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray

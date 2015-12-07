@@ -113,7 +113,7 @@ describe(@"For Post Methed", ^{
         
         waitUntil(^(DoneCallback done) {
             NSDate *now = [[NSDate alloc] init];
-            [[PIXBlog new] createBlogArticleWithTitle:@"抬頭3" body:@"巴帝4" status:PIXArticleStatusPassword publicAt:now userCategoryID:@"6494551" siteCategoryID:@"5" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"API",@"NEW"] thumbURL:nil trackback:@[@"http://google.com",@"http://tw.yahoo.com"] password:userForTest.userPassword passwordHint:@"9487" friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] createBlogArticleWithTitle:@"抬頭3" body:@"巴帝4" status:PIXArticleStatusPassword publicAt:now userCategoryID:@"6494551" siteCategoryID:@"5" subSiteCategoryID:@"6" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"API",@"NEW"] thumbURL:nil trackback:@[@"http://google.com",@"http://tw.yahoo.com"] password:userForTest.userPassword passwordHint:@"9487" friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -124,13 +124,13 @@ describe(@"For Post Methed", ^{
     });
     
 //修改部落格個人文章
-    /*
+    
     it(@"Modify Blog Atricle", ^{
         setAsyncSpecTimeout(60);
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] updateBlogArticleWithArticleID:@"373856665" title:@"修改部落格抬頭" body:@"修改部落格巴帝" status:PIXArticleStatusPublic publicAt:nil userCategoryID:nil siteCategoryID:nil useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"blah",@"and blah"] thumbURL:nil trackback:nil password:nil passwordHint:nil friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] updateBlogArticleWithArticleID:@"378750325" title:@"修改部落格抬頭" body:@"修改部落格巴帝" status:PIXArticleStatusPublic publicAt:nil userCategoryID:nil siteCategoryID:@"7"                            subSiteCategoryID:@"8" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"blah",@"and blah"] thumbURL:nil trackback:nil password:nil passwordHint:nil friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -138,7 +138,7 @@ describe(@"For Post Methed", ^{
             }];
         });
     });
-    */
+    
 //新增部落格留言
     
     it(@"New Blog Comment in Public Article", ^{

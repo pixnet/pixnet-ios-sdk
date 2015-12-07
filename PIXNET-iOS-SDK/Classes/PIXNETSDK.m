@@ -256,6 +256,7 @@
                                      publicAt:nil
                                userCategoryID:nil
                                siteCategoryID:nil
+                            subSiteCategoryID:nil
                                useNewLineToBR:YES
                                   commentPerm:PIXArticleCommentPermPublic
                                 commentHidden:NO
@@ -280,6 +281,7 @@
                               publicAt:(NSDate *)date
                         userCategoryID:(NSString *)userCategoryId
                         siteCategoryID:(NSString *)cateID
+                     subSiteCategoryID:(NSString *)subCateID
                            commentPerm:(PIXArticleCommentPerm)commentPerm
                          commentHidden:(BOOL)commentHidden
                                   tags:(NSArray *)tagArray
@@ -300,6 +302,7 @@
                                          publicAt:date
                                    userCategoryID:userCategoryId
                                    siteCategoryID:cateID
+                                subSiteCategoryID:subCateID
                                    useNewLineToBR:YES
                                       commentPerm:commentPerm
                                     commentHidden:commentHidden
