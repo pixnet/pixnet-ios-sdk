@@ -242,7 +242,7 @@
             return;
         }
         for (id value in userCategories) {
-            if (![value isMemberOfClass:[NSString class]]) {
+            if (![value isKindOfClass:[NSString class]]) {
                 completion(NO, nil, [NSError PIXErrorWithParameterName:@"個人自行定義的分類裡每個值都一定要是 NSString"]);
                 return;
             }

@@ -20,6 +20,7 @@ static NSString *kCallbackURL;
 #import "PIXURLSessionDelegateHandler.h"
 #import "NSData+Base64.h"
 #import "OMGHTTPURLRQ.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
 static NSString *const kApiURLHost = @"emma.pixnet.cc";
@@ -311,6 +312,10 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
             return;
         }
     }
+    if (![self isReachability]) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"目前沒有網路連線"]);
+        return;
+    }
     _timeoutInterval = timeoutInterval;
     NSString *parameterString = nil;
     if (parameters != nil && [parameters isKindOfClass:[NSDictionary class]]) {
@@ -538,8 +543,16 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
  *  產生一個用來取得 token 的 URLQuest (for XAuth)
  */
 +(NSMutableURLRequest *)requestForXAuthWithPath:(NSString *)path parameters:(NSDictionary *)params httpMethod:(NSString *)httpMethod{
-    NSDictionary *userDict = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
+    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
+    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
+    
+    NSDictionary *userDict = nil;
+    //判斷是否登入，如無登入才需要帶帳號密碼去驗證，登入過後應該用token及secret去驗證才對
+    if (token.length == 0 || secret.length == 0) {
+        userDict = [PIXAPIHandler sharedInstance].userDictionaryForXAuth;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:userDict];
+    
     if (params) {
         [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *obj, BOOL *stop) {
             dict[key] = obj;
@@ -547,8 +560,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     }
     NSMutableURLRequest *request = nil;
     NSString *oPath = [NSString stringWithFormat:@"/%@", path];
-    NSString *token = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenIdentifier];
-    NSString *secret = [[PIXCredentialStorage sharedInstance] stringForIdentifier:kOauthTokenSecretIdentifier];
 
     if ([httpMethod isEqualToString:@"GET"]) {
         request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
@@ -567,5 +578,27 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
         }
     }
     return request;
+}
+#define testcase (kSCNetworkReachabilityFlagsConnectionRequired | kSCNetworkReachabilityFlagsTransientConnection)
+/**
+ *  用來確認是否有網路連線
+ *
+ *  @return 有網路連線時回會回傳 YES，但不一定是代表 emma 是活著的，但 PIXNET 的伺服器很少掛點的。
+ */
+-(BOOL)isReachability{
+    SCNetworkReachabilityRef ref = SCNetworkReachabilityCreateWithName(NULL, [kApiURLHost UTF8String]);
+    SCNetworkReachabilityFlags flags;
+    SCNetworkReachabilityGetFlags(ref, &flags);
+    if (!flags) {
+        return NO;
+    }
+    BOOL connectionUP = YES;
+    if(!(flags & kSCNetworkReachabilityFlagsReachable)){
+        connectionUP = NO;
+    }
+    if( (flags & testcase) == testcase ){
+        connectionUP = NO;
+    }
+    return connectionUP;
 }
 @end

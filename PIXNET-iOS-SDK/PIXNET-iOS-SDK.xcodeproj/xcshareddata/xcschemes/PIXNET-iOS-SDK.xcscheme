@@ -216,7 +216,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEBD84661B53A44A003487E2"
@@ -282,6 +282,7 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
+      showNonLocalizedStrings = "YES"
       language = "zh-Hant">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">

@@ -124,7 +124,6 @@
     //刪除部落格個人分類
     [self deleteBlogCategory:categoryId];
     [self deleteBlogFoler:folderId];
-    
 }
 -(void)updateBlogInformation:(NSArray *)siteCategories{
     int index = arc4random()%[siteCategories count];
