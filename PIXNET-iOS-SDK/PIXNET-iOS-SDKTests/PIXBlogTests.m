@@ -83,6 +83,8 @@
     
     //修改部落格個人文章
     [self modifyBlogArticle:articleId];
+    //同樣是修改部落格個人文章，但這個的 siteCategoryID == subSiteCategoryID，所以不會過
+    [self modifyBlogArticle:articleId];
     //列出所有部落格個人文章
     NSArray *articles = [self getBlogArticles];
     //讀取部落格個人單篇文章
@@ -375,6 +377,41 @@
     }
     return articles;
 }
+-(void)modifyBlogArticleShouldFail:(NSString *)articleId{
+    __block BOOL done = NO;
+    [[PIXNETSDK new] updateBlogArticleWithArticleID:articleId
+                                              title:@"title"
+                                               body:@"body"
+                                             status:PIXArticleStatusDraft
+                                           publicAt:nil
+                                     userCategoryID:nil
+                                     siteCategoryID:@"7"
+                                  subSiteCategoryID:@"7"
+                                        commentPerm:PIXArticleCommentPermClose
+                                      commentHidden:NO
+                                               tags:nil
+                                           thumbURL:nil
+                                          trackback:nil
+                                           password:nil
+                                       passwordHint:nil
+                                      friendGroupID:nil
+                                      notifyTwitter:NO
+                                     notifyFacebook:NO
+                                        notifyPlurk:NO
+                                              cover:nil
+                                         completion:^(BOOL succeed, id result, NSError *error) {
+                                             if (succeed) {
+                                                 XCTFail(@"fail");
+                                             } else {
+                                                 
+                                             }
+                                             done = YES;
+                                         }];
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
 -(void)modifyBlogArticle:(NSString *)articleId{
     __block BOOL done = NO;
     [[PIXNETSDK new] updateBlogArticleWithArticleID:articleId
@@ -384,6 +421,7 @@
                                            publicAt:nil
                                      userCategoryID:nil
                                      siteCategoryID:nil
+                                  subSiteCategoryID:nil
                                         commentPerm:PIXArticleCommentPermClose
                                       commentHidden:NO
                                                tags:nil
