@@ -94,9 +94,7 @@ describe(@"For Post Methed", ^{
     
     it(@"Modify Blog Category Sort", ^{
         setAsyncSpecTimeout(60);
-        
         waitUntil(^(DoneCallback done) {
-            
             [[PIXBlog new] sortBlogCategoriesTo:@[@"6494551"] completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
@@ -150,11 +148,22 @@ describe(@"For Post Methed", ^{
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
-                
             }];
         });
     });
-    
+    // 同樣是修改文章，但這個應該不會 pas，因為 siteCategoryID == subSiteCategoryID
+    it(@"Modify Blog Atricle", ^{
+        setAsyncSpecTimeout(60);
+
+        waitUntil(^(DoneCallback done) {
+            [[PIXBlog new] updateBlogArticleWithArticleID:@"378750325" title:@"修改部落格抬頭" body:@"修改部落格巴帝" status:PIXArticleStatusPublic publicAt:nil userCategoryID:nil siteCategoryID:@"7" subSiteCategoryID:@"7" useNewLineToBR:YES commentPerm:PIXArticleCommentPermPublic commentHidden:NO tags:@[@"blah",@"and blah"] thumbURL:nil trackback:nil password:nil passwordHint:nil friendGroupID:nil notifyTwitter:NO notifyFacebook:NO notifyPlurk:NO cover:nil completion:^(BOOL succeed, id result, NSError *error) {
+                expect(succeed).notTo.beTruthy();
+                expect(result).to.beNil();
+                done();
+            }];
+        });
+    });
+
 //新增部落格留言
     
     it(@"New Blog Comment in Public Article", ^{
