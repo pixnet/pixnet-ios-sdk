@@ -161,6 +161,7 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param completion  PIXHandlerCompletion
  */
 -(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion;
+
 /**
  *  建立使用者的 MIB 資訊，若已上傳過帳戶資料，除非需要補件，否則不開放再次上傳帳戶資料。 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibCreate
  *
@@ -173,10 +174,9 @@ typedef NS_ENUM(NSInteger, PIXUserEducation) {
  *  @param cellPhone     手機號碼，必要欄位。
  *  @param mailAddress   支票寄送地址，必要欄位。
  *  @param domicile      戶籍地址，必要欄位。
- *  @param enableVideoAd 是否開啟影音廣告。
  *  @param completion    PIXHandlerCompletion
  */
--(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion;
+- (void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile completion:(PIXHandlerCompletion)completion;
 /*
 * 啟用使用者的 MIB 帳戶，須認證才能使用這支 API。 https://developer.pixnet.pro/#!/doc/pixnetApi/accountMibEnable
 * */
