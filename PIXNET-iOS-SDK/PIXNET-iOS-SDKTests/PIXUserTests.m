@@ -61,6 +61,9 @@
     BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
 //    [self createMIB];
     if (isAppliedMIB) {
+        [self getAllMibPositions];
+        [self getAllMibPositionsShouldFail];
+
         NSArray *mibPositions = [self fetchPositions:mibInfos];
         [self getMibPositionsInfo:mibPositions];
         //TODO: 後台還沒完成
@@ -88,6 +91,40 @@
     }
 
 //    return;
+}
+// 取得所有 MIB 的版位資訊, 正向測試
+-(void)getAllMibPositions {
+    NSArray *days = @[@(0), @(1), @(90)];
+    for (NSNumber *number in days) {
+        __block XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+        [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:number.unsignedIntegerValue completion:^(BOOL succeed, id result, NSError *error) {
+            if (!succeed) {
+                XCTFail(@"get all mib positions failed: %@", error);
+            }
+            [expectation fulfill];
+        }];
+        [self waitForExpectationsWithTimeout:8.0 handler:^(NSError *error) {
+            if (error) {
+                XCTFail(@"get all mib positions timeout: %@", error);
+            }
+        }];
+    }
+}
+// 取得所有 MIB 的版位資訊，反向測試
+-(void)getAllMibPositionsShouldFail {
+    NSArray *days = @[@(-1), @(91)];
+    __block BOOL done = NO;
+    for (NSNumber *number in days) {
+        [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:number.unsignedIntegerValue completion:^(BOOL succeed, id result, NSError *error) {
+            if (succeed) {
+                XCTFail(@"get all mib positions failed: %@", error);
+            }
+            done = YES;
+        }];
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
 }
 -(void)createMIB{
     __block BOOL done = NO;

@@ -107,6 +107,11 @@
     [[PIXUser new] enableMIBAccount:completion];
 }
 
+- (void)getAccountMIBAllPositionsWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion {
+    [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:historyDays completion:completion];
+}
+
+
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getAccountMIBPositionWithPositionID:positionId completion:completion];
 }

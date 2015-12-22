@@ -176,6 +176,13 @@
 * */
 -(void)enableMIBAccount:(PIXHandlerCompletion)completion;
 /**
+ *  取得 MIB 所有版位的資料 https://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositions
+ *
+ *  @param historyDays 列出指定天數的歷史收益資訊，最少 0 天，最多 90 天
+ *  @param completion PIXHandlerCompletion
+ */
+-(void)getAccountMIBAllPositionsWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion;
+/**
  *  取得 MIB 某個版位的資料 https://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositionsId
  *
  *  @param positionId 該版位的 ID
