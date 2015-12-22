@@ -176,7 +176,7 @@
 * */
 -(void)enableMIBAccount:(PIXHandlerCompletion)completion;
 /**
- *  取得 MIB 某個版位的資料 http://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositions
+ *  取得 MIB 某個版位的資料 https://developer.pixnet.pro/#!/doc/pixnetApi/accountMibPositionsId
  *
  *  @param positionId 該版位的 ID
  *  @param completion PIXHandlerCompletion

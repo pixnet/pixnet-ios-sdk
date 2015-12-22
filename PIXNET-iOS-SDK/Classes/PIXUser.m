@@ -260,7 +260,6 @@
     [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)updateAccountMIBPositionWithPositionID:(NSString *)positionId enabled:(NSNumber *)enabled fixedAdBox:(NSNumber *)fixedAdBox completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {
