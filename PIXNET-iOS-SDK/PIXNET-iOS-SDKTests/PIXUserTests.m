@@ -98,9 +98,7 @@
     for (NSNumber *number in days) {
         __block XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
         [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:number.unsignedIntegerValue completion:^(BOOL succeed, id result, NSError *error) {
-            if (!succeed) {
-                XCTFail(@"get all mib positions failed: %@", error);
-            }
+            XCTAssertTrue(succeed);
             [expectation fulfill];
         }];
         [self waitForExpectationsWithTimeout:8.0 handler:^(NSError *error) {
@@ -116,9 +114,7 @@
     __block BOOL done = NO;
     for (NSNumber *number in days) {
         [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:number.unsignedIntegerValue completion:^(BOOL succeed, id result, NSError *error) {
-            if (succeed) {
-                XCTFail(@"get all mib positions failed: %@", error);
-            }
+            XCTAssertFalse(succeed);
             done = YES;
         }];
         while (!done) {
