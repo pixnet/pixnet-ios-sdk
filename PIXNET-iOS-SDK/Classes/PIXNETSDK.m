@@ -98,13 +98,19 @@
 -(void)getAccountMIBWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getAccountMIBWithHistoryDays:historyDays completion:completion];
 }
--(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion{
-    [[PIXUser new] createAccountMIBWithRealName:realName idNumber:idNumber idImageFront:idImageFront idImageBack:idImageBack email:email telephone:telephone cellPhone:cellPhone mailAddress:mailAddress domicile:domicile enableVideoAd:enableVideoAd completion:completion];
+
+- (void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile completion:(PIXHandlerCompletion)completion {
+    [[PIXUser new] createAccountMIBWithRealName:realName idNumber:idNumber idImageFront:idImageFront idImageBack:idImageBack email:email telephone:telephone cellPhone:cellPhone mailAddress:mailAddress domicile:domicile completion:completion];
 }
 
 - (void)enableMIBAccount:(PIXHandlerCompletion)completion {
     [[PIXUser new] enableMIBAccount:completion];
 }
+
+- (void)getAccountMIBAllPositionsWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion {
+    [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:historyDays completion:completion];
+}
+
 
 -(void)getAccountMIBPositionWithPositionID:(NSString *)positionId completion:(PIXHandlerCompletion)completion{
     [[PIXUser new] getAccountMIBPositionWithPositionID:positionId completion:completion];
