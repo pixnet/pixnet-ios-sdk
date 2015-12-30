@@ -564,7 +564,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     if ([httpMethod isEqualToString:@"GET"]) {
         request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
     } else {
-        if ([httpMethod isEqualToString:@"POST"]) S
+        if ([httpMethod isEqualToString:@"POST"]) {
             if ([dict.allKeys containsObject:@"upload_file"]) {
                 NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:dict];
                 NSData *uploadData = dictionary[@"upload_file"];
