@@ -137,9 +137,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "PIXAlbumTests">
-               </Test>
-               <Test
                   Identifier = "PIXBlockTests">
                </Test>
                <Test
@@ -162,6 +159,9 @@
                </Test>
                <Test
                   Identifier = "PIXOAuth2Tests">
+               </Test>
+               <Test
+                  Identifier = "PIXUserTests">
                </Test>
             </SkippedTests>
          </TestableReference>
