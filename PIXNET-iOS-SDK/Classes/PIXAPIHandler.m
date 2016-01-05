@@ -22,11 +22,11 @@ static NSString *kCallbackURL;
 #import "OMGHTTPURLRQ.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
-/*static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
-static NSString *const kApiURLHost = @"emma.pixnet.cc";*/
+static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
+static NSString *const kApiURLHost = @"emma.pixnet.cc";
 //here
-static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc.43133.alpha.pixnet/";
-static NSString *const kApiURLHost = @"emma.pixnet.cc.43133.alpha.pixnet";
+//static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc.43133.alpha.pixnet/";
+//static NSString *const kApiURLHost = @"emma.pixnet.cc.43133.alpha.pixnet";
 
 static NSString *const kUserNameIdentifier = @"kUserNameIdentifier";
 static NSString *const kUserPasswordIdentifier = @"kUserPasswordIdentifier";
@@ -391,6 +391,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 
     }
 }
+
 -(NSMutableURLRequest *)requestWithURL:(NSURL *)url apiPath:(NSString *)path shouldAuth:(BOOL)auth httpMethod:(NSString *)httpMethod parameters:(NSDictionary *)parameters timeoutInterval:(NSTimeInterval)timeoutInterval{
     NSMutableURLRequest *request = nil;
     PIXAuthType authType = [[NSUserDefaults standardUserDefaults] integerForKey:kAuthTypeKey];
@@ -564,7 +565,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     if ([httpMethod isEqualToString:@"GET"]) {
         request = (NSMutableURLRequest *)[GCOAuth URLRequestForPath:oPath GETParameters:dict host:kApiURLHost consumerKey:kConsumerKey consumerSecret:kConsumerSecret accessToken:token tokenSecret:secret];
     } else {
-        if ([httpMethod isEqualToString:@"POST"]) S
+        if ([httpMethod isEqualToString:@"POST"]) {
             if ([dict.allKeys containsObject:@"upload_file"]) {
                 NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:dict];
                 NSData *uploadData = dictionary[@"upload_file"];

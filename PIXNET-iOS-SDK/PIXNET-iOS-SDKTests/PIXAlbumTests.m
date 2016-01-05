@@ -78,13 +78,14 @@ static NSString *kSetComment = @"Unit test comment in set";
     [self getAlbumMain];
     //列出相簿及folder 列表
     [self getAlbumSetsAndFolders];
-    
+    /*
     //產生一個 folder
     NSString *folderId = [self createAlbumFolder];
     //修改 folder
     [self updateFolder:folderId];
     //取得 folder 列表
     NSArray *folders = [self getAlbumFolders];
+     */
     
     //產生一個相簿
     NSString *albumSetId = [self createAlbumSet];
@@ -93,7 +94,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     //取得相簿列表
     [self getAlbumSets];
     //修改相簿的順序
-    [self sortAlbumsWithOrdinaryAlbums:folders];
+//    [self sortAlbumsWithOrdinaryAlbums:folders];
     //取得附近的相簿
     [self getAlbumsetsNearby];
     
@@ -106,7 +107,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     //取得相簿裡所有留言
     [self getAlbumSetComments:albumSetId];
     //將相簿移到 folder 底下
-    [self removeSet:albumSetId toFolder:folderId];
+//    [self removeSet:albumSetId toFolder:folderId];
     
     //新增一張照片
     NSString *elementId = [self addElementInAlbum:albumSetId];
@@ -138,9 +139,10 @@ static NSString *kSetComment = @"Unit test comment in set";
     [self deleteElement:elementId];
     //刪除相簿
     [self deleteAlbum:albumSetId];
+    /*
     //刪除資料夾
     [self deleteFolder:folderId];
-
+     */
 
 }
 -(void)getAlbumSiteCategories{
