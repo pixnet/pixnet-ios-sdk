@@ -82,9 +82,6 @@
 }
 -(NSData *)PIXEncodedImageData:(UIImage *)image{
     NSData *data = UIImagePNGRepresentation(image);
-//    NSData *data = UIImageJPEGRepresentation(image, 1.0);
-//    CGDataProviderRef provider = CGImageGetDataProvider(image.CGImage);
-//    NSData *data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
     NSData *encodedData = nil;
     if ([data respondsToSelector:@selector(base64EncodedDataWithOptions:)]) {
         encodedData = [data base64EncodedDataWithOptions:NSDataBase64Encoding64CharacterLineLength|NSDataBase64EncodingEndLineWithLineFeed];
@@ -97,8 +94,7 @@
     return encodedData;
 }
 -(NSString *)PIXEncodedStringWithImage:(UIImage *)image{
-    CGDataProviderRef provider = CGImageGetDataProvider(image.CGImage);
-    NSData *data = (id)CFBridgingRelease(CGDataProviderCopyData(provider));
+    NSData *data = UIImagePNGRepresentation(image);
     NSString *string = nil;
     if ([data respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
         string = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
