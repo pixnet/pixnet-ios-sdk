@@ -61,6 +61,9 @@
     BOOL isAppliedMIB = [mibInfos[@"applied"] boolValue];
 //    [self createMIB];
     if (isAppliedMIB) {
+        [self getAllMibPositions];
+        [self getAllMibPositionsShouldFail];
+
         NSArray *mibPositions = [self fetchPositions:mibInfos];
         [self getMibPositionsInfo:mibPositions];
         //TODO: 後台還沒完成
@@ -89,9 +92,39 @@
 
 //    return;
 }
+// 取得所有 MIB 的版位資訊, 正向測試
+-(void)getAllMibPositions {
+    NSArray *days = @[@(0), @(1), @(90)];
+    for (NSNumber *number in days) {
+        __block XCTestExpectation *expectation = [self expectationWithDescription:@"Testing Async Method Works!"];
+        [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:number.unsignedIntegerValue completion:^(BOOL succeed, id result, NSError *error) {
+            XCTAssertTrue(succeed);
+            [expectation fulfill];
+        }];
+        [self waitForExpectationsWithTimeout:8.0 handler:^(NSError *error) {
+            if (error) {
+                XCTFail(@"get all mib positions timeout: %@", error);
+            }
+        }];
+    }
+}
+// 取得所有 MIB 的版位資訊，反向測試
+-(void)getAllMibPositionsShouldFail {
+    NSArray *days = @[@(-1), @(91)];
+    __block BOOL done = NO;
+    for (NSNumber *number in days) {
+        [[PIXUser new] getAccountMIBAllPositionsWithHistoryDays:number.unsignedIntegerValue completion:^(BOOL succeed, id result, NSError *error) {
+            XCTAssertFalse(succeed);
+            done = YES;
+        }];
+        while (!done) {
+            [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+        }
+    }
+}
 -(void)createMIB{
     __block BOOL done = NO;
-    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"ROC_ID_front.jpg"] idImageBack:[UIImage imageNamed:@"ROC_ID_back.jpg"] email:@"test@pixnet.tw" telephone:@"037778888" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" enableVideoAd:YES completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXUser new] createAccountMIBWithRealName:@"測試者" idNumber:@"A128123123" idImageFront:[UIImage imageNamed:@"ROC_ID_front.jpg"] idImageBack:[UIImage imageNamed:@"ROC_ID_back.jpg"] email:@"test@pixnet.tw" telephone:@"037778888" cellPhone:@"0999999999" mailAddress:@"台北市忠孝南路200號" domicile:@"台北市中山西路999號" completion:^(BOOL succeed, id result, NSError *error) {
         NSString *methodName = @"createAccountMIBWithRealName";
         if (succeed) {
             NSLog(@"%@, succeed", methodName);

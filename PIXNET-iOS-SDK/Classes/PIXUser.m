@@ -219,14 +219,14 @@
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
--(void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile enableVideoAd:(BOOL)enableVideoAd completion:(PIXHandlerCompletion)completion{
+
+- (void)createAccountMIBWithRealName:(NSString *)realName idNumber:(NSString *)idNumber idImageFront:(UIImage *)idImageFront idImageBack:(UIImage *)idImageBack email:(NSString *)email telephone:(NSString *)telephone cellPhone:(NSString *)cellPhone mailAddress:(NSString *)mailAddress domicile:(NSString *)domicile completion:(PIXHandlerCompletion)completion {
     if (!realName || realName.length==0 || !idNumber || idNumber.length==0 || !idImageFront || !idImageBack || !email || email.length==0 || !telephone || telephone.length==0 || !cellPhone || cellPhone.length==0 || !mailAddress || mailAddress.length==0 || !domicile || domicile.length==0) {
         completion(NO, nil , [NSError PIXErrorWithParameterName:@"缺乏必要參數"]);
         return;
     }
-    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:11];
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithCapacity:10];
     params[@"id_number"] = idNumber;
-
     params[@"upload_method"] = @"base64";
     params[@"id_image_front"] = [self PIXEncodedStringWithImage:idImageFront];
     params[@"id_image_back"] = [self PIXEncodedStringWithImage:idImageBack];
@@ -235,7 +235,6 @@
     params[@"cellphone"] = cellPhone;
     params[@"mail_address"] = mailAddress;
     params[@"domicile"] = domicile;
-    params[@"enable_video_ad"] = [NSString stringWithFormat:@"%i", enableVideoAd];
     params[@"name"] = realName;
     [[PIXAPIHandler new] callAPI:@"account/mib" httpMethod:@"POST" shouldAuth:YES parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
@@ -244,6 +243,20 @@
 
 - (void)enableMIBAccount:(PIXHandlerCompletion)completion {
     [[PIXAPIHandler new] callAPI:@"account/enableMibAccount" httpMethod:@"POST" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        if (succeed) {
+            [self succeedHandleWithData:result completion:completion];
+        } else {
+            completion(NO, nil, error);
+        }
+    }];
+}
+
+-(void)getAccountMIBAllPositionsWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion {
+    if (historyDays < 0 || historyDays > 90) {
+        completion(NO, nil, [NSError PIXErrorWithParameterName:@"historyDays 最少為0, 最大為90"]);
+        return;
+    }
+    [[PIXAPIHandler new] callAPI:@"account/mib/positions" httpMethod:@"GET" shouldAuth:YES parameters:@{@"history_days":[NSString stringWithFormat:@"%i", historyDays]} requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
@@ -261,7 +274,6 @@
     [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:YES parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
-//    [self invokeMethod:@selector(callAPI:httpMethod:shouldAuth:parameters:requestCompletion:) parameters:@[path, @"GET", @YES, [NSNull null], completion] receiver:[PIXAPIHandler new]];
 }
 -(void)updateAccountMIBPositionWithPositionID:(NSString *)positionId enabled:(NSNumber *)enabled fixedAdBox:(NSNumber *)fixedAdBox completion:(PIXHandlerCompletion)completion{
     if (!positionId || positionId.length==0) {

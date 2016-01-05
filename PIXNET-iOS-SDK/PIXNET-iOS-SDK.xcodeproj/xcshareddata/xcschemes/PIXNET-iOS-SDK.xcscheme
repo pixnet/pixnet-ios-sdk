@@ -137,10 +137,10 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "PIXAlbumTests">
+                  Identifier = "PIXBlockTests">
                </Test>
                <Test
-                  Identifier = "PIXBlockTests">
+                  Identifier = "PIXBlogTests">
                </Test>
                <Test
                   Identifier = "PIXCategoryTests">
