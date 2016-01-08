@@ -37,3 +37,4 @@ pod 'Expecta', '~> 1.0.3'
 pod 'Specta', '~> 1.0.4'
 pod 'Nocilla', '~> 0.10.0'
 end
+\n
