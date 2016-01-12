@@ -23,7 +23,7 @@ default_platform :ios
 
 platform :ios do
   before_all do
-    # ENV["SLACK_URL"] = "https://hooks.slack.com/services/..."
+    ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
     cocoapods
     
     # increment_build_number
@@ -63,6 +63,21 @@ platform :ios do
       force: true,              # optional, default: false
     )
     pod_push(path: String.new("#{podspecPath}"))
+
+    if ENV["SLACK_URL"]
+      slack(
+        message:"pixnet-ios-sdk build success!",
+        success:true,
+        attachment_properties:{
+          fields:[{
+            title: "New Version:",
+            value: String.new("#{version}"),
+            short: true
+          }]
+        },
+        default_payloads:[]
+      )
+    end
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
@@ -96,8 +111,24 @@ platform :ios do
   end
 
   error do |lane, exception|
-    say "which lane:#{lane} exception:#{exception}"
-    version = version_get_podspec(path: String.new("#{podspecPath}"))
+    if ENV["SLACK_URL"]
+      slack(
+        message:"pixnet-ios-sdk build failure.",
+        success:false,
+        attachment_properties:{
+          fields:[{
+            title: "Reason?",
+            value: String.new("#{exception}"),
+            short: false
+          },{
+              title: "see detail info.",
+              value: "jenkins console <http://jenkins.cocoa.pixnet:8080/job/pixnet-ios-sdk/lastBuild/console|click here>",
+              short: false
+          }]
+        },
+        default_payloads:[]
+      )
+    end
   end
 end
 
