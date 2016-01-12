@@ -62,8 +62,8 @@ platform :ios do
       remote_branch: 'master', # optional, default is set to local_branch
       force: true,              # optional, default: false
     )
-    pod_push(path: String.new("#{podspecPath}"))
-
+    # pod_push(path: String.new("#{podspecPath}"))
+    sh(String.new("pod trunk push --allow-warnings #{podspecPath}"))
     if ENV["SLACK_URL"]
       slack(
         message:"pixnet-ios-sdk build success!",
@@ -117,7 +117,7 @@ platform :ios do
         success:false,
         attachment_properties:{
           fields:[{
-            title: "Reason?",
+            title: "exception",
             value: String.new("#{exception}"),
             short: false
           },{
