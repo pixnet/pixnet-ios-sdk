@@ -55,7 +55,7 @@ platform :ios do
     add_git_tag(
       tag: String.new("#{version}"),
     )
-    sh("git remote set-url --push git@github.com:pixnet/pixnet-ios-sdk.git")
+    sh("git remote set-url --push origin git@github.com:pixnet/pixnet-ios-sdk.git")# set remote to github
     push_to_git_remote(
       remote: 'origin',         # optional, default: 'origin'
       local_branch: 'HEAD',  # optional, aliased by 'branch', default: 'master'
