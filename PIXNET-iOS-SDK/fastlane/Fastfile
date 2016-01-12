@@ -45,7 +45,7 @@ platform :ios do
   desc "push to cocoapods trunk"
   lane :podspec do
     runtest
-    podspecPath = "../PIXNET-iOS-SDK.podspec"
+    podspecPath = File.join(ENV['HOME'], "/Home/jobs/pixnet-ios-sdk/workspace/PIXNET-iOS-SDK.podspec")
     version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
     say "new version: #{version}"
     git_commit(
@@ -63,7 +63,7 @@ platform :ios do
       force: true,              # optional, default: false
     )
     # pod_push(path: String.new("#{podspecPath}"))
-    sh(String.new("pod trunk push --allow-warnings #{podspecPath}"))
+    sh(String.new("pod trunk push #{podspecPath} --allow-warnings"))
     if ENV["SLACK_URL"]
       slack(
         message:"pixnet-ios-sdk build success!",
