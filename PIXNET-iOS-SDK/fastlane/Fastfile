@@ -42,6 +42,29 @@ platform :ios do
     	)
   end
 
+  desc "push to cocoapods trunk"
+  lane :podspec do
+    test
+    podspecPath = "../PIXNET-iOS-SDK.podspec"
+    version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
+    say "new version: #{version}"
+    git_commit(
+      path: String.new("#{podspecPath}"),
+      message: "update podspec(from jenkins)"
+    )
+    push_to_git_remote(
+      remote: 'origin',         # optional, default: 'origin'
+      local_branch: 'master',  # optional, aliased by 'branch', default: 'master'
+      remote_branch: 'master', # optional, default is set to local_branch
+      force: true,              # optional, default: false
+    )
+    add_git_tag(
+      tag: String.new("#{version}"),
+    )
+    push_git_tags
+    pod_push
+  end
+
   desc "Submit a new Beta Build to Apple TestFlight"
   desc "This will also make sure the profile is up to date"
   lane :beta do
@@ -73,10 +96,8 @@ platform :ios do
   end
 
   error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
+    say "which lane:#{lane} exception:#{exception}"
+    version = version_get_podspec(path: "../PIXNET-iOS-SDK.podspec")
   end
 end
 
