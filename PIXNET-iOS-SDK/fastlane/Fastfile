@@ -32,7 +32,7 @@ platform :ios do
   end
 
   desc "Runs all the tests"
-  lane :test do
+  lane :runtest do
     scan(
     	workspace:"PIXNET-iOS-SDK.xcworkspace",
     	scheme:"PIXNET-iOS-SDK",
@@ -40,6 +40,29 @@ platform :ios do
     	output_types:"html",
     	clean:true
     	)
+  end
+
+  desc "push to cocoapods trunk"
+  lane :podspec do
+    runtest
+    podspecPath = "../PIXNET-iOS-SDK.podspec"
+    version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
+    say "new version: #{version}"
+    git_commit(
+      path: String.new("#{podspecPath}"),
+      message: "update podspec(from jenkins)"
+    )
+    add_git_tag(
+      tag: String.new("#{version}"),
+    )
+    sh("git remote set-url --push git@github.com:pixnet/pixnet-ios-sdk.git")
+    push_to_git_remote(
+      remote: 'origin',         # optional, default: 'origin'
+      local_branch: 'HEAD',  # optional, aliased by 'branch', default: 'master'
+      remote_branch: 'master', # optional, default is set to local_branch
+      force: true,              # optional, default: false
+    )
+    pod_push(path: String.new("#{podspecPath}"))
   end
 
   desc "Submit a new Beta Build to Apple TestFlight"
@@ -73,10 +96,8 @@ platform :ios do
   end
 
   error do |lane, exception|
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
+    say "which lane:#{lane} exception:#{exception}"
+    version = version_get_podspec(path: String.new("#{podspecPath}"))
   end
 end
 
