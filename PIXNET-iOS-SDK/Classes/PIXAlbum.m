@@ -136,7 +136,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     if (shouldAuth) {
         
     } else {
-        [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"album/sets/%li", (long)setId] parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
+        [[PIXAPIHandler new] callAPI:[NSString stringWithFormat:@"album/sets/%@", setId] parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
             if (succeed) {
                 [self succeedHandleWithData:result completion:completion];
             } else {
