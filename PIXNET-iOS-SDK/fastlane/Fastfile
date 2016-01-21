@@ -44,6 +44,7 @@ platform :ios do
 
   desc "push to cocoapods trunk"
   lane :podspec do
+
     runtest
     podspecPath = File.join(ENV['HOME'], "/Home/jobs/pixnet-ios-sdk/workspace/PIXNET-iOS-SDK.podspec")
     version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
