@@ -806,7 +806,7 @@
         params[@"sort"] = @"date-posted-desc";
     }
     params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
 
     BOOL shouldAuthed = ([PIXAPIHandler isConsumerKeyAndSecretAssigned]&&[PIXAPIHandler isAuthed]);
     [[PIXAPIHandler new] callAPI:@"blog/comments" httpMethod:@"GET" shouldAuth:shouldAuthed parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {

@@ -487,7 +487,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     
     if (shouldAuth) {
@@ -514,7 +514,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     NSMutableDictionary *params = [NSMutableDictionary new];
     params[@"user"] = userName;
     params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     
     NSString *pathString = [NSString stringWithFormat:@"album/folders/%@", folderId];
     if (shouldAuth) {
@@ -547,7 +547,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     if (perPage < 1) {
         perPage = 20;
     }
-    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     if (parentId) {
         params[@"parent_id"] = parentId;

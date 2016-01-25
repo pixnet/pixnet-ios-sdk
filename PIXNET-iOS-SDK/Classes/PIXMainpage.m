@@ -23,7 +23,7 @@
     if (perPage < 1) {
         perPage = 10;
     }
-    params[@"count"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     NSString *path = [NSString stringWithFormat:@"mainpage/blog/categories/%@/%@", typeString, categoryId];
     
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
@@ -49,7 +49,7 @@
     if (perPage < 1) {
         perPage = 10;
     }
-    params[@"count"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"strict_filter"] = [NSString stringWithFormat:@"%i", strictFilter];
     params[@"api_version"] = @"2";
 //    params[@"category_id"] = [categoryIds componentsJoinedByString:@","];
@@ -78,7 +78,7 @@
     NSString *typeString = [self maintypeStringWithType:videoType];
     NSString *path = [NSString stringWithFormat:@"mainpage/album/video/%@", typeString];
     NSDictionary *params = @{@"page": [NSString stringWithFormat:@"%lu", (unsigned long)page],
-                             @"count": [NSString stringWithFormat:@"%lu", (unsigned long)perPage]};
+                             @"per_page": [NSString stringWithFormat:@"%lu", (unsigned long)perPage]};
     
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
