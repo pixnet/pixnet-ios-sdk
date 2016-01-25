@@ -420,7 +420,7 @@ static const NSString *kSetsNearbyPath = @"album/sets/nearby";
     params[@"distance_min"] = [NSString stringWithFormat:@"%lu", (unsigned long)distanceMin];
     params[@"distance_max"] = [NSString stringWithFormat:@"%lu", (unsigned long)distanceMax];
     params[@"page"] = [NSString stringWithFormat:@"%lu", (unsigned long)page];
-    params[@"perPage"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
     switch (type) {
         case PIXAlbumElementTypePic:
