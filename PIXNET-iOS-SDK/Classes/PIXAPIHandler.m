@@ -470,13 +470,13 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                 [params enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
                     if (![key isEqualToString:@"upload_file"]) {
                         tempParams[key] = obj;
+                    } else {
+                        NSData *uploadingFile = params[key];
+                        NSString *encodedString = [uploadingFile base64EncodedStringWithOptions:0];
+                        tempParams[key] = encodedString;
                     }
                 }];
                 [formData addParameters:tempParams];
-                NSData *uploadingFile = params[@"upload_file"];
-                NSString *encodedString = [uploadingFile base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-                [formData addText:encodedString parameterName:@"upload_file"];
-//                NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData];
                 NSError *error;
                 NSMutableURLRequest *mutableURLRequest = [OMGHTTPURLRQ POST:urlString :formData error:&error];
                 return mutableURLRequest;

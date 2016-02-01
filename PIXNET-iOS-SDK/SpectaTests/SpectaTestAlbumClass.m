@@ -6,18 +6,18 @@
 #import "UserForTest.h"
 #import "KWValue.h"
 
-SpecBegin(SomeBlogAPI)
+SpecBegin(TestAlbumAPIs)
 __block UserForTest *userForTest = nil;
 __block NSString *systemAlbum;
 __block NSArray *albumsAndFolders;
 describe(@"These methods are auth needed", ^{
     beforeAll( ^{
         
+        setAsyncSpecTimeout(60 * 60);
         waitUntil(^(DoneCallback done) {
             userForTest = [[UserForTest alloc] init];
             [PIXNETSDK setConsumerKey:userForTest.consumerKey consumerSecret:userForTest.consumerSecret];
             [PIXNETSDK logout];
-            setAsyncSpecTimeout(60 * 60);
             
             id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
             UIView *rootView = appDelegate.window.rootViewController.view;
@@ -27,6 +27,9 @@ describe(@"These methods are auth needed", ^{
                 expect(succeed).to.beTruthy();
                 if (succeed) {
                     setAsyncSpecTimeout(60);
+                    //Email or Phone
+                    //Facebook Password
+                    //好的, 允許
                     expect([PIXNETSDK isAuthed]).to.beTruthy();
                     [webView removeFromSuperview];
                 } else {
@@ -58,22 +61,20 @@ describe(@"These methods are auth needed", ^{
                 expect(succeed).to.beTruthy();
                 if (succeed) {
                     systemAlbum = result[@"system_albumset_id"];
+                    XCTAssertNotNil(systemAlbum);
                 }
                 done();
             }];
         });
     });
     it(@"create element in system album",  ^{
-        
         waitUntil(^(DoneCallback done) {
             expect(systemAlbum).notTo.beNil();
             UIImage *image = [UIImage imageNamed:@"pixFox.jpg"];
             NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
             [[PIXNETSDK new] createElementWithElementData:imageData setID:systemAlbum elementTitle:nil elementDescription:nil tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
-                expect(succeed).to.beTruthy();
-                if (succeed) {
-                    NSLog(@"create element succeed: %@", result);
-                } else {
+                XCTAssertTrue(succeed);
+                if (!succeed) {
                     NSLog(@"create element failed: %@", error);
                 }
                 done();
@@ -85,8 +86,5 @@ describe(@"These methods are auth needed", ^{
         [PIXNETSDK logout];
         expect([PIXNETSDK isAuthed]).toNot.beTruthy();
     });
-});
-// 以下的 testing 是不需要 auth 的
-describe(@"these methods are login unnecessary", ^{
 });
 SpecEnd

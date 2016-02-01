@@ -23,7 +23,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 #import "UserForTest.h"
 
 @interface PIXAlbumTests : XCTestCase
-@property (nonatomic, strong) XCTestLog *testLog;
+//@property (nonatomic, strong) XCTestLog *testLog;
 @property (nonatomic) CLLocationCoordinate2D location;
 @property (nonatomic, strong) UserForTest *testUser;
 
@@ -34,7 +34,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 - (void)setUp
 {
     [super setUp];
-    _testLog = [XCTestLog new];
+//    _testLog = [XCTestLog new];
     _location = CLLocationCoordinate2DMake(25.0685028,121.5456014);
     _testUser = [[UserForTest alloc] init];
 }
@@ -47,7 +47,7 @@ static NSString *kSetComment = @"Unit test comment in set";
 
 - (void)testMain
 {
-    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret callbackURL:_testUser.callbaclURL];
+    [PIXNETSDK setConsumerKey:_testUser.consumerKey consumerSecret:_testUser.consumerSecret];
     __block BOOL done = NO;
 
     [PIXNETSDK logout];
@@ -111,6 +111,7 @@ static NSString *kSetComment = @"Unit test comment in set";
     
     //新增一張照片
     NSString *elementId = [self addElementInAlbum:albumSetId];
+    XCTAssertNotNil(elementId);
     //修改相片
     [self updateElement:elementId];
 
@@ -364,8 +365,9 @@ static NSString *kSetComment = @"Unit test comment in set";
     NSData *data = UIImageJPEGRepresentation(image, 0.7);
     [[PIXNETSDK new] createElementWithElementData:data setID:albumId elementTitle:@"unit test photo title" elementDescription:@"unit test photo description" tags:nil location:kCLLocationCoordinate2DInvalid completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-//            NSLog(@"add element succeed: %@", result);
+            NSLog(@"add element succeed: %@", result);
             elementId = result[@"element"][@"id"];
+            XCTAssertNotNil(elementId);
         } else {
             XCTFail(@"add element in album failed: %@", error);
         }
@@ -438,7 +440,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] getAlbumFoldersWithUserName:_testUser.userName trimUser:NO page:1 completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             folder = result[@"folders"];
-            [_testLog testLogWithFormat:@"get folders succeed, folders count: %lu\n", (unsigned long)[result[@"folders"] count]];
         } else {
             XCTFail(@"get album folders failed: %@", error);
         }
@@ -454,7 +455,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     __block BOOL done = NO;
     [[PIXNETSDK new] updateAlbumFolderWithFolderID:folderId title:@"folder title updated" description:@"folder description updated" completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            [_testLog testLogWithFormat:@"folder updated: %@\n", folderId];
         } else {
             XCTFail(@"update album folder with folderID failed: %@", error);
         }
@@ -470,7 +470,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     __block BOOL done = NO;
     [[PIXNETSDK new] updateAlbumSetWithSetID:albumId setTitle:@"album title updated" setDescription:@"album description updated" permission:PIXAlbumSetPermissionTypeOpen categoryID:nil isLockRight:NO isAllowCC:NO commentRightType:PIXAlbumSetCommentRightTypeFriend password:nil passwordHint:nil friendGroupIDs:nil allowCommercialUse:NO allowDerivation:NO parentID:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            [_testLog testLogWithFormat:@"album updated: %@\n", albumId];
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);
         }
@@ -487,7 +486,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     
     [[PIXNETSDK new] deleteAlbumFolderWithFolderID:folderId completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            [_testLog testLogWithFormat:@"delete folder: %@\n", folderId];
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);
         }
@@ -504,7 +502,6 @@ static NSString *kSetComment = @"Unit test comment in set";
 
     [[PIXNETSDK new] deleteAlbumSetWithSetID:albumId completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
-            [_testLog testLogWithFormat:@"delete album: %@\n", albumId];
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);
         }
@@ -524,7 +521,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] markAlbumSetCommentAsHamWithCommentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             spamed = YES;
-            [_testLog testLogWithFormat:@"mark comment in set as ham: %@\n", commentId];
         } else {
             XCTFail(@"mark comment in set as ham failed: %@", error);
         }
@@ -545,7 +541,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] markAlbumSetCommentAsSpamWithCommentID:commentId completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             spamed = YES;
-            [_testLog testLogWithFormat:@"mark comment in set as spam: %@\n", commentId];
         } else {
             XCTFail(@"mark comment in set as spam failed: %@", error);
         }
@@ -580,7 +575,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] createAlbumSetCommentWithSetID:setId body:comment password:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             commentId = result[@"comment"][@"id"];
-            [_testLog testLogWithFormat:@"create comment in set succeed: %@ album set: %@\n", commentId, setId];
         } else {
             
         }
@@ -615,7 +609,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] createAlbumFolderWithTitle:kFolderTitle description:@"unit test folder description" completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             folderId = result[@"folder"][@"id"];
-            [_testLog testLogWithFormat:@"create folder succeed: %@", folderId];
         } else {
             XCTFail(@"create folder failed: %@", error);
         }
@@ -633,7 +626,6 @@ static NSString *kSetComment = @"Unit test comment in set";
     [[PIXNETSDK new] createAlbumSetWithTitle:kSetTitle description:kSetDescription permission:PIXAlbumSetPermissionTypeOpen isAllowCC:YES commentRightType:PIXAlbumSetCommentRightTypeAll password:nil passwordHint:nil friendGroupIDs:nil parentID:nil completion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             setId = result[@"set"][@"id"];
-            [_testLog testLogWithFormat:@"create set succeed: %@\n", setId];
         } else {
             XCTFail(@"create album set failed: %@\n", error);
         }
