@@ -140,9 +140,6 @@
                   Identifier = "PIXBlockTests">
                </Test>
                <Test
-                  Identifier = "PIXBlogTests">
-               </Test>
-               <Test
                   Identifier = "PIXCategoryTests">
                </Test>
                <Test
@@ -193,7 +190,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CE3DF3D21ABBBD6100106D55"

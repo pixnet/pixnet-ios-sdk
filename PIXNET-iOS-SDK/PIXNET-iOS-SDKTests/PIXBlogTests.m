@@ -102,6 +102,8 @@
     
     //新增部落格留言
     NSString *commentId = [self createBlogArticleComment:articles[0][@"id"]];
+    //新增一則在別人文章裡的留言 https://github.com/pixnet/pixnet-ios-sdk/issues/8
+    [self createSomeOneBlogArticleComment];
     //回覆部落格留言
     [self replyBlogComment:commentId];
     //將留言設為悄悄話
@@ -623,6 +625,20 @@
         done = YES;
     }];
     
+    while (!done) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    return;
+}
+- (void)createSomeOneBlogArticleComment {
+    __block BOOL done = NO;
+    [[PIXNETSDK new] createBlogCommentWithArticleID:@"236485159" body:@"隋棠好正" userName:@"samuellu" author:nil title:nil url:nil isOpen:NO email:nil blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+        XCTAssertTrue(succeed);
+        if (!succeed) {
+            NSLog(@"在別人的文章上留言失敗: %@", error);
+        }
+        done = YES;
+    }];
     while (!done) {
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
