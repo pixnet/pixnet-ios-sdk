@@ -346,8 +346,16 @@
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
 - (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
-
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray *)userCategories completion:(PIXHandlerCompletion)completion;
+/**
+ *  列出部落格個人文章，且可以限制只要某幾個自行定義的文章分類。
+ *
+ *  @param userName       部落客 id，必要參數
+ *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
+ *  @param page           頁數
+ *  @param userCategories 使用者自自定義的文章分類 id，最多10個。
+ *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
+ */
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray <NSString*>*)userCategories completion:(PIXHandlerCompletion)completion;
 
 /**
  *  讀取部落格個人文章 http://emma.pixnet.cc/blog/articles/:id

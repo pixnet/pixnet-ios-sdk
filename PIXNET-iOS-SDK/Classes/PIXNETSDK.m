@@ -199,7 +199,7 @@
     [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:nil status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:completion];
 }
 
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray *)userCategories completion:(PIXHandlerCompletion)completion {
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray <NSString*>*)userCategories completion:(PIXHandlerCompletion)completion {
     [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:userCategories status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:completion];
 }
 

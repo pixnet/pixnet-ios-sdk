@@ -42,7 +42,6 @@ describe(@"For Auth", ^{
         setAsyncSpecTimeout(60);
 
         waitUntil(^(DoneCallback done) {
-
             [[PIXBlog new] getBlogAllArticlesWithUserName:userForTest.userName password:nil page:0 perpage:0 userCategories:nil status:PIXArticleStatusPassword isTop:NO trimUser:NO shouldAuth:YES completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
