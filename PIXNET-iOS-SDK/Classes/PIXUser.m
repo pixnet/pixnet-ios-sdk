@@ -112,7 +112,7 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing userName"]);
         return;
     }
-    NSString *path = [NSString stringWithFormat:@"users/%@", userName];
+    NSString *path = [NSString stringWithFormat:@"users/%@?with_blog=1", userName];
     [[PIXAPIHandler new] callAPI:path parameters:nil requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
