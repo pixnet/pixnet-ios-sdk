@@ -286,7 +286,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-AppleLanguages (zh-Hant)"
+            argument = "-AppleLanguages (zh-Hant-TW)"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
