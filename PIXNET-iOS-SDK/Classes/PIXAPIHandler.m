@@ -73,7 +73,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _timeoutInterval = 8;
+        _timeoutInterval = 60;
     }
     return self;
 }
