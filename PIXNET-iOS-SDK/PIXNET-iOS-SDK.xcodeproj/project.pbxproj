@@ -105,7 +105,6 @@
 		CEDCD10118F3AD7E00B32ACC /* PIXUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDCD10018F3AD7E00B32ACC /* PIXUser.m */; };
 		CEDD79FE194599EE00F0457A /* PIXGuestbookTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD79FD194599EE00F0457A /* PIXGuestbookTests.m */; };
 		CEE68D8B18FF6A64004AE5FC /* PIXAlbumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */; };
-		CEE7834C1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7834B1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m */; };
 		CEECBD6B1917340B00CC98C4 /* PIXBlogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */; };
 		D2C300279399403B84D4742C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CDB24BB1BB342F89ED09330 /* libPods.a */; };
 		E520D400323F01E3CBF59593 /* libPods-ErrorDescriptionTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FB784A4C56C8534043E1E9AC /* libPods-ErrorDescriptionTests.a */; };
@@ -162,13 +161,6 @@
 			remoteInfo = "PIXNET-iOS-SDK";
 		};
 		CEDD93DC1A7767B600C7C34B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CEDB7C7518D2ECF700D14D0C;
-			remoteInfo = "PIXNET-iOS-SDK";
-		};
-		CEE7834D1B744E2900201D80 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CEDB7C6E18D2ECF700D14D0C /* Project object */;
 			proxyType = 1;
@@ -316,9 +308,6 @@
 		CEDD93D91A7767B600C7C34B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEDD93DA1A7767B600C7C34B /* SpectaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpectaTests.m; sourceTree = "<group>"; };
 		CEE68D8A18FF6A64004AE5FC /* PIXAlbumTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXAlbumTests.m; sourceTree = "<group>"; };
-		CEE783471B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PIXNET-iOS-SDK User Class Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEE7834A1B744E2900201D80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEE7834B1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PIXNET_iOS_SDK_User_Class_Tests.m; sourceTree = "<group>"; };
 		CEECBD6A1917340B00CC98C4 /* PIXBlogTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PIXBlogTests.m; sourceTree = "<group>"; };
 		E5621253DC60E57D3B87C086 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F9304BADE0392AAC667400D5 /* Pods-KiwiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiTests/Pods-KiwiTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -404,13 +393,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8255907BF4A050F46A1C470D /* libPods-SpectaTests.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CEE783441B744E2900201D80 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,7 +556,6 @@
 				CE3DF3D41ABBBD6100106D55 /* SpectaTestAlbumClass */,
 				CE165F1B1AD5135E0038FABB /* SpectaTestInOAuth1 */,
 				CEBD84681B53A44A003487E2 /* ErrorDescriptionTests */,
-				CEE783481B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests */,
 				952482FD1BBCD24F00090FAB /* SpectaTestBlogClass */,
 				CEDB7C7818D2ECF700D14D0C /* Frameworks */,
 				CEDB7C7718D2ECF700D14D0C /* Products */,
@@ -593,7 +574,6 @@
 				CE3DF3D31ABBBD6100106D55 /* SpectaTestAlbumClass.xctest */,
 				CE165F1A1AD5135D0038FABB /* SpectaTestInOAuth1.xctest */,
 				CEBD84671B53A44A003487E2 /* ErrorDescriptionTests.xctest */,
-				CEE783471B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests.xctest */,
 				952482FC1BBCD24F00090FAB /* SpectaTestBlogClass.xctest */,
 			);
 			name = Products;
@@ -769,23 +749,6 @@
 			isa = PBXGroup;
 			children = (
 				CEDD93D91A7767B600C7C34B /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		CEE783481B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests */ = {
-			isa = PBXGroup;
-			children = (
-				CEE7834B1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m */,
-				CEE783491B744E2900201D80 /* Supporting Files */,
-			);
-			path = "PIXNET-iOS-SDK User Class Tests";
-			sourceTree = "<group>";
-		};
-		CEE783491B744E2900201D80 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				CEE7834A1B744E2900201D80 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -978,24 +941,6 @@
 			productReference = CEDD93D61A7767B600C7C34B /* SpectaTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CEE783461B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CEE783511B744E2900201D80 /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDK User Class Tests" */;
-			buildPhases = (
-				CEE783431B744E2900201D80 /* Sources */,
-				CEE783441B744E2900201D80 /* Frameworks */,
-				CEE783451B744E2900201D80 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CEE7834E1B744E2900201D80 /* PBXTargetDependency */,
-			);
-			name = "PIXNET-iOS-SDK User Class Tests";
-			productName = "PIXNET-iOS-SDK User Class Tests";
-			productReference = CEE783471B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1038,10 +983,6 @@
 						CreatedOnToolsVersion = 6.1.1;
 						TestTargetID = CEDB7C7518D2ECF700D14D0C;
 					};
-					CEE783461B744E2900201D80 = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = CEDB7C7518D2ECF700D14D0C;
-					};
 				};
 			};
 			buildConfigurationList = CEDB7C7118D2ECF700D14D0C /* Build configuration list for PBXProject "PIXNET-iOS-SDK" */;
@@ -1066,7 +1007,6 @@
 				CE3DF3D21ABBBD6100106D55 /* SpectaTestAlbumClass */,
 				CE165F191AD5135D0038FABB /* SpectaTestInOAuth1 */,
 				CEBD84661B53A44A003487E2 /* ErrorDescriptionTests */,
-				CEE783461B744E2900201D80 /* PIXNET-iOS-SDK User Class Tests */,
 				952482FB1BBCD24F00090FAB /* SpectaTestBlogClass */,
 			);
 		};
@@ -1145,13 +1085,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE165F141AD50DCF0038FABB /* pixFox.jpg in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CEE783451B744E2900201D80 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1654,14 +1587,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEE783431B744E2900201D80 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CEE7834C1B744E2900201D80 /* PIXNET_iOS_SDK_User_Class_Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1704,11 +1629,6 @@
 			isa = PBXTargetDependency;
 			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
 			targetProxy = CEDD93DC1A7767B600C7C34B /* PBXContainerItemProxy */;
-		};
-		CEE7834E1B744E2900201D80 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CEDB7C7518D2ECF700D14D0C /* PIXNET-iOS-SDK */;
-			targetProxy = CEE7834D1B744E2900201D80 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2215,53 +2135,6 @@
 			};
 			name = Release;
 		};
-		CEE7834F1B744E2900201D80 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "PIXNET-iOS-SDK User Class Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
-			};
-			name = Debug;
-		};
-		CEE783501B744E2900201D80 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "PIXNET-iOS-SDK User Class Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PIXNET-iOS-SDK.app/PIXNET-iOS-SDK";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2360,15 +2233,6 @@
 			buildConfigurations = (
 				CEDF6BD518F51DB7001750D3 /* Debug */,
 				CEDF6BD618F51DB7001750D3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CEE783511B744E2900201D80 /* Build configuration list for PBXNativeTarget "PIXNET-iOS-SDK User Class Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CEE7834F1B744E2900201D80 /* Debug */,
-				CEE783501B744E2900201D80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -127,7 +127,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO">
+            skipped = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEDB7C9018D2ECF700D14D0C"
@@ -137,7 +137,13 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "PIXAlbumTests">
+               </Test>
+               <Test
                   Identifier = "PIXBlockTests">
+               </Test>
+               <Test
+                  Identifier = "PIXBlogTests">
                </Test>
                <Test
                   Identifier = "PIXCategoryTests">
@@ -156,6 +162,9 @@
                </Test>
                <Test
                   Identifier = "PIXOAuth2Tests">
+               </Test>
+               <Test
+                  Identifier = "PIXUserTests">
                </Test>
             </SkippedTests>
          </TestableReference>
@@ -210,7 +219,7 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEBD84661B53A44A003487E2"
