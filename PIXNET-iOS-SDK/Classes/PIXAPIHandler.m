@@ -24,16 +24,11 @@ static NSString *kCallbackURL;
 
 static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc/";
 static NSString *const kApiURLHost = @"emma.pixnet.cc";
-//here
-//static NSString *const kApiURLPrefix = @"https://emma.pixnet.cc.43133.alpha.pixnet/";
-//static NSString *const kApiURLHost = @"emma.pixnet.cc.43133.alpha.pixnet";
-
 static NSString *const kUserNameIdentifier = @"kUserNameIdentifier";
 static NSString *const kUserPasswordIdentifier = @"kUserPasswordIdentifier";
 static NSString *const kOauthTokenIdentifier = @"kOauthTokenIdentifier";
 static NSString *const kOauthTokenSecretIdentifier = @"kOauthTokenSecretIdentifier";
 static NSString *const kAuthTypeKey = @"kAuthTypeKey";
-//static PIXAuthType authType;
 
 @interface PIXAPIHandler ()
 @property (nonatomic, strong) NSDictionary *paramForXAuthRequest;
@@ -55,7 +50,6 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
                                                                         secret:kConsumerSecret
                                                                    redirectURL:[NSURL URLWithString:kCallbackURL]];
         sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/authorize", kApiURLPrefix]];
-//        sharedInstance.oauth2Client.userURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@", kApiURLPrefix]];
         sharedInstance.oauth2Client.tokenURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@oauth2/grant", kApiURLPrefix]];
         sharedInstance.oauth2ClientDelegateHandler = [[LROAuth2ClientDelegateHandler alloc] initWithOAuth2Completion:^(BOOL succeed, LROAuth2AccessToken *accessToken, NSError *error) {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -290,7 +284,7 @@ static NSString *const kAuthTypeKey = @"kAuthTypeKey";
     [self callAPI:apiPath httpMethod:httpMethod shouldAuth:[shouldAuth boolValue] shouldExecuteInBackground:NO uploadData:uploadData parameters:parameters requestCompletion:completion];
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters requestCompletion:(PIXHandlerCompletion)completion{
-    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:uploadData parameters:parameters timeoutInterval:8 requestCompletion:completion];
+    [self callAPI:apiPath httpMethod:httpMethod shouldAuth:shouldAuth shouldExecuteInBackground:backgroundExec uploadData:uploadData parameters:parameters timeoutInterval:_timeoutInterval requestCompletion:completion];
 }
 -(void)callAPI:(NSString *)apiPath httpMethod:(NSString *)httpMethod shouldAuth:(BOOL)shouldAuth shouldExecuteInBackground:(BOOL)backgroundExec uploadData:(NSData *)uploadData parameters:(NSDictionary *)parameters timeoutInterval:(NSTimeInterval)timeoutInterval requestCompletion:(PIXHandlerCompletion)completion{
     if (shouldAuth) {
