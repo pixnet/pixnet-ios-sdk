@@ -19,13 +19,13 @@ describe(@"test1", ^{
     NSURL *fileURL = [[NSBundle mainBundle] URLForResource:@"Localizable" withExtension:@"strings"];
     NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:fileURL];
     NSArray *allKeys = dictionary.allKeys;
-    
+    [PIXNETSDK setConsumerKey:@"0" consumerSecret:@"00000"];
     for (NSString *key in allKeys) {
         it(@"should return error", ^{
             
             waitUntil(^(DoneCallback done) {
                 NSString *bodyString = [NSString stringWithFormat:@"{\"code\":\"%@\"}", key];
-                stubRequest(@"GET", @"https://emma.pixnet.cc/mainpage/blog/categories/hot/0?count=10&page=1&format=json").andReturn(401).withBody(bodyString);
+                stubRequest(@"GET", @"https://emma.pixnet.cc/mainpage/blog/categories/hot/0?per_page=10&client_id=0&page=1&format=json").andReturn(401).withBody(bodyString);
                 [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"0" articleType:PIXMainpageTypeHot page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
                     NSString *string = error.userInfo[@"NSLocalizedDescription"];
                     NSDictionary *errorDictionary = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];

@@ -158,9 +158,6 @@
                   Identifier = "PIXIndexTest">
                </Test>
                <Test
-                  Identifier = "PIXMainpageTests">
-               </Test>
-               <Test
                   Identifier = "PIXOAuth2Tests">
                </Test>
                <Test
@@ -219,22 +216,12 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEBD84661B53A44A003487E2"
                BuildableName = "ErrorDescriptionTests.xctest"
                BlueprintName = "ErrorDescriptionTests"
-               ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CEE783461B744E2900201D80"
-               BuildableName = "PIXNET-iOS-SDK User Class Tests.xctest"
-               BlueprintName = "PIXNET-iOS-SDK User Class Tests"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
