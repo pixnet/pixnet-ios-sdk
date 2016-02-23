@@ -109,9 +109,7 @@
       </section>
       <section class="right">
         <section id="counters">
-          <h2 id="test-count"><span class="number">21</span> tests</h2>
-          
-            <h2 id="fail-count"><span class="number">11</span> failures</h2>
+          <h2 id="test-count"><span class="number">148</span> tests</h2>
           
         </section>
         <section id="segment-bar">
@@ -122,396 +120,1639 @@
     <section id="test-suites">
       
         
-        <section class="test-suite failing" id="BlogSpec">
+        <section class="test-suite passing" id="ErrorDescriptionSpec">
           <section class="heading" onclick="toggleTests(this);">
-            <h3 class="title">BlogSpec</h3>
+            <h3 class="title">ErrorDescriptionSpec</h3>
           </section>
           <section class="tests">
             
             <table>
             
               
-              <tr class="test failing "  onclick="toggleDetails('test_For_not_Auth__blog_articles_which_need_password');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error');">
                 <td>
                   
-                </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_which_need_password</h3></td>
-              </tr>
-              
-                <tr class="details test_For_not_Auth__blog_articles_which_need_password">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: a truthy value, got: 0, which is falsy</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m            [39m[38;5;87m[[[39m[38;5;230mPIXBlog[39m[38;5;230m [39m[38;5;153mnew[39m[38;5;87m][39m[38;5;230m [39m[38;5;153mgetBlogSingleArticleWithUserName[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserName[39m[38;5;230m [39m[38;5;153marticleID[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230mprivateArticle[39m[38;5;230m [39m[38;5;153mneedAuth[39m[38;5;87m:[39m[01mNO[00m[38;5;230m [39m[38;5;153mblogPassword[39m[38;5;87m:[39m[01mnil[00m[38;5;230m [39m[38;5;153marticlePassword[39m[38;5;87m:[39m[38;5;229;01m@"949487"[39;00m[38;5;230m [39m[38;5;153mcompletion[39m[38;5;87m:[39m[38;5;87m^[39m[38;5;87m([39m[38;5;230mBOOL[39m[38;5;230m [39m[38;5;230msucceed[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mid[39m[38;5;230m [39m[38;5;230mresult[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mNSError[39m[38;5;230m [39m[38;5;87m*[39m[38;5;230merror[39m[38;5;87m)[39m[38;5;230m [39m[38;5;87m{[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:26</section>
-                    
-                  </td>
-                </tr>
-              
-            
-              
-              <tr class="test failing odd"  onclick="toggleDetails('test_For_not_Auth__blog_articles_which_need_password');">
-                <td>
+                    <h3 class="time">0.015s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_which_need_password</h3></td>
-              </tr>
-              
-                <tr class="details test_For_not_Auth__blog_articles_which_need_password">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: not nil/null, got: nil/null</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mdone[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:27</section>
-                    
-                  </td>
-                </tr>
-              
-            
-              
-              <tr class="test passing "  onclick="toggleDetails('test_For_not_Auth__blog_articles_need_but_no_password');">
-                <td>
-                  
-                    <h3 class="time">0.034s</h3>
-                  
-                </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_need_but_no_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error</h3></td>
               </tr>
               
             
               
-              <tr class="test passing odd"  onclick="toggleDetails('test_For_not_Auth__blog_articles_related_need_password');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_2');">
                 <td>
                   
-                    <h3 class="time">0.037s</h3>
+                    <h3 class="time">0.012s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_related_need_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_2</h3></td>
               </tr>
               
             
               
-              <tr class="test failing "  onclick="toggleDetails('test_For_not_Auth__blog_articles_comments');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_3');">
                 <td>
                   
-                </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_comments</h3></td>
-              </tr>
-              
-                <tr class="details test_For_not_Auth__blog_articles_comments">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: a truthy value, got: 0, which is falsy</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m            [39m[38;5;87m[[[39m[38;5;230mPIXBlog[39m[38;5;230m [39m[38;5;153mnew[39m[38;5;87m][39m[38;5;230m [39m[38;5;153mgetBlogArticleCommentsWithUserName[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserName[39m[38;5;230m [39m[38;5;153marticleID[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230mprivateArticle[39m[38;5;230m [39m[38;5;153mblogPassword[39m[38;5;87m:[39m[01mnil[00m[38;5;230m [39m[38;5;153marticlePassword[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserPassword[39m[38;5;230m [39m[38;5;153mpage[39m[38;5;87m:[39m[38;5;212;01m1[39;00m[38;5;230m [39m[38;5;153mcommentsPerPage[39m[38;5;87m:[39m[38;5;212;01m100[39;00m[38;5;230m [39m[38;5;153mcompletion[39m[38;5;87m:[39m[38;5;87m^[39m[38;5;87m([39m[38;5;230mBOOL[39m[38;5;230m [39m[38;5;230msucceed[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mid[39m[38;5;230m [39m[38;5;230mresult[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mNSError[39m[38;5;230m [39m[38;5;87m*[39m[38;5;230merror[39m[38;5;87m)[39m[38;5;230m [39m[38;5;87m{[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:64</section>
-                    
-                  </td>
-                </tr>
-              
-            
-              
-              <tr class="test failing odd"  onclick="toggleDetails('test_For_not_Auth__blog_articles_comments');">
-                <td>
+                    <h3 class="time">0.012s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_comments</h3></td>
-              </tr>
-              
-                <tr class="details test_For_not_Auth__blog_articles_comments">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: not nil/null, got: nil/null</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mdone[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:65</section>
-                    
-                  </td>
-                </tr>
-              
-            
-              
-              <tr class="test passing "  onclick="toggleDetails('test_For_not_Auth__blog_articles_comments_wrong_password');">
-                <td>
-                  
-                    <h3 class="time">0.037s</h3>
-                  
-                </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_comments_wrong_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_3</h3></td>
               </tr>
               
             
               
-              <tr class="test passing odd"  onclick="toggleDetails('test_For_not_Auth__blog_articles_latest');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_4');">
                 <td>
                   
-                    <h3 class="time">0.236s</h3>
+                    <h3 class="time">0.012s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_latest</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_4</h3></td>
               </tr>
               
             
               
-              <tr class="test passing "  onclick="toggleDetails('test_For_not_Auth__blog_articles_hot_has_date');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_5');">
                 <td>
                   
-                    <h3 class="time">0.035s</h3>
+                    <h3 class="time">0.011s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_hot_has_date</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_5</h3></td>
               </tr>
               
             
               
-              <tr class="test passing odd"  onclick="toggleDetails('test_For_not_Auth__blog_articles_hot_no_date');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_6');">
                 <td>
                   
-                    <h3 class="time">0.136s</h3>
+                    <h3 class="time">0.012s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_hot_no_date</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_6</h3></td>
               </tr>
               
             
               
-              <tr class="test passing "  onclick="toggleDetails('test_For_not_Auth__blog_articles_hot_date_upside_down');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_7');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_7</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_8');">
                 <td>
                   
                     <h3 class="time">0.013s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_hot_date_upside_down</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_8</h3></td>
               </tr>
               
             
               
-              <tr class="test passing odd"  onclick="toggleDetails('test_For_not_Auth__blog_articles_search');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_9');">
                 <td>
                   
-                    <h3 class="time">2.032s</h3>
+                    <h3 class="time">0.013s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_articles_search</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_9</h3></td>
               </tr>
               
             
               
-              <tr class="test passing "  onclick="toggleDetails('test_For_not_Auth__blog_comments_need_password_but_havent');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_10');">
                 <td>
                   
-                    <h3 class="time">0.036s</h3>
+                    <h3 class="time">0.011s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_comments_need_password_but_havent</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_10</h3></td>
               </tr>
               
             
               
-              <tr class="test failing odd"  onclick="toggleDetails('test_For_not_Auth__blog_comments_need_password');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_11');">
                 <td>
                   
+                    <h3 class="time">0.011s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_comments_need_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_11</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_comments_need_password">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: a truthy value, got: 0, which is falsy</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m            [39m[38;5;87m[[[39m[38;5;230mPIXBlog[39m[38;5;230m [39m[38;5;153mnew[39m[38;5;87m][39m[38;5;230m [39m[38;5;153mgetBlogCommentsWithUserName[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserName[39m[38;5;230m [39m[38;5;153marticleID[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230mprivateArticle[39m[38;5;230m [39m[38;5;153mblogPassword[39m[38;5;87m:[39m[01mnil[00m[38;5;230m [39m[38;5;153marticlePassword[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserPassword[39m[38;5;230m [39m[38;5;153mfilter[39m[38;5;87m:[39m[38;5;230mPIXBlogCommentFilterTypeAll[39m[38;5;230m [39m[38;5;153misSortAscending[39m[38;5;87m:[39m[01mYES[00m[38;5;230m [39m[38;5;153mpage[39m[38;5;87m:[39m[38;5;212;01m1[39;00m[38;5;230m [39m[38;5;153mperPage[39m[38;5;87m:[39m[38;5;212;01m100[39;00m[38;5;230m [39m[38;5;153mcompletion[39m[38;5;87m:[39m[38;5;87m^[39m[38;5;87m([39m[38;5;230mBOOL[39m[38;5;230m [39m[38;5;230msucceed[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mid[39m[38;5;230m [39m[38;5;230mresult[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mNSError[39m[38;5;230m [39m[38;5;87m*[39m[38;5;230merror[39m[38;5;87m)[39m[38;5;230m [39m[38;5;87m{[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:165</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test failing "  onclick="toggleDetails('test_For_not_Auth__blog_comments_need_password');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_12');">
                 <td>
                   
+                    <h3 class="time">0.011s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_comments_need_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_12</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_comments_need_password">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: not nil/null, got: nil/null</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mdone[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:166</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test failing odd"  onclick="toggleDetails('test_For_not_Auth__blog_comments_no_need_password');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_13');">
                 <td>
                   
+                    <h3 class="time">0.013s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_comments_no_need_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_13</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_comments_no_need_password">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: a truthy value, got: 0, which is falsy</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m            [39m[38;5;87m[[[39m[38;5;230mPIXBlog[39m[38;5;230m [39m[38;5;153mnew[39m[38;5;87m][39m[38;5;230m [39m[38;5;153mgetBlogCommentsWithUserName[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserName[39m[38;5;230m [39m[38;5;153marticleID[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230mpublicArticle[39m[38;5;230m [39m[38;5;153mblogPassword[39m[38;5;87m:[39m[01mnil[00m[38;5;230m [39m[38;5;153marticlePassword[39m[38;5;87m:[39m[01mnil[00m[38;5;230m [39m[38;5;153mfilter[39m[38;5;87m:[39m[38;5;230mPIXBlogCommentFilterTypeAll[39m[38;5;230m [39m[38;5;153misSortAscending[39m[38;5;87m:[39m[01mYES[00m[38;5;230m [39m[38;5;153mpage[39m[38;5;87m:[39m[38;5;212;01m1[39;00m[38;5;230m [39m[38;5;153mperPage[39m[38;5;87m:[39m[38;5;212;01m100[39;00m[38;5;230m [39m[38;5;153mcompletion[39m[38;5;87m:[39m[38;5;87m^[39m[38;5;87m([39m[38;5;230mBOOL[39m[38;5;230m [39m[38;5;230msucceed[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mid[39m[38;5;230m [39m[38;5;230mresult[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mNSError[39m[38;5;230m [39m[38;5;87m*[39m[38;5;230merror[39m[38;5;87m)[39m[38;5;230m [39m[38;5;87m{[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:177</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test failing "  onclick="toggleDetails('test_For_not_Auth__blog_comments_no_need_password');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_14');">
                 <td>
                   
+                    <h3 class="time">0.011s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_comments_no_need_password</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_14</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_comments_no_need_password">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: not nil/null, got: nil/null</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mdone[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:178</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test failing odd"  onclick="toggleDetails('test_For_not_Auth__blog_single_comment');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_15');">
                 <td>
                   
+                    <h3 class="time">0.011s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_single_comment</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_15</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_single_comment">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: a truthy value, got: 0, which is falsy</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m            [39m[38;5;87m[[[39m[38;5;230mPIXBlog[39m[38;5;230m [39m[38;5;153mnew[39m[38;5;87m][39m[38;5;230m [39m[38;5;153mgetBlogSingleCommentWithUserName[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230muserName[39m[38;5;230m [39m[38;5;153mcommmentID[39m[38;5;87m:[39m[38;5;230muserForTest[39m[38;5;87m.[39m[38;5;230mpublicComment[39m[38;5;230m [39m[38;5;153mcompletion[39m[38;5;87m:[39m[38;5;87m^[39m[38;5;87m([39m[38;5;230mBOOL[39m[38;5;230m [39m[38;5;230msucceed[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mid[39m[38;5;230m [39m[38;5;230mresult[39m[38;5;87m,[39m[38;5;230m [39m[38;5;230mNSError[39m[38;5;230m [39m[38;5;87m*[39m[38;5;230merror[39m[38;5;87m)[39m[38;5;230m [39m[38;5;87m{[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m()[39m[38;5;15;48;5;1m;[39;49m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:190</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test failing "  onclick="toggleDetails('test_For_not_Auth__blog_single_comment');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_16');">
                 <td>
                   
+                    <h3 class="time">0.013s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_single_comment</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_16</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_single_comment">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: not nil/null, got: nil/null</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230msucceed[39m[38;5;87m).[39m[38;5;230mto[39m[38;5;87m.[39m[38;5;230mbeTruthy[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m[[39m[38;5;229;01m@"comment"[39;00m[38;5;87m][[39m[38;5;229;01m@"body"[39;00m[38;5;87m]).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:191</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test failing odd"  onclick="toggleDetails('test_For_not_Auth__blog_single_comment');">
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_17');">
                 <td>
                   
+                    <h3 class="time">0.011s</h3>
+                  
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_single_comment</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_17</h3></td>
               </tr>
-              
-                <tr class="details test_For_not_Auth__blog_single_comment">
-                  <td></td>
-                  <td>
-                    
-                      <section class="test-detail reason">expected: not nil/null, got: nil/null</section>
-                    
-                    
-                      <section class="test-detail snippet">[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mexpect[39m[38;5;87m([39m[38;5;230mresult[39m[38;5;87m[[39m[38;5;229;01m@"comment"[39;00m[38;5;87m][[39m[38;5;229;01m@"body"[39;00m[38;5;87m]).[39m[38;5;230mnotTo[39m[38;5;87m.[39m[38;5;230mbeNil[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m                [39m[38;5;230mdone[39m[38;5;87m();[39m[38;5;230m
-[38;5;230m[39m</section>
-                      <section class="test-detail">/Users/dennis/Desktop/pixnet-ios-sdk/PIXNET-iOS-SDK/SpectaTestBlogClass/GetMethodNoAuth.m:192</section>
-                    
-                  </td>
-                </tr>
               
             
               
-              <tr class="test passing "  onclick="toggleDetails('test_For_not_Auth__blog_latest_comment');">
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_18');">
                 <td>
                   
-                    <h3 class="time">0.037s</h3>
+                    <h3 class="time">0.013s</h3>
                   
                 </td>
-                <td><h3 class="title">test_For_not_Auth__blog_latest_comment</h3></td>
+                <td><h3 class="title">test_test1__should_return_error_18</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_19');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_19</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_20');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_20</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_21');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_21</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_22');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_22</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_23');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_23</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_24');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_24</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_25');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_25</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_26');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_26</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_27');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_27</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_28');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_28</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_29');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_29</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_30');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_30</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_31');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_31</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_32');">
+                <td>
+                  
+                    <h3 class="time">0.010s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_32</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_33');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_33</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_34');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_34</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_35');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_35</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_36');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_36</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_37');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_37</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_38');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_38</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_39');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_39</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_40');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_40</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_41');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_41</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_42');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_42</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_43');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_43</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_44');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_44</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_45');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_45</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_46');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_46</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_47');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_47</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_48');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_48</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_49');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_49</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_50');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_50</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_51');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_51</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_52');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_52</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_53');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_53</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_54');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_54</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_55');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_55</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_56');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_56</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_57');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_57</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_58');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_58</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_59');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_59</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_60');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_60</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_61');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_61</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_62');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_62</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_63');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_63</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_64');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_64</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_65');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_65</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_66');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_66</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_67');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_67</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_68');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_68</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_69');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_69</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_70');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_70</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_71');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_71</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_72');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_72</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_73');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_73</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_74');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_74</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_75');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_75</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_76');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_76</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_77');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_77</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_78');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_78</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_79');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_79</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_80');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_80</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_81');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_81</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_82');">
+                <td>
+                  
+                    <h3 class="time">0.010s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_82</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_83');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_83</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_84');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_84</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_85');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_85</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_86');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_86</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_87');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_87</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_88');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_88</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_89');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_89</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_90');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_90</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_91');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_91</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_92');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_92</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_93');">
+                <td>
+                  
+                    <h3 class="time">0.010s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_93</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_94');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_94</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_95');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_95</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_96');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_96</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_97');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_97</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_98');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_98</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_99');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_99</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_100');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_100</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_101');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_101</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_102');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_102</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_103');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_103</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_104');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_104</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_105');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_105</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_106');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_106</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_107');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_107</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_108');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_108</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_109');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_109</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_110');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_110</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_111');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_111</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_112');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_112</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_113');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_113</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_114');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_114</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_115');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_115</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_116');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_116</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_117');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_117</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_118');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_118</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_119');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_119</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_120');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_120</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_121');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_121</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_122');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_122</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_123');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_123</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_124');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_124</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_125');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_125</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_126');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_126</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_127');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_127</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_128');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_128</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_129');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_129</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_130');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_130</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_131');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_131</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_132');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_132</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_133');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_133</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_134');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_134</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_135');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_135</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_136');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_136</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_137');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_137</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_138');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_138</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_139');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_139</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_140');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_140</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_141');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_141</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_142');">
+                <td>
+                  
+                    <h3 class="time">0.011s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_142</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_143');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_143</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_144');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_144</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_145');">
+                <td>
+                  
+                    <h3 class="time">0.010s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_145</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_146');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_146</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing "  onclick="toggleDetails('test_test1__should_return_error_147');">
+                <td>
+                  
+                    <h3 class="time">0.012s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_147</h3></td>
+              </tr>
+              
+            
+              
+              <tr class="test passing odd"  onclick="toggleDetails('test_test1__should_return_error_148');">
+                <td>
+                  
+                    <h3 class="time">0.013s</h3>
+                  
+                </td>
+                <td><h3 class="title">test_test1__should_return_error_148</h3></td>
               </tr>
               
             

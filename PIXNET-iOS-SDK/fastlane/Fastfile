@@ -46,7 +46,8 @@ platform :ios do
   lane :podspec do
 
     runtest
-    podspecPath = File.join(ENV['HOME'], "/Home/jobs/pixnet-ios-sdk/workspace/PIXNET-iOS-SDK.podspec")
+    #podspecPath = File.join(ENV['HOME'], "PIXNET-iOS-SDK.podspec")
+    podspecPath = "PIXNET-iOS-SDK.podspec"
     version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
     say "new version: #{version}"
     git_commit(
