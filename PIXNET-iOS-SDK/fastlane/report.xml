@@ -3,49 +3,69 @@
   <testsuite name="fastlane.lanes">
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000433">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000434">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.00029">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000271">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: cocoapods" time="14.524517">
+      <testcase classname="fastlane.lanes" name="2: cocoapods" time="37.002151">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: Switch to ios runtest lane" time="0.000407">
+      <testcase classname="fastlane.lanes" name="3: Switch to ios runtest lane" time="0.000403">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: scan" time="22.209201">
+      <testcase classname="fastlane.lanes" name="4: scan" time="44.91032">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: version_bump_podspec" time="0.002163">
+      <testcase classname="fastlane.lanes" name="5: version_bump_podspec" time="0.001919">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="6: say" time="4.365975">
+      <testcase classname="fastlane.lanes" name="6: say" time="3.625909">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="7: git_commit" time="0.226192">
-        
-          <failure message="/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/actions/actions_helper.rb:33:in `execute_action'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:129:in `block in execute_action'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:128:in `chdir'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:128:in `execute_action'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/fast_file.rb:149:in `method_missing'&#10;Fastfile:53:in `block (2 levels) in parsing_binding'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/lane.rb:36:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/lane.rb:36:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:52:in `block in execute'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:46:in `chdir'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:46:in `execute'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/lane_manager.rb:46:in `cruise_lane'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/command_line_handler.rb:30:in `handle'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/bin/fastlane:38:in `block (2 levels) in run'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/command.rb:178:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/command.rb:178:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/command.rb:153:in `run'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/runner.rb:428:in `run_active_command'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane_core-0.36.6/lib/fastlane_core/ui/fastlane_runner.rb:23:in `run!'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/delegates.rb:15:in `run!'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/bin/fastlane:150:in `run'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/bin/fastlane:156:in `&lt;top (required)&gt;'&#10;/usr/local/bin/fastlane:23:in `load'&#10;/usr/local/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Exit status of command 'git commit -m 'update podspec(from jenkins)' 'PIXNET-iOS-SDK.podspec'' was 1 instead of 0.&#10;error: pathspec 'PIXNET-iOS-SDK.podspec' did not match any file(s) known to git.&#10;" />
+      <testcase classname="fastlane.lanes" name="7: git_commit" time="1.913586">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="8: slack" time="1.161416">
+      <testcase classname="fastlane.lanes" name="8: add_git_tag" time="0.033253">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="9: git remote set-url --push origin git@github.com:pixnet/pixnet-ios-sdk.git" time="0.044129">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="10: push_to_git_remote" time="6.950014">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="11: pod trunk push /Users/DolphinSu/Dropbox/pixnet-ios-sdk/PIXNET-iOS-SDK/PIXNET-iOS-SDK.podspec --allow-warnings" time="88.169419">
+        
+          <failure message="/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/actions/actions_helper.rb:33:in `execute_action'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/fast_file.rb:181:in `sh'&#10;Fastfile:69:in `block (2 levels) in parsing_binding'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/lane.rb:36:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/lane.rb:36:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:52:in `block in execute'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:46:in `chdir'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/runner.rb:46:in `execute'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/lane_manager.rb:46:in `cruise_lane'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/lib/fastlane/command_line_handler.rb:30:in `handle'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/bin/fastlane:38:in `block (2 levels) in run'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/command.rb:178:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/command.rb:178:in `call'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/command.rb:153:in `run'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/runner.rb:428:in `run_active_command'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane_core-0.36.6/lib/fastlane_core/ui/fastlane_runner.rb:23:in `run!'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/commander-4.3.5/lib/commander/delegates.rb:15:in `run!'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/bin/fastlane:150:in `run'&#10;/usr/local/lib/ruby/gems/2.2.0/gems/fastlane-1.61.0/bin/fastlane:156:in `&lt;top (required)&gt;'&#10;/usr/local/bin/fastlane:23:in `load'&#10;/usr/local/bin/fastlane:23:in `&lt;main&gt;'&#10;&#10;Exit status of command 'pod trunk push /Users/DolphinSu/Dropbox/pixnet-ios-sdk/PIXNET-iOS-SDK/PIXNET-iOS-SDK.podspec --allow-warnings' was 1 instead of 0.&#10;Updating spec repo `master`&#10;&#10;CocoaPods 1.0.0.beta.3 is available.&#10;To update use: `sudo gem install cocoapods --pre`&#10;[!] This is a test version we'd love you to try.&#10;&#10;For more information see http://blog.cocoapods.org&#10;and the CHANGELOG for this version http://git.io/BaH8pQ.&#10;&#10;Validating podspec&#10; -&gt; PIXNET-iOS-SDK -&gt; PIXNET-iOS-SDK (1.13.20)&#10;    - ERROR | [iOS] file patterns: The `source_files` pattern did not match any file.&#10;&#10;[!] The podspec does not validate.&#10;" />
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="12: slack" time="0.809241">
         
       </testcase>
     
