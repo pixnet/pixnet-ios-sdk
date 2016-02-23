@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = 'PIXNET-iOS-SDK'
-  s.version      = '1.13.19'
+  s.version      = '1.13.20'
   s.license      =  {:type => 'BSD'}
   s.homepage     = 'https://github.com/pixnet/pixnet-ios-sdk'
   s.authors      =  {'PIXNET' => 'sdk@pixnet.tw'}
