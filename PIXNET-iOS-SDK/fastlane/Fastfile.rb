@@ -42,15 +42,18 @@ platform :ios do
     	)
   end
 
-  desc "push to cocoapods trunk"
+  desc "測試完畢後發佈上 cocoapods"
   lane :podspec do
-
-    runtest
-    #podspecPath = File.join(`echo $HOME/Dropbox/pixnet-ios-sdk/PIXNET-iOS-SDK`, "PIXNET-iOS-SDK.podspec")
-    podspecPath =  "/Users/DolphinSu/Dropbox/pixnet-ios-sdk/PIXNET-iOS-SDK.podspec"
+    # 先跑測試
+    # runtest
+    # 指定 .podspec 的路徑
+    # podspecPath =  "/Users/DolphinSu/Dropbox/pixnet-ios-sdk/PIXNET-iOS-SDK.podspec"
+    podspecPath = "PIXNET-iOS-SDK.podspec"
+    # 小版號++
     version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
-
+    # log 新的版號
     say "new version: #{version}"
+    # 
     git_commit(
       path: String.new("#{podspecPath}"),
       message: "update podspec(from jenkins)"
@@ -65,7 +68,7 @@ platform :ios do
       remote_branch: 'master', # optional, default is set to local_branch
       force: true,              # optional, default: false
     )
-    # pod_push(path: String.new("#{podspecPath}"))
+    # pod_push(path: String.new("#{podspecPath}"), allow_warnings)
     sh(String.new("pod trunk push #{podspecPath} --allow-warnings"))
     if ENV["SLACK_URL"]
       slack(
