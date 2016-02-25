@@ -45,24 +45,24 @@ platform :ios do
   desc "測試完畢後發佈上 cocoapods"
   lane :podspec do
     # 先跑測試
-    # runtest
-    # 指定 .podspec 的路徑
-    sh("pwd")
-    # 取得目前的路徑，並移除換行符號
+    runtest
+    # 指定 .podspec 的路徑，先取得目前的路徑，並移除換行符號
     currentFolder = `pwd`.gsub("\n", '')
     podspecPath = currentFolder + "/PIXNET-iOS-SDK.podspec"
     # 小版號++
     version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
     # log 新的版號
     say "new version: #{version}"
-    # 
+    # 由於小版號++了，所以要 commit
     git_commit(
       path: String.new("#{podspecPath}"),
       message: "update podspec(from jenkins)"
     )
+    # 對上面的 commit 下 tag，讓人可以用 tag 號安裝這個 SDK
     add_git_tag(
       tag: String.new("#{version}"),
     )
+    # git push
     sh("git remote set-url --push origin git@github.com:pixnet/pixnet-ios-sdk.git")# set remote to github
     push_to_git_remote(
       remote: 'origin',         # optional, default: 'origin'
@@ -70,6 +70,7 @@ platform :ios do
       remote_branch: 'master', # optional, default is set to local_branch
       force: true,              # optional, default: false
     )
+    # 將這個新版的 SDK 推上 cocoapods
     # pod_push(path: String.new("#{podspecPath}"), allow_warnings)
     sh(String.new("pod trunk push #{podspecPath} --allow-warnings"))
     if ENV["SLACK_URL"]
