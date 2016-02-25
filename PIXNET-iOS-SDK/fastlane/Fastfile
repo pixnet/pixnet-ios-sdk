@@ -47,9 +47,10 @@ platform :ios do
     # 先跑測試
     # runtest
     # 指定 .podspec 的路徑
-    # podspecPath =  "/Users/DolphinSu/Dropbox/pixnet-ios-sdk/PIXNET-iOS-SDK.podspec"
     sh("pwd")
-    podspecPath = "../../PIXNET-iOS-SDK.podspec"
+    #podspecPath = "./PIXNET-iOS-SDK.podspec"
+    currentFolder = `pwd`.gsub("\n", '')
+    podspecPath = currentFolder + "/PIXNET-iOS-SDK.podspec"
     # 小版號++
     version = version_bump_podspec(path: String.new("#{podspecPath}"), bump_type: "patch")# major, minor, patch
     # log 新的版號
