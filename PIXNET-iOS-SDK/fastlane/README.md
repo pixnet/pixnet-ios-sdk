@@ -15,7 +15,7 @@ Runs all the tests
 ```
 fastlane ios podspec
 ```
-push to cocoapods trunk
+測試完畢後發佈上 cocoapods
 ### ios beta
 ```
 fastlane ios beta
