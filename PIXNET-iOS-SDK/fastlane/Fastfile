@@ -24,7 +24,7 @@ default_platform :ios
 platform :ios do
   before_all do
     ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
-    #cocoapods
+    cocoapods
     
     # increment_build_number
 
