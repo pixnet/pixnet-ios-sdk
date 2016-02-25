@@ -48,7 +48,7 @@ platform :ios do
     # runtest
     # 指定 .podspec 的路徑
     sh("pwd")
-    #podspecPath = "./PIXNET-iOS-SDK.podspec"
+    # 取得目前的路徑，並移除換行符號
     currentFolder = `pwd`.gsub("\n", '')
     podspecPath = currentFolder + "/PIXNET-iOS-SDK.podspec"
     # 小版號++
