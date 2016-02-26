@@ -35,7 +35,7 @@ platform :ios do
   lane :runtest do
     scan(
     	workspace:"PIXNET-iOS-SDK.xcworkspace",
-    	scheme:"PIXNET-iOS-SDK",
+    	scheme:"JenkinsScheme",
     	device:"iPhone 6s Plus",
     	output_types:"html",
     	clean:true
