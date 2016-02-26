@@ -135,6 +135,11 @@
                BlueprintName = "PIXNET-iOS-SDKTests"
                ReferencedContainer = "container:PIXNET-iOS-SDK.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "PIXOAuth2Tests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "YES">
