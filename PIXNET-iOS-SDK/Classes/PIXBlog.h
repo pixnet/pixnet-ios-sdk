@@ -117,6 +117,35 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
     */
             PIXArticleSearchTypeKeyword
 };
+/**
+ *  文章縮圖大小
+ */
+typedef NS_ENUM(NSInteger, ThumbSize) {
+    /**
+     *  圖片大小 60x60
+     */
+    ThumbSizeWith60 = 1,
+    /**
+     *  圖片大小 90x90
+     */
+    ThumbSizeWith90 = 2,
+    /**
+     *  圖片大小 100x100
+     */
+    ThumbSizeWith100 = 3,
+    /**
+     *  圖片大小 320x320
+     */
+    ThumbSizeWith320 = 4,
+    /**
+     *  圖片大小 640x640
+     */
+    ThumbSizeWith640 = 5,
+    /**
+     *  圖片大小 960x960
+     */
+    ThumbSizeWith960 = 6,
+};
 
 #pragma mark - Blog information
 /**
@@ -215,9 +244,10 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param isTop          是否回傳置頂文章
 *  @param trimUser       是否每篇文章都要回傳作者資訊，輸入 YES 就不回傳
 *  @param shouldAuth     是否要透過認證。當需要取得非公開文章時，必須為 YES
+*  @param thumbSize      指定縮圖大小，如帶入0的話為預設大小 90x90
 *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page perpage:(NSUInteger)articlePerPage userCategories:(NSArray <NSString *>*)userCategories status:(PIXArticleStatus)status isTop:(BOOL)isTop trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion;
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page perpage:(NSUInteger)articlePerPage userCategories:(NSArray <NSString *>*)userCategories status:(PIXArticleStatus)status isTop:(BOOL)isTop trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion;
 
 /**
 *  讀取部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesId
@@ -227,9 +257,10 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param needAuth      非公開的文章會需要認證，預設是 NO
 *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
 *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
+*  @param thumbSize     指定縮圖大小，如帶入0的話為預設大小 90x90
 *  @param completion    succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)getBlogSingleArticleWithUserName:(NSString *)userName articleID:(NSString *)articleID needAuth:(BOOL)needAuth blogPassword:(NSString *)blogPasswd articlePassword:(NSString *)articlePasswd completion:(PIXHandlerCompletion)completion;
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName articleID:(NSString *)articleID needAuth:(BOOL)needAuth blogPassword:(NSString *)blogPasswd articlePassword:(NSString *)articlePasswd thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion;
 
 /**
 *  讀取指定 ID 文章的相關文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesIdRelated
@@ -271,12 +302,14 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param blogPassword 如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
 *  @param limit        回傳筆數
 *  @param trimUser     是否每篇文章都省略作者資訊
+*  @param thumbSize    指定縮圖大小，如帶入0的話為預設大小 90x90
 *  @param completion   succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
                             blogPassword:(NSString *)blogPassword
                                    limit:(NSUInteger)limit
                                 trimUser:(BOOL)trimUser
+                               thumbSize:(ThumbSize)thumbSize
                               completion:(PIXHandlerCompletion)completion;
 
 /**
@@ -288,9 +321,10 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param toDate     到哪一天為止，如果有 fromDate, 這個參數就是必填
 *  @param limit      回傳筆數
 *  @param trimUser   是否每篇文章都省略作者資訊
+*  @param thumbSize  指定縮圖大小，如帶入0的話為預設大小 90x90
 *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
-- (void)getBlogHotArticleWithUserName:(NSString *)userName password:(NSString *)passwd fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate limit:(NSUInteger)limit trimUser:(BOOL)trimUser completion:(PIXHandlerCompletion)completion;
+- (void)getBlogHotArticleWithUserName:(NSString *)userName password:(NSString *)passwd fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate limit:(NSUInteger)limit trimUser:(BOOL)trimUser thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion;
 
 /**
 *  搜尋部落格個人文章 http://developer.pixnet.pro/#!/doc/pixnetApi/blogArticlesSearch
@@ -300,6 +334,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
 *  @param searchType 搜尋類型
 *  @param page       頁數
 *  @param perPage    每頁幾筆
+*  @param thumbSize  指定縮圖大小，如帶入0的話為預設大小 90x90
 *  @param completion succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
 */
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
@@ -307,6 +342,7 @@ typedef NS_ENUM(NSInteger, PIXArticleSearchType){
                              searchType:(PIXArticleSearchType)searchType
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
+                              thumbSize:(ThumbSize)thumbSize
                              completion:(PIXHandlerCompletion)completion;
 
 #pragma mark Article method need access token

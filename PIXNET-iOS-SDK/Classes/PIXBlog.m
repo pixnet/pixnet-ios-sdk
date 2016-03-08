@@ -214,7 +214,7 @@
 
 #pragma mark - Blog Articles
 
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page perpage:(NSUInteger)articlePerPage userCategories:(NSArray <NSString *>*)userCategories status:(PIXArticleStatus)status isTop:(BOOL)isTop trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth completion:(PIXHandlerCompletion)completion {
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page perpage:(NSUInteger)articlePerPage userCategories:(NSArray <NSString *>*)userCategories status:(PIXArticleStatus)status isTop:(BOOL)isTop trimUser:(BOOL)trimUser shouldAuth:(BOOL)shouldAuth thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion {
     //檢查進來的參數
     if (userName == nil) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
@@ -254,6 +254,7 @@
     }
     params[@"is_top"] = [NSString stringWithFormat:@"%i", isTop];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
+    params = [self getThumbSizeParams:thumbSize params:params];
 
     [[PIXAPIHandler new] callAPI:@"blog/articles" httpMethod:@"GET" shouldAuth:shouldAuth parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
@@ -264,7 +265,7 @@
     }];
 }
 
-- (void)getBlogSingleArticleWithUserName:(NSString *)userName articleID:(NSString *)articleID needAuth:(BOOL)needAuth blogPassword:(NSString *)blogPasswd articlePassword:(NSString *)articlePasswd completion:(PIXHandlerCompletion)completion {
+- (void)getBlogSingleArticleWithUserName:(NSString *)userName articleID:(NSString *)articleID needAuth:(BOOL)needAuth blogPassword:(NSString *)blogPasswd articlePassword:(NSString *)articlePasswd thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion {
 
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
@@ -284,6 +285,9 @@
     if (articlePasswd != nil) {
         params[@"article_password"] = articlePasswd;
     }
+    
+    params = [self getThumbSizeParams:thumbSize params:params];
+    
     NSString *path = [NSString stringWithFormat:@"blog/articles/%@", articleID];
     [[PIXAPIHandler new] callAPI:path httpMethod:@"GET" shouldAuth:needAuth parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
@@ -383,6 +387,7 @@
                             blogPassword:(NSString *)blogPassword
                                    limit:(NSUInteger)limit
                                 trimUser:(BOOL)trimUser
+                               thumbSize:(ThumbSize)thumbSize
                               completion:(PIXHandlerCompletion)completion{
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
@@ -396,7 +401,7 @@
     }
     params[@"limit"] = [NSString stringWithFormat:@"%lu", (unsigned long)limit];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
-
+    params = [self getThumbSizeParams:thumbSize params:params];
     [[PIXAPIHandler new] callAPI:@"blog/articles/latest"
                       parameters:params
                requestCompletion:^(BOOL succeed, id result, NSError *errorMessage) {
@@ -409,7 +414,7 @@
 
 }
 
-- (void)getBlogHotArticleWithUserName:(NSString *)userName password:(NSString *)passwd fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate limit:(NSUInteger)limit trimUser:(BOOL)trimUser completion:(PIXHandlerCompletion)completion {
+- (void)getBlogHotArticleWithUserName:(NSString *)userName password:(NSString *)passwd fromDate:(NSDate *)fromDate toDate:(NSDate *)toDate limit:(NSUInteger)limit trimUser:(BOOL)trimUser thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion {
     if (userName == nil || userName.length == 0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing User Name"]);
         return;
@@ -431,7 +436,7 @@
     }
     params[@"limit"] = [NSString stringWithFormat:@"%lu", (unsigned long)limit];
     params[@"trim_user"] = [NSString stringWithFormat:@"%i", trimUser];
-
+    params = [self getThumbSizeParams:thumbSize params:params];
     NSMutableString *pathString = [NSMutableString stringWithString:@"blog/articles/hot"];
     if (fromDate && toDate) {
         NSDateFormatter *formatter = [NSDateFormatter new];
@@ -454,6 +459,7 @@
                              searchType:(PIXArticleSearchType)searchType
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
+                              thumbSize:(ThumbSize)thumbSize
                              completion:(PIXHandlerCompletion)completion{
 
     if (keyword == nil || keyword.length == 0) {
@@ -487,7 +493,7 @@
     if (perPage) {
         params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
     }
-
+    params = [self getThumbSizeParams:thumbSize params:params];
 
     [[PIXAPIHandler new] callAPI:@"blog/articles/search"
                       parameters:params
@@ -1114,4 +1120,37 @@
                }];
 
 }
+
+#pragma mark - Get ThumbSize Params
+
+-(NSMutableDictionary *)getThumbSizeParams:(ThumbSize)thumbSize params:(NSMutableDictionary *)params {
+    
+    switch (thumbSize) {
+        case ThumbSizeWith60:
+            params[@"thumb_size"] = [NSNumber numberWithInt:60];
+            break;
+        case ThumbSizeWith90:
+            params[@"thumb_size"] = [NSNumber numberWithInt:90];
+            break;
+        case ThumbSizeWith100:
+            params[@"thumb_size"] = [NSNumber numberWithInt:100];
+            break;
+        case ThumbSizeWith320:
+            params[@"thumb_size"] = [NSNumber numberWithInt:320];
+            break;
+        case ThumbSizeWith640:
+            params[@"thumb_size"] = [NSNumber numberWithInt:640];
+            break;
+        case ThumbSizeWith960:
+            params[@"thumb_size"] = [NSNumber numberWithInt:960];
+            break;
+            
+        default:
+            params[@"thumb_size"] = [NSNumber numberWithInt:90];
+            break;
+    }
+    
+    return params;
+}
+
 @end

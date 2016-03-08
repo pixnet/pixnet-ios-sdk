@@ -195,20 +195,21 @@
 
 #pragma mark - Blog Articles
 
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page completion:(PIXHandlerCompletion)completion {
-    [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:nil status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:completion];
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:nil status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO thumbSize:thumbSize completion:completion];
 }
 
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray <NSString*>*)userCategories completion:(PIXHandlerCompletion)completion {
-    [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:userCategories status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO completion:completion];
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray <NSString*>*)userCategories thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion {
+    [[PIXBlog new] getBlogAllArticlesWithUserName:userName password:passwd page:page perpage:20 userCategories:userCategories status:PIXArticleStatusPublic isTop:NO trimUser:YES shouldAuth:NO thumbSize:thumbSize completion:completion];
 }
 
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName
                                articleID:(NSString *)articleID
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePasswd
+                               thumbSize:(ThumbSize)thumbSize
                               completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogSingleArticleWithUserName:userName articleID:articleID needAuth:NO blogPassword:blogPasswd articlePassword:articlePasswd completion:completion];
+    [[PIXBlog new] getBlogSingleArticleWithUserName:userName articleID:articleID needAuth:NO blogPassword:blogPasswd articlePassword:articlePasswd thumbSize:thumbSize completion:completion];
 }
 
 - (void)getBlogRelatedArticleByArticleID:(NSString *)articleID
@@ -234,18 +235,21 @@
 
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
                             blogPassword:(NSString *)blogPassword
+                               thumbSize:(ThumbSize)thumbSize
                               completion:(PIXHandlerCompletion)completion{
     [[PIXBlog new] getBlogLatestArticleWithUserName:userName
                                        blogPassword:blogPassword
                                               limit:20
                                            trimUser:YES
+                                          thumbSize:thumbSize
                                          completion:completion];
 }
 
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                              password:(NSString *)passwd
+                            thumbSize:(ThumbSize)thumbSize
                            completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd fromDate:nil toDate:nil limit:10 trimUser:YES completion:completion];
+    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd fromDate:nil toDate:nil limit:10 trimUser:YES thumbSize:thumbSize completion:completion];
 //    [[PIXBlog new] getBlogHotArticleWithUserName:userName password:passwd fromDate:nil toDate:nil limit:1 trimUser:YES completion:completion];
 }
 
@@ -253,8 +257,9 @@
                                userName:(NSString *)userName
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
+                              thumbSize:(ThumbSize)thumbSize
                              completion:(PIXHandlerCompletion)completion{
-    [[PIXBlog new] getblogSearchArticleWithKeyword:keyword userName:userName searchType:PIXArticleSearchTypeKeyword page:page perPage:perPage completion:completion];
+    [[PIXBlog new] getblogSearchArticleWithKeyword:keyword userName:userName searchType:PIXArticleSearchTypeKeyword page:page perPage:perPage thumbSize:thumbSize completion:completion];
 }
 #pragma mark Article method need access token
 - (void)createBlogArticleWithTitle:(NSString *)title

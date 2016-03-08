@@ -3,6 +3,7 @@
 #import "Specta.h"
 #import "Expecta.h"
 #import "PIXNETSDK.h"
+#import "PIXBlog.h"
 #import "UserForTest.h"
 #import "Nocilla.h"
 
@@ -44,7 +45,7 @@ describe(@"These methods are auth needed", ^{
     it(@"get blog articles", ^{
         
         waitUntil(^(DoneCallback done) {
-            [[PIXNETSDK new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:1 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXNETSDK new] getBlogAllArticlesWithUserName:userForTest.userName password:userForTest.userPassword page:1 thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 if (!succeed) {
                     failure([NSString stringWithFormat:@"error code: %li, description: %@", (long)error.code, error.localizedDescription]);
                 }
