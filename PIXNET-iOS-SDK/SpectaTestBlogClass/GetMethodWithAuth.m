@@ -42,7 +42,7 @@ describe(@"For Auth", ^{
         setAsyncSpecTimeout(60);
 
         waitUntil(^(DoneCallback done) {
-            [[PIXBlog new] getBlogAllArticlesWithUserName:userForTest.userName password:nil page:0 perpage:0 userCategories:nil status:PIXArticleStatusPassword isTop:NO trimUser:NO shouldAuth:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogAllArticlesWithUserName:userForTest.userName password:nil page:0 perpage:0 userCategories:nil status:PIXArticleStatusPassword isTop:NO trimUser:NO shouldAuth:YES thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -57,7 +57,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:NO blogPassword:nil articlePassword:userForTest.userPassword completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:NO blogPassword:nil articlePassword:userForTest.userPassword thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -70,7 +70,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:NO blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:NO blogPassword:nil articlePassword:nil thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -83,7 +83,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:YES blogPassword:nil articlePassword:nil completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogSingleArticleWithUserName:userForTest.userName articleID:userForTest.privateArticle needAuth:YES blogPassword:nil articlePassword:nil thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -139,7 +139,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogLatestArticleWithUserName:userForTest.userName blogPassword:nil limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogLatestArticleWithUserName:userForTest.userName blogPassword:nil limit:1000 trimUser:YES thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -153,7 +153,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] toDate:[NSDate date] limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] toDate:[NSDate date] limit:1000 trimUser:YES thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -166,7 +166,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:nil toDate:nil limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:nil toDate:nil limit:1000 trimUser:YES thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();
@@ -179,7 +179,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:[NSDate date] toDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] limit:1000 trimUser:YES completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getBlogHotArticleWithUserName:userForTest.userName password:nil fromDate:[NSDate date] toDate:[[NSDate alloc] initWithTimeInterval:-60*60*60 sinceDate:[NSDate date]] limit:1000 trimUser:YES thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).notTo.beTruthy();
                 expect(result).to.beNil();
                 done();
@@ -193,7 +193,7 @@ describe(@"For Auth", ^{
         
         waitUntil(^(DoneCallback done) {
             
-            [[PIXBlog new] getblogSearchArticleWithKeyword:@"@#$%^&*(" userName:userForTest.userName searchType:PIXArticleSearchTypeKeyword page:1000 perPage:1 completion:^(BOOL succeed, id result, NSError *error) {
+            [[PIXBlog new] getblogSearchArticleWithKeyword:@"@#$%^&*(" userName:userForTest.userName searchType:PIXArticleSearchTypeKeyword page:1000 perPage:1 thumbSize:0 completion:^(BOOL succeed, id result, NSError *error) {
                 expect(succeed).to.beTruthy();
                 expect(result).notTo.beNil();
                 done();

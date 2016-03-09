@@ -6,7 +6,6 @@
 //  Copyright (c) 2014年 PIXNET. All rights reserved.
 //
 
-
 #import <Foundation/Foundation.h>
 //@class PIXBlog;
 //#import "PIXBlog.h"
@@ -343,9 +342,10 @@
  *  @param userName       部落客 id，必要參數
  *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param page           頁數
+ *  @param thumbSize      縮圖大小
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page completion:(PIXHandlerCompletion)completion;
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion;
 /**
  *  列出部落格個人文章，且可以限制只要某幾個自行定義的文章分類。
  *
@@ -353,9 +353,10 @@
  *  @param passwd         如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
  *  @param page           頁數
  *  @param userCategories 使用者自自定義的文章分類 id，最多10個。
+ *  @param thumbSize      縮圖大小
  *  @param completion     succeed = YES 時 result 可以用，succeed = NO 時 result 會是 nil，錯誤原因會在 NSError 物件中
  */
-- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray <NSString*>*)userCategories completion:(PIXHandlerCompletion)completion;
+- (void)getBlogAllArticlesWithUserName:(NSString *)userName password:(NSString *)passwd page:(NSUInteger)page userCategories:(NSArray <NSString*>*)userCategories thumbSize:(ThumbSize)thumbSize completion:(PIXHandlerCompletion)completion;
 
 /**
  *  讀取部落格個人文章 http://emma.pixnet.cc/blog/articles/:id
@@ -365,12 +366,14 @@
  *  @param articleID     ＊指定要回傳的文章Ier
  *  @param blogPasswd    如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
  *  @param articlePasswd 如果指定使用者的文章被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
+ *  @param thumbSize     縮圖大小
  *  @param completion    succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogSingleArticleWithUserName:(NSString *)userName
                                articleID:(NSString *)articleID
                             blogPassword:(NSString *)blogPasswd
                          articlePassword:(NSString *)articlePasswd
+                               thumbSize:(ThumbSize)thumbSize
                               completion:(PIXHandlerCompletion)completion;
 
 /**
@@ -409,10 +412,12 @@
  *
  *  @param userName     *指定要回傳的使用者資訊
  *  @param blogPassword 如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權
+ *  @param thumbSize    縮圖大小
  *  @param completion   succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogLatestArticleWithUserName:(NSString *)userName
                             blogPassword:(NSString *)blogPassword
+                               thumbSize:(ThumbSize)thumbSize
                               completion:(PIXHandlerCompletion)completion;
 
 /**
@@ -420,10 +425,12 @@
  *
  *  @param userName   *指定要回傳的使用者資訊
  *  @param passwd     如果指定使用者的 Blog 被密碼保護，則需要指定這個參數以通過授權，沒有則輸入 nil
+ *  @param thumbSize  縮圖大小
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getBlogHotArticleWithUserName:(NSString *)userName
                              password:(NSString *)passwd
+                            thumbSize:(ThumbSize)thumbSize
                            completion:(PIXHandlerCompletion)completion;
 
 /**
@@ -433,12 +440,14 @@
  *  @param userName   指定要回傳的使用者資訊，如輸入 nil 則搜尋全站
  *  @param page       頁數, 預設為 1, 不需要則輸入 nil
  *  @param perPage    每頁幾筆, 預設為 100, 不需要則輸入 nil
+ *  @param thumbSize  縮圖大小
  *  @param completion succeed = YES 時 result 可以用 (errorMessage == nil)，succeed = NO 時 result 會是 nil，錯誤原因會在 errorMessage 裡
  */
 - (void)getblogSearchArticleWithKeyword:(NSString *)keyword
                                userName:(NSString *)userName
                                    page:(NSUInteger)page
                                 perPage:(NSUInteger)perPage
+                              thumbSize:(ThumbSize)thumbSize
                              completion:(PIXHandlerCompletion)completion;
 
 #pragma mark Article method need access token
