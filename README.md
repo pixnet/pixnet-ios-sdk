@@ -70,7 +70,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
 ```
 ####認證/登入
 ```Objective-C
-UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
+UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
 [self.view addSubview:webView];
 [PIXNETSDK loginByOAuth2OpenIDOnlyWithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
     if (succeed) {
