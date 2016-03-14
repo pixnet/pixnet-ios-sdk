@@ -53,19 +53,20 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
 ###範例 - Sample Code
 ####不需認證的情況下
 取得使用者個人資料：
+
 ```Objective-C
-    [[PIXNETSDK new] getUserWithUserName:@"UserName" completion:
-     ^(BOOL succeed, id result, NSError *error) {
-         if (succeed) {
-             //做要做的東西
-         }else{
-             [[[UIAlertView alloc] initWithTitle:@"Ooops!"
-                                         message:error.localizedDescription
-                                        delegate:self
-                               cancelButtonTitle:@"確定"
-                               otherButtonTitles:nil, nil] show];
-         }
-     }];
+[[PIXNETSDK new] getUserWithUserName:@"UserName" completion:
+ ^(BOOL succeed, id result, NSError *error) {
+     if (succeed) {
+         //做要做的東西
+     }else{
+         [[[UIAlertView alloc] initWithTitle:@"Ooops!"
+                                     message:error.localizedDescription
+                                    delegate:self
+                           cancelButtonTitle:@"確定"
+                           otherButtonTitles:nil, nil] show];
+     }
+ }];
 ```
 ####認證/登入
 ```Objective-C
