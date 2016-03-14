@@ -23,7 +23,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
  1. Consumer Key(client_id)
  2. Consumer Secret 
 
-請使用以下的 code 把東西丟進 SDK 中就可以開始使用了
+請使用以下的 code 把東西丟寫在您的專案中就可以開始使用了，一般會寫在```- application:didFinishLaunchingWithOptions:```裡
 
 ```objective-c
 #import <PIXNETSDK.h>
