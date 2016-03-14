@@ -26,7 +26,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
 請使用以下的 code 把東西丟寫在您的專案中就可以開始使用了，一般會寫在```- application:didFinishLaunchingWithOptions:```裡
 
 ```objective-c
-#import <PIXNETSDK.h>
+#import "PIXNETSDK.h"
 
 [PIXNETSDK setConsumerKey:@"Consumer Key" consumerSecret:@"Consumer Secret"];
 ```
@@ -35,7 +35,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
 請在安裝後在需要用到的 Class 中
 
 ```objective-c
-#import <PIXNETSDK.h>
+#import "PIXNETSDK.h"
 ```
 
 就可以開始使用簡易功能。每個 method 都用 block 的方式通知您 query 後的結果，只要 succed 為 YES，result 一定不為 nil，error 必為 nil；相反的，當 succeed 為 NO 時，result 一定是 nil，而 error 一定有東西。
