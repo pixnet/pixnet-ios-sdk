@@ -24,6 +24,7 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
  2. Consumer Secret 
 
 請使用以下的 code 把東西丟進 SDK 中就可以開始使用了
+
 ```objective-c
 #import <PIXNETSDK.h>
 
@@ -37,17 +38,17 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
 #import <PIXNETSDK.h>
 ```
 
-就可以開始使用簡易功能。
-
+就可以開始使用簡易功能。每個 method 都用 block 的方式通知您 query 後的結果，只要 succed 為 YES，result 一定不為 nil，error 必為 nil；相反的，當 succeed 為 NO 時，result 一定是 nil，而 error 一定有東西。
+### error 的處理
+您可以直接使用 ```error.localizedDescription``` 告知使用者發生了什麼錯誤，或是您也可以根據```error.code```來客製化您的錯誤訊息呈現方式。 [error code 的完整說明在這](https://pixnet.gitbooks.io/api-error-codes/content/)。
 
 ###進階使用者
-可依各種不同需求 import 你所需要的各種不同功能，目前開放：
+這個 SDK 總共分成三層，
 
- 1. `PIXBlog.h`
- 2. `PIXAlbum.h`
- 3. `PIXUser.h`
-
-三隻不同的 Class 讓開發者使用並取得資料。
+* 最外層的是 PIXNETSDK.h，這裡包含了所有的 method，但 method 裡的參數是簡化過的，方便開發者快速開發大多數的功能。
+* 第二層是 PIXNET 所有開放出來的功能(例如部落格(PIXBlog.h)、相簿(PIXAlbum.h))，裡面的每個 method 都有完整的參數。
+* 第三層是 PIXApiHandler.h，這裡提供的是將 OAuth1 及 OAuth2 包裝過後的各項網路連線功能。 
+* 每個 method 的說明裡都會放 Restful API 的說明網頁連結，方便您比對及尋找 API 及 method 之間的關係。
 
 ###範例 - Sample Code
 ####不需認證的情況下
@@ -68,27 +69,23 @@ PIXNET iOS SDK 支援 Xcode 5.0，及 iOS 6.0 及之後的版本，且只支援[
 ```
 ####認證/登入
 ```Objective-C
-    [PIXNETSDK authByXauthWithUserName:@"UserName" userPassword:@"Password" requestCompletion:^(BOOL succeed, id result, NSError *error) {
-        if (succeed) {
-            [[[UIAlertView alloc] initWithTitle:@"登入成功"
-                                        message:@"已登入PIXNET"
-                                       delegate:self
-                              cancelButtonTitle:@"確定"
-                              otherButtonTitles:nil, nil] show];
-        }else{
-            [[[UIAlertView alloc] initWithTitle:@"登入失敗"
-                                        message:error.localizedDescription
-                                       delegate:self
-                              cancelButtonTitle:@"確定"
-                              otherButtonTitles:nil, nil] show];
-        }
-    }];
+UIWebView *webView = [[UIWebView alloc] initWithFrame:rootView.bounds];
+[self.view addSubview:webView];
+[PIXNETSDK loginByOAuth2OpenIDOnlyWithLoginView:webView completion:^(BOOL succeed, id result, NSError *error) {
+    if (succeed) {
+    	// 使用者登入成功了, 接下來您可以呼叫需要認證才能使用的 method 了
+		[webView removeFromSuperview];
+    } else {
+    	// 使用者未登入成功
+    }
+    done();
+}];
 ```
 登入後即可使用需認證後才可使用的 Method。
 
 ####登出
 ```Objective-C
-    [PIXNETSDK logout];
+[PIXNETSDK logout];
 ```
 即可登出。
 
