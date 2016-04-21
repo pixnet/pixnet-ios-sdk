@@ -1344,7 +1344,7 @@
  *  @param perPage     每頁幾筆
  *  @param completion  PIXHandlerCompletion
  */
--(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage hasSpam:(BOOL)hasSpam  completion:(PIXHandlerCompletion)completion;
+-(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage hasSpam:(BOOL)hasSpam completion:(PIXHandlerCompletion)completion;
 /**
  *  取得某些類別底下的相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/mainpageAlbumCategories
  *

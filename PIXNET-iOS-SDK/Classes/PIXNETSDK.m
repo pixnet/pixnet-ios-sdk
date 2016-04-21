@@ -657,7 +657,7 @@
     [[PIXBlock new] updateBlockWithUsers:users isAddToBlock:isAddToBlock completion:completion];
 }
 
--(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage hasSpam:(BOOL)hasSpam  completion:(PIXHandlerCompletion)completion{
+-(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage hasSpam:(BOOL)hasSpam completion:(PIXHandlerCompletion)completion{
     [[PIXMainpage new] getMainpageBlogCategoriesWithCategoryID:categoryId articleType:articleType page:page perPage:perPage hasSpam:hasSpam completion:completion];
 }
 -(void)getMainpageAlbumsWithCategoryIDs:(NSArray *)categoryIds albumType:(PIXMainpageType)albumType page:(NSUInteger)page perPage:(NSUInteger)perPage strictFilter:(BOOL)strictFilter completion:(PIXHandlerCompletion)completion{
