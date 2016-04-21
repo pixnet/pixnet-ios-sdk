@@ -157,7 +157,7 @@
 }
 -(void)getArticlesWithCategoryId:(NSString *)categoryId articleType:(PIXMainpageType)articleType{
     __block BOOL done = NO;
-    [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:categoryId articleType:articleType page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:categoryId articleType:articleType page:1 perPage:10 hasSpam:NO completion:^(BOOL succeed, id result, NSError *error) {
         done = YES;
         NSString *methodName = @"getMainpageBlogCategoriesWithCategoryID";
         if (succeed) {
