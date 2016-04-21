@@ -26,7 +26,7 @@ describe(@"test1", ^{
             waitUntil(^(DoneCallback done) {
                 NSString *bodyString = [NSString stringWithFormat:@"{\"code\":\"%@\"}", key];
                 stubRequest(@"GET", @"https://emma.pixnet.cc/mainpage/blog/categories/hot/0?per_page=10&client_id=0&page=1&format=json").andReturn(401).withBody(bodyString);
-                [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"0" articleType:PIXMainpageTypeHot page:1 perPage:10 completion:^(BOOL succeed, id result, NSError *error) {
+                [[PIXNETSDK new] getMainpageBlogCategoriesWithCategoryID:@"0" articleType:PIXMainpageTypeHot page:1 perPage:10 hasSpam:NO completion:^(BOOL succeed, id result, NSError *error) {
                     NSString *string = error.userInfo[@"NSLocalizedDescription"];
                     NSDictionary *errorDictionary = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
                     // 用 PIXErrorWithServerResponse 產生 error 物件，確定該物件有正確的用 code 產生中文化的錯誤訊息
