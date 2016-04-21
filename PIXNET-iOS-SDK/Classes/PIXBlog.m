@@ -1127,22 +1127,22 @@
     
     switch (thumbSize) {
         case ThumbSizeWith60:
-            params[@"thumb_size"] = [NSNumber numberWithInt:60];
+            params[@"thumb_size"] = @"60";
             break;
         case ThumbSizeWith90:
-            params[@"thumb_size"] = [NSNumber numberWithInt:90];
+            params[@"thumb_size"] = @"90";
             break;
         case ThumbSizeWith100:
-            params[@"thumb_size"] = [NSNumber numberWithInt:100];
+            params[@"thumb_size"] = @"100";
             break;
         case ThumbSizeWith320:
-            params[@"thumb_size"] = [NSNumber numberWithInt:320];
+            params[@"thumb_size"] = @"320";
             break;
         case ThumbSizeWith640:
-            params[@"thumb_size"] = [NSNumber numberWithInt:640];
+            params[@"thumb_size"] = @"640";
             break;
         case ThumbSizeWith960:
-            params[@"thumb_size"] = [NSNumber numberWithInt:960];
+            params[@"thumb_size"] = @"960";
             break;
             
         default:

@@ -9,7 +9,7 @@
 #import "PIXMainpage.h"
 
 @implementation PIXMainpage
--(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion{
+-(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage hasSpam:(BOOL)hasSpam completion:(PIXHandlerCompletion)completion{
     if (!categoryId || categoryId.length==0) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"categoryId 參數有誤"]);
         return;
@@ -24,6 +24,9 @@
         perPage = 10;
     }
     params[@"per_page"] = [NSString stringWithFormat:@"%lu", (unsigned long)perPage];
+    if (hasSpam == NO) {
+        params[@"filter"] = @"top_authors";
+    }
     NSString *path = [NSString stringWithFormat:@"mainpage/blog/categories/%@/%@", typeString, categoryId];
     
     [[PIXAPIHandler new] callAPI:path parameters:params requestCompletion:^(BOOL succeed, id result, NSError *error) {

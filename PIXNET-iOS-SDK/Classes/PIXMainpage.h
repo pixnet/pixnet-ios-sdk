@@ -36,9 +36,10 @@ typedef NS_ENUM(NSInteger, PIXMainpageType) {
  *  @param articleType 有 熱門/最新/近期熱門 三種選項。
  *  @param page        頁數
  *  @param perPage     每頁幾筆
+ *  @param hasSpam     過濾Spam(NO為無Spam)
  *  @param completion  PIXHandlerCompletion
  */
--(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage completion:(PIXHandlerCompletion)completion;
+-(void)getMainpageBlogCategoriesWithCategoryID:(NSString *)categoryId articleType:(PIXMainpageType)articleType page:(NSUInteger)page perPage:(NSUInteger)perPage hasSpam:(BOOL)hasSpam completion:(PIXHandlerCompletion)completion;
 /**
  *  取得某些類別底下的相簿 http://developer.pixnet.pro/#!/doc/pixnetApi/mainpageAlbumCategories
  *

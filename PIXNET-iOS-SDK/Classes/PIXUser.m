@@ -252,11 +252,11 @@
 }
 
 -(void)getAccountMIBAllPositionsWithHistoryDays:(NSUInteger)historyDays completion:(PIXHandlerCompletion)completion {
-    if (historyDays < 0 || historyDays > 90) {
+    if ((int)historyDays < 0 || (int)historyDays > 90) {
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"historyDays 最少為0, 最大為90"]);
         return;
     }
-    [[PIXAPIHandler new] callAPI:@"account/mib/positions" httpMethod:@"GET" shouldAuth:YES parameters:@{@"history_days":[NSString stringWithFormat:@"%i", historyDays]} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXAPIHandler new] callAPI:@"account/mib/positions" httpMethod:@"GET" shouldAuth:YES parameters:@{@"history_days":[NSString stringWithFormat:@"%i", (int)historyDays]} requestCompletion:^(BOOL succeed, id result, NSError *error) {
         if (succeed) {
             [self succeedHandleWithData:result completion:completion];
         } else {
