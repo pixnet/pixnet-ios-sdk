@@ -624,7 +624,7 @@
     }
     if (subCateID!=nil && subCateID.length>0) {
         if ([subCateID isEqualToString:cateID]) {
-            completion(NO, nil, [NSError PIXErrorWithParameterName:@"subCateID 不可與 cateID 相同"]);
+            completion(NO, nil, [NSError PIXErrorWithParameterName:@"文章設定的全站分類不可相同"]);
             return;
         }
         params[@"sub_site_category_id"] = subCateID;
