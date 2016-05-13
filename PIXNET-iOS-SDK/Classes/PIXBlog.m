@@ -622,13 +622,13 @@
     if (cateID!=nil && cateID.length>0) {
         params[@"site_category_id"] = cateID;
     }
-    if (subCateID!=nil && subCateID.length>0) {
-        if ([subCateID isEqualToString:cateID]) {
-            completion(NO, nil, [NSError PIXErrorWithParameterName:@"文章設定的全站分類不可相同"]);
-            return;
-        }
-        params[@"sub_site_category_id"] = subCateID;
-    }
+//    if (subCateID!=nil && subCateID.length>0) {
+//        if ([subCateID isEqualToString:cateID]) {
+//            completion(NO, nil, [NSError PIXErrorWithParameterName:@"文章設定的全站分類不可相同"]);
+//            return;
+//        }
+//        params[@"sub_site_category_id"] = subCateID;
+//    }
     params[@"use_nl2br"] = [NSString stringWithFormat:@"%i", useNewLineToBR];
 
     params[@"comment_perm"] = [NSString stringWithFormat:@"%li", (long)commentPerm];;

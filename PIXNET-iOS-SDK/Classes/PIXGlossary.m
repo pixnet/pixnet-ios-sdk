@@ -17,7 +17,7 @@
         completion(NO, nil, [NSError PIXErrorWithParameterName:@"Missing version"]);
         return;
     }
-    [[PIXAPIHandler new] callAPI:@"glossary/twzipcode" httpMethod:@"GET" parameters:@{@"version":version, @"fetch":[NSString stringWithFormat:@"%i",isFetch]} requestCompletion:^(BOOL succeed, id result, NSError *error) {
+    [[PIXAPIHandler new] callAPI:@"glossary/twzipcode" httpMethod:@"GET" parameters:@{@"version":version, @"fetch":[NSString stringWithFormat:@"%i",isFetch], @"is_array":@"true", @"is_show_state_region":@"true"} requestCompletion:^(BOOL succeed, id result, NSError *error) {
         [self resultHandleWithIsSucceed:succeed result:result error:error completion:completion];
     }];
 }
