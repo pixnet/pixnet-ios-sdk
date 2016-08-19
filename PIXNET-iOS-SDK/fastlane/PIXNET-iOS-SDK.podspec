@@ -13,7 +13,9 @@ Pod::Spec.new do |s|
   s.framework    =  'CoreLocation','SystemConfiguration'
   s.resource_bundles = { 'PIXNET-iOS-SDK' => 'LocalizableStrings/**' }
   s.requires_arc = true
-  
+  # s.resource_bundles = {
+  #   'dummy' => ['dummy/Assets/*.png']
+  # }
 # Pod Dependencies
   s.dependency 'PIX-cocoa-oauth', '~> 0.0.2'
   s.dependency 'OMGHTTPURLRQ', '~> 3.0.2'
